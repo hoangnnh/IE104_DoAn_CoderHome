@@ -1,0 +1,41 @@
+:root {
+    --white: #ffffff;
+    --white-smoke: #f7f3f1;
+    --primary-gray: #4a4848;
+    --secondary-gray: #7d7d7d;
+    --primary-black: #222222;
+    --black: #000000;
+}
+
+/* header */
+
+.header {
+    background: var(--white-smoke);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    height: 50px;
+}
+
+
+.button {
+    border: none;
+    width: 120px;
+    height: 30px;
+    border-radius: 50px;
+    margin: 15px;
+    font-size: 0.9rem;
+}
+
+.button-sign-in {
+    background: transparent;
+    color: var(--primary-black);
+}
+
+.button-sign-up {
+    background: var(--primary-black);
+    color: var(--white-smoke);
+}
+
+/* main */
