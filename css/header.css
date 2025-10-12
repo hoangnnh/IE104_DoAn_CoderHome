@@ -8,34 +8,75 @@
 }
 
 /* header */
-
 .header {
     background: var(--white-smoke);
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 20px;
-    height: 50px;
+    justify-content: space-between;
+    padding: 12px 60px;
+    height: 70px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
+/* Logo */
+.web-logo {
+    height: 38px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
 
+/* Button group */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Buttons (shared styles) */
 .button {
     border: none;
-    width: 120px;
-    height: 30px;
     border-radius: 50px;
-    margin: 15px;
-    font-size: 0.9rem;
+    padding: 8px 22px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
+/* Sign In button */
 .button-sign-in {
     background: transparent;
     color: var(--primary-black);
+    border: 1px solid var(--primary-black);
 }
 
+.button-sign-in:hover {
+    background: rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+}
+
+/* Get Started button */
 .button-sign-up {
     background: var(--primary-black);
     color: var(--white-smoke);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
-/* main */
+.button-sign-up:hover {
+    background: var(--primary-gray);
+    transform: translateY(-2px);
+}
+
+/* Adjust spacing for smaller screens */
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 24px;
+    }
+    .button {
+        padding: 6px 16px;
+        font-size: 0.85rem;
+    }
+}
