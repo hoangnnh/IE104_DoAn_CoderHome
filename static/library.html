@@ -4,8 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your saved list</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/library.css ">
 </head>
 <body>
     <!-- Khoa -->
+    <header class="header">
+        <!-- Hoàng -->
+        <div class="menu">
+            <!-- Khôi -->
+            <!-- <img src="./images/toggle menu.png" alt="hamburger menu button"> -->
+        </div>
+        <img src="../images/logo.png" alt="logo">
+        <div class="button-group">
+            <button class="button button-sign-in">Sign in</button>
+            <button class="button button-sign-up">Get started</button>
+        </div>
+    </header>
+
+     <!-- Main Content -->
+  <main class="container">
+    <section class="library">
+    <div class="library-header">
+      <h2 class="library-title">Your library</h2>
+      <button class="new-list-btn">New list</button>
+    </div>
+      
+    
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active">Your lists</button>
+        <button class="tab">Saved lists</button>
+        <button class="tab">History</button>
+      </div>
+
+      <!-- Create list card -->
+      <div class="create-list-card">
+        <div class="create-list-card-info">
+          <h3>Create a list to easily organize and share stories</h3>
+          <button class="start-btn">Start a list</button>
+        </div>
+        <div class="placeholder">
+          
+        </div>
+      </div>
+
+      <!-- User lists -->
+      <div class="list-card">
+        <div class="list-info">
+          <span class="user">@Khoi_Bui_22</span>
+          <h3>Khoi_Bui_22</h3>
+          <p>No stories 🔒</p>
+        </div>
+        <div class="list-preview">
+          <div class="preview-box1"></div>
+          <div class="preview-box2"></div>
+          <div class="preview-box3"></div>
+        </div>
+      </div>
+
+      <div class="list-card">
+        <div class="list-info">
+          <span class="user">@Khoi_Bui_22</span>
+          <h3>Coder</h3>
+          <p>No stories 🔒</p>
+        </div>
+        <div class="list-preview">
+          <div class="preview-box1"></div>
+          <div class="preview-box2"></div>
+          <div class="preview-box3"></div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
