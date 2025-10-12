@@ -1,0 +1,121 @@
+/* Main Content */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 🔥 Căn giữa nút và chữ theo chiều dọc */
+  padding: 8px 0;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+}
+
+.library-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center; /* căn giữa chữ trong tiêu đề */
+}
+
+
+
+.tabs {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-family: sans-serif;
+  margin-bottom: 24px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+.tab.active {
+  background-color: #f5f1ef; /* màu nền xám nhạt */
+}
+
+.tab:hover:not(.active) {
+  background-color: #f8f6f5; /* hover nhẹ */
+}
+
+.new-list-btn {
+  float: right;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+
+.list-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border: 1px solid #eee;
+  
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.list-info {
+  padding: 16px;
+  flex-grow: 1; /* chiếm không gian còn lại */
+}
+
+.list-info h3 {
+  margin-top: 6px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.list-info-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.list-info p {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+}
+
+.list-preview {
+  display: flex;
+  gap: 2px; /* khoảng cách giữa các hình */
+  
+}
+
+.preview-box1,
+.preview-box2,
+.preview-box3 {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+/* Chiều rộng khác nhau */
+.preview-box1 { width: 120px; background: #ccc; }  /* dài nhất */
+.preview-box2 { width: 80px;  background: #ccc; }  /* trung bình */
+.preview-box3 { width: 50px;  background: #ccc; }  /* ngắn nhất */
