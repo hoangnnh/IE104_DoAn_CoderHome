@@ -1,3 +1,6 @@
+/* ================================
+   Root Variables
+================================ */
 :root {
     --white: #ffffff;
     --white-smoke: #f7f3f1;
@@ -7,6 +10,9 @@
     --black: #000000;
 }
 
+/* ================================
+   Layout
+================================ */
 #main-section {
     display: grid;
     grid-template-columns: 1.5fr 5fr;
@@ -15,11 +21,20 @@
 .user-profile-container {
     display: grid;
     grid-template-columns: 6fr 3fr;
-    height: calc(100vh - 50px - 42px);
-    margin-left: 1rem;
-    margin-top: 3rem;
+    height: calc(100vh - 92px);
+    max-height: 700px;
+    margin: 3rem 1rem 0;
+    max-width: 1200px;
 }
 
+
+/* ================================
+   User Profile Main
+================================ */
+
+.user-profile {
+    max-width: 1000px;
+}
 
 .user-profile-avatar-and-name {
     display: flex;
@@ -30,27 +45,23 @@
 .user-profile-avatar {
     width: 6rem;
     height: 6rem;
-    border: 2px solid #000;
-    border-radius: 100%;
+    border: 2px solid var(--black);
+    border-radius: 50%;
+    background: url("/images/post-thumbnail.png") no-repeat;
     position: relative;
-    background-image: url("/images/post-thumbnail.png");
-}
-
-.user-profile-avatar:hover {
     cursor: pointer;
 }
 
 .add-photo-icon {
     position: absolute;
+    bottom: 3px;
+    right: 0;
     width: 20px;
     height: 20px;
-    border: 1px solid #000;
-    bottom: 3px;
-    right: 0%;
-    border-radius: 100%;
     padding: 0.25rem;
-    background-color: var(--white-smoke);
     border: 2px solid var(--black);
+    border-radius: 50%;
+    background-color: var(--white-smoke);
 }
 
 .user-profile-name {
@@ -58,21 +69,21 @@
     font-weight: bold;
 }
 
+/* ================================
+   Profile Options
+================================ */
 .user-profile-option-list {
-    list-style-type: none;
     display: flex;
     gap: 2.5rem;
-    margin-top: 2rem;
-    margin-left: 0.5rem;
-    margin-bottom: 2rem;
+    list-style: none;
+    margin: 2rem 0 2rem 0.5rem;
     font-size: 1.2rem;
-
 }
 
 .user-profile-option-item {
     padding: 0.5rem 0.75rem;
     border-radius: 30px;
-    transition: transform 500ms ease, background 500ms ease-in-out;
+    transition: transform 0.5s ease, background 0.5s ease-in-out;
 }
 
 .user-profile-option-item:hover {
@@ -80,157 +91,223 @@
     background-color: var(--white-smoke);
     cursor: pointer;
 }
+
+/* ================================
+   Post Buttons
+================================ */
 .new-and-sort-post {
     display: flex;
     gap: 1rem;
 }
 
-.write-new-post-btn {
-    border-radius: 20px;
-    font-size: 1.4rem;
-    padding: 0.5rem 2rem;
-    width: 30rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: var(--white);
-    border: 2px solid var(--black);
-    transition: transform 600ms ease, box-shadow 400ms ease;
-}
-
+.write-new-post-btn,
 .sort-post-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    background-color: var(--white-smoke);
-    border: 2px solid var(--primary-black);
-    border-radius: 25px;
     font-size: 1.4rem;
     padding: 0.5rem 2rem;
-    transition: transform 600ms ease, box-shadow 400ms ease;
+    border-radius: 25px;
+    border: 2px solid var(--black);
+    background-color: var(--white);
+    transition: transform 0.6s ease, box-shadow 0.4s ease;
 }
 
-.write-new-post-btn img,
-.sort-post-btn img, .share-btn img {
-    width: 2rem;
-    height: 2rem;
+.write-new-post-btn {
+    width: 30rem;
+}
+
+.sort-post-btn {
+    background-color: var(--white-smoke);
+    border-color: var(--primary-black);
 }
 
 .write-new-post-btn:hover,
 .sort-post-btn:hover {
     transform: translateY(-5px);
     cursor: pointer;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.write-new-post-btn img,
+.sort-post-btn img,
+.share-btn img {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* ================================
+    Sidebar Profile
+================================ */
 .user-side-profile {
-    margin-right: 1rem;
     display: grid;
     grid-template-rows: 6fr 2fr;
-    height: 80vh;
+    max-height: 1000px;
+    margin-right: 1rem;
 }
 
 .user-side-profile-wall {
-    border: 2px solid #000;
+    border: 2px solid var(--black);
     background-color: var(--white-smoke);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px 20px 0 0;
 }
 
 .background {
     width: 100%;
     height: 9rem;
-    border-bottom: 2px solid #000;
-    position: relative;
-    background-image: url("/images/post-thumbnail.png");
+    border-bottom: 2px solid var(--black);
+    border-radius: 20px 20px 0 0;
+    background: url("/images/post-thumbnail.png") no-repeat;
     background-size: cover;
-    background-repeat: no-repeat;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.user-side-profile-social-links {
-    margin-top: 2rem;
-    border: 2px solid #000;
-    background-color: var(--white-smoke);
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    position: relative;
 }
 
 .add-photo-icon-background {
     position: absolute;
-    width: 20px;
-    height: 20px;
     bottom: 15px;
     right: 20px;
-    border-radius: 100%;
+    width: 20px;
+    height: 20px;
     padding: 0.25rem;
-    background-color: var(--white-smoke);
     border: 2px solid var(--black);
+    border-radius: 50%;
+    background-color: var(--white-smoke);
 }
 
 .user-side-profile-name {
+    margin: 1rem 0 0 1rem;
     font-size: 1.25rem;
     font-weight: bold;
-    margin-left: 1rem;
-    margin-top: 1rem;
 }
 
-.share-btn img, .add-social-links-btn img {
-    width: 1.5rem;
-    height: 1.5rem;
-    filter: invert(95%) sepia(6%) saturate(405%) hue-rotate(316deg) brightness(104%) contrast(96%);
-}
-
-.share-btn, .add-social-links-btn {
+/* ================================
+    Buttons (Share / Social Links)
+================================ */
+.share-btn,
+.add-social-links-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.25rem;
-    margin-left: 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0 0 1rem;
     font-size: 1rem;
     font-weight: bold;
     padding: 0.4rem 0.75rem;
     border-radius: 9px;
     background-color: var(--secondary-gray);
     color: var(--white-smoke);
-    
-}
-
-.share-btn:hover {
     cursor: pointer;
 }
 
+.share-btn img,
+.add-social-links-btn img {
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: invert(95%) sepia(6%) saturate(405%) hue-rotate(316deg) brightness(104%) contrast(96%);
+}
+
+/* ================================
+    Follower Info
+================================ */
 .followers {
-    margin-top: 1.5rem;
-    margin-left: 1rem;
+    margin: 1.5rem 0 0 1rem;
     font-size: 1rem;
-    color: var(--secondary-gray)
+    color: var(--secondary-gray);
 }
 
 .info-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    list-style-type: none;
+    grid-template-columns: repeat(2, 1fr);
+    list-style: none;
     margin-top: 1.5rem;
 }
 
 .info-item {
     font-size: 1rem;
     padding-left: 1rem;
-    margin-bottom: 0;
 }
 
 .info-item p {
     margin: 0;
 }
 
+/* ================================
+    Social Links Section
+================================ */
+.user-side-profile-social-links {
+    margin-top: 2rem;
+    border: 2px solid var(--black);
+    background-color: var(--white-smoke);
+    border-radius: 0 0 20px 20px;
+}
+
 .social-links-title {
+    margin: 1rem 0 0 1rem;
     font-size: 1.25rem;
-    margin-left: 1rem;
-    margin-top: 1rem;
+}
+
+
+/* Responsive */
+
+/* Mobile */
+@media (max-width: 767px) {
+    .user-side-profile {
+        display: none;
+    }
+
+    .user-profile {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .user-profile {
+        margin-left: 50px;
+    }
+
+    .user-side-profile {
+        margin-left: 5rem;
+    }
+
+    .write-new-post-btn {
+        width: 20rem;
+    }
+
+    .menu-sidebar {
+        display: none;
+    }
+
+    .user-side-profile {
+        display: grid;
+        grid-template-rows: 6fr 2fr;
+        min-width: 278px;
+        min-height: 600px;
+        margin-right: 1rem;
+    }
+}
+
+
+@media (min-width: 1024px) and (max-width: 1300px) {
+    .user-profile {
+        margin-left: 50px;
+    }
+
+    .user-side-profile {
+        margin-left: 5rem;
+    }
+
+    .write-new-post-btn {
+        width: 20rem;
+    }
+
+    .user-side-profile {
+        display: grid;
+        grid-template-rows: 6fr 2fr;
+        min-width: 278px;
+        min-height: 600px;
+        margin-right: 1rem;
+    }
 }

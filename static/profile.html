@@ -1,71 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/profile.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/reset.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
 </head>
+
 <body>
-    <!-- Kiên -->
+    <!-- Header -->
     <header class="header">
-        <div class="menu">
-        </div>
-        <img src="/images/logo.png" alt="logo">
+        <div class="menu"></div>
+
+        <img src="/images/logo.png" alt="CoderHome Logo" class="logo" />
+
         <div class="button-group">
             <button class="button button-sign-in">Sign in</button>
             <button class="button button-sign-up">Get started</button>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main id="main-section">
+        <!-- Sidebar (Menu) -->
         <aside class="menu-sidebar">
-            <!--Khoi Bui lam-->
+            <!-- Khoi Bui section -->
         </aside>
+
+        <!-- User Profile Section -->
         <section class="user-profile-container">
-            <div class="user-profile">
-                <div class="user-profile-avatar-and-name">
-                    <div class="user-profile-avatar">
-                        <div class="add-photo-icon">
-                            <img src="/images/camera-plus-outline.svg" alt="add-photo-icon">
+            <article class="user-profile">
+                <!-- Left: Main Profile -->
+                <header class="user-profile-header">
+                    <div class="user-profile-avatar-and-name">
+                        <div class="user-profile-avatar">
+                            <div class="add-photo-icon">
+                                <img src="/images/camera-plus-outline.svg" alt="Add photo" />
+                            </div>
                         </div>
+                        <h1 class="user-profile-name">Khoi_Bui_22</h1>
                     </div>
-                    <div class="user-profile-name">Khoi_Bui_22</div>
-                </div>
-                <div class="user-profile-option">
-                        <ul class="user-profile-option-list">
-                            <li class="user-profile-option-item">Posts</li>
-                            <li class="user-profile-option-item">Comments</li>
-                            <li class="user-profile-option-item">Biography</li>
-                        </ul>
-                </div>
+                </header>
+                <!-- Tabs -->
+                <nav class="user-profile-option">
+                    <ul class="user-profile-option-list">
+                        <li class="user-profile-option-item">Posts</li>
+                        <li class="user-profile-option-item">Comments</li>
+                        <li class="user-profile-option-item">Biography</li>
+                    </ul>
+                </nav>
+
+                <!-- Post Actions -->
                 <div class="new-and-sort-post">
                     <button class="write-new-post-btn">
-                        <img src="/images/square-edit-outline.svg" alt="write-new-post-icon">
+                        <img src="/images/square-edit-outline.svg" alt="Write new post" />
                         <span>Tell us your story</span>
                     </button>
+
                     <button class="sort-post-btn">
                         <span>New</span>
-                        <img src="/images/arrow-down.svg" alt="sort-post-icon">
+                        <img src="/images/arrow-down.svg" alt="Sort posts" />
                     </button>
                 </div>
-            </div>
+            </article>
+
+            <!-- Right: Side Profile -->
             <aside class="user-side-profile">
-                <div class="user-side-profile-wall">
+                <section class="user-side-profile-wall">
                     <div class="background">
                         <div class="add-photo-icon-background">
-                            <img src="/images/camera-plus-outline.svg" alt="add-photo-icon">
+                            <img src="/images/camera-plus-outline.svg" alt="Add background" />
                         </div>
                     </div>
-                    <p class="user-side-profile-name">Khoi_Bui_22</p>
+
+                    <h2 class="user-side-profile-name">Khoi_Bui_22</h2>
+
                     <button class="share-btn">
-                        <img src="/images/share.svg" alt="share-icon">
+                        <img src="/images/share.svg" alt="Share profile" />
                         <span>Share</span>
                     </button>
                     <p class="followers"><strong>2 Followers</strong></p>
-                    <div class="detail-info">
+                    <section class="detail-info">
                         <ul class="info-list">
                             <li class="info-item">
                                 <p><strong>1d</strong></p>
@@ -84,18 +104,20 @@
                                 <p>Likes</p>
                             </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="user-side-profile-social-links">
-                    <p class="social-links-title">Social Links</p>
+                    </section>
+                </section>
+
+                <!-- Social Links -->
+                <section class="user-side-profile-social-links">
+                    <h2 class="social-links-title">Social Links</h2>
                     <button class="add-social-links-btn">
-                        <img src="/images/plus.svg" alt="add-social-links-icon">
+                        <img src="/images/plus.svg" alt="Add social links" />
                         <span>Add social links</span>
                     </button>
-                </div>
+                </section>
             </aside>
         </section>
     </main>
-
 </body>
+
 </html>
