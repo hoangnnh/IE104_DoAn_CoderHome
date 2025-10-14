@@ -1,36 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/header.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/aside-menu.css" />
     <title>CoderHome</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <!-- Hoàng -->
-        <div class="menu">
-            <!-- Khôi -->
-            <!-- <img src="./images/toggle menu.png" alt="hamburger menu button"> -->
-        </div>
-        <img src="./images/logo.png" alt="logo">
-        <div class="button-group">
-            <button class="button button-sign-in">Sign in</button>
-            <button class="button button-sign-up">Get started</button>
-        </div>
-    </header>
-    <main>
-        <!-- Hoàng -->
-        <section class="post-feed"></section>
+      <!-- Hoàng -->
+      <div>
         <!-- Khôi -->
-        <aside class="side-bar">
-            <div class="recommended-post"></div>
-            <div class="hot-topic"></div>
-        </aside>
+        <button class="button button-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <img src="./images/logo.png" alt="logo" />
+      <div class="button-group">
+        <button class="button button-sign-in">Sign in</button>
+        <button class="button button-sign-up">Get started</button>
+      </div>
+    </header>
+    <div class="menu">
+      <nav class="menu-container">
+        <div class="menu-list">
+          <a href="#" class="menu-items">
+            <img src="./images/home.png" alt="" />
+            <span>Home</span>
+          </a>
+          <a href="#" class="menu-items">
+            <img src="./images/profile-circled.png" alt="" />
+            <span>Profile</span>
+          </a>
+          <a href="#" class="menu-items">
+            <img src="./images/bookmark-empty.png" alt="" />
+            <span>Library</span>
+          </a>
+          <a href="#" class="menu-items">
+            <img src="./images/user-plus.png" alt="" />
+            <span>Following</span>
+          </a>
+          <hr class="menu-divider"></hr>
+          <a href="#" class="menu-items">
+            <img src="./images/shield.png" alt="" />
+            <span>Privacy Policy</span>
+          </a>
+          <a href="#" class="menu-items">
+            <img src="./images/checklist.png" alt="" />
+            <span> Terms of Service</span>
+          </a>
+          <a href="#" class="menu-items">
+            <img src="./images/people-outline.png" alt="" />
+            <span>About Us</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+    <main>
+      <!-- Hoàng -->
+      <section class="post-feed"></section>
+      <!-- Khôi -->
+      <aside class="side-bar">
+        <div class="recommended-post">
+          <h2>Recommended!</h2>
+          <div class="post-list-recommended">
+            <div class="post">
+              <h3 class="post-title">How to Protect Your Data in the Age of Cyber Attacks!</h3>
+              <p class="author">BuiKhoi</p>
+              <hr class="post-divider">
+            </div>
+            <div class="post">
+              <h3 class="post-title">A Beginner’s Guide to Building Scalable Web Applications!</h3>
+              <p class="author">BuiKhoi</p>
+              <hr class="post-divider">
+            </div>
+            <div class="post">
+              <h3 class="post-title">10 Best Practices for Writing Clean Code</h3>
+              <p class="author">BuiKhoi</p>
+              <hr class="post-divider">
+            </div>
+            <div class="post">
+              <h3 class="post-title">From Student to IT Professional: A Career Roadmap</h3>
+              <p class="author">BuiKhoi</p>
+              <hr class="post-divider">
+            </div>
+            <div class="post">
+              <h3 class="post-title">The Hidden Costs of Poor Software Design</h3>
+              <p class="author">BuiKhoi</p>
+              <hr class="post-divider">
+            </div>
+          </div>
+        </div>
+        <div class="hot-topic">
+          <h2>Hot Topic!!</h2>
+          <div class="topic-container">
+            <button class="button topic-tags"><span>AI</span></button>
+            <button class="button topic-tags"><span>C++</span></button>
+            <button class="button topic-tags"><span>Blockchain</span></button>
+            <button class="button topic-tags"><span>CSS</span></button>
+            <button class="button topic-tags"><span>Machine Learning</span></button>
+            <button class="button topic-tags"><span>HTML</span></button>
+            <button class="button topic-tags"><span>Python</span></button>
+            <button class="button topic-tags"><span>Cyber Security</span></button>
+            <button class="button topic-tags"><span>JS</span></button>
+            <button class="button topic-tags"><span>SQL</span></button>
+          </div>
+          <button class="button down-arrow">
+            <div></div>
+          </button>
+        </div>
+      </aside>
     </main>
-</body>
-
+    <script src="./JS/script.js"></script>
+  </body>
 </html>
