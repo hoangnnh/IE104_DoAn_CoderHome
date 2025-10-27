@@ -1,0 +1,151 @@
+<!-- Header Template -->
+<template id="header-template">
+  <style>
+    :host {
+      --white: #ffffff;
+      --white-smoke: #f7f3f1;
+      --primary-gray: #4a4848;
+      --secondary-gray: #7d7d7d;
+      --primary-black: #222222;
+      --black: #000000;
+
+      display: block;
+    }
+
+    /* ===== Header (BEM) ===== */
+    .header {
+      background: var(--white);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      position: sticky; top: 0; z-index: 50;
+    }
+
+    .header__inner {
+      height: 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* left: menu + brand */
+    .header__left {
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .header__menu-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.15);
+      background: transparent; display: grid; place-items: center;
+      cursor: pointer; transition: background .2s;
+    }
+    .header__menu-btn:hover { background: rgba(0,0,0,.05); }
+
+    .header__brand {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .header__logo { width: 22px; height: 22px; border-radius: 50%; background: var(--primary-black); display: grid; place-items: center; color: var(--white); font-size: 12px; }
+    .header__name  { font-weight: 700; color: var(--primary-black); font-family: system-ui, -apple-system, Segoe UI, Inter, Roboto, sans-serif; }
+
+    /* middle: search */
+    .header__search {
+      display: flex; align-items: center; gap: 8px;
+      height: 40px; padding: 0 14px;
+      background: #f5f5f5; border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .header__search-icon { width: 18px; height: 18px; opacity: .6; }
+    .header__search-input {
+      flex: 1; border: none; outline: none;
+      background: transparent; color: var(--primary-black);
+      font-size: 0.95rem;
+    }
+
+    /* right: actions */
+    .header__actions {
+      display: flex; align-items: center; gap: 16px;
+      color: var(--secondary-gray);
+    }
+
+    .header__action {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--secondary-gray); text-decoration: none;
+      font-size: .95rem;
+    }
+    .header__icon-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: grid; place-items: center; border: 1px solid rgba(0,0,0,.15);
+      background: transparent; cursor: pointer; transition: background .2s;
+    }
+    .header__icon-btn:hover { background: rgba(0,0,0,.05); }
+
+    .header__avatar {
+      width: 34px; height: 34px; border-radius: 50%; object-fit: cover;
+      border: 1px solid rgba(0,0,0,.1);
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .header__name { display: none; }         /* keep the logo, hide wordmark */
+      .header__search-input { font-size: .9rem; }
+    }
+    @media (max-width: 640px) {
+      .header__search { display: none; }       /* hide search on very small screens */
+      .header__inner { grid-template-columns: auto 1fr auto; }
+    }
+
+    /* icon base */
+    .icon { width: 18px; height: 18px; display: inline-block; }
+  </style>
+
+  <header class="header">
+    <div class="header__inner">
+
+      <!-- Left -->
+      <div class="header__left">
+        <button class="header__menu-btn" aria-label="Open menu">
+          <!-- hamburger -->
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+        <a class="header__brand" href="/">
+          <span class="header__logo">🏠</span>
+          <span class="header__name">Coderhome</span>
+        </a>
+      </div>
+
+      <!-- Search -->
+      <label class="header__search" aria-label="Search">
+        <svg class="header__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="7" stroke-width="2"></circle>
+          <path d="M21 21l-3.6-3.6" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+        <input class="header__search-input" type="search" placeholder="Search" />
+      </label>
+
+      <!-- Right actions -->
+      <div class="header__actions">
+        <a class="header__action" href="/write.html" title="Write">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-width="2" d="M4 20h4l10-10-4-4L4 16v4z"></path>
+          </svg>
+          <span>Write</span>
+        </a>
+
+        <button class="header__icon-btn" title="Notifications">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-width="2" d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14v-3a6 6 0 1 0-12 0v3a2 2 0 0 1-.6 1.4L4 17h5"></path>
+            <path stroke-width="2" d="M9 17a3 3 0 0 0 6 0"></path>
+          </svg>
+        </button>
+
+        <img class="header__avatar" src="../../images/author-logo.png" alt="Your avatar">
+      </div>
+
+    </div>
+  </header>
+</template>
