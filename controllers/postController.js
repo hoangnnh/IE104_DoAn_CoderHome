@@ -1,0 +1,84 @@
+// controllers/postController.js
+const Post = require('../models/post');
+const User = require('../models/user'); // We might need this later
+
+exports.getNewPost = (req, res) => {
+    res.render('pages/new-post', {
+        pageTitle: 'Create New Post'
+    });
+};
+
+exports.createPost = async (req, res) => {
+    try {
+        const { title, content, category, tags } = req.body;
+
+        // Get the logged-in user's ID from the session
+        const authorId = req.session.userId;
+
+        // Split tags string into an array (e.g., "js, node, mongo" -> ["js", "node", "mongo"])
+        const tagsArray = tags.split(',').map(tag => tag.trim());
+
+        const post = new Post({
+            title: title,
+            content: content,
+            category: category,
+            tags: tagsArray,
+            author: authorId // Link the post to the logged-in user
+        });
+
+        // Save the post to the database
+        const savedPost = await post.save();
+
+        // Redirect the user to the new post's page
+        res.redirect(`/posts/${savedPost._id}`);
+
+    } catch (err) {
+        console.error('Create Post Error:', err);
+        res.redirect('/posts/new'); // Send them back to the form if there's an error
+    }
+};
+
+// --- Show a single post ---
+exports.getPost = async (req, res) => {
+    try {
+        const postId = req.params.id;
+
+        // Find the post by its ID and populate the 'author' field
+        // .populate('author', 'username') will find the user linked
+        // to 'author' and only pull their 'username' field.
+        const post = await Post.findById(postId)
+            .populate('author', 'username profilePicture');
+
+        if (!post) {
+            return res.status(404).render('404', { pageTitle: 'Post Not Found' });
+        }
+
+        res.render('pages/show-post', {
+            pageTitle: post.title,
+            post: post
+        });
+
+    } catch (err) {
+        console.error('Get Post Error:', err);
+        res.status(500).send('Server Error');
+    }
+};
+
+// --- Show all posts (for the homepage feed) ---
+exports.getAllPosts = async (req, res) => {
+    try {
+        // Find all posts, sort by newest, and populate author's username
+        const posts = await Post.find()
+            .populate('author', 'username')
+            .sort({ createdAt: -1 }); // -1 means descending order
+
+        res.render('pages/index', {
+            pageTitle: 'Your Feed',
+            posts: posts // Pass the array of posts to the view
+        });
+
+    } catch (err) {
+        console.error('Get All Posts Error:', err);
+        res.status(500).send('Server Error');
+    }
+};
