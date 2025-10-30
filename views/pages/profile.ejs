@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('../partials/header.ejs') %>
+    <main class="container">
+      <section class="user__detail">
+        <div class="user__info">
+          <img
+            src="<%= post.profilePicture %>"
+            alt="<%=  %>"
+            class="user__avatar"
+          />
+          <p class="user__name">Khoi_Bui_22</p>
+        </div>
+        <nav class="profile-nav">
+          <a href="#" class="profile-nav__items">Posts</a>
+          <a href="#" class="profile-nav__items">Comments</a>
+          <a href="#" class="profile-nav__items">Biography</a>
+        </nav>
+        <button class="tell-story-button"></button>
+        <article class="user__bio"></article>
+      </section>
+      <aside class="side-profile">
+        <img src="" alt="" class="user__bg-img" />
+        <div class="user__more-info"></div>
+        <div class="user__social-links"></div>
+        <button class="add-social-link-button"></button>
+      </aside>
+    </main>
+  </body>
+</html>
