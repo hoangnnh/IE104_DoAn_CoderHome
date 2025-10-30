@@ -1,12 +1,44 @@
-<nav>
-  <a href="/">Home</a>
-  <a href="/posts/new">New Post</a>
+<!DOCTYPE html>
+<html lang="en">
 
-  <% if (isLoggedIn) { %>
-  <a href="/profile">Hi, <%= username %>!</a>
-  <a href="/logout">Logout</a>
-  <% } else { %>
-  <a href="/login">Login</a>
-  <a href="/register">Register</a>
-  <% } %>
-</nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= pageTitle %>
+  </title>
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="page-container">
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="/images/coderhome-logo.png" alt="">
+        </div>
+
+        <div class="navbar__links">
+          <a href="/our-story" class="navbar__item">Our story</a>
+          <a href="/membership" class="navbar__item">Membership</a>
+          <a href="/write" class="navbar__item">Write</a>
+
+          <% if (isLoggedIn) { %>
+          <a href="/profile" class="navbar__item">Hi, <%= username %>!</a>
+          <a href="/logout" class="navbar__item button button--outline">Logout</a>
+          <% } else { %>
+          <a href="/login" class="navbar__item">Sign in</a>
+          <a href="/register" class="navbar__item button button--primary">
+            <button id="bottone1">
+              <strong>Get started</strong>
+            </button>
+          </a>
+          <% } %>
+        </div>
+      </nav>
+    </header>

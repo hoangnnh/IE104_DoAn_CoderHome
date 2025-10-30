@@ -1,0 +1,117 @@
+:root{
+	--bg: #f6f2ec; /* warm paper */
+	--text: #0f0f0f;
+	--muted: #6f6b66;
+	--accent: #5a2fb8;
+	--btn-bg: #0b0b0b;
+	--btn-fg: #fff;
+}
+
+html,body{
+	height:100%;
+	background:var(--bg);
+	color:var(--text);
+	font-family: Lora, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Phần hero */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 40px;
+}       
+
+.hero__content {
+  max-width: 1200px;
+  align-items: center;
+  min-height: calc(95vh - 120px);
+  gap: 36px;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  margin: 0 auto;
+
+}  
+
+.hero__copy{
+	padding: 28px 12px;
+}
+
+.hero__title {
+  font-family: 'Lora', 'Times New Roman', Roboto;
+  font-weight: 800;
+	margin: 0 0 12px 0;
+	color: var(--text);
+	font-size: clamp(30px, 10vw, 80px);
+	line-height: 0.95;
+	letter-spacing: -1px;
+}
+
+.hero__subtitle {
+    color: var(--muted);
+	margin: 8px 0 20px 0;
+	font-size: 1.125rem;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.button--primary1 {
+    margin: 0;
+}
+
+.hero__media img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+
+
+#bottone2 {
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 0px;
+  cursor: pointer;
+  border-radius: 8px;
+}   
+
+
+#bottone1:hover {
+ box-shadow: 7px 5px 56px -14px #000000;
+}
+
+#bottone1:active {
+ transform: scale(0.97);
+ box-shadow: 7px 5px 56px -10px #000000;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {     
+    .hero {
+        text-align: center;
+    }       
+    
+    .hero__media {
+        margin-top: 30px;
+    }       
+}
+
+.footer{
+	margin-top: 24px;
+	padding: 18px 20px;
+	background: transparent;
+    border-top: 2px solid #e0e0e0;
+}
+.footer__links{
+	max-width:1200px;
+	margin: 0 auto;
+	text-align:center;
+}
+.footer-nav{ display:flex; gap:24px; justify-content:center; flex-wrap:wrap; color:var(--muted); }
+.footer-nav a{ color:var(--muted); text-decoration:none; font-size:.95rem; }
+/* End of landing.css */        
