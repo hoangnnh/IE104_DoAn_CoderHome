@@ -19,13 +19,17 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  bio: { // <-- New field
+  bio: {
     type: String,
     default: '' 
   },
   profilePicture: {
     type: String,
-    default: '/public/images/default-avatar.png' // You can set a default path
+    default: '/public/images/default-avatar.png'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 });
 

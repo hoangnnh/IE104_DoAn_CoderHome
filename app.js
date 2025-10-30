@@ -50,15 +50,17 @@ app.use((req, res, next) => {
 // --- Routes ---
 // import routes from auth.js
 const authRoutes = require('./routes/auth');
+const postRoutes = require('./routes/posts')
 
 app.use(authRoutes);
-
+app.use(postRoutes);
 // Homepage
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+  const postsList = await Post.find();
   if (req.session.isLoggedIn) {
     // USER IS LOGGED IN
     res.render('pages/index', { 
-      pageTitle: 'Your Feed'
+      pageTitle: 'Your Feed', postsList
     });
   } else {
     // USER IS NOT LOGGED IN

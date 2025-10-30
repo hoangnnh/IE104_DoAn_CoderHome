@@ -2,13 +2,15 @@
 const Post = require('../models/post');
 const User = require('../models/user'); // We might need this later
 
-exports.getNewPost = (req, res) => {
+// Hien thi trang viet blog
+function getNewPost (req, res) {
     res.render('pages/new-post', {
         pageTitle: 'Create New Post'
     });
 };
 
-exports.createPost = async (req, res) => {
+// Xu li tao bai viet
+async function createPost (req, res) {
     try {
         const { title, content, category, tags } = req.body;
 
@@ -23,7 +25,7 @@ exports.createPost = async (req, res) => {
             content: content,
             category: category,
             tags: tagsArray,
-            author: authorId // Link the post to the logged-in user
+            author: authorId
         });
 
         // Save the post to the database
@@ -38,8 +40,8 @@ exports.createPost = async (req, res) => {
     }
 };
 
-// --- Show a single post ---
-exports.getPost = async (req, res) => {
+// Hien thi post voi ID
+async function getPost (req, res) {
     try {
         const postId = req.params.id;
 
@@ -64,8 +66,8 @@ exports.getPost = async (req, res) => {
     }
 };
 
-// --- Show all posts (for the homepage feed) ---
-exports.getAllPosts = async (req, res) => {
+// Hien thi toan bo bai viet (cho Homepage)
+async function getAllPosts (req, res) {
     try {
         // Find all posts, sort by newest, and populate author's username
         const posts = await Post.find()
@@ -82,3 +84,10 @@ exports.getAllPosts = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+module.exports = {
+    getNewPost,
+    createPost,
+    getPost,
+    getAllPosts
+}
