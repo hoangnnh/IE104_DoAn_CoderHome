@@ -1,17 +1,19 @@
-:root{
-	--bg: #f6f2ec; /* warm paper */
-	--text: #0f0f0f;
-	--muted: #6f6b66;
-	--accent: #5a2fb8;
-	--btn-bg: #0b0b0b;
-	--btn-fg: #fff;
+:root {
+  --bg: #fff; /* warm paper */
+  --text: #0f0f0f;
+  --muted: #6f6b66;
+  --accent: #5a2fb8;
+  --btn-bg: #0b0b0b;
+  --btn-fg: #fff;
 }
 
-html,body{
-	height:100%;
-	background:var(--bg);
-	color:var(--text);
-	font-family: Lora, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Lora, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
 }
 
 /* Thanh điều hướng */
@@ -47,7 +49,6 @@ nav {
   display: flex;
   align-items: center;
   height: 100%;
-
 }
 
 .navbar__item {
@@ -58,34 +59,33 @@ nav {
 }
 
 a {
-	text-decoration: none;
-  	color: var(--text);
-  	margin-left: 20px;
+  text-decoration: none;
+  color: var(--text);
+  margin-left: 20px;
 }
 
-/* From Uiverse.io by TCdesign-dev */ 
+/* From Uiverse.io by TCdesign-dev */
 #bottone1 {
- padding-left: 30px;
- padding-right: 30px;
- padding-bottom: 10px;
- padding-top: 10px;
- border-radius: 14px;
- background: #000000;
- border: none;
- font-family: inherit;
- text-align: center;
- cursor: pointer;
- transition: 0.4s;
- color: #fff;
- font-family: 'Roboto Condensed', sans-serif;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-radius: 14px;
+  background: #000000;
+  border: none;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.4s;
+  color: #fff;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 #bottone1:hover {
- box-shadow: 7px 5px 56px -14px #000000;
+  box-shadow: 7px 5px 56px -14px #000000;
 }
 
 #bottone1:active {
- transform: scale(0.97);
- box-shadow: 7px 5px 56px -10px #000000;
+  transform: scale(0.97);
+  box-shadow: 7px 5px 56px -10px #000000;
 }
-

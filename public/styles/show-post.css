@@ -1,0 +1,330 @@
+html,
+body {
+  height: 100%;
+  background-color: white; /* ✅ toàn trang đều có nền trắng */
+  margin: 0;
+  padding: 0;
+}
+.post__content,
+.post__footer {
+  width: 1000px; /* hoặc tùy bạn muốn rộng bao nhiêu */
+  max-width: 100%; /* để responsive trên mobile */
+  margin: 0 auto; /* căn giữa */
+}
+button {
+  padding: 12px 60px;
+}
+img {
+  border-radius: 9999px;
+}
+
+/* Main container */
+.container {
+  display: grid;
+  grid-template-rows: 1fr 500px;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  justify-content: center;
+  justify-items: center;
+}
+
+/* Post */
+.post {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: flex-start;
+}
+
+/* Post header */
+.post__header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Post Header Title */
+.post__title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 40px 0 0 0;
+}
+
+/* Post Header Descrpt */
+.post__description {
+  font-size: 1rem;
+  color: #7d7d7d;
+}
+
+/* Post Header Metadata Section */
+.post__metadata {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Post Header Metadata Post Author */
+.post-author {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin: 10px 0 0 0;
+}
+
+/* Post Header Metadata Post Author Img */
+.post-author__img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Post Header Metadata Post Author  Name*/
+.post-author__name {
+}
+/* Post Header Metadata Post Author Follow Button*/
+.post-author__follow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1.2px solid black;
+  width: 70px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.post-author__follow:hover {
+  background-color: #7d7d7d;
+  opacity: 0.2;
+}
+
+/* Post Header Metadata Post Author Posted Date*/
+.post__posted-date {
+  color: #7d7d7d;
+}
+
+/* Post Header Metadata Post Divider*/
+.post__divider {
+  border: none;
+  border-top: 1px solid #7d7d7d;
+  width: 100%;
+  margin: 20px auto;
+  align-self: center;
+  opacity: 0.6;
+}
+
+/* Post Header Metadata Interaction Section */
+.metadata__interaction-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px;
+}
+/* Post Header Metadata Interaction Section */
+.metadata__interaction {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+/* Post Header Metadata Interaction Items */
+.interaction__items {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.interaction__items img {
+  margin: 10px 0 20px 0;
+}
+.interaction__items p {
+  margin: 10px 0 20px 0;
+  color: #7d7d7d;
+}
+/* Post Header Metadata Action Section */
+.metadata__action {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-items: center;
+  height: 100%;
+  gap: 20px;
+}
+.metadata__action img {
+  margin: 10px 0 20px 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* Post Content */
+.post__content {
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Footer */
+.post__footer {
+  display: flex;
+  flex-direction: column;
+  justify-self: start;
+  margin: 20px 0;
+  padding: 20px 0;
+  gap: 20px;
+}
+
+/* Footer Post Tags */
+.post__tags {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+/* Footer Post Tags Button */
+.post__tags-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: none;
+  width: 70px;
+  background-color: #ececec;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.post__tags-button:hover {
+  background-color: #7d7d7d 20%;
+  transform: scale(1.1);
+}
+
+/* Footer Post About Author */
+.post__about-author {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.about-author__img {
+  width: 48px;
+  height: 48px;
+}
+/* Footer Post About Author Sectiom */
+.about-author__content {
+  display: flex;
+  flex-direction: column;
+}
+.about-author__writenby {
+  font-weight: bold;
+  margin: 0 0 16px 0;
+}
+.about-author__bio {
+  margin: 0;
+}
+.about-author__follow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1.2px solid black;
+  height: 40px;
+  width: 70px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+/* Footer Post Respone Section */
+.post__respone {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+/* Footer Post Respone Count */
+.post-respones__count {
+  font-weight: bold;
+  margin: 0;
+}
+/* Footer Post Respone User Info Section */
+.user__info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin: 20px auto;
+}
+
+/* Footer Post Respone User Info User Avatar */
+.user__avatar {
+  height: 32px;
+  width: 32px;
+}
+/* Footer Post Respone User Info User Name */
+.user__name {
+  font-weight: bold;
+}
+
+/* Footer Post Respone Input section */
+.post-respone__input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #ececec;
+}
+
+/* Footer Post Respone Input Text */
+#post-respone {
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  justify-self: center;
+  width: 95%;
+  margin: 20px auto;
+  padding: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+#post-respone:focus {
+  border: 0;
+  outline: none;
+  border-radius: 20px;
+  height: 180px;
+  padding-top: 0;
+}
+#post-respone::placeholder {
+}
+/* Footer Post Respone Button Section */
+.respones__nav {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end !important;
+  gap: 20px;
+  padding: 10px 40px 10px 0;
+}
+
+/* Footer Post Respone Button Cancel */
+.respones__cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: none;
+  width: 70px;
+  background-color: #ececec;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Footer Post Respone Button Respond */
+.respones__respond {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: none;
+  width: 70px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
