@@ -47,10 +47,10 @@ async function getPost(req, res) {
     // Find the post by its ID and populate the 'author' field
     // .populate('author', 'username') will find the user linked
     // to 'author' and only pull their 'username' field.
-    const post = await Post.findById(postId).populate(
-      "author",
-      "username profilePicture bio"
-    );
+    const post = await Post.findById(postId).populate({
+      path: "author",
+      select: "username profilePicture bio",
+    });
 
     if (!post) {
       return res.status(404).render("404", { pageTitle: "Post Not Found" });

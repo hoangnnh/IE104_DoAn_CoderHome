@@ -74,6 +74,7 @@
             </p>
             <p class="about-author__bio"><%= post.author.bio %></p>
           </div>
+          <button class="about-author__follow"><span>Follow</span></button>
         </div>
         <hr class="post__divider" />
         <div class="post-respone">
@@ -81,17 +82,25 @@
             Respones ( <%= post.responeCount %> )
           </p>
           <div class="user__info">
-            <img src="" alt="" class="user__avatar" />
-            <p class="user__name"></p>
+            <img src="" alt="-avatar" class="user__avatar" />
+            <!-- user.username -->
+            <!-- user.profilePicture -->
+            <p class="user__name"><%= %> user.username</p>
           </div>
+          <%= %>
           <div class="post-respone__input">
-            <input type="text" name="" id="post-respone" />
+            <input
+              type="text"
+              name="post-respone"
+              id="post-respone"
+              placeholder="Write your comment..."
+            />
             <div class="respones__nav">
               <button class="respones__cancel">
                 <span>Cancel</span>
               </button>
               <button class="respones__respond">
-                <span>Respone</span>
+                <span>Respond</span>
               </button>
             </div>
           </div>

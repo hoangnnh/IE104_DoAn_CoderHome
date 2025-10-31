@@ -52,8 +52,10 @@ app.use((req, res, next) => {
 // import routes from auth.js
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
+const profileRoutes = require("./routes/profile");
 
 app.use(authRoutes);
+app.use("/profile", profileRoutes);
 app.use("/posts", postRoutes);
 // Homepage
 app.get("/", async (req, res) => {

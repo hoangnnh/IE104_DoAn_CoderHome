@@ -1,5 +1,6 @@
 // models/user.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const post = require("./post");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -7,30 +8,36 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true
+    trim: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    trim: true
+    trim: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   bio: {
     type: String,
-    default: '' 
+    default: "",
   },
   profilePicture: {
     type: String,
-    default: '/public/images/default-avatar.png'
+    default: "public/images/default-avatar.png",
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
+  postedPost: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+    },
+  ],
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
