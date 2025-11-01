@@ -5,11 +5,14 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.post,
 .post__content,
 .post__footer {
-  width: 1000px; /* hoặc tùy bạn muốn rộng bao nhiêu */
-  max-width: 100%; /* để responsive trên mobile */
+  width: 90%; /* hoặc tùy bạn muốn rộng bao nhiêu */
+  max-width: 1200px; /* để responsive trên mobile */
   margin: 0 auto; /* căn giữa */
+  box-sizing: border-box;
 }
 button {
   padding: 12px 60px;
@@ -167,7 +170,6 @@ img {
 .post__footer {
   display: flex;
   flex-direction: column;
-  justify-self: start;
   margin: 20px 0;
   padding: 20px 0;
   gap: 20px;
@@ -327,4 +329,118 @@ img {
   background-color: black;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+/* ---- GPT test Responsive ---- */
+/* ============================= */
+/* 🧩 RESPONSIVE DESIGN SECTION  */
+/* ============================= */
+
+/* Mobile (dưới 768px) */
+@media (min-width: 100px) and (max-width: 600px) {
+  /* Căn lề và bố cục chung */
+  .container {
+    width: 95%;
+    grid-template-rows: auto;
+    padding: 10px;
+    justify-content: start;
+    justify-items: start;
+  }
+  .post__header {
+    margin: auto 0;
+  }
+  .post,
+  .post__content,
+  .post__footer {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  /* Post card */
+  .post {
+    width: 100%;
+    align-items: center;
+  }
+
+  .post__title {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
+  .post__description {
+    font-size: 0.9rem;
+  }
+
+  /* Metadata & author */
+  .post-author {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .post-author__follow {
+    width: 60px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .metadata__interaction {
+    flex-direction: row;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  /* Footer */
+  .post__footer {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .post__tags {
+    flex-wrap: wrap;
+  }
+
+  .post__tags-button {
+    width: auto;
+    padding: 6px 12px;
+  }
+
+  /* About author */
+  .post__about-author {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  /* Input section */
+  #post-respone {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .respones__nav {
+    justify-content: end !important;
+    margin-right: 28px;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+  }
+}
+
+/* Desktop lớn (trên 1440px) */
+@media (min-width: 1440px) and (max-width: 100vh) {
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .post__content,
+  .post__footer {
+    width: 80%;
+  }
+
+  .post__title {
+    font-size: 2.2rem;
+  }
 }
