@@ -12,7 +12,7 @@ async function getOwnProfile(req, res) {
       select: "title content author category createdAt",
       populate: { path: "author", select: "username profilePicture" },
     });
-
+    console.log("getOwnProfile - User with posts:", user);
     if (!user) {
       return res.status(404).render("404", { pageTitle: "User Not Found" });
     }
@@ -51,6 +51,7 @@ async function getUserProfile(req, res) {
           select: "title content author category createdAt",
         },
       });
+    console.log("GetUserProfile - User with posts:", user);
     if (!user) {
       return res.status(404).render("404", { pageTitle: "User Not Found" });
     }
