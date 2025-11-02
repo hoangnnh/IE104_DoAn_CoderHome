@@ -14,7 +14,7 @@ li {
 
 .container {
   display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-columns: 1.25fr 0.75fr;
   grid-template-areas:
     "main sidebar"
     "main sidebar"
@@ -26,8 +26,8 @@ li {
 
 .user__main {
   display: flex;
-  grid-area: "main";
-  width: 90%;
+  grid-area: main;
+  width: 80%;
   flex-direction: column;
   gap: 2.5rem;
 }
@@ -40,8 +40,8 @@ li {
 }
 .user__avatar {
   border-radius: 9999px;
-  height: 70px;
-  width: 70px;
+  height: 4.375rem;
+  width: 4.375rem;
 }
 .user__name {
   display: flex;
@@ -52,6 +52,7 @@ li {
 .profile-nav {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1.25rem;
 }
 .profile-nav__items {
@@ -140,7 +141,6 @@ li {
 
 .post__left-text {
   width: 100%;
-  min-width: 515.64px;
 }
 
 .post__interact {
@@ -171,8 +171,8 @@ li {
 }
 
 .post__author-img {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 6.35rem;
 }
 
@@ -186,12 +186,13 @@ li {
 }
 
 .post__img {
-  width: 200px;
+  display: flex;
+  width: 12.5rem;
 }
 
 .react-icon {
-  width: 15px;
-  height: 15px;
+  width: 1rem;
+  height: 1rem;
 }
 
 .react-icon:hover {
@@ -202,18 +203,18 @@ li {
 
 .side-profile {
   display: flex;
-  grid-area: "sidebar";
+  grid-area: sidebar;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
   width: 90%;
-  max-width: 600px;
-  border-radius: 20px;
+  max-width: 800px;
+  border-radius: 1.25rem;
 }
 .user__bg-img {
   border-top-left-radius: 1.25rem;
   border-top-right-radius: 1.25rem;
   width: 100%;
-  height: 300px;
+  height: 30%;
 }
 .user__more-info {
   display: flex;
@@ -229,7 +230,11 @@ li {
   gap: 1.25rem;
   justify-content: flex-start;
 }
-
+.more-info__title {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
 .more-info__name {
   font-weight: bold;
   font-size: 2rem;
@@ -276,7 +281,6 @@ li {
   justify-content: center;
   align-items: start;
   width: 100%;
-
   padding: 1rem 0;
 }
 
@@ -304,7 +308,7 @@ li {
   font-size: 1.5rem;
 }
 
-.socials-links__items {
+.social-links__items {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -317,4 +321,128 @@ li {
   background-color: black;
   color: white;
   padding: 0.75rem 2.5rem;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 500px) and (max-width: 1100px) {
+  body,
+  html {
+    width: 100%;
+    height: 100%;
+    font-size: 6px;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr minmax(0, 0.25fr);
+    grid-template-areas:
+      "main"
+      "sidebar";
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .user__main,
+  .side-profile {
+    width: 90%;
+    max-width: 90%;
+    box-sizing: border-box;
+  }
+
+  .user__main {
+    display: flex;
+    flex-direction: column;
+    grid-area: main;
+  }
+  .side-profile {
+    display: flex;
+    flex-direction: row;
+    grid-area: sidebar;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .user__more-info {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    max-height: 0.25fr;
+  }
+  .user__bg-img {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-bottom-left-radius: 1.25rem;
+    border-top-right-radius: 0;
+  }
+  .more-info__container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 90%;
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+  .more-info__title {
+    display: flex;
+    flex-direction: column;
+  }
+  .more-info__name {
+  }
+  .more-info__share {
+  }
+  .more-info__details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: max-content;
+    justify-content: space-around;
+    gap: 1.25rem;
+  }
+
+  .more-info__follower {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.5rem;
+    justify-content: center;
+  }
+  .more-info__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+  }
+  .more-info__items {
+    height: 100%;
+  }
+
+  .user__posted-post {
+  }
+
+  .user__social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 20%;
+    height: auto;
+  }
+  .user__social-links p {
+    margin: 0;
+  }
+  .social-links__items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .social-links__items a {
+    margin: 0 0 0 1.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  html,
+  body {
+    font-size: 4px !important;
+  }
 }

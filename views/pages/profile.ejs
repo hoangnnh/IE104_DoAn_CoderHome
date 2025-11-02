@@ -115,8 +115,10 @@
             class="user__bg-img"
           />
           <div class="more-info__container">
-            <div class="more-info__name"><%= user.username %></div>
-            <button class="more-info__share">Share</button>
+            <div class="more-info__title">
+              <div class="more-info__name"><%= user.username %></div>
+              <button class="more-info__share">Share</button>
+            </div>
             <div class="more-info__details">
               <div class="more-info__follower">
                 <p><%= user.followerCount %>2</p>
@@ -155,7 +157,7 @@
         </div>
         <div class="user__social-links">
           <p>Social Link</p>
-          <div class="socials-links__items">
+          <div class="social-links__items">
             <a href="#">Instagram</a>
             <a href="#">Facebook</a>
           </div>
