@@ -158,8 +158,8 @@ img {
 
 /* Post Content */
 .post__content {
-  margin: 0;
-  max-width: 100%;
+  margin: 0 auto;
+  max-width: 1175px;
   box-sizing: border-box;
 }
 
@@ -290,8 +290,7 @@ img {
   height: 180px;
   padding-top: 0;
 }
-#post-respone::placeholder {
-}
+
 /* Footer Post Respone Button Section */
 .respones__nav {
   display: flex;

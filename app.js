@@ -58,14 +58,9 @@ app.use(authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/posts", postRoutes);
 // Homepage
-app.get("/", async (req, res) => {
-  const postsList = await Post.find();
+app.get("/", (req, res) => {
   if (req.session.isLoggedIn) {
-    // USER IS LOGGED IN
-    res.render("pages/index", {
-      pageTitle: "Your Feed",
-      postsList,
-    });
+    res.sendFile(path.join(__dirname, "views/pages/index.html"))
   } else {
     // USER IS NOT LOGGED IN
     res.render("pages/landing", {
@@ -73,6 +68,15 @@ app.get("/", async (req, res) => {
     });
   }
 });
+
+app.get("/post/:id", (req, res) => {
+  if(req.session.isLoggedIn) res.sendFile(path.join(__dirname, "views/pages/post.html"))
+    else {
+    res.render("pages/landing", {
+      pageTitle: "Welcome to Coderhome",
+    });
+    }
+})
 
 // --- Server Startup ---
 app.listen(PORT, () => {
