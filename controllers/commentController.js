@@ -1,4 +1,5 @@
 const Comment = require("../models/comment");
+const Post = require("../models/post");
 const { Schema } = require("mongoose");
 
 async function addComment(req, res) {
@@ -10,6 +11,10 @@ async function addComment(req, res) {
             content,
             author
         });
+        await Post.updateOne(
+            { _id: postId },
+            { $inc: { responseCount: 1 } }
+        );
         res.status(201).json(comment);
     } catch (err) {
         console.error("Add Response Error:", err);

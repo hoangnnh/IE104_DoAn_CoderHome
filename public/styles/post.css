@@ -279,7 +279,8 @@ button {
   margin-bottom: 3rem;
 }
 /* Footer Post Respone Count */
-.post__respones-count {
+.post__respones-title {
+  font-size: 2rem;
   font-weight: bold;
   margin: 0;
 }

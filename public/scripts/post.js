@@ -96,7 +96,7 @@ async function loadPostID() {
     `;
 
     postResponse.innerHTML = `
-    <p class="post__respones-count">Responses(${post.responseCount})</p>
+    <p class="post__respones-title">Responses</p>
                     <div class="user__info">
                         <img src="${currentUser.profilePicture}" alt="avatar" class="user__avatar" />
                         <p class="user__name"> ${currentUser.username}</p>
