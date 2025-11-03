@@ -8,7 +8,8 @@ function getRegister (req, res) {
 // Xu ly khi nguoi dung dang ky
 async function postRegister (req, res) {
   try {
-    const { username, email, password } = req.body;
+    const { Firstname, Lastname, email, password } = req.body;
+    const username = `${Firstname}${Lastname}`.toLowerCase();
     // Kiem tra user ton tai chua
     const existingUser = await User.findOne({ email: email });
 

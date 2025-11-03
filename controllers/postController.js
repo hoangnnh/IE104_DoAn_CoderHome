@@ -1,6 +1,6 @@
 // controllers/postController.js
 const Post = require("../models/post");
-const User = require("../models/user"); // We might need this later
+const User = require("../models/user");
 
 // Hien thi trang viet blog
 function getNewPost(req, res) {
@@ -62,7 +62,7 @@ async function getAllPosts(req, res) {
   try {
     // Find all posts, sort by newest, and populate author's username
     const posts = await Post.find()
-      .populate("author", "_id username")
+      .populate("author", "_id username profilePicture")
       .sort({ createdAt: -1 }); // -1 means descending order
     res.json(posts);
   } catch (err) {

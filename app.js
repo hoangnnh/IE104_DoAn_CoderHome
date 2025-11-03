@@ -53,10 +53,15 @@ app.use((req, res, next) => {
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
 const profileRoutes = require("./routes/profile");
+const currentRoutes = require("./routes/current");
+const commentRoutes = require("./routes/comments");
 
 app.use(authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/posts", postRoutes);
+app.use("/current", currentRoutes);
+app.use("/comment", commentRoutes);
+
 // Homepage
 app.get("/", (req, res) => {
   if (req.session.isLoggedIn) {
