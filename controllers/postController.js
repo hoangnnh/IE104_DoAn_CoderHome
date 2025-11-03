@@ -1,6 +1,6 @@
 // controllers/postController.js
 const Post = require("../models/post");
-const User = require("../models/user"); // We might need this later
+const User = require("../models/user");
 
 // Hien thi trang viet blog
 function getNewPost(req, res) {
@@ -43,23 +43,14 @@ async function createPost(req, res) {
 async function getPost(req, res) {
   try {
     const postId = req.params.id;
-
-    // Find the post by its ID and populate the 'author' field
-    // .populate('author', 'username') will find the user linked
-    // to 'author' and only pull their 'username' field.
     const post = await Post.findById(postId).populate({
       path: "author",
       select: "username profilePicture bio",
     });
-
     if (!post) {
-      return res.status(404).render("404", { pageTitle: "Post Not Found" });
+      return res.json({messagge: "Error"});
     }
-
-    res.render("pages/show-post", {
-      pageTitle: post.title,
-      post: post,
-    });
+    res.json(post);
   } catch (err) {
     console.error("Get Post Error:", err);
     res.status(500).send("Server Error");
@@ -71,13 +62,9 @@ async function getAllPosts(req, res) {
   try {
     // Find all posts, sort by newest, and populate author's username
     const posts = await Post.find()
-      .populate("author", "username")
+      .populate("author", "_id username profilePicture")
       .sort({ createdAt: -1 }); // -1 means descending order
-
-    res.render("pages/index", {
-      pageTitle: "Your Feed",
-      posts: posts, // Pass the array of posts to the view
-    });
+    res.json(posts);
   } catch (err) {
     console.error("Get All Posts Error:", err);
     res.status(500).send("Server Error");

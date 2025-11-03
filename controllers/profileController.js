@@ -25,4 +25,6 @@ async function getUserProfile(req, res) {
   }
 }
 
+
+
 module.exports = { getUserProfile };

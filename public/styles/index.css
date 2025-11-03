@@ -95,7 +95,9 @@ body {
 h2,
 h3,
 .post__content-title,
-.post__author-name, .name, .bio {
+.post__author-name,
+.name,
+.bio {
     font-family: "Lora", sans-serif;
     padding: 0;
     margin: 0;
@@ -163,11 +165,13 @@ li:hover {
     margin-top: 3rem;
     justify-content: space-between;
     align-items: center;
+    color: #7d7d7d;
 }
 
 .post__interact-meta {
     display: flex;
     gap: 1rem;
+    font-size: 1.25rem;
 }
 
 .post__interact-action {
@@ -193,8 +197,8 @@ li:hover {
 
 .post__content-overview {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -204,12 +208,20 @@ li:hover {
     width: 200px;
 }
 
-.react-icon {
-    width: 15px;
-    height: 15px;
+.react-icon-meta {
+    width: 17px;
+    height: 17px;
 }
 
-.react-icon:hover {
+.react-icon {
+    width: 25px;
+    height: 25px;
+    filter: brightness(0) saturate(100%)
+    invert(44%) sepia(5%) saturate(0%) brightness(85%) contrast(85%);
+}
+
+.post__interact-meta .react-icon:hover,
+.react-icon-meta:hover {
     cursor: pointer;
 }
 
@@ -298,6 +310,14 @@ aside {
     background-color: #ffffff;
     padding: 0.5rem 1.5rem;
     border-radius: 100px;
+    transition: all 0.5s ease;
+}
+
+.follow__btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: #000;
+    color: #fff;
 }
 
 /* ---------- Tablet (768px - 1023px) ---------- */
