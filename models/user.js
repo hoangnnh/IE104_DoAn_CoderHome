@@ -26,7 +26,7 @@ const userSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    default: "public/images/default-avatar.png",
+    default: "/images/user-avatar.jpg",
   },
   createdAt: {
     type: Date,
