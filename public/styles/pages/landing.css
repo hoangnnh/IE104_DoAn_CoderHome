@@ -150,7 +150,7 @@
 @media (max-width: 768px) {
 
   /* --- Header / Navbar (Mobile) --- */
-  .navbar {
+  .header {
     justify-content: space-around;
     padding: var(--space-md);
   }
