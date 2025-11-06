@@ -7,70 +7,51 @@
   <title>
     <%= pageTitle %>
   </title>
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/header.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="/styles/landing.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/token.css">
+  <link rel="stylesheet" href="/styles/base/fonts.css">
+  <link rel="stylesheet" href="/styles/pages/landing.css">
 </head>
 
 <body>
-
   <div class="page-container">
     <header class="header">
-      <nav class="navbar">
-        <div class="logo">
-          <img src="/images/coderhome-logo.png" alt="">
-        </div>
-
-        <div class="navbar__links">
-          <a href="/our-story" class="navbar__item">Our story</a>
-          <a href="/membership" class="navbar__item">Membership</a>
-          <a href="/write" class="navbar__item">Write</a>
-
-          <% if (isLoggedIn) { %>
-          <a href="/profile" class="navbar__item">Hi, <%= username %>!</a>
-          <a href="/logout" class="navbar__item button button--outline">Logout</a>
-          <% } else { %>
-          <a href="/login" class="navbar__item">Sign in</a>
-          <a href="/register" class="navbar__item button button--primary">
-            <button id="bottone1">
-              <strong>Get started</strong>
-            </button>
-          </a>
-          <% } %>
-        </div>
-      </nav>
+      <div class="logo">
+        <img src="/images/coderhome-logo.png" alt="Coderhome Logo">
+      </div>
+      <div class="navbar__links">
+        <a href="/our-story" class="navbar__item">Our story</a>
+        <a href="/membership" class="navbar__item">Membership</a>
+        <a href="/write" class="navbar__item">Write</a>
+        <a href="/login" class="navbar__item">Sign in</a>
+        <a href="/register" class="navbar__item button button--primary">
+          Get started
+        </a> 
+      </div>
     </header>
-
     <main class="hero">
       <div class="hero__content">
-        <section class="hero__copy">  
-        <h1 class="hero__title">Intelligent stories & ideas</h1>
-        <p class="hero__subtitle">A place to read, write, and deepen your understanding</p>
-        <a href="/register" class="button button--primary1 button--large">
-          <button id="bottone2">
-              <strong>Get started</strong>
-          </button>
-        </a>
+          <section class="hero__copy">
+                <h1 class="hero__title">Intelligent stories & ideas</h1>
+          <p class="hero__subtitle">A place to read, write, and deepen your understanding</p>
+          <a href="/register" class="button button--primary button--large">
+            Get started
+          </a>  
         </section>
-      
         <div class="hero__media">
-          <img src="/images/Landing.png" alt="">
+          <img src="/images/landing-page-bg.png" alt="Illustration of person writing">
         </div>
       </div>
     </main>
-
     <footer class="footer">
       <div class="footer__links">
-        <nav class="footer-nav" aria-label="Footer">
-        <a href="/help" class="footer__link">Help</a>
-        <a href="/status" class="footer__link">Status</a>
-        <a href="/about" class="footer__link">About</a>
-        <a href="/press" class="footer__link">Press</a>
-        <a href="/privacy" class="footer__link">Privacy</a>
-        <a href="/terms" class="footer__link">Terms</a>
+         <nav class="footer-nav" aria-label="Footer">
+            <a href="/help" class="footer__link">Help</a>
+          <a href="/status" class="footer__link">Status</a>
+          <a href="/about" class="footer__link">About</a>
+          <a href="/press" class="footer__link">Press</a>
+          <a href="/privacy" class="footer__link">Privacy</a>
+          <a href="/terms" class="footer__link">Terms</a>
         </nav>
       </div>
     </footer>

@@ -14,16 +14,14 @@
 .header {
   border-bottom: var(--border-width) solid var(--color-border);
   box-shadow: var(--shadow-sm);
-}
-
-.navbar {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
 }
+
 
 .logo img {
   height: 30px;
@@ -128,6 +126,7 @@
 .footer {
   padding: var(--space-xl) var(--space-lg);
   border-top: var(--border-width) solid var(--color-border);
+  height: 100px;
 }
 
 .footer__links {
