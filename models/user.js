@@ -52,7 +52,7 @@ const userSchema = new Schema({
       ref: "User",
       default: [],
     },
-  ],
+  ]
 });
 
 module.exports = mongoose.model("User", userSchema);
