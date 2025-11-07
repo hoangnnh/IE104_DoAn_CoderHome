@@ -1,15 +1,27 @@
-body {
+@font-face {
+  font-family: "Lora";
+  src: url("/fonts/Lora/Lora-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "RobotoCondensed";
+  src: url("/fonts/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf");
+}
+
+nav a,
+button {
+  font-family: "RobotoCondensed";
+}
+a {
+  text-decoration: none;
+  color: #111;
+}
+body,
+span {
   font-size: 16px;
   margin: 0;
   padding: 0;
   background-color: #fff;
-}
-
-p,
-span,
-a,
-li {
-  font-family: "RobotoCondensed";
 }
 
 .container {
@@ -49,6 +61,8 @@ li {
   font-weight: bold;
   font-size: 2rem;
 }
+
+/* ----- Nav ----- */
 .profile-nav {
   display: flex;
   flex-direction: row;
@@ -61,7 +75,6 @@ li {
   background-color: #ffffff;
   font-size: 1.5rem;
   border-radius: 9999px;
-
   color: #666666;
   transition: all 0.2s ease;
   margin: 0;
@@ -73,14 +86,21 @@ li {
   box-shadow: 0 0.25rem 0.25rem 0 #afafaf;
   border: none;
 }
-
-.profile-nav__items:hover {
+.profile-nav__items.active {
   color: black;
   background-color: #f7f7f7;
   box-shadow: 0 0.25rem 0.25rem 0 #afafaf;
   border: none;
 }
 
+.profile-nav__items:hover {
+  color: black;
+  transform: scale(1.05);
+  background-color: #f7f7f7;
+  box-shadow: 0 0.25rem 0.25rem 0 #afafaf;
+  border: none;
+}
+/* Tell Story Button */
 .tell-story-button {
   display: flex;
   width: 100%;
@@ -92,21 +112,28 @@ li {
   font-weight: bold;
   font-size: 1.5rem;
   background-color: #fff;
+  transition: all 0.3s ease;
+}
+.tell-story-button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }
 .tell-story-button p {
   font-weight: bold;
   font-size: 1.5rem;
 }
-.user__bio {
-}
-.user__no-post {
-  font-size: 2rem;
-  justify-self: center;
-}
-.user__posted-post {
+
+.profile-content {
   width: 100%;
   padding-top: 2rem;
   margin: 0 auto;
+}
+
+.user__bio,
+.user__no-post,
+.user__no-comment {
+  font-size: 2rem;
+  justify-self: center;
 }
 
 /* ----Post----   */
@@ -154,7 +181,9 @@ li {
   display: flex;
   gap: 1rem;
 }
-
+.post__interact-meta span {
+  font-size: 0.75rem;
+}
 .post__interact-action {
   display: flex;
   gap: 1rem;
@@ -198,6 +227,9 @@ li {
 .react-icon:hover {
   cursor: pointer;
 }
+.post__divider {
+  margin: 1% auto;
+}
 
 /* ---- Side Profile ---- */
 
@@ -221,7 +253,9 @@ li {
   flex-direction: column;
   gap: 1.25rem;
   background-color: #f7f7f7;
+  box-shadow: 0.1rem 0.1rem 1rem #666666;
   border-radius: 1.25rem;
+  height: auto;
 }
 .more-info__container {
   display: flex;
@@ -297,11 +331,13 @@ li {
   color: #666;
   margin: 4px 0;
 }
+/* Social Links */
 
 .user__social-links {
   padding: 1.25rem;
   background-color: #f7f7f7;
   border-radius: 1.25rem;
+  box-shadow: 0.1rem 0.1rem 1rem #666666;
 }
 .user__social-links p {
   font-weight: bold;
@@ -314,7 +350,9 @@ li {
   gap: 1.25rem;
   margin: 1.25rem 0;
 }
-
+.social-links__items a {
+  font-size: 1.25rem;
+}
 .add-social-link-button {
   border-radius: 9999px;
   border: none;
@@ -322,9 +360,14 @@ li {
   color: white;
   padding: 0.75rem 2.5rem;
   font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+.add-social-link-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
-@media (min-width: 500px) and (max-width: 1100px) {
+@media (max-width: 1100px) {
   body,
   html {
     width: 100%;
@@ -342,6 +385,7 @@ li {
     max-width: 1100px;
     margin: 0 auto;
     align-items: start;
+    gap: 5rem;
   }
   .user__main,
   .side-profile {
@@ -360,14 +404,15 @@ li {
     flex-direction: row;
     grid-area: sidebar;
     justify-content: space-between;
-    height: 100%;
+    height: 15rem;
   }
 
   .user__more-info {
     display: flex;
     flex-direction: row;
     width: 80%;
-    max-height: 0.25fr;
+    height: 15rem;
+    /* max-height: 0.5fr; */
   }
   .user__bg-img {
     width: auto;
@@ -379,8 +424,9 @@ li {
   .more-info__container {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     width: 90%;
-    height: 90%;
+    height: 80%;
     padding: 0.5rem;
     gap: 1rem;
   }
@@ -396,7 +442,6 @@ li {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: max-content;
     justify-content: space-around;
     gap: 1.25rem;
   }
@@ -405,16 +450,16 @@ li {
     display: flex;
     flex-direction: column;
     padding: 0 0.5rem;
-    justify-content: center;
   }
   .more-info__content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: fit-content;
     width: 80%;
   }
   .more-info__items {
-    height: 100%;
+    height: fit-content;
   }
 
   .user__posted-post {
@@ -437,12 +482,5 @@ li {
   }
   .social-links__items a {
     margin: 0 0 0 1.5rem;
-  }
-}
-
-@media (max-width: 500px) {
-  html,
-  body {
-    font-size: 4px !important;
   }
 }

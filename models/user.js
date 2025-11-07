@@ -28,6 +28,10 @@ const userSchema = new Schema({
     type: String,
     default: "/images/user-avatar.jpg",
   },
+  backgroundImg: {
+    type: String,
+    default: "/images/user-bg.jpg",
+  },
   createdAt: {
     type: Date,
     default: Date.now,
