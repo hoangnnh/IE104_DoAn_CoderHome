@@ -1,0 +1,28 @@
+<!-- This is a new, simplified navbar for the editor page -->
+<header class="header header--write">
+  <nav class="navbar navbar--write">
+    <div class="navbar__group--left">
+      <a href="/" class="logo">
+        <img src="/images/coderhome-logo.png" alt="Coderhome Logo">
+      </a>
+      <span class="navbar__draft-status">Draft in @<%= username %></span>
+    </div>
+
+    <div class="navbar__group--right">
+      <!-- This button clicks the hidden submit button in the form -->
+      <button type="button" class="button button--primary" onclick="document.getElementById('form-submit-button').click()">
+        Publish
+      </button>
+      <a href="#" class="navbar__icon">
+        <!-- Bell icon (add one later) -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </a>
+      <a href="/profile" class="navbar__avatar">
+        <img src="<%= profilePicture %>" alt="User Avatar">
+      </a>
+    </div>
+  </nav>
+</header>
