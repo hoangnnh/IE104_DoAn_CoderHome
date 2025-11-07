@@ -2,44 +2,40 @@
 const Post = require("../models/post");
 const User = require("../models/user");
 
-// Hien thi trang viet blog
 function getNewPost(req, res) {
   res.render("pages/new-post", {
     pageTitle: "Create New Post",
   });
 }
 
-// Xu li tao bai viet
 async function createPost(req, res) {
   try {
-    const { title, content, category, tags } = req.body;
-
-    // Get the logged-in user's ID from the session
+    const { title, description, thumbnailUrl, tags, content } = req.body;
     const authorId = req.session.userId;
-
-    // Split tags string into an array (e.g., "js, node, mongo" -> ["js", "node", "mongo"])
     const tagsArray = tags.split(",").map((tag) => tag.trim());
 
     const post = new Post({
       title: title,
+      description: description,
+      thumbnailUrl: thumbnailUrl || '/images/default-thumbnail.png',
       content: content,
-      category: category,
+      category: req.body.category || 'General',
       tags: tagsArray,
       author: authorId,
     });
 
-    // Save the post to the database
     const savedPost = await post.save();
 
-    // Redirect the user to the new post's page
     res.redirect(`/posts/${savedPost._id}`);
   } catch (err) {
     console.error("Create Post Error:", err);
-    res.redirect("/posts/new"); // Send them back to the form if there's an error
+    res.render("pages/new-post", {
+      pageTitle: "Create New Post",
+      error: "An error occured while creating the post. Please try again."
+    });
   }
 }
 
-// Hien thi post voi ID
 async function getPost(req, res) {
   try {
     const postId = req.params.id;
@@ -48,7 +44,7 @@ async function getPost(req, res) {
       select: "username profilePicture bio",
     });
     if (!post) {
-      return res.json({messagge: "Error"});
+      return res.status(404).json({ message: "Post Not Found" });
     }
     res.json(post);
   } catch (err) {
@@ -57,13 +53,13 @@ async function getPost(req, res) {
   }
 }
 
-// Hien thi toan bo bai viet (cho Homepage)
+// Show all posts in Homepage
 async function getAllPosts(req, res) {
   try {
     // Find all posts, sort by newest, and populate author's username
     const posts = await Post.find()
       .populate("author", "_id username profilePicture")
-      .sort({ createdAt: -1 }); // -1 means descending order
+      .sort({ createdAt: -1 });
     res.json(posts);
   } catch (err) {
     console.error("Get All Posts Error:", err);

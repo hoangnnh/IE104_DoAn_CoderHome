@@ -1,0 +1,175 @@
+/* * Styles for the 'new-post.ejs' write page
+ */
+
+/* --- Main Layout --- */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.write-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* --- Simplified Write Header --- */
+.header--write {
+    background-color: var(--color-surface);
+    border-bottom: var(--border-width) solid var(--color-border);
+    /* Make it non-sticky, part of the page flow */
+    flex-shrink: 0; 
+}
+
+.navbar--write {
+    max-width: none; /* Full width */
+    padding: var(--space-sm) var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__group--left,
+.navbar__group--right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.navbar__draft-status {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.navbar__icon {
+    color: var(--color-text-muted);
+}
+.navbar__icon:hover {
+    color: var(--color-text-heading);
+}
+
+.navbar__avatar img {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* --- Meta Fields (Title, Desc, etc.) --- */
+.form-group-meta {
+    padding: var(--space-lg);
+    border: none;
+    background-color: var(--color-gray-lightest); /* Light bg for meta */
+    flex-shrink: 0;
+
+    /* ------------------------------------------- */
+    /* !! NEW CSS GRID IMPLEMENTATION !! */
+    /* ------------------------------------------- */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-heading);
+    margin-bottom: var(--space-xs);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-md);
+    font-family: var(--font-family-body);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-surface);
+}
+
+/* --- Editor: Two-Pane Layout --- */
+.editor-container {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    overflow: hidden;
+}
+
+.editor-pane,
+.preview-pane {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.form-label--pane {
+    padding: var(--space-md);
+    background-color: var(--color-gray-lightest);
+    border-bottom: var(--border-width) solid var(--color-border);
+    flex-shrink: 0;
+}
+
+.preview-pane {
+    border-left: var(--border-width) solid var(--color-border);
+    background-color: var(--color-surface);
+}
+
+.editor-textarea,
+.editor-preview {
+    flex-grow: 1;
+    padding: var(--space-lg);
+    overflow-y: auto; /* Enable scrolling */
+}
+
+.editor-textarea {
+    resize: none;
+    border: none;
+    outline: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-body);
+}
+
+/* Style the preview just like the post content */
+.editor-preview {
+    font-family: var(--font-family-body);
+}
+
+.editor-preview h1,
+.editor-preview h2,
+.editor-preview h3 {
+    font-family: var(--font-family-heading);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+.editor-preview p { margin-bottom: var(--space-md); }
+.editor-preview pre {
+    background-color: var(--color-gray-darkest);
+    color: #f8f8f2;
+    padding: var(--space-md);
+    border-radius: var(--border-radius-sm);
+    overflow-x: auto;
+}
+.editor-preview code { font-family: 'Courier New', Courier, monospace; }
+.editor-preview blockquote {
+    border-left: 4px solid var(--color-accent);
+    padding-left: var(--space-md);
+    color: var(--color-text-muted);
+    font-style: italic;
+}

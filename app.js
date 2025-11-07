@@ -45,6 +45,7 @@ app.use((req, res, next) => {
   // These variables will be available in all EJS templates
   res.locals.isLoggedIn = req.session.isLoggedIn || false;
   res.locals.username = req.session.username || "";
+  res.locals.profilePicture = req.session.profilePicture || "/images/default-avatar.png";
   next();
 });
 
@@ -75,12 +76,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/post/:id", (req, res) => {
-  if(req.session.isLoggedIn) res.sendFile(path.join(__dirname, "views/pages/post.html"))
-    else {
+  if (req.session.isLoggedIn) res.sendFile(path.join(__dirname, "views/pages/post.html"))
+  else {
     res.render("pages/landing", {
       pageTitle: "Welcome to Coderhome",
     });
-    }
+  }
 })
 
 // --- Server Startup ---
