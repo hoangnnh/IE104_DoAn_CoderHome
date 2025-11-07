@@ -126,7 +126,7 @@
 .footer {
   padding: var(--space-xl) var(--space-lg);
   border-top: var(--border-width) solid var(--color-border);
-  height: 100px;
+  /* height: 100px; */
 }
 
 .footer__links {
@@ -203,5 +203,7 @@
 
   .footer__links {
     max-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
