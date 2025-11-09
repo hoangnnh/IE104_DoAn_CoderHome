@@ -1,0 +1,444 @@
+body{
+    margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* font */
+@font-face {
+    font-family: 'Lora';
+    src: url(../fonts/Lora/Lora-VariableFont_wght.ttf), format(truetype);
+}
+
+@font-face {
+    font-family: 'robto';
+    src: url(../fonts/Roboto_Condensed/RobotoCondensed-Medium.ttf), format(truetype);
+}
+
+
+
+/*main part*/
+.main{
+    width: 100%;
+    height: auto;
+    padding-top: 56px;
+    display: flex;
+}
+
+.main .main_container{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.main_container .container_left{
+    flex:6.5;
+    display: flex;
+    justify-content: center;
+
+}
+
+.main_container .container_right{
+    flex:3.5;
+}
+
+.container_left .left_main{
+    width: 70%;
+    margin: 0 24px;
+}
+
+.left_main .left_main_content{
+    padding-top: 50px;
+}
+
+.left_main_content h2{
+    font-family: 'lora';
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.left_main_content .setting_nav{
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    overflow: hidden;
+}
+
+.nav_item{
+    float: left;
+}
+
+.nav_item,
+.nav_item * {
+    cursor: pointer;
+}
+
+.nav_item .nav_btn{
+    border: none;
+    background-color: #fff;
+    padding: 7.5px 40px;
+}
+
+.nav_btn p{
+    opacity: 0.6;
+}
+
+.nav_item:hover p{
+    opacity: 1;
+}
+
+.nav_item.active p{
+    opacity: 1;
+}
+
+.container_left .mail_name_btn{
+    width: 100%;
+    height: 20px;
+    margin: 20px 0 15px 0;
+    border: none;
+    background-color: #fff;
+    display: flex;
+    cursor: pointer;
+}
+
+.mail_name_btn .big_span{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.big_span .right{
+    opacity: 0.6;
+}
+
+.mail_name_btn:hover .right{
+    opacity: 1;
+}
+
+.container_left .setting_btn{
+    width: 100%;
+    height: 45px;
+    margin: 20px 0;
+    border: none;
+    background-color: #fff;
+    display: flex;
+    cursor: pointer;
+}
+
+.setting_btn .left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.left .bellow{
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+.right_img{
+    border-radius: 100%;
+    width: 2vw;
+}
+
+.setting_btn .big_span{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.setting_btn .right{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.setting_btn:hover .right{
+    opacity: 1;
+}
+
+.ti-new-window{
+    font-size: 20px;
+}
+
+.line {
+    display: block;
+    height: 1px;            
+    background-color: #ccc;  
+    width: 100%;  
+    margin: 20px 0;           
+}
+
+.p2{
+    color: green;
+}
+
+.ti-angle-down{
+    font-size: 15px;
+}
+
+.setting_btn .p_del{
+    color: red;
+}
+
+.flex_box{
+    display: flex;
+    flex-direction: column;
+}
+
+.container_right{
+    padding: 0 0 0 30px;
+    border-left: 1px solid #ccc;
+}
+
+.container_right .right_text{
+    padding-top: 70px;
+    font-family: 'lora';
+    margin: 0 20px;
+}
+
+.right_text h3{
+    font-size: 16px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.right_text ul li{
+    list-style: none;
+    padding: 10px 0;
+}
+
+ul li a{
+    text-decoration: none;
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+ul li a:hover{
+    opacity: 1;
+}
+
+.right_footer{
+    padding-top: 430px;
+    margin: 0 20px;
+}
+
+.right_footer .nav_foot{
+    
+}
+
+.nav_foot li{
+    display: inline-block;
+    list-style: none;
+    padding: 5px 15px;
+}
+
+/* =============================================
+   RESPONSIVE: THEO YÊU CẦU CHÍNH XÁC
+   ============================================= */
+
+/* 1. ≤1320px: Bật scroll ngang cho .setting_nav */
+@media (max-width: 1320px) {
+    .setting_nav {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        padding-bottom: 8px;
+    }
+
+    .setting_nav::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .setting_nav::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    .setting_nav::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 3px;
+    }
+
+    .nav_item {
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+
+    .nav_item button {
+        padding: 10px 20px;
+        white-space: nowrap;
+    }
+
+    .nav_item.active button::after {
+        left: 16px;
+        right: 16px;
+    }
+}
+
+/* 2. ≤1250px: ẨN HOÀN TOÀN PHẦN SIDEBAR (.container_right) */
+@media (max-width: 1250px) {
+    .container_right {
+        display: none !important;
+    }
+
+    .main_container {
+        width: 100%;
+        display: block;
+    }
+
+    .container_left {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .left_main {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* 3. ≤768px: Tablet - Tối ưu layout 1 cột */
+@media (max-width: 768px) {
+    .main {
+        padding-top: 30px;
+    }
+
+    .left_main_content {
+        padding-top: 20px;
+    }
+
+    .left_main_content h2 {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+
+    .flex_box {
+        min-height: auto;
+    }
+
+    .mail_name_btn,
+    .setting_btn {
+        margin: 14px 0;
+        padding: 10px 0;
+    }
+
+    .big_span {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .big_span .right {
+        align-self: flex-end;
+    }
+
+    .right_img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .bellow {
+        font-size: 13.5px;
+    }
+}
+
+@media (max-width: 1320px) {
+    .setting_nav {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 0;
+        scrollbar-width: thin;
+        padding-bottom: 6px;
+    }
+
+    .setting_nav::-webkit-scrollbar {
+        height: 6px;
+    }
+    .setting_nav::-webkit-scrollbar-track {
+        background: #eee;
+    }
+    .setting_nav::-webkit-scrollbar-thumb {
+        background: #bbb;
+    }
+
+    .nav_item {
+        flex: 0 0 auto;
+    }
+
+    .nav_item .nav_btn {
+        padding: 10px 24px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 1250px) {
+    .container_right {
+        display: none !important;
+    }
+
+    .main_container {
+        width: 100%;
+        display: block;
+    }
+
+    .container_left {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .left_main {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .left_main_content h2 {
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .nav_item .nav_btn {
+        padding: 10px 18px;
+    }
+
+    .setting_btn,
+    .mail_name_btn {
+        margin: 12px 0;
+        padding: 12px 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    .main_container {
+        width: 90% !important;
+        padding: 0 10px;
+    }
+
+    .container_left {
+        width: 90% !important;
+        padding: 0;
+        margin: 0;
+    }
+
+    .left_main {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .left_main_content {
+        width: 100% !important;
+    }
+}

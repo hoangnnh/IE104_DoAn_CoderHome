@@ -34,7 +34,7 @@ h2{
     border-radius: 20px;
     padding: 0 50px;
     width: 80%;
-    height: 75px;
+    height: 65px;
     align-items: center;
     z-index: 10000;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -51,7 +51,7 @@ h2{
 }
 
 .container_logo .logo_img{
-    width: 13em;
+    width: 10em;
     display: block;
 }
 
@@ -59,28 +59,13 @@ h2{
     margin-right: 50px;
     position: absolute;
     right: 0;
-    padding: 16px 24px;
+    padding: 14px 20px;
     border-radius: 1.5em;
     color: white;
     background-color: black;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     cursor: pointer;
-}
-
-/*Reponsive header mobile & tablet*/
-@media only screen and (max-width:800px){
-    .header_container{
-        margin: 0;
-        width: 85%;
-        display: flex;
-        justify-content: center;
-    }
-    .header_container .container_btn{
-        display: none;
-    }
-    .container_logo{
-        width: 40%;
-    }
+    font-size: 0.8em;
 }
 
 /*body part*/
@@ -517,6 +502,36 @@ nav li a{
     opacity: 0.5;
 }
 
+nav li a:hover{
+    opacity: 1;
+}
+
+/*Reponsive header mobile & tablet*/
+@media only screen and (max-width:1024px){
+    .header_container{
+        margin: 0;
+        width: 85%;
+        display: flex;
+        justify-content: center;
+        height: 50px;
+    }
+    .header_container .container_btn{
+        display: none;
+    }
+    .container_logo{
+        width: 40%;
+    }
+
+    .body_welcome{
+        height: 90vh;
+    }
+
+    .container_logo .logo_img{
+    width: 8em;
+    }
+
+    
+}
 
 
 
