@@ -29,6 +29,7 @@ button {
 .container {
   height: 100%;
   width: 100%;
+  min-width: 482px;
   background-color: white;
   justify-content: center;
   justify-items: center;
@@ -210,6 +211,7 @@ button {
   display: flex;
   flex-direction: row;
   gap: 15px;
+  flex-wrap: wrap;
 }
 /* Footer Post Tags Button */
 .post__tags-button {
@@ -245,6 +247,7 @@ button {
   font-family: "Lora", serif;
   display: flex;
   flex-direction: column;
+  min-width: 172px
 }
 .post__author-writenby {
   font-weight: bold;
@@ -432,4 +435,46 @@ button {
 .more-action-btn img {
   width: 20px;
   height: 20px;
+}
+
+@media (max-width: 1023px) {
+  body {
+    margin: 0 20px;
+  }
+}
+
+/* ---------- Mobile (<768px) ---------- */
+@media (max-width: 767px) {
+  html {
+    font-size: 10px;
+  }
+
+  body {
+    margin: 0 30px;
+  }
+
+  .container {
+    min-width: 200px;
+  }
+   .post__author-follow {
+    padding: 2px 3px;
+  }
+
+  .metadata__interaction-action {
+    flex-direction: column;
+  }
+
+  .post__author, .user__info {
+    gap: 10px;
+  }
+
+  .post__about-author {
+    gap: 12px;
+  }
+
+
+  .post__author-img, .user__avatar, .response__avatar{
+    height: 25px;
+    width: 25px;
+  }
 }
