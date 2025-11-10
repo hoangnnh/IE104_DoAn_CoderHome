@@ -42,7 +42,7 @@ async function loadPostID() {
 
     postHeader.innerHTML = `
     <p class="post__title">${post.title}</p>
-    <p class="post__description">${post.overview}</p>
+    <p class="post__description">${post.description}</p>
         <div class="post__metadata">
             <div class="post__author">
                 <img src="${post.author.profilePicture}" alt="avatar"

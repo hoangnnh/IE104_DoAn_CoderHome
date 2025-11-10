@@ -14,7 +14,7 @@ async function loadPost() {
             <div class="post__left-text">
                 <div class="post__content">
                     <a href="/post/${p._id}" class="post__content-title">${p.title}</a>
-                    <p class="post__content-overview">${p.overview}</p>
+                    <p class="post__content-overview">${p.description}</p>
                 </div>
                 <div class="post__interact">
                     <div class="post__interact-meta">
