@@ -1,26 +1,28 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
-// Hien thi trang dang ky
 function getRegister (req, res) {
   res.render('pages/register');
 };
-// Xu ly khi nguoi dung dang ky
+
 async function postRegister (req, res) {
   try {
-    const { Firstname, Lastname, email, password } = req.body;
-    const username = `${Firstname}${Lastname}`.toLowerCase();
-    // Kiem tra user ton tai chua
+    const { firstName, lastName, email, password } = req.body;
+    const username = `${firstName}${lastName}`.toLowerCase();
+    
+    // Check if a user is already existed
     const existingUser = await User.findOne({ email: email });
 
-    //Neu ton tai thi dua nguoi dung den trang Log in
+    // If exists, go to login page
     if (existingUser) {
       console.log('Email already in use, please sign in.');
       return res.redirect('/login');
     }
-    // Ma hoa mat khau
+
+    // Password encryption
     const hashedPassword = await bcrypt.hash(password, 12);
-    // Tao va luu nguoi dung moi trong database
+    
+    // Save new user to DB
     const user = new User({
       username,
       email,
@@ -37,12 +39,11 @@ async function postRegister (req, res) {
   }
 };
 
-// Hien thi trang Log in
 function getLogin (req, res) {
   res.render('pages/login', { pageTitle: 'Login' });
 };
 
-// --- Handle User Login ---
+// Handle User Login
 async function postLogin (req, res) {
   try {
     const { email, password } = req.body;
@@ -63,6 +64,7 @@ async function postLogin (req, res) {
     req.session.userId = user._id;
     req.session.username = user.username;
     req.session.isLoggedIn = true;
+    req.session.profilePicture = user.profilePicture;
 
     req.session.save((err) => {
       if (err) {

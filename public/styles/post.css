@@ -11,19 +11,22 @@
 html,
 body {
   height: 100%;
-  background-color: white; /* ✅ toàn trang đều có nền trắng */
+  background-color: white;
+  /* ✅ toàn trang đều có nền trắng */
   margin: 0;
   padding: 0;
 }
 
-.post,
 .post__content,
 .post__footer {
-  width: 90%; /* hoặc tùy bạn muốn rộng bao nhiêu */
-  max-width: 1200px; /* để responsive trên mobile */
-  margin: 0 auto; /* căn giữa */
-  box-sizing: border-box;
+  width: 1000px;
+  /* hoặc tùy bạn muốn rộng bao nhiêu */
+  max-width: 100%;
+  /* để responsive trên mobile */
+  margin: 0 auto;
+  /* căn giữa */
 }
+
 button {
   padding: 12px 60px;
 }
@@ -94,7 +97,8 @@ button {
 }
 
 /* Post Header Metadata Post Author Img */
-.post__author-img, .user__avatar {
+.post__author-img,
+.user__avatar {
   border-radius: 1000px;
   object-fit: contain;
   width: 48x;
@@ -117,6 +121,7 @@ button {
   font-family: "Lora", serif;
   font-size: 1.3rem;
 }
+
 .post__author-follow:hover {
   background-color: #7d7d7d;
   opacity: 0.2;
@@ -146,6 +151,7 @@ button {
   align-items: center;
   margin: 0 10px;
 }
+
 /* Post Header Metadata Interaction Section */
 .metadata__interaction {
   display: flex;
@@ -160,13 +166,16 @@ button {
   align-items: center;
   gap: 10px;
 }
+
 .interaction__items img {
   width: 30px;
   height: 30px;
 }
+
 .interaction__items p {
   color: #7d7d7d;
 }
+
 /* Post Header Metadata Action Section */
 .metadata__action {
   display: flex;
@@ -176,19 +185,28 @@ button {
   height: 100%;
   gap: 20px;
 }
+
 .metadata__action img {
   margin: 10px 0 20px 0;
   width: 30px;
   height: 30px;
 }
 
-.heart-icon, .comment-icon, .close-icon,
-.share-icon, .bookmark-icon, .more-action-icon {
+.heart-icon,
+.comment-icon,
+.close-icon,
+.share-icon,
+.bookmark-icon,
+.more-action-icon {
   transition: all 200ms ease-in;
 }
 
-.heart-icon:hover, .comment-icon:hover, .close-icon:hover,
-.share-icon:hover, .bookmark-icon:hover, .more-action-icon:hover {
+.heart-icon:hover,
+.comment-icon:hover,
+.close-icon:hover,
+.share-icon:hover,
+.bookmark-icon:hover,
+.more-action-icon:hover {
   cursor: pointer;
   transform: scale(1.2);
 }
@@ -216,6 +234,7 @@ button {
   flex-direction: row;
   gap: 15px;
 }
+
 /* Footer Post Tags Button */
 .post__tags-button {
   font-family: "Lora", serif;
@@ -230,6 +249,7 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
 .post__tags-button:hover {
   background-color: #7d7d7d 20%;
   transform: scale(1.1);
@@ -251,13 +271,16 @@ button {
   display: flex;
   flex-direction: column;
 }
+
 .post__author-writenby {
   font-weight: bold;
   margin: 0 0 16px 0;
 }
+
 .post__author-bio {
   margin: 0;
 }
+
 .post__author-follow {
   display: flex;
   align-items: center;
@@ -270,6 +293,7 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
 /* Footer Post Respone Section */
 .post__response {
   display: flex;
@@ -279,12 +303,14 @@ button {
   font-family: "Lora", serif;
   margin-bottom: 3rem;
 }
+
 /* Footer Post Respone Count */
 .post__respones-title {
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
 }
+
 /* Footer Post Respone User Info Section */
 .user__info {
   display: flex;
@@ -344,8 +370,8 @@ button {
   border-color: #000;
 }
 
-.response-input textarea:focus + label,
-.response-input textarea:not(:placeholder-shown) + label {
+.response-input textarea:focus+label,
+.response-input textarea:not(:placeholder-shown)+label {
   top: -8px;
   left: 10px;
   font-size: 0.85rem;

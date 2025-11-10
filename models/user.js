@@ -28,6 +28,10 @@ const userSchema = new Schema({
     type: String,
     default: "/images/user-avatar.jpg",
   },
+  backgroundImg: {
+    type: String,
+    default: "/images/user-bg.jpg",
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -36,21 +40,6 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Post",
-      default: [],
-    },
-  ],
-  liked: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Post",
-      default: [],
-    },
-  ],
-  contributors: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      default: [],
     },
   ]
 });

@@ -1,0 +1,129 @@
+/* * ==========================================================
+ * Font Definitions (Self-Hosted)
+ * ==========================================================
+ * This file uses @font-face to load your local font files.
+ */
+
+/* * ------------------------------------------
+ * Lora (Serif - for Body Content)
+ * ------------------------------------------
+ */
+
+/* Lora Regular */
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 400; /* Regular */
+    src: url('../../fonts/Lora/static/Lora-Regular.ttf') format('truetype');
+}
+
+/* Lora Italic */
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 400; /* Regular */
+    src: url('../../fonts/Lora/static/Lora-Italic.ttf') format('truetype');
+}
+
+/* Lora Medium */
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 500; /* Medium */
+    src: url('../../fonts/Lora/static/Lora-Medium.ttf') format('truetype');
+}
+
+/* Lora Medium Italic */
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 500; /* Medium */
+    src: url('../../fonts/Lora/static/Lora-MediumItalic.ttf') format('truetype');
+}
+
+/* Lora SemiBold */
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 600; /* SemiBold */
+    src: url('../../fonts/Lora/static/Lora-SemiBold.ttf') format('truetype');
+}
+
+/* Lora SemiBold Italic */
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 600; /* SemiBold */
+    src: url('../../fonts/Lora/static/Lora-SemiBoldItalic.ttf') format('truetype');
+}
+
+/* Lora Bold */
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    src: url('../../fonts/Lora/static/Lora-Bold.ttf') format('truetype');
+}
+
+/* Lora Bold Italic */
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 700; /* Bold */
+    src: url('../../fonts/Lora/static/Lora-BoldItalic.ttf') format('truetype');
+}
+
+
+/* * ------------------------------------------
+ * Source Sans 3 (Sans-Serif - for Headings)
+ * ------------------------------------------
+ * (Assuming similar file paths)
+ */
+
+/* Source Sans 3 Regular */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 400; /* Regular */
+    src: url('../../fonts/SourceSans3/static/SourceSans3-Regular.ttf') format('truetype');
+}
+
+/* Source Sans 3 Italic */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: italic;
+    font-weight: 400; /* Regular */
+    src: url('../../fonts/SourceSans3/static/SourceSans3-Italic.ttf') format('truetype');
+}
+
+/* Source Sans 3 SemiBold */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 600; /* SemiBold */
+    src: url('../../fonts/SourceSans3/static/SourceSans3-SemiBold.ttf') format('truetype');
+}
+
+/* Source Sans 3 SemiBold Italic */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: italic;
+    font-weight: 600; /* SemiBold */
+    src: url('../../fonts/SourceSans3/static/SourceSans3-SemiBoldItalic.ttf') format('truetype');
+}
+
+/* Source Sans 3 Bold */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    src: url('../../fonts/SourceSans3/static/SourceSans3-Bold.ttf') format('truetype');
+}
+
+/* Source Sans 3 Bold Italic */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: italic;
+    font-weight: 700; /* Bold */
+    src: url('../../fonts/SourceSans3/static/SourceSans3-BoldItalic.ttf') format('truetype');
+}

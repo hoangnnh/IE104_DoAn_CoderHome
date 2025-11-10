@@ -45,6 +45,7 @@ app.use((req, res, next) => {
   // These variables will be available in all EJS templates
   res.locals.isLoggedIn = req.session.isLoggedIn || false;
   res.locals.username = req.session.username || "";
+  res.locals.profilePicture = req.session.profilePicture || "/images/default-avatar.png";
   next();
 });
 
@@ -52,20 +53,20 @@ app.use((req, res, next) => {
 // import routes from auth.js
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
-const profileRoutes = require("./routes/profile");
+const userRoutes = require("./routes/profiles");
 const currentRoutes = require("./routes/current");
 const commentRoutes = require("./routes/comments");
 
 app.use(authRoutes);
-app.use("/profile", profileRoutes);
 app.use("/posts", postRoutes);
+app.use("/profiles", userRoutes);
 app.use("/current", currentRoutes);
 app.use("/comment", commentRoutes);
 
 // Homepage
 app.get("/", (req, res) => {
   if (req.session.isLoggedIn) {
-    res.sendFile(path.join(__dirname, "views/pages/index.html"))
+    res.sendFile(path.join(__dirname, "views/pages/index.html"));
   } else {
     // USER IS NOT LOGGED IN
     res.render("pages/landing", {
@@ -75,13 +76,24 @@ app.get("/", (req, res) => {
 });
 
 app.get("/post/:id", (req, res) => {
-  if(req.session.isLoggedIn) res.sendFile(path.join(__dirname, "views/pages/post.html"))
-    else {
+  if (req.session.isLoggedIn)
+    res.sendFile(path.join(__dirname, "views/pages/post.html"));
+  else {
     res.render("pages/landing", {
       pageTitle: "Welcome to Coderhome",
     });
-    }
-})
+  }
+});
+
+app.get("/profile/:id", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/profile.html"));
+  } else {
+    res.render("pages/landing", {
+      pageTitle: "Welcome to Coderhome",
+    });
+  }
+});
 
 // --- Server Startup ---
 app.listen(PORT, () => {

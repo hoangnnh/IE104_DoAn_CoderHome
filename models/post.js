@@ -1,39 +1,51 @@
 // models/post.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
-  overview: {
+  description: {
     type: String,
-    required: true
+    required: true,
+  },
+  thumbnailUrl: {
+    type: String,
+    required: false, // Không bắt buộc, có thể đặt giá trị mặc định
+    default: '/images/default-thumbnail.png' // Một ảnh placeholder
   },
   content: {
     type: String,
-    required: true
+    required: true,
+  },
+  thumbnailUrl: {
+    type: String,
+    default: "/images/post-thumbnail.png",
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   author: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: "User",
+    required: true,
   },
   category: {
     type: String,
-    default: 'General'
+    default: "General",
   },
   tags: [String],
-  
-  likes: [{ // <-- An array of users who liked the post
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }]
+
+  likes: [
+    {
+      // <-- An array of users who liked the post
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model("Post", postSchema);
