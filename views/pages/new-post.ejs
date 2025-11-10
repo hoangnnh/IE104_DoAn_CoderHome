@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/token.css">
+  <link rel="stylesheet" href="/styles/base/font.css">
+  <link rel="stylesheet" href="/styles/pages/new-post.css">
+</head>
+
+<body>
+  <div class="page-container">
+    <%- include('../partials/navbar-write.ejs') %>
+    <main class="write-container">
+      <form action="/posts" method="POST" class="post-form">
+        <fieldset class="form-group-meta">
+          <div class="form-field">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" name="title" class="form-control" required placeholder="Your post title...">
+          </div>
+          <div class="form-field">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" name="description" class="form-control" required placeholder="A short, catchy description...">
+          </div>
+          <div class="form-field">
+            <label for="thumbnailUrl" class="form-label">Thumbnail URL</label>
+            <input type="url" id="thumbnailUrl" name="thumbnailUrl" class="form-control" placeholder="https://... (Optional)">
+          </div>
+          <div class="form-field">
+            <label for="tags" class="form-label">Tags</label>
+            <input type="text" id="tags" name="tags" class="form-control" placeholder="nodejs, express, mongo (comma-separated)">
+          </div>
+        </fieldset>
+
+        <!-- 
+              Markdown Editor
+              This is the two-pane section.
+            -->
+        <div class="editor-container">
+          <!-- 1. The Markdown Input -->
+          <div class="editor-pane">
+            <label for="content" class="form-label form-label--pane">Write your post using Markdown</label>
+            <textarea id="content" name="content" class="editor-textarea" required placeholder="## Your Heading..."></textarea>
+          </div>
+
+          <!-- 2. The HTML Preview (not part of the form) -->
+          <div class="preview-pane">
+            <label class="form-label form-label--pane">Live Preview</label>
+            <div id="preview" class="editor-preview"></div>
+          </div>
+        </div>
+
+        <!-- This hidden submit button can be clicked by the header's "Publish" button -->
+        <button type="submit" id="form-submit-button" style="display: none;">Submit</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- 
+      Client-Side Libraries
+      We load these at the end for faster page load.
+    -->
+  <!-- 1. Marked.js (converts Markdown to HTML) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- 2. DOMPurify (sanitizes HTML to prevent XSS attacks) -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/dompurify.min.js"></script>
+
+  <!-- 3. Our custom script -->
+  <script>
+    // Get the elements
+    const markdownInput = document.getElementById('content');
+    const previewOutput = document.getElementById('preview');
+
+    // Function to update the preview
+    function updatePreview() {
+      const rawText = markdownInput.value;
+      // Convert Markdown to HTML
+      const rawHtml = marked.parse(rawText);
+      // Sanitize the HTML
+      const cleanHtml = DOMPurify.sanitize(rawHtml);
+      // Display it
+      previewOutput.innerHTML = cleanHtml;
+    }
+
+    // Add an event listener to the textarea
+    markdownInput.addEventListener('input', updatePreview);
+
+    // Initial update on page load (in case of saved drafts, etc.)
+    updatePreview();
+  </script>
+</body>
+
+</html>

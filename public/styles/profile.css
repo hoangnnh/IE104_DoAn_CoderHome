@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @font-face {
   font-family: "Lora";
   src: url("/fonts/Lora/Lora-VariableFont_wght.ttf");
@@ -484,3 +485,10 @@ span {
     margin: 0 0 0 1.5rem;
   }
 }
+=======
+.user__posted-post {
+  display: flex;
+  flex-direction: column;
+}
+.
+>>>>>>> 9d7a8413c7b6eaac144ad8f4cac66c2408ff4c1f

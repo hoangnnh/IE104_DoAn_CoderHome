@@ -1,6 +1,5 @@
 const User = require("../models/user");
 const Post = require("../models/post");
-const path = require("path");
 
 // Lay user bang ID, khi bam vao xem user khac.
 async function getUser(req, res) {

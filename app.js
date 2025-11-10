@@ -45,6 +45,7 @@ app.use((req, res, next) => {
   // These variables will be available in all EJS templates
   res.locals.isLoggedIn = req.session.isLoggedIn || false;
   res.locals.username = req.session.username || "";
+  res.locals.profilePicture = req.session.profilePicture || "/images/default-avatar.png";
   next();
 });
 

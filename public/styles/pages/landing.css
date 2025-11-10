@@ -1,0 +1,209 @@
+/* public/styles/pages/landing.css */
+
+/* Base */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-white);
+  font-family: var(--font-family-heading);
+}
+
+/* Header + Navbar */
+
+.header {
+  border-bottom: var(--border-width) solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+}
+
+
+.logo img {
+  height: 30px;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.navbar__item {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  transition: color 0.3s ease;
+}
+
+.navbar__item:hover {
+  color: var(--color-text-heading);
+}
+
+/* Reusable Button Component */
+.button {
+  font-family: var(--font-family-heading);
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--border-radius-pill);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button--primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.button--primary:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.button--large {
+  font-size: var(--font-size-lg);
+  padding: var(--space-md) var(--space-xl);
+}
+
+/* --- Hero Section --- */
+.hero {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-xxl) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.hero__copy {
+  flex: 1;
+}
+
+.hero__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-display);
+  color: var(--color-text-heading);
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-lg);
+}
+
+.hero__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-body);
+  margin-bottom: var(--space-xl);
+}
+
+.hero__media {
+  flex: 1;
+}
+
+.hero__media img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  border-top: var(--border-width) solid var(--color-border);
+  /* height: 100px; */
+}
+
+.footer__links {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  gap: var(--space-lg);
+}
+
+.footer__link {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.footer__link:hover {
+  color: var(--color-link-hover);
+}
+
+@media (max-width: 768px) {
+
+  /* --- Header / Navbar (Mobile) --- */
+  .header {
+    justify-content: space-around;
+    padding: var(--space-md);
+  }
+
+  .navbar__links {
+    gap: var(--space-md);
+  }
+
+  /* Hide the first 3 nav items: "Our story", "Membership", "Write" */
+  .navbar__item:nth-child(1),
+  .navbar__item:nth-child(2),
+  .navbar__item:nth-child(3) {
+    display: none;
+  }
+
+  .button {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  /* --- Hero Section (Mobile) --- */
+  .hero__content {
+    /* Stack the items: text on top, image on bottom */
+    flex-direction: column;
+    padding: var(--space-xl) var(--space-lg);
+    /* Reduce padding */
+    text-align: center;
+  }
+
+  .hero__title {
+    font-size: var(--font-size-xxl);
+    /* Smaller title */
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-md);
+    /* Smaller subtitle */
+  }
+
+  .button--large {
+    font-size: var(--font-size-md);
+    /* Smaller button */
+    padding: var(--space-sm) var(--space-lg);
+  }
+
+  .hero__media {
+    margin-top: var(--space-xl);
+    /* Add space above image */
+  }
+
+  .footer__links {
+    max-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

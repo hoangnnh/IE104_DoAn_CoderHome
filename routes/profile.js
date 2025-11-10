@@ -13,6 +13,4 @@ const isAuth = require("../middleware/isAuth"); // Import your auth guard
 // Show a single, specific post. This is public.
 router.get("/:id", profileController.getUserProfile);
 
-router.get("/", isAuth, profileController.getOwnProfile);
-
 module.exports = router;

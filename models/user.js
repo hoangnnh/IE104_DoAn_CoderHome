@@ -40,21 +40,6 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Post",
-      default: [],
-    },
-  ],
-  liked: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Post",
-      default: [],
-    },
-  ],
-  contributors: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      default: [],
     },
   ],
 });
