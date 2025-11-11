@@ -4,7 +4,7 @@
     --color-gray-darkest: #222222;
     --color-gray-medium: #7D7D7D;
     --color-gray-lightest: #F7F7F7;
-    --color-cream-background: #F7F4ED;
+    --color-red-medium: #D93025;
     --color-accent-tan: #BE7C53;
     --color-accent-blue: #2166E5;
 
@@ -25,6 +25,7 @@
     --color-text-heading: var(--color-black);
     --color-text-body: var(--color-gray-darkest);
     --color-text-muted: var(--color-gray-medium);
+    --color-text-error: var(--color-red-medium);
     /* For description, date, time, etc. */
 
     /* Backgrounds & Surfaces */
