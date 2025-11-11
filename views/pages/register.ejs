@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Register</title>
+  <title><%= pageTitle %></title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
@@ -23,47 +23,52 @@
         <p><strong>Share Your Thoughts<br>Inspire the World</strong></p>
       </div>
     </div>
-  
+
     <div class="login-right">
-    <h1>Register</h1>
+      <h1>Register</h1>
       <form action="/register" method="POST">
-      <div class="form-fullname">
-        <div>
-          <label for="firstName">First name</label>
-          <input type="text" id="firstName" name="firstName" required>
+        <div class="form-fullname">
+          <div>
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" value="<%= oldInput.firstName %>" required>
+          </div>
+          <div>
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" value="<%= oldInput.lastName %>" required>
+          </div>
         </div>
         <div>
-          <label for="lastName">Last name</label>
-          <input type="text" id="lastName" name="lastName" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <% if (error) { %>
+            <p class="error-text"><%= error %></p>
+          <% } %>
         </div>
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button class="form-btn" type="submit">Create Account</button>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button class="form-btn" type="submit">Create Account</button>
 
-      <p class="signup-text">
-        Already have an account? <a href="/login">Login</a>
-      </p>
+        <p class="signup-text">
+          Already have an account? <a href="/login">Login</a>
+        </p>
 
-      <div class="divider">
-        <hr> <span> or</span> <hr>
-      </div>
-      
-      <div class="social-login">
-        <button class="btn-social github">
-         <img src="/images/Github.png" style="width: 30px; height: 20px;" alt="Github"> Login with Github
-        </button>
-        <button class="btn-social google">
-         <img src="/images/gg.png" alt="Google"> Login with Google
-        </button>
-      </div>
-    </form>
+        <div class="divider">
+          <hr> <span> or</span>
+          <hr>
+        </div>
+
+        <div class="social-login">
+          <button class="btn-social github">
+            <img src="/images/Github.png" style="width: 30px; height: 20px;" alt="Github"> Login with Github
+          </button>
+          <button class="btn-social google">
+            <img src="/images/gg.png" alt="Google"> Login with Google
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </body>
