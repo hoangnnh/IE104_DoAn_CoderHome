@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <button class="setting_btn">
                 <div class="big_span">
                     <span class="left">
-                        <p>Your CoderHome Digest frequency</p><br>
+                        <p class = "p1">Your CoderHome Digest frequency</p><br>
                         <p class="bellow">Adjust how often you see a new Digest.</p>
                     </span>
                     <span class="right">

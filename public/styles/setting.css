@@ -146,7 +146,7 @@ body{
 
 .right_img{
     border-radius: 100%;
-    width: 2vw;
+    width: 36px;
 }
 
 .setting_btn .big_span{
@@ -242,203 +242,128 @@ ul li a:hover{
     padding: 5px 15px;
 }
 
-/* =============================================
-   RESPONSIVE: THEO YÊU CẦU CHÍNH XÁC
-   ============================================= */
-
-/* 1. ≤1320px: Bật scroll ngang cho .setting_nav */
-@media (max-width: 1320px) {
-    .setting_nav {
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        padding-bottom: 8px;
-    }
-
-    .setting_nav::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    .setting_nav::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 3px;
-    }
-
-    .setting_nav::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 3px;
-    }
-
-    .nav_item {
-        flex: 0 0 auto;
-        min-width: 120px;
-    }
-
-    .nav_item button {
-        padding: 10px 20px;
-        white-space: nowrap;
-    }
-
-    .nav_item.active button::after {
-        left: 16px;
-        right: 16px;
-    }
-}
-
-/* 2. ≤1250px: ẨN HOÀN TOÀN PHẦN SIDEBAR (.container_right) */
-@media (max-width: 1250px) {
-    .container_right {
-        display: none !important;
-    }
-
-    .main_container {
-        width: 100%;
-        display: block;
-    }
-
-    .container_left {
-        width: 100%;
-        padding: 0 20px;
-    }
-
-    .left_main {
-        width: 100%;
-        margin: 0;
-    }
-}
-
-/* 3. ≤768px: Tablet - Tối ưu layout 1 cột */
-@media (max-width: 768px) {
-    .main {
-        padding-top: 30px;
-    }
-
-    .left_main_content {
-        padding-top: 20px;
-    }
-
-    .left_main_content h2 {
-        font-size: 32px;
-        margin-bottom: 16px;
-    }
-
-    .flex_box {
-        min-height: auto;
-    }
-
-    .mail_name_btn,
-    .setting_btn {
-        margin: 14px 0;
-        padding: 10px 0;
-    }
-
-    .big_span {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-    }
-
-    .big_span .right {
-        align-self: flex-end;
-    }
-
-    .right_img {
+ 
+/* ≤1250px: Ẩn sidebar và responsive image */
+@media (max-width: 1250px) { 
+    .container_right { 
+        display: none !important; 
+    } 
+ 
+    .main_container { 
+        width: 100%; 
+        display: block; 
+    } 
+ 
+    .container_left { 
+        width: 100%; 
+        padding: 0 20px; 
+    } 
+ 
+    .left_main { 
+        width: 100%; 
+        margin: 0; 
+    } 
+ 
+    .right_img { 
         width: 36px;
-        height: 36px;
+    } 
+} 
+ 
+/* 3. ≤1000px: Container adjustments */
+@media (max-width: 1000px) { 
+    .main_container { 
+        width: 90% !important; 
+        padding: 0 10px; 
+    } 
+ 
+    .container_left { 
+        width: 90% !important; 
+        padding: 0; 
+        margin: 0; 
+    } 
+ 
+    .left_main { 
+        width: 100% !important; 
+        margin: 0 !important; 
+    } 
+ 
+    .left_main_content { 
+        width: 100% !important; 
+    }
+
+    .right_img { 
+        width: 36px; 
+    }
+} 
+ 
+/* 4. ≤900px: Font size và padding adjustments */
+@media (max-width: 900px) { 
+    .left_main_content h2 { 
+        font-size: 32px; 
+        margin-bottom: 18px; 
+    } 
+ 
+    .nav_item .nav_btn { 
+        padding: 10px 18px; 
+    } 
+ 
+    .setting_btn, 
+    .mail_name_btn { 
+        margin: 12px 0; 
+        padding: 12px 0; 
+    }
+} 
+
+@media (max-width: 600px) {
+    .right_img { 
+        width: 36px; 
+        height: auto;
+    }
+
+    .container_left { 
+        padding: 0 15px; 
+    }
+
+    .nav_item .nav_btn { 
+        padding: 8px 16px;
+        font-size: 14px;
     }
 
     .bellow {
-        font-size: 13.5px;
+        width: auto; 
+        text-align: left;
     }
 }
 
-@media (max-width: 1320px) {
-    .setting_nav {
-        display: flex;
-        overflow-x: auto;
+@media (max-width: 550px) {
+    .right_img{
+        display: none;
+    }
+
+    .right .p1{
+        width: auto;     
         white-space: nowrap;
-        gap: 0;
-        scrollbar-width: thin;
-        padding-bottom: 6px;
+        overflow: hidden;
     }
 
-    .setting_nav::-webkit-scrollbar {
-        height: 6px;
-    }
-    .setting_nav::-webkit-scrollbar-track {
-        background: #eee;
-    }
-    .setting_nav::-webkit-scrollbar-thumb {
-        background: #bbb;
+    .setting_btn .right {
+        gap: 10px;
     }
 
-    .nav_item {
-        flex: 0 0 auto;
-    }
-
-    .nav_item .nav_btn {
-        padding: 10px 24px;
+    .left .p1{
+        width: 150px;     
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis ;
     }
 }
 
-@media (max-width: 1250px) {
-    .container_right {
-        display: none !important;
-    }
-
-    .main_container {
-        width: 100%;
-        display: block;
-    }
-
-    .container_left {
-        width: 100%;
-        padding: 0 20px;
-    }
-
-    .left_main {
-        width: 100%;
-        margin: 0;
-    }
-}
-
-@media (max-width: 900px) {
-    .left_main_content h2 {
-        font-size: 32px;
-        margin-bottom: 18px;
-    }
-
+@media (max-width: 400px) {
     .nav_item .nav_btn {
-        padding: 10px 18px;
-    }
-
-    .setting_btn,
-    .mail_name_btn {
-        margin: 12px 0;
-        padding: 12px 0;
+        padding: 8px 10px;
     }
 }
 
-@media (max-width: 1000px) {
-    .main_container {
-        width: 90% !important;
-        padding: 0 10px;
-    }
 
-    .container_left {
-        width: 90% !important;
-        padding: 0;
-        margin: 0;
-    }
 
-    .left_main {
-        width: 100% !important;
-        margin: 0 !important;
-    }
 
-    .left_main_content {
-        width: 100% !important;
-    }
-}
