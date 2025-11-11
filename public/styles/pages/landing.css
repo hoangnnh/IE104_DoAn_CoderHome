@@ -42,7 +42,7 @@
   transition: color 0.3s ease;
 }
 
-.navbar__item:hover {
+.navbar__item:hover:not(:last-child) {
   color: var(--color-text-heading);
 }
 
@@ -67,8 +67,8 @@
 }
 
 .button--primary:hover {
-  background-color: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
+  background-color: var(--color-gray-darkest);
+  border-color: var(--color-gray-darkest);
 }
 
 .button--large {
