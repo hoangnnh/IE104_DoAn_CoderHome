@@ -1,11 +1,11 @@
-.login-page-wrapper {
+.register-page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
-.login-container {
+.register-container {
   display: flex;
   width: 100%;
   max-width: 850px;
@@ -17,7 +17,7 @@
 }
 
 /* Left */
-.login-left {
+.register-left {
   background-color: var(--color-background);
   flex-basis: 35%;
   padding: var(--space-xl) var(--space-lg);
@@ -28,17 +28,18 @@
   justify-content: center;
 }
 
-.login-left .logo img {
+.register-left .logo img {
   width: 150px;
   margin-bottom: var(--space-xxl);
 }
 
-.login-left .illustration img {
+
+.register-left .illustration img {
   width: 200px;
   margin-bottom: var(--space-md);
 }
 
-.login-left p {
+.register-left p {
   color: var(--color-text-body);
   font-size: var(--font-size-md);
   line-height: var(--line-height-body);
@@ -46,12 +47,12 @@
 }
 
 /* Right */
-.login-right {
+.register-right {
   flex: 1;
   padding: var(--space-xl) var(--space-xxl);
 }
 
-.login-right h1 {
+.register-right h1 {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-bold);
@@ -59,15 +60,23 @@
   margin-bottom: var(--space-lg);
 }
 
+.form-fullname {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  width: 100%;
+  margin-bottom: calc(-1 * var(--space-md));
+}
+
 form label {
   display: block;
   margin-bottom: var(--space-xs);
-  color: var(--color-text-heading);
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-body);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 }
 
+input[type="text"],
 input[type="email"],
 input[type="password"] {
   width: 100%;
@@ -78,6 +87,7 @@ input[type="password"] {
   margin-bottom: var(--space-lg);
 }
 
+input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
   outline: var(--border-width) solid var(--color-background);
@@ -113,32 +123,6 @@ input[type="password"]:focus {
 .form-btn:active {
   box-shadow: none;
 }
-
-.options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: var(--space-lg);
-  font-size: var(--font-size-sm);
-}
-
-.options label {
-  font-family: var(--font-family-body);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-sm);
-  margin-bottom: 0;
-}
-
-.btn--forget-pw {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-
-.btn--forget-pw:hover {
-  text-decoration: underline;
-}
-
-/* Divider */
 
 .divider {
   margin: var(--space-lg) 0;
