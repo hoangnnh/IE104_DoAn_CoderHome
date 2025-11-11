@@ -1,33 +1,47 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
-function getRegister (req, res) {
-  res.render('pages/register');
+function getRegister(req, res) {
+  res.render('pages/register', {
+    pageTitle: 'Register',
+    error: null,
+    oldInput: {
+      firstName: '',
+      lastName: ''
+    },
+  });
 };
 
-async function postRegister (req, res) {
+async function postRegister(req, res) {
   try {
     const { firstName, lastName, email, password } = req.body;
     const username = `${firstName}${lastName}`.toLowerCase();
-    
+
     // Check if a user is already existed
     const existingUser = await User.findOne({ email: email });
 
-    // If exists, go to login page
+    // If exists, re-render the page with an error
     if (existingUser) {
       console.log('Email already in use, please sign in.');
-      return res.redirect('/login');
+      return res.render('pages/register', {
+        pageTitle: 'Register',
+        error: 'Email is already registered, please use another email.',
+        oldInput: {
+          firstName: firstName,
+          lastName: lastName
+        }
+      });
     }
 
     // Password encryption
     const hashedPassword = await bcrypt.hash(password, 12);
-    
+
     // Save new user to DB
     const user = new User({
       username,
       email,
       password: hashedPassword,
-      bio: '', 
+      bio: '',
       profilePicture: '/images/default-avatar.png'
     });
     await user.save();
@@ -39,12 +53,12 @@ async function postRegister (req, res) {
   }
 };
 
-function getLogin (req, res) {
+function getLogin(req, res) {
   res.render('pages/login', { pageTitle: 'Login' });
 };
 
 // Handle User Login
-async function postLogin (req, res) {
+async function postLogin(req, res) {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
@@ -80,7 +94,7 @@ async function postLogin (req, res) {
   }
 };
 
-function getLogout (req, res) {
+function getLogout(req, res) {
   // This function destroys the session
   req.session.destroy((err) => {
     if (err) {
