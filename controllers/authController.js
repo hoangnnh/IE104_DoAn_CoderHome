@@ -54,7 +54,7 @@ async function postRegister(req, res) {
 };
 
 function getLogin(req, res) {
-  res.render('pages/login', { pageTitle: 'Login' });
+  res.render('pages/login', { pageTitle: 'Login', error: null });
 };
 
 // Handle User Login
@@ -64,15 +64,21 @@ async function postLogin(req, res) {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      console.log('Login attempt failed: Invalid email or password.');
-      return res.redirect('/login');
+      console.log('Invalid email!');
+      return res.render('pages/login', {
+        pageTitle: 'Login',
+        error: 'Invalid email or password!'
+      });
     }
 
     const doMatch = await bcrypt.compare(password, user.password);
 
     if (!doMatch) {
-      console.log('Login attempt failed: Invalid email or password.');
-      return res.redirect('/login');
+      console.log('Invalid password.');
+      return res.render('pages/login', {
+        pageTitle: 'Login',
+        error: 'Invalid email or password'
+      });
     }
 
     req.session.userId = user._id;

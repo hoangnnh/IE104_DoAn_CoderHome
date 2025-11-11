@@ -40,11 +40,10 @@
         <div>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
-
-          <% if (error) { %>
-            <p class="error-text"><%= error %></p>
-          <% } %>
         </div>
+        <% if (error) { %>
+          <p class="error-text"><%= error %></p>
+        <% } %>
         <div>
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required>

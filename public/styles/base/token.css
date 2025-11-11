@@ -4,9 +4,9 @@
     --color-gray-darkest: #222222;
     --color-gray-medium: #7D7D7D;
     --color-gray-lightest: #F7F7F7;
-    --color-cream-background: #F7F4ED;
-    --color-accent-tan: #BE7C53;
-    --color-accent-blue: #2166E5;
+    --color-red: #D93025;
+    --color-blue: #2166E5;
+    --color-cream: #F8F5EF;
 
     /* Primary color */
     --color-primary: var(--color-black);
@@ -14,8 +14,9 @@
     --color-primary-hover: var(--color-gray-darkest);
 
     /* Accent color */
-    --color-accent: var(--color-accent-tan);
-    --color-accent-hover: #a46a47;
+    --color-accent-red: var(--color-red);
+    --color-accent-blue: var(--color-blue);
+    --color-accent-cream: var(--color-cream);
 
     /* Link color */
     --color-link: var(--color-accent-blue);
@@ -25,10 +26,11 @@
     --color-text-heading: var(--color-black);
     --color-text-body: var(--color-gray-darkest);
     --color-text-muted: var(--color-gray-medium);
+    --color-text-error: var(--color-accent-red);
     /* For description, date, time, etc. */
 
     /* Backgrounds & Surfaces */
-    --color-background: var(--color-cream-background);
+    --color-background: var(--color-accent-cream);
     /* Primary background */
     --color-surface: var(--color-white);
     /* Background for navbar, card, footer */
@@ -94,4 +96,9 @@
     /* Navbar */
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
     /* Post as card-view */
+
+    /* Breakpoints */
+    /*
+        480 > 768 > 1024 > 1280
+    */
 }

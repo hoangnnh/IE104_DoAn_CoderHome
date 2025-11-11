@@ -3,62 +3,68 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Log in</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/styles/login.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-  <link rel="stylesheet" href="/">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/fonts.css">
+  <link rel="stylesheet" href="/styles/base/token.css">
+  <link rel="stylesheet" href="/styles/pages/login.css">
 </head>
 
 <body>
-  <div class="login-container">
-    <div class="login-left">
-      <div class="logo">
-        <img src="/images/coderhome-logo.png" alt="Coderhome Logo" />
+  <main class="login-page-wrapper">
+    <div class="login-container">
+      <div class="login-left">
+        <div class="logo">
+          <img src="/images/coderhome-logo.png" alt="Coderhome Logo" />
+        </div>
+        <div class="illustration">
+          <img src="/images/Login.png" alt="Study Illustration" />
+          <p><strong>Share Your Thoughts<br>Inspire the World</strong></p>
+        </div>
       </div>
-      <div class="illustration">
-        <img src="/images/Login.png" alt="Study Illustration" />
-        <p><strong>Share Your Thoughts<br>Inspire the World</strong></p>
+
+      <div class="login-right">
+        <h1>Login</h1>
+        <form action="/login" method="POST">
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <% if (error) { %>
+          <p class="error-text"><%= error %></p>
+          <% } %>
+          <button class=" form-btn">Log in</button>
+
+          <div class="options">
+            <label><input type="checkbox" /> Remember me</label>
+            <a href="#" class="btn--forget-pw">Forgot password?</a>
+          </div>
+
+          <div class="divider">
+            <hr> <span> or</span>
+            <hr>
+          </div>
+
+          <div class="social-login">
+            <button class="btn-social github" type="button">
+              <img src="/images/Github.png" style="width: 30px; height: 20px;" alt="Github"> Login with Github
+            </button>
+            <button class="btn-social google" type="button">
+              <img src="/images/gg.png" alt="Google"> Login with Google
+            </button>
+          </div>
+
+          <p class="signup-text">
+            New to Coderhome? <a href="/register">Create account.</a>
+          </p>
+        </form>
       </div>
     </div>
-  
-    <div class="login-right">
-    <h1>Login</h1>
-      <form action="/login" method="POST">
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button class="form-btn">Log in</button>
-
-      <div class="options">
-        <label><input type="checkbox" /> Remember me</label>
-        <a href="#" class="forgot">Forgot password?</a>
-      </div>
-
-      <div class="divider">
-        <hr> <span> or</span> <hr>
-      </div>
-      
-      <div class="social-login">
-        <button class="btn-social github">
-         <img src="/images/Github.png" style="width: 30px; height: 20px;" alt="Github"> Login with Github
-        </button>
-        <button class="btn-social google">
-         <img src="/images/gg.png" alt="Google"> Login with Google
-        </button>
-      </div>
-
-      <p class="signup-text">
-        New to Coderhome? <a href="/register">Create account.</a>
-      </p>
-    </form>
-    </div>
-  </div>
+  </main>
 </body>
 
 </html>
