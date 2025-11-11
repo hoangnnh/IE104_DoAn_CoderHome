@@ -1,0 +1,369 @@
+body{
+    margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* font */
+@font-face {
+    font-family: 'Lora';
+    src: url(../fonts/Lora/Lora-VariableFont_wght.ttf), format(truetype);
+}
+
+@font-face {
+    font-family: 'robto';
+    src: url(../fonts/Roboto_Condensed/RobotoCondensed-Medium.ttf), format(truetype);
+}
+
+
+
+/*main part*/
+.main{
+    width: 100%;
+    height: auto;
+    padding-top: 56px;
+    display: flex;
+}
+
+.main .main_container{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.main_container .container_left{
+    flex:6.5;
+    display: flex;
+    justify-content: center;
+
+}
+
+.main_container .container_right{
+    flex:3.5;
+}
+
+.container_left .left_main{
+    width: 70%;
+    margin: 0 24px;
+}
+
+.left_main .left_main_content{
+    padding-top: 50px;
+}
+
+.left_main_content h2{
+    font-family: 'lora';
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.left_main_content .setting_nav{
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    overflow: hidden;
+}
+
+.nav_item{
+    float: left;
+}
+
+.nav_item,
+.nav_item * {
+    cursor: pointer;
+}
+
+.nav_item .nav_btn{
+    border: none;
+    background-color: #fff;
+    padding: 7.5px 40px;
+}
+
+.nav_btn p{
+    opacity: 0.6;
+}
+
+.nav_item:hover p{
+    opacity: 1;
+}
+
+.nav_item.active p{
+    opacity: 1;
+}
+
+.container_left .mail_name_btn{
+    width: 100%;
+    height: 20px;
+    margin: 20px 0 15px 0;
+    border: none;
+    background-color: #fff;
+    display: flex;
+    cursor: pointer;
+}
+
+.mail_name_btn .big_span{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.big_span .right{
+    opacity: 0.6;
+}
+
+.mail_name_btn:hover .right{
+    opacity: 1;
+}
+
+.container_left .setting_btn{
+    width: 100%;
+    height: 45px;
+    margin: 20px 0;
+    border: none;
+    background-color: #fff;
+    display: flex;
+    cursor: pointer;
+}
+
+.setting_btn .left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.left .bellow{
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+.right_img{
+    border-radius: 100%;
+    width: 36px;
+}
+
+.setting_btn .big_span{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.setting_btn .right{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.setting_btn:hover .right{
+    opacity: 1;
+}
+
+.ti-new-window{
+    font-size: 20px;
+}
+
+.line {
+    display: block;
+    height: 1px;            
+    background-color: #ccc;  
+    width: 100%;  
+    margin: 20px 0;           
+}
+
+.p2{
+    color: green;
+}
+
+.ti-angle-down{
+    font-size: 15px;
+}
+
+.setting_btn .p_del{
+    color: red;
+}
+
+.flex_box{
+    display: flex;
+    flex-direction: column;
+}
+
+.container_right{
+    padding: 0 0 0 30px;
+    border-left: 1px solid #ccc;
+}
+
+.container_right .right_text{
+    padding-top: 70px;
+    font-family: 'lora';
+    margin: 0 20px;
+}
+
+.right_text h3{
+    font-size: 16px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.right_text ul li{
+    list-style: none;
+    padding: 10px 0;
+}
+
+ul li a{
+    text-decoration: none;
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+ul li a:hover{
+    opacity: 1;
+}
+
+.right_footer{
+    padding-top: 430px;
+    margin: 0 20px;
+}
+
+.right_footer .nav_foot{
+    
+}
+
+.nav_foot li{
+    display: inline-block;
+    list-style: none;
+    padding: 5px 15px;
+}
+
+ 
+/* ≤1250px: Ẩn sidebar và responsive image */
+@media (max-width: 1250px) { 
+    .container_right { 
+        display: none !important; 
+    } 
+ 
+    .main_container { 
+        width: 100%; 
+        display: block; 
+    } 
+ 
+    .container_left { 
+        width: 100%; 
+        padding: 0 20px; 
+    } 
+ 
+    .left_main { 
+        width: 100%; 
+        margin: 0; 
+    } 
+ 
+    .right_img { 
+        width: 36px;
+    } 
+} 
+ 
+/* 3. ≤1000px: Container adjustments */
+@media (max-width: 1000px) { 
+    .main_container { 
+        width: 90% !important; 
+        padding: 0 10px; 
+    } 
+ 
+    .container_left { 
+        width: 90% !important; 
+        padding: 0; 
+        margin: 0; 
+    } 
+ 
+    .left_main { 
+        width: 100% !important; 
+        margin: 0 !important; 
+    } 
+ 
+    .left_main_content { 
+        width: 100% !important; 
+    }
+
+    .right_img { 
+        width: 36px; 
+    }
+} 
+ 
+/* 4. ≤900px: Font size và padding adjustments */
+@media (max-width: 900px) { 
+    .left_main_content h2 { 
+        font-size: 32px; 
+        margin-bottom: 18px; 
+    } 
+ 
+    .nav_item .nav_btn { 
+        padding: 10px 18px; 
+    } 
+ 
+    .setting_btn, 
+    .mail_name_btn { 
+        margin: 12px 0; 
+        padding: 12px 0; 
+    }
+} 
+
+@media (max-width: 600px) {
+    .right_img { 
+        width: 36px; 
+        height: auto;
+    }
+
+    .container_left { 
+        padding: 0 15px; 
+    }
+
+    .nav_item .nav_btn { 
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .bellow {
+        width: auto; 
+        text-align: left;
+    }
+}
+
+@media (max-width: 550px) {
+    .right_img{
+        display: none;
+    }
+
+    .right .p1{
+        width: auto;     
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .setting_btn .right {
+        gap: 10px;
+    }
+
+    .left .p1{
+        width: 150px;     
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis ;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav_item .nav_btn {
+        padding: 8px 10px;
+    }
+}
+
+
+
+

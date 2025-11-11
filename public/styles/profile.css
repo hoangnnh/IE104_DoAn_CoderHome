@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @font-face {
   font-family: "Lora";
   src: url("/fonts/Lora/Lora-VariableFont_wght.ttf");
@@ -18,12 +19,25 @@ a {
 }
 body,
 span {
+=======
+body {
+>>>>>>> nhuhinh
   font-size: 16px;
   margin: 0;
   padding: 0;
   background-color: #fff;
 }
 
+<<<<<<< HEAD
+=======
+p,
+span,
+a,
+li {
+  font-family: "RobotoCondensed";
+}
+
+>>>>>>> nhuhinh
 .container {
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
@@ -61,8 +75,11 @@ span {
   font-weight: bold;
   font-size: 2rem;
 }
+<<<<<<< HEAD
 
 /* ----- Nav ----- */
+=======
+>>>>>>> nhuhinh
 .profile-nav {
   display: flex;
   flex-direction: row;
@@ -75,6 +92,10 @@ span {
   background-color: #ffffff;
   font-size: 1.5rem;
   border-radius: 9999px;
+<<<<<<< HEAD
+=======
+
+>>>>>>> nhuhinh
   color: #666666;
   transition: all 0.2s ease;
   margin: 0;
@@ -86,13 +107,19 @@ span {
   box-shadow: 0 0.25rem 0.25rem 0 #afafaf;
   border: none;
 }
+<<<<<<< HEAD
 .profile-nav__items.active {
+=======
+
+.profile-nav__items:hover {
+>>>>>>> nhuhinh
   color: black;
   background-color: #f7f7f7;
   box-shadow: 0 0.25rem 0.25rem 0 #afafaf;
   border: none;
 }
 
+<<<<<<< HEAD
 .profile-nav__items:hover {
   color: black;
   transform: scale(1.05);
@@ -101,6 +128,8 @@ span {
   border: none;
 }
 /* Tell Story Button */
+=======
+>>>>>>> nhuhinh
 .tell-story-button {
   display: flex;
   width: 100%;
@@ -112,23 +141,37 @@ span {
   font-weight: bold;
   font-size: 1.5rem;
   background-color: #fff;
+<<<<<<< HEAD
   transition: all 0.3s ease;
 }
 .tell-story-button:hover {
   transform: scale(1.05);
   cursor: pointer;
+=======
+>>>>>>> nhuhinh
 }
 .tell-story-button p {
   font-weight: bold;
   font-size: 1.5rem;
 }
+<<<<<<< HEAD
 
 .profile-content {
+=======
+.user__bio {
+}
+.user__no-post {
+  font-size: 2rem;
+  justify-self: center;
+}
+.user__posted-post {
+>>>>>>> nhuhinh
   width: 100%;
   padding-top: 2rem;
   margin: 0 auto;
 }
 
+<<<<<<< HEAD
 .user__bio,
 .user__no-post,
 .user__no-comment {
@@ -136,6 +179,8 @@ span {
   justify-self: center;
 }
 
+=======
+>>>>>>> nhuhinh
 /* ----Post----   */
 
 .post__card {
@@ -181,9 +226,13 @@ span {
   display: flex;
   gap: 1rem;
 }
+<<<<<<< HEAD
 .post__interact-meta span {
   font-size: 0.75rem;
 }
+=======
+
+>>>>>>> nhuhinh
 .post__interact-action {
   display: flex;
   gap: 1rem;
@@ -227,9 +276,12 @@ span {
 .react-icon:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
 .post__divider {
   margin: 1% auto;
 }
+=======
+>>>>>>> nhuhinh
 
 /* ---- Side Profile ---- */
 
@@ -253,9 +305,13 @@ span {
   flex-direction: column;
   gap: 1.25rem;
   background-color: #f7f7f7;
+<<<<<<< HEAD
   box-shadow: 0.1rem 0.1rem 1rem #666666;
   border-radius: 1.25rem;
   height: auto;
+=======
+  border-radius: 1.25rem;
+>>>>>>> nhuhinh
 }
 .more-info__container {
   display: flex;
@@ -331,13 +387,19 @@ span {
   color: #666;
   margin: 4px 0;
 }
+<<<<<<< HEAD
 /* Social Links */
+=======
+>>>>>>> nhuhinh
 
 .user__social-links {
   padding: 1.25rem;
   background-color: #f7f7f7;
   border-radius: 1.25rem;
+<<<<<<< HEAD
   box-shadow: 0.1rem 0.1rem 1rem #666666;
+=======
+>>>>>>> nhuhinh
 }
 .user__social-links p {
   font-weight: bold;
@@ -350,9 +412,13 @@ span {
   gap: 1.25rem;
   margin: 1.25rem 0;
 }
+<<<<<<< HEAD
 .social-links__items a {
   font-size: 1.25rem;
 }
+=======
+
+>>>>>>> nhuhinh
 .add-social-link-button {
   border-radius: 9999px;
   border: none;
@@ -360,6 +426,7 @@ span {
   color: white;
   padding: 0.75rem 2.5rem;
   font-size: 1.2rem;
+<<<<<<< HEAD
   transition: all 0.3s ease;
 }
 .add-social-link-button:hover {
@@ -368,6 +435,11 @@ span {
 }
 
 @media (max-width: 1100px) {
+=======
+}
+
+@media (min-width: 500px) and (max-width: 1100px) {
+>>>>>>> nhuhinh
   body,
   html {
     width: 100%;
@@ -385,7 +457,10 @@ span {
     max-width: 1100px;
     margin: 0 auto;
     align-items: start;
+<<<<<<< HEAD
     gap: 5rem;
+=======
+>>>>>>> nhuhinh
   }
   .user__main,
   .side-profile {
@@ -404,15 +479,23 @@ span {
     flex-direction: row;
     grid-area: sidebar;
     justify-content: space-between;
+<<<<<<< HEAD
     height: 15rem;
+=======
+    height: 100%;
+>>>>>>> nhuhinh
   }
 
   .user__more-info {
     display: flex;
     flex-direction: row;
     width: 80%;
+<<<<<<< HEAD
     height: 15rem;
     /* max-height: 0.5fr; */
+=======
+    max-height: 0.25fr;
+>>>>>>> nhuhinh
   }
   .user__bg-img {
     width: auto;
@@ -424,9 +507,14 @@ span {
   .more-info__container {
     display: flex;
     flex-direction: row;
+<<<<<<< HEAD
     justify-content: flex-start;
     width: 90%;
     height: 80%;
+=======
+    width: 90%;
+    height: 90%;
+>>>>>>> nhuhinh
     padding: 0.5rem;
     gap: 1rem;
   }
@@ -442,6 +530,10 @@ span {
     display: flex;
     flex-direction: row;
     width: 100%;
+<<<<<<< HEAD
+=======
+    height: max-content;
+>>>>>>> nhuhinh
     justify-content: space-around;
     gap: 1.25rem;
   }
@@ -450,16 +542,27 @@ span {
     display: flex;
     flex-direction: column;
     padding: 0 0.5rem;
+<<<<<<< HEAD
+=======
+    justify-content: center;
+>>>>>>> nhuhinh
   }
   .more-info__content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+<<<<<<< HEAD
     height: fit-content;
     width: 80%;
   }
   .more-info__items {
     height: fit-content;
+=======
+    width: 80%;
+  }
+  .more-info__items {
+    height: 100%;
+>>>>>>> nhuhinh
   }
 
   .user__posted-post {
@@ -484,3 +587,13 @@ span {
     margin: 0 0 0 1.5rem;
   }
 }
+<<<<<<< HEAD
+=======
+
+@media (max-width: 500px) {
+  html,
+  body {
+    font-size: 4px !important;
+  }
+}
+>>>>>>> nhuhinh

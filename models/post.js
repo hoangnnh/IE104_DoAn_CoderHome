@@ -16,6 +16,10 @@ const postSchema = new Schema({
     required: false, // Không bắt buộc, có thể đặt giá trị mặc định
     default: '/images/default-thumbnail.png' // Một ảnh placeholder
   },
+  overview: {
+    type: String,
+    required: true
+  },
   content: {
     type: String,
     required: true,

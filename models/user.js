@@ -27,10 +27,13 @@ const userSchema = new Schema({
   profilePicture: {
     type: String,
     default: "/images/user-avatar.jpg",
+<<<<<<< HEAD
   },
   backgroundImg: {
     type: String,
     default: "/images/user-bg.jpg",
+=======
+>>>>>>> nhuhinh
   },
   createdAt: {
     type: Date,
@@ -40,6 +43,10 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Post",
+<<<<<<< HEAD
+=======
+      default: [],
+>>>>>>> nhuhinh
     },
   ],
   liked: [

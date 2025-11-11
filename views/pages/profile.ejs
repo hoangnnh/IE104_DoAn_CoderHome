@@ -3,13 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="/style/profile.css" />
+=======
+    <link rel="stylesheet" href="/styles/profile.css" />
+>>>>>>> nhuhinh
     <title><%= pageTitle %></title>
   </head>
   <body>
     <%- include('../partials/header.ejs') %>
     <main class="container">
+<<<<<<< HEAD
       <section class="user__detail">
+=======
+      <section class="user__main">
+>>>>>>> nhuhinh
         <div class="user__info">
           <img
             src="<%= user.profilePicture %>"
@@ -24,6 +32,7 @@
           <a href="#" class="profile-nav__items">Biography</a>
         </nav>
         <button class="tell-story-button">
+<<<<<<< HEAD
           <img src="" alt="" />
           Tell us your story
         </button>
@@ -31,6 +40,15 @@
         <div class="user__posted-post">
           <% if (user.postedPost && user.postedPost.length > 0) { %> <%
           user.postedPost.forEach(post => { %>
+=======
+          <img src="" alt="" /> Tell us your story
+        </button>
+        <article class="user__bio"></article>
+        <div class="user__posted-post">
+          <% if (user.postedPost && user.postedPost.length > 0) { %>
+          <span></span>
+          <% user.postedPost.forEach(post => { %>
+>>>>>>> nhuhinh
           <article class="post__card">
             <div class="post__author">
               <img
@@ -100,17 +118,85 @@
               <img src="/images/post-thumbnail.png" alt="" class="post__img" />
             </div>
           </article>
+<<<<<<< HEAD
           <% }) %> <% } else { %>
           <p>This user hasn’t posted anything yet.</p>
+=======
+          <% }) %>
+          <span></span>
+          <% } else { %>
+          <p class="user__no-post">This user hasn't posted any Post yet.</p>
+>>>>>>> nhuhinh
           <% } %>
         </div>
       </section>
       <aside class="side-profile">
+<<<<<<< HEAD
         <img src="" alt="" class="user__bg-img" />
         <div class="user__more-info"></div>
         <div class="user__social-links"></div>
         <button class="add-social-link-button"></button>
       </aside>
     </main>
+=======
+        <div class="user__more-info">
+          <img
+            src="<%= user.profilePicture %>"
+            alt="<%= user.profilePicture %>-bgm"
+            class="user__bg-img"
+          />
+          <div class="more-info__container">
+            <div class="more-info__title">
+              <div class="more-info__name"><%= user.username %></div>
+              <button class="more-info__share">Share</button>
+            </div>
+            <div class="more-info__details">
+              <div class="more-info__follower">
+                <p><%= user.followerCount %>2</p>
+                <p>Follower</p>
+              </div>
+              <div class="more-info__content">
+                <div class="more-info__items">
+                  <p><%= /*user.createdAt*/0 %>d</p>
+                  <p>CoderHome Age</p>
+                </div>
+                <div class="more-info__items">
+                  <% if (user.contributors && user.contributors.length > 0) { %>
+                  <p><%= user.contributors.length %></p>
+                  <p>Contributors</p>
+                  <% } else { %>
+                  <p>0</p>
+                  <p>Contributors</p>
+                  <% } %>
+                </div>
+                <div class="more-info__items">
+                  <p>0*</p>
+                  <p>Visit</p>
+                </div>
+                <div class="more-info__items">
+                  <% if (user.liked && user.liked.length > 0) { %>
+                  <p><%= user.liked.length %></p>
+                  <p>Likes</p>
+                  <% } else { %>
+                  <p>0</p>
+                  <p>Likes</p>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="user__social-links">
+          <p>Social Link</p>
+          <div class="social-links__items">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+          </div>
+          <button class="add-social-link-button">Add</button>
+        </div>
+      </aside>
+    </main>
+    <script src="/public/scripts/profile.js"></script>
+>>>>>>> nhuhinh
   </body>
 </html>
