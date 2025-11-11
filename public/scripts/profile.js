@@ -1,5 +1,20 @@
 const userId = location.pathname.split("/").pop();
 
+async function loadWriteStoryButton() {
+  const res = await fetch(`/current/`);
+  const currentUser = await res.json();
+  const res2 = await fetch(`/profiles/${userId}`);
+  const user = await res2.json();
+  const btnContainer = document.querySelector(".button-container");
+
+  if (user._id == currentUser._id) {
+    btnContainer.innerHTML = `
+        <button class="tell-story-button">
+          <img src="" alt="" /> Tell us your story
+        </button>
+    `;
+  }
+}
 async function loadUserInfo() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
@@ -109,11 +124,11 @@ async function loadComment() {
 
   if (comments && comments.length > 0) {
     CommentsContainer.innerHTML = `
-    <p class="user__no-comment">You haven't comment yet!!</p>
+    <p class="user__no-comment">No comment yet!!</p>
     `;
   } else {
     CommentsContainer.innerHTML = `
-    <p class="user__no-comment">You haven't comment yet!!</p>
+    <p class="user__no-comment">No comment yet!!</p>
     `;
   }
 }
@@ -191,6 +206,7 @@ async function loadUserSocialLink() {
 }
 
 //
+loadWriteStoryButton();
 loadUserInfo();
 loadPostedPost();
 loadUserMoreInfo();
