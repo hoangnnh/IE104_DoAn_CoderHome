@@ -1,19 +1,21 @@
 const postId = location.pathname.split("/").pop();
-const postTitle = document.querySelector(".post__title-head")
+const postTitle = document.querySelector(".post__title-head");
 const postHeader = document.querySelector(".post__header");
 const postContent = document.querySelector(".post__content");
 const postTags = document.querySelector(".post__tags");
 const postAboutAuthor = document.querySelector(".post__about-author");
 const postResponse = document.querySelector(".post__response");
 
-async function loadComment() { 
-    const commentList = document.querySelector(".comment__list");
-    const resComment = await fetch(`/comment/${postId}`);
-    const comments = await resComment.json();
+async function loadComment() {
+  const commentList = document.querySelector(".comment__list");
+  const resComment = await fetch(`/comments/${postId}`);
+  const comments = await resComment.json();
 
-    console.log(resComment);
-    console.log(comments);    
-    commentList.innerHTML = comments.map((item) => `
+  console.log(resComment);
+  console.log(comments);
+  commentList.innerHTML = comments
+    .map(
+      (item) => `
         <li class="comment__list-item">
             <div class="item__container">
                 <div class="item__header">
@@ -29,18 +31,20 @@ async function loadComment() {
             </div>
             <hr class="post__divider"/>
         </li>
-    `).join("");
+    `
+    )
+    .join("");
 }
 
 async function loadPostID() {
-    const resPost = await fetch(`/posts/${postId}`);
-    const post = await resPost.json();
-    const resUser = await fetch(`/current/`);
-    const currentUser = await resUser.json();
+  const resPost = await fetch(`/posts/${postId}`);
+  const post = await resPost.json();
+  const resUser = await fetch(`/current/`);
+  const currentUser = await resUser.json();
 
-    postTitle.textContent = `${post.title}`;
+  postTitle.textContent = `${post.title}`;
 
-    postHeader.innerHTML = `
+  postHeader.innerHTML = `
     <p class="post__title">${post.title}</p>
     <p class="post__description">${post.overview}</p>
         <div class="post__metadata">
@@ -77,16 +81,20 @@ async function loadPostID() {
         </div>
 `;
 
-    postContent.innerHTML = `${post.content}`;
-    postTags.innerHTML = post.tags.map((tag, index) => `
+  postContent.innerHTML = `${post.content}`;
+  postTags.innerHTML = post.tags
+    .map(
+      (tag, index) => `
         <button class="post__tags-button">
             <span>
                 ${tag}
             </span>
         </button>
-    `).join("");
+    `
+    )
+    .join("");
 
-    postAboutAuthor.innerHTML = `
+  postAboutAuthor.innerHTML = `
     <img src="${post.author.profilePicture}" alt="avatar" class="post__author-img"/>
         <div class="post__author-content">
             <p class="post__author-writenby">Writen by ${post.author.username}</p>
@@ -95,7 +103,7 @@ async function loadPostID() {
     <button class="post__author-follow"><span>Follow</span></button>
     `;
 
-    postResponse.innerHTML = `
+  postResponse.innerHTML = `
     <p class="post__respones-count">Responses(${post.responseCount})</p>
                     <div class="user__info">
                         <img src="${currentUser.profilePicture}" alt="avatar" class="user__avatar" />
@@ -114,53 +122,50 @@ async function loadPostID() {
                                 </button>
                             </div>
                         </form>
-    `
-    
+    `;
 
-    const textarea = document.getElementById("response-content");
-    const form = document.querySelector(".response-form");
-    const baseHeight = textarea.scrollHeight;
+  const textarea = document.getElementById("response-content");
+  const form = document.querySelector(".response-form");
+  const baseHeight = textarea.scrollHeight;
 
-    textarea.addEventListener("focus", () => {
-        form.classList.add("active");
+  textarea.addEventListener("focus", () => {
+    form.classList.add("active");
+  });
+
+  textarea.addEventListener("blur", () => {
+    if (!textarea.value.trim()) {
+      form.classList.remove("active");
+    }
+  });
+
+  const cancelBtn = document.querySelector(".respones__cancel");
+  cancelBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    textarea.value = "";
+    textarea.style.height = baseHeight + "px";
+    form.classList.remove("active");
+  });
+
+  textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  });
+
+  await loadComment();
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const content = textarea.value.trim();
+
+    await fetch("/comment/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ postId, content }),
     });
-
-    textarea.addEventListener("blur", () => {
-        if (!textarea.value.trim()) {
-            form.classList.remove("active");
-        }
-    });
-
-    const cancelBtn = document.querySelector(".respones__cancel");
-    cancelBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        textarea.value = "";
-        textarea.style.height = baseHeight + "px";
-        form.classList.remove("active");
-    });
-
-    textarea.addEventListener("input", () => {
-        textarea.style.height = "auto";
-        textarea.style.height = textarea.scrollHeight + "px";
-    });
-
+    textarea.value = "";
     await loadComment();
-
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const content = textarea.value.trim();
-
-        await fetch("/comment/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({postId, content})
-        })
-        textarea.value = "";
-        await loadComment();
-    })
+  });
 }
 loadPostID();
-
-
