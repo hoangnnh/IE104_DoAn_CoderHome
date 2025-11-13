@@ -61,7 +61,7 @@ body {
   max-width: 16rem;
   cursor: pointer;
   z-index: 10;
-  border: 1px solid #111;
+  border: 2px solid #111;
 }
 
 .dropdown__header {
