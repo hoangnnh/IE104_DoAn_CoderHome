@@ -51,9 +51,9 @@ async function loadPostID() {
             <div class="post__author">
                 <img src="${post.author.profilePicture}" alt="avatar"
                     class="post__author-img" />
-                <p class="post__author-name">
+                <a href="/profile/${post.author._id}" class="post__author-name">
                     ${post.author.username}
-                </p>
+                </a>
                 <button class="post__author-follow">
                     <span>Follow</span>
                 </button>
@@ -157,7 +157,7 @@ async function loadPostID() {
     e.preventDefault();
     const content = textarea.value.trim();
 
-    await fetch("/comment/", {
+    await fetch("/comments/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

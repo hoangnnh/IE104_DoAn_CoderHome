@@ -8,11 +8,12 @@ router.get('/new', isAuth, postController.getNewPost);
 
 router.get("/", isAuth, postController.getAllPosts);
 
-// Handle the creation of the new post. Must be logged in.
 router.post('/', isAuth, postController.createPost);
 
+router.get('/stats', isAuth, postController.getStats);
 
-// Show a single, specific post.
-router.get('/:id', postController.getPost);
+router.get('/:id', isAuth, postController.getPost);
+
+
 
 module.exports = router;

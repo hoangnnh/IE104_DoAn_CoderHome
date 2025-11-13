@@ -444,7 +444,6 @@ body {
     max-width: 900px;
     margin: 0 auto;
     justify-items: center;
-
     gap: 5rem;
   }
   .user__main {
@@ -455,6 +454,11 @@ body {
     max-width: 90%;
     box-sizing: border-box;
   }
+
+  .profile-nav {
+    justify-content: center;
+  }
+
   .side-profile {
     display: flex;
     max-height: 6rem;
@@ -480,6 +484,7 @@ body {
     height: 6rem;
     cursor: pointer;
   }
+
   .side-profile span {
     display: flex;
     height: 6rem;
@@ -567,6 +572,14 @@ body {
   }
   .more-info__items {
     height: fit-content;
+  }
+  .more-info__items p:first-child {
+    font-size: 1.5rem;
+  }
+  .more-info__items p:last-child {
+    font-size: 1.25rem;
+  }
+  .user__posted-post {
   }
 
   .user__social-links {

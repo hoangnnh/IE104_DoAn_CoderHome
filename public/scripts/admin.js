@@ -111,9 +111,97 @@ async function loadManagePosts() {
     mainListContent.innerHTML = firstTableRow + content;
 }
 
+
+async function loadPostStats() {
+    const resUser = await fetch("/profiles/");
+    const users = await resUser.json();
+    const resPost = await fetch("/posts/");
+    const posts = await resPost.json();
+    const resComment = await fetch("/comments/");
+    const comments = await resComment.json();
+    mainContent.innerHTML = "";
+    mainContent.innerHTML = `
+    <div class="card__container">
+                <ul class="card__list">
+                    <li class="card__item">
+                        <p>Total Users</p>
+                        <div class="card__item-info">
+                            <img src="/images/account.svg" alt="User icon">
+                            <p class="count">${users.length}</p>
+                        </div>
+                    </li>
+                    <li class="card__item">
+                        <p>Total Posts</p>
+                        <div class="card__item-info">
+                            <img src="/images/text-box-multiple-outline.svg" alt="Post icon">
+                            <p class="count">${posts.length}</p>
+                        </div>
+                    </li>
+                    <li class="card__item">
+                        <p>Total Comments</p>
+                        <div class="card__item-info">
+                            <img src="/images/comment-regular-full.svg" alt="Comment icon">
+                            <p class="count">${comments.length}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chart-container">
+                <canvas id="postChart"></canvas>
+            </div>`;
+
+    const res = await fetch("/posts/stats");
+    const data = await res.json();
+
+    const labels = data.map(item => item._id);
+    const counts = data.map(item => item.count);
+
+    new Chart(document.getElementById("postChart"), {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                label: "Số bài đăng",
+                data: counts,
+                backgroundColor: "#1A3D64",
+                borderColor: "#1A3D64",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Number of posts"
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Published Date"
+                    }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: context => ` ${context.parsed.y} posts`
+                    }
+                }
+            }
+        }
+    });
+}
+
+loadPostStats();
+
 managePostsBtn.addEventListener("click", loadManagePosts);
 manageUsersBtn.addEventListener("click", loadManageUsers);
-// dashboardBtn.addEventListener("click", loadDashboard);
+dashboardBtn.addEventListener("click", loadPostStats);
 
 managePostsBtn.addEventListener("mouseenter", () => {
     managePostsIcon.classList.add("hover-img");

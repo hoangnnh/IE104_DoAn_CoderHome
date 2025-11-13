@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 const { faker } = require("@faker-js/faker");
 const Post = require("../../models/post");
 const User = require("../../models/user");
+require('dotenv').config();
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://23520532:23520532@coderhome.0rpsyv7.mongodb.net/?appName=CoderHome";
+
+const MONGO_URI = process.env.MONGO_URI;
 const NUM_POSTS = parseInt(process.env.NUM_POSTS) || 100;
-const PEXELS_API_KEY = process.env.PEXELS_KEY || "YOUR_PEXELS_API_KEY"; // Thêm key vào đây
+const PEXELS_API_KEY = process.env.PEXELS_KEY;
 
 const CATEGORIES = ["General", "Tech", "Life", "Career", "Tutorial", "News"];
 const TAGS = ["javascript", "html", "css", "nodejs", "react", "mongodb", "express", "api", "frontend", "backend"];
@@ -23,7 +25,6 @@ const IT_KEYWORDS = [
     "workspace"
 ];
 
-// Function lấy ảnh IT từ Pexels
 async function getPexelsITImage(width = 800, height = 500) {
     const keyword = faker.helpers.arrayElement(IT_KEYWORDS);
     const page = faker.number.int({ min: 1, max: 10 });
@@ -32,13 +33,13 @@ async function getPexelsITImage(width = 800, height = 500) {
     try {
         const response = await fetch(url, {
             headers: {
-                'Authorization': "suGmDhtHbnGCBTqiX7mZsgU7iA7cMZ1UPiuv1FX90Ozi2L0coZIUy87P"
+                'Authorization': PEXELS_API_KEY
             }
         });
         const data = await response.json();
         
         if (data.photos && data.photos.length > 0) {
-            return data.photos[0].src.large; // URL ảnh chất lượng cao
+            return data.photos[0].src.large;
         }
         
         // Fallback
@@ -49,7 +50,6 @@ async function getPexelsITImage(width = 800, height = 500) {
     }
 }
 
-// Function tạo content với ảnh IT
 async function generateContentWithITImages(numParagraphs = 10, numImages = 3) {
     const paragraphs = [];
     const paragraphsPerImage = Math.floor(numParagraphs / (numImages + 1));
@@ -81,20 +81,20 @@ async function generateContentWithITImages(numParagraphs = 10, numImages = 3) {
 (async () => {
     try {
         await mongoose.connect(MONGO_URI);
-        console.log("✅ Connected to MongoDB");
+        console.log("Connected to MongoDB");
 
         const users = await User.find();
         if (users.length === 0) {
-            throw new Error("⚠️ Không có user nào trong DB. Hãy chạy seed users trước!");
+            throw new Error("User not found!");
         }
 
-        console.log(`📊 Found ${users.length} users`);
+        console.log(`Found ${users.length} users`);
         const posts = [];
 
         for (let i = 0; i < NUM_POSTS; i++) {
             const randomUser = users[Math.floor(Math.random() * users.length)];
             
-            console.log(`   📝 Creating post ${i + 1}/${NUM_POSTS}...`);
+            console.log(`Creating post ${i + 1}/${NUM_POSTS}...`);
             
             posts.push({
                 title: faker.lorem.sentence({ min: 5, max: 10 }).replace(/\.$/, ''),
@@ -108,9 +108,8 @@ async function generateContentWithITImages(numParagraphs = 10, numImages = 3) {
         }
 
         const insertedPosts = await Post.insertMany(posts);
-        console.log(`\n🎉 Created ${insertedPosts.length} fake posts with Pexels IT images`);
+        console.log(`\nCreated ${insertedPosts.length} fake posts with Pexels IT images`);
 
-        // Cập nhật postedPost của users
         const userPostsMap = {};
         
         insertedPosts.forEach(post => {
@@ -131,17 +130,17 @@ async function generateContentWithITImages(numParagraphs = 10, numImages = 3) {
         await Promise.all(updatePromises);
         console.log(`🔗 Updated postedPost for ${Object.keys(userPostsMap).length} users`);
 
-        console.log("\n📋 Summary:");
+        console.log("\nSummary:");
         for (const [userId, postIds] of Object.entries(userPostsMap)) {
             const user = users.find(u => u._id.toString() === userId);
             console.log(`   - ${user.username}: ${postIds.length} posts`);
         }
 
         await mongoose.connection.close();
-        console.log("\n🔌 Disconnected from MongoDB");
+        console.log("\nDisconnected from MongoDB");
         process.exit(0);
     } catch (err) {
-        console.error("❌ Error:", err.message);
+        console.error("Error:", err.message);
         if (mongoose.connection.readyState === 1) {
             await mongoose.connection.close();
         }
