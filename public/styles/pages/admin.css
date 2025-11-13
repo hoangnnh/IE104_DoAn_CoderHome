@@ -1,0 +1,271 @@
+@font-face {
+    font-family: "RobotoCondensed";
+    src: url("/fonts/Source_Sans_3/SourceSans3-VariableFont_wght.ttf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "RobotoCondensed", sans-serif;
+    background-color: #f3f3f3;
+}
+
+button {
+    font-family: "RobotoCondensed", sans-serif;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+}
+
+aside {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 100%;
+    min-width: 8rem;
+    min-height: 100vh;
+    height: 100%;
+    background-color: #fff;
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 2rem 0rem;
+    font-size: 1.7rem;
+    margin: 0;
+}
+
+.nav__list-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 300ms ease-out;
+
+}
+
+.nav__list-item:hover {
+    background-color: #000;
+    color: #fff
+}
+
+.nav__list-item img {
+    width: 28px;
+    height: 28px;
+}
+
+.hover-img {
+    filter: invert(1) brightness(2);
+}
+
+.nav__list-item-logo img{
+    width: 200px;
+    height: auto;
+}
+
+.nav__list-item-logo {
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+}
+
+.main__content {
+    margin: 1rem 3rem;
+    background-color: #f3f3f3;
+}
+
+.main__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.main__header-button {
+    padding: 0.5rem 3rem;
+    font-size: 1rem;
+    background-color: #4e72de;
+    color: #fff;
+    border: 1px solid #273970;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.main__header-button:hover {
+    background-color: #333364;
+    transform: scale(1.1);
+}
+
+.main__list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background-color: #fff;
+}
+
+.list-title {
+    font-size: 1.5rem;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    width: 20rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 30px;
+    background-color: #f3f3f3;
+    color: #7e7e7e;
+}
+
+.search-img {
+    width: 20px;
+    height: 20px;
+}
+
+.main__list-content {
+    display: grid;
+    grid-auto-rows: auto;
+    border-top: 0;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.main__list-content::-webkit-scrollbar {
+    display: none;
+}
+
+.table__row {
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr 2fr 5fr;
+    min-height: 70px;
+    background-color: #fff;
+    transition: all 300ms ease-out;
+}
+
+.table__row-header {
+    font-weight: bold;
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #eee;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    padding: 1rem 0.5rem;
+}
+.title {
+    justify-content: start;
+}
+
+.action {
+    display: flex;
+    gap: 1rem
+}
+
+.edit-btn, .delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0rem 1rem;
+    border: 0 solid #eee;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.edit-btn img, .delete-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.table__row:hover {
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.table__row:first-child {
+    position: sticky;
+    top: 0;
+    background-color: #f3f3f3;
+    z-index: 2;
+    font-weight: bold;
+}
+
+@media (max-width: 1023px) {
+    main {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 8fr;
+    }
+
+    .sidebar {
+        min-height: auto;
+    }
+
+    .nav__list {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    .nav__list-item {
+        padding: 0 2rem;
+    }
+
+    .nav__list-item-logo {
+        display: none;
+    }
+}
+
+
+@media (max-width: 767px) {
+    body {
+        font-size: 13px;
+    }
+
+    .sidebar {
+        min-height: auto;
+    }
+
+    .nav__list {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    .nav__list-item {
+        height: 100%;
+    }
+
+    .edit-btn, .delete-btn {
+        padding: 0rem 0.5rem;
+        gap: 0px;
+    }
+
+    .nav__list-item-logo {
+        display: none;
+    }
+}

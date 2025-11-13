@@ -29,7 +29,7 @@ async function loadPost() {
                     </div>
                 </div>
             </div>
-            <img src="/images/post-thumbnail.png" class="post__img"/>
+            <img src="${p.thumbnailUrl}" class="post__img"/>
         </div>
         ${index !== posts.length - 1 ? '<hr class="divider">' : ""}
         </article>

@@ -4,13 +4,13 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 
 // GET /register - Show registration form
-router.get('/register', authController.getRegister);
+// router.get('/register', authController.getRegister);
 
 // POST /register - Handle new user registration
 router.post('/register', authController.postRegister);
 
 // GET /login - Show login form
-router.get('/login', authController.getLogin);
+// router.get('/login', authController.getLogin);
 
 // POST /login - Handle user login
 router.post('/login', authController.postLogin);

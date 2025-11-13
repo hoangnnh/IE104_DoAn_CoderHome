@@ -4,11 +4,7 @@ const bcrypt = require('bcryptjs');
 function getRegister(req, res) {
   res.render('pages/register', {
     pageTitle: 'Register',
-    error: null,
-    oldInput: {
-      firstName: '',
-      lastName: ''
-    },
+    error: null
   });
 };
 
@@ -22,17 +18,8 @@ async function postRegister(req, res) {
 
     // If exists, re-render the page with an error
     if (existingUser) {
-      console.log('Email already in use, please sign in.');
-      return res.render('pages/register', {
-        pageTitle: 'Register',
-        error: 'Email is already registered, please use another email.',
-        oldInput: {
-          firstName: firstName,
-          lastName: lastName
-        }
-      });
+      return res.redirect('/login');
     }
-
     // Password encryption
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -42,7 +29,7 @@ async function postRegister(req, res) {
       email,
       password: hashedPassword,
       bio: '',
-      profilePicture: '/images/default-avatar.png'
+      profilePicture: '/images/user-avatar.jpg'
     });
     await user.save();
     console.log('User created successfully!');
@@ -64,26 +51,20 @@ async function postLogin(req, res) {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      console.log('Invalid email!');
-      return res.render('pages/login', {
-        pageTitle: 'Login',
-        error: 'Invalid email or password!'
-      });
+      return res.json({state: "invalid"});
     }
 
     const doMatch = await bcrypt.compare(password, user.password);
 
     if (!doMatch) {
-      console.log('Invalid password.');
-      return res.render('pages/login', {
-        pageTitle: 'Login',
-        error: 'Invalid email or password'
-      });
+      return res.json({state: "invalid"});
     }
+    const isAdmin = user.role;
 
     req.session.userId = user._id;
     req.session.username = user.username;
     req.session.isLoggedIn = true;
+    req.session.isAdmin = (isAdmin === "Admin") ? 1 : 0;
     req.session.profilePicture = user.profilePicture;
 
     req.session.save((err) => {
@@ -91,12 +72,15 @@ async function postLogin(req, res) {
         console.error('Session save error:', err);
       }
       console.log('Login successful, session created.');
-      res.redirect('/');
+
+      if (req.session.isAdmin === 0)
+      return res.json({state: "success", redirectUrl: "/"});
+      else return res.json({state: "success", redirectUrl: "/admin"});
     });
 
   } catch (err) {
     console.error('Login Error:', err);
-    res.redirect('/login');
+    return res.json({state: "error", redirectUrl: "/login"});
   }
 };
 

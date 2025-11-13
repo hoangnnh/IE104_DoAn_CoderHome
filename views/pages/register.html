@@ -3,17 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <title><%= pageTitle %></title>
+  <title>Register</title>
   <link rel="stylesheet" href="/styles/base/reset.css">
-  <link rel="stylesheet" href="/styles/base/fonts.css">
   <link rel="stylesheet" href="/styles/base/token.css">
-  <link rel="stylesheet" href="/styles/pages/login.css">
+  <link rel="stylesheet" href="/styles/base/fonts.css">
+  <link rel="stylesheet" href="/styles/pages/register.css">
 </head>
 
 <body>
-  <main class="login-page-wrapper">
-    <div class="login-container">
-      <div class="login-left">
+  <main class="register-page-wrapper">
+    <div class="register-container">
+      <div class="register-left">
         <div class="logo">
           <img src="/images/coderhome-logo.png" alt="Coderhome Logo" />
         </div>
@@ -23,9 +23,19 @@
         </div>
       </div>
 
-      <div class="login-right">
-        <h1>Login</h1>
-        <form action="/login" method="POST">
+      <div class="register-right">
+        <h1>Register</h1>
+        <form action="/register" method="POST">
+          <div class="form-fullname">
+            <div>
+              <label for="firstName">First name</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div>
+              <label for="lastName">Last name</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
           <div>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
@@ -34,15 +44,11 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
           </div>
-          <% if (error) { %>
-          <p class="error-text"><%= error %></p>
-          <% } %>
-          <button class=" form-btn">Log in</button>
+          <button class="form-btn" type="submit">Create Account</button>
 
-          <div class="options">
-            <label><input type="checkbox" /> Remember me</label>
-            <a href="#" class="btn--forget-pw">Forgot password?</a>
-          </div>
+          <p class="auth-switch-link">
+            Already have an account? <a href="/login">Login</a>
+          </p>
 
           <div class="divider">
             <hr> <span> or</span>
@@ -50,17 +56,13 @@
           </div>
 
           <div class="social-login">
-            <button class="btn-social github" type="button">
+            <button class="btn-social github">
               <img src="/images/Github.png" style="width: 30px; height: 20px;" alt="Github"> Login with Github
             </button>
-            <button class="btn-social google" type="button">
+            <button class="btn-social google">
               <img src="/images/gg.png" alt="Google"> Login with Google
             </button>
           </div>
-
-          <p class="signup-text">
-            New to Coderhome? <a href="/register">Create account.</a>
-          </p>
         </form>
       </div>
     </div>

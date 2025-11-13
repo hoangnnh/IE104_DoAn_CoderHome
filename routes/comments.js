@@ -5,5 +5,6 @@ const isAuth = require("../middleware/isAuth");
 
 router.post("/", isAuth, commentController.addComment);
 router.get("/:id", isAuth, commentController.getCommentByPostID);
+router.get("/user/:id", isAuth, commentController.getCommentByUserID);
 
 module.exports = router;

@@ -34,4 +34,15 @@ async function getCommentByPostID(req, res) {
     }
 }
 
-module.exports = { addComment, getCommentByPostID };
+async function getCommentByUserID(req, res) {
+    try {
+        const userId = req.params.id;
+        const comments = (await Comment.find({author: userId}).populate("author", "username"));
+        res.json(comments);
+    } catch (error) {
+        console.error("Get Comments Error:", err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
+
+module.exports = { addComment, getCommentByPostID, getCommentByUserID };

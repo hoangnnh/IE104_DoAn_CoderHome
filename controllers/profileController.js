@@ -1,6 +1,17 @@
 const User = require("../models/user");
 const Post = require("../models/post");
 
+async function getAllUser(req, res) {
+  try {
+    const users = await User.find().sort({createdAt: -1});
+    res.json(users);
+  } catch (err) {
+    console.error("Get User Error:", err);
+    res.status(500).send("Server Error");
+  }
+}
+
+
 // Lay user bang ID, khi bam vao xem user khac.
 async function getUser(req, res) {
   try {
@@ -38,4 +49,4 @@ async function getUser(req, res) {
   }
 }
 
-module.exports = { getUser };
+module.exports = { getUser, getAllUser };

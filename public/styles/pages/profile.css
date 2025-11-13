@@ -8,6 +8,10 @@
   src: url("/fonts/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf");
 }
 
+* {
+  font-family: "Lora", serif;
+}
+
 nav a,
 button {
   font-family: "RobotoCondensed";
@@ -434,10 +438,7 @@ span {
     display: flex;
     flex-direction: column;
   }
-  .more-info__name {
-  }
-  .more-info__share {
-  }
+
   .more-info__details {
     display: flex;
     flex-direction: row;
@@ -460,9 +461,6 @@ span {
   }
   .more-info__items {
     height: fit-content;
-  }
-
-  .user__posted-post {
   }
 
   .user__social-links {
