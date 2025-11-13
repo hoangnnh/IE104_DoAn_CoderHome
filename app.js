@@ -66,7 +66,10 @@ app.use("/comment", commentRoutes);
 // Homepage
 app.get("/", (req, res) => {
   if (req.session.isLoggedIn) {
-    res.sendFile(path.join(__dirname, "views/pages/index.html"));
+    res.render("pages/index", {
+      pageTitle: "CoderHome"
+    }
+    )
   } else {
     // USER IS NOT LOGGED IN
     res.render("pages/landing", {
