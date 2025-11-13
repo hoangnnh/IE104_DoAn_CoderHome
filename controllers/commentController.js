@@ -1,5 +1,4 @@
 const Comment = require("../models/comment");
-const User = require("../models/user");
 const { Schema } = require("mongoose");
 
 async function addComment(req, res) {
