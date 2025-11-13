@@ -1,15 +1,9 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 
 function getRegister(req, res) {
-  res.render('pages/register', {
-    pageTitle: 'Register',
-    error: null,
-    oldInput: {
-      firstName: '',
-      lastName: ''
-    },
-  });
+  res.sendFile(path.join(__dirname, "views/pages/register.html"));
 };
 
 async function postRegister(req, res) {
@@ -23,14 +17,7 @@ async function postRegister(req, res) {
     // If exists, re-render the page with an error
     if (existingUser) {
       console.log('Email already in use, please sign in.');
-      return res.render('pages/register', {
-        pageTitle: 'Register',
-        error: 'Email is already registered, please use another email.',
-        oldInput: {
-          firstName: firstName,
-          lastName: lastName
-        }
-      });
+      return res.sendFile(path.join(__dirname, "views/pages/register.html"));
     }
 
     // Password encryption
@@ -54,7 +41,7 @@ async function postRegister(req, res) {
 };
 
 function getLogin(req, res) {
-  res.render('pages/login', { pageTitle: 'Login', error: null });
+  res.sendFile(path.join(__dirname, "views/pages/login.html"));
 };
 
 // Handle User Login
@@ -65,20 +52,14 @@ async function postLogin(req, res) {
 
     if (!user) {
       console.log('Invalid email!');
-      return res.render('pages/login', {
-        pageTitle: 'Login',
-        error: 'Invalid email or password!'
-      });
+      res.sendFile(path.join(__dirname, "views/pages/login.html"));
     }
 
     const doMatch = await bcrypt.compare(password, user.password);
 
     if (!doMatch) {
       console.log('Invalid password.');
-      return res.render('pages/login', {
-        pageTitle: 'Login',
-        error: 'Invalid email or password'
-      });
+      return res.sendFile(path.join(__dirname, "views/pages/index.html"));
     }
 
     req.session.userId = user._id;

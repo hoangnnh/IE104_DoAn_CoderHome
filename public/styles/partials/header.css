@@ -100,7 +100,8 @@
     color: var(--color-text-muted);
     font-size: var(--font-size-md);
     font-family: var(--font-family-body);
-    gap: var(--space-sm);
+    gap: var(--space-xs);
+    text-decoration: none;
 }
 
 .header__write-btn:hover {
@@ -122,12 +123,16 @@
     color: var(--color-text-muted);
 }
 
+.header__notification-btn img {
+    width: 100%;
+}
+
 .header__notification-btn:hover {
     background: var(--color-gray-lightest);
 }
 
 .header__avatar {
-    width: calc(1.2 * var(--icon-base-width));
+    width: var(--icon-base-width);
     border-radius: 50%;
     border: none;
     cursor: pointer;
