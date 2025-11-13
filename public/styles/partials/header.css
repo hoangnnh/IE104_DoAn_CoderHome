@@ -24,7 +24,7 @@
 }
 
 .header__menu-btn {
-    width: var(--header-height);
+    width: calc(1.2 * var(--header-height));
     height: var(--header-height);
     display: flex;
     justify-content: center;
@@ -34,6 +34,7 @@
     transition: background .2s;
     color: var(--color-text-muted);
     border: none;
+    margin-right: 0 var(--space-md);
 }
 
 .header__menu-btn:hover {
