@@ -47,6 +47,11 @@
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
 
+    --header-height: 60px;
+
+    --icon-base-width: 32px;
+    --icon-base-height: 32px;
+
     /* Font size */
     --font-size-sm: 0.875rem;
     /* 14px */
