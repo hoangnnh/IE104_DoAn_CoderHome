@@ -1,33 +1,34 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 
-function getRegister (req, res) {
-  res.render('pages/register');
+function getRegister(req, res) {
+  res.sendFile(path.join(__dirname, "views/pages/register.html"));
 };
 
-async function postRegister (req, res) {
+async function postRegister(req, res) {
   try {
     const { firstName, lastName, email, password } = req.body;
     const username = `${firstName}${lastName}`.toLowerCase();
-    
+
     // Check if a user is already existed
     const existingUser = await User.findOne({ email: email });
 
-    // If exists, go to login page
+    // If exists, re-render the page with an error
     if (existingUser) {
       console.log('Email already in use, please sign in.');
-      return res.redirect('/login');
+      return res.sendFile(path.join(__dirname, "views/pages/register.html"));
     }
 
     // Password encryption
     const hashedPassword = await bcrypt.hash(password, 12);
-    
+
     // Save new user to DB
     const user = new User({
       username,
       email,
       password: hashedPassword,
-      bio: '', 
+      bio: '',
       profilePicture: '/images/default-avatar.png'
     });
     await user.save();
@@ -39,26 +40,26 @@ async function postRegister (req, res) {
   }
 };
 
-function getLogin (req, res) {
-  res.render('pages/login', { pageTitle: 'Login' });
+function getLogin(req, res) {
+  res.sendFile(path.join(__dirname, "views/pages/login.html"));
 };
 
 // Handle User Login
-async function postLogin (req, res) {
+async function postLogin(req, res) {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      console.log('Login attempt failed: Invalid email or password.');
-      return res.redirect('/login');
+      console.log('Invalid email!');
+      res.sendFile(path.join(__dirname, "views/pages/login.html"));
     }
 
     const doMatch = await bcrypt.compare(password, user.password);
 
     if (!doMatch) {
-      console.log('Login attempt failed: Invalid email or password.');
-      return res.redirect('/login');
+      console.log('Invalid password.');
+      return res.sendFile(path.join(__dirname, "views/pages/index.html"));
     }
 
     req.session.userId = user._id;
@@ -80,7 +81,7 @@ async function postLogin (req, res) {
   }
 };
 
-function getLogout (req, res) {
+function getLogout(req, res) {
   // This function destroys the session
   req.session.destroy((err) => {
     if (err) {

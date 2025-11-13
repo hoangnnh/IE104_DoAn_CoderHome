@@ -18,12 +18,6 @@ mongoose
   .then(() => console.log("Successfully connected to MongoDB!"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// --- View Engine Setup ---
-// Set EJS to template engine
-app.set("view engine", "ejs");
-// Set views folder
-app.set("views", path.join(__dirname, "views"));
-
 // --- Middleware ---
 // Serve static files (like CSS, images) from the 'public' folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -37,18 +31,8 @@ app.use(
     secret: "coderhome_secret_key", // Change this to a random string
     resave: false, // Don't save session if unmodified
     saveUninitialized: false, // Don't create session until something stored
-    // You can also add 'cookie: { maxAge: ... }'
   })
 );
-
-app.use((req, res, next) => {
-  // These variables will be available in all EJS templates
-  res.locals.isLoggedIn = req.session.isLoggedIn || false;
-  res.locals.username = req.session.username || "";
-  res.locals.profilePicture =
-    req.session.profilePicture || "/images/default-avatar.png";
-  next();
-});
 
 // --- Routes ---
 // import routes from auth.js
@@ -69,20 +53,25 @@ app.get("/", (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, "views/pages/index.html"));
   } else {
-    // USER IS NOT LOGGED IN
-    res.render("pages/landing", {
-      pageTitle: "Welcome to Coderhome",
-    });
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
+});
+
+// Login Page Route
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/pages/login.html"));
+});
+
+// Register Page Route
+app.get("/register", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/pages/register.html"));
 });
 
 app.get("/post/:id", (req, res) => {
   if (req.session.isLoggedIn)
     res.sendFile(path.join(__dirname, "views/pages/post.html"));
   else {
-    res.render("pages/landing", {
-      pageTitle: "Welcome to Coderhome",
-    });
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
 });
 
@@ -90,9 +79,7 @@ app.get("/profile/:id", (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, "views/pages/profile.html"));
   } else {
-    res.render("pages/landing", {
-      pageTitle: "Welcome to Coderhome",
-    });
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
 });
 
@@ -115,15 +102,12 @@ app.listen(PORT, () => {
 const livereload = require("livereload");
 const connectLivereload = require("connect-livereload");
 
-// Bật live reload server
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "public"));
 liveReloadServer.watch(path.join(__dirname, "views"));
 
-// Tích hợp middleware vào Express
 app.use(connectLivereload());
 
-// Khi server reload, gửi lệnh reload browser
 liveReloadServer.server.once("connection", () => {
   setTimeout(() => {
     liveReloadServer.refresh("/");
