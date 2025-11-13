@@ -78,8 +78,8 @@
     outline: none;
     background: transparent;
     color: var(--color-text-body);
+    font-family: var(--font-family-heading);
     font-size: var(--font-size-md);
-    font-family: var(--font-family-body);
 }
 
 /* right: actions */
