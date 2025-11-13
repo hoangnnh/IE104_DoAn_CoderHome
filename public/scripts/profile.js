@@ -262,16 +262,3 @@ more.addEventListener("click", () => {
   sideProfile.classList.toggle("active");
   arrow.classList.toggle("active");
 });
-
-//Test
-
-btnLeft.addEventListener("click", () => {
-  nav.scrollBy({ left: -150, behavior: "smooth" });
-});
-btnRight.addEventListener("click", () => {
-  nav.scrollBy({ left: 150, behavior: "smooth" });
-});
-
-nav.addEventListener("scroll", updateArrows);
-window.addEventListener("resize", updateArrows);
-updateArrows();
