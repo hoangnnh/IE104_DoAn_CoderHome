@@ -34,6 +34,15 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  // These variables will be available in all EJS templates
+  res.locals.isLoggedIn = req.session.isLoggedIn || false;
+  res.locals.username = req.session.username || "";
+  res.locals.profilePicture =
+    req.session.profilePicture || "/images/default-avatar.png";
+  next();
+});
+
 // --- Routes ---
 // import routes from auth.js
 const authRoutes = require("./routes/auth");
@@ -46,7 +55,7 @@ app.use(authRoutes);
 app.use("/posts", postRoutes);
 app.use("/profiles", userRoutes);
 app.use("/current", currentRoutes);
-app.use("/comment", commentRoutes);
+app.use("/comments", commentRoutes);
 
 // Homepage
 app.get("/", (req, res) => {
