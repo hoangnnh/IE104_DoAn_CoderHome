@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 
 function getRegister(req, res) {
   res.render('pages/register', {
@@ -41,7 +42,7 @@ async function postRegister(req, res) {
 };
 
 function getLogin(req, res) {
-  res.render('pages/login', { pageTitle: 'Login', error: null });
+  res.sendFile(path.join(__dirname, "views/pages/login.html"));
 };
 
 // Handle User Login

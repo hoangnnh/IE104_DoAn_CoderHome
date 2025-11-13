@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const Post = require("../models/post");
+const path = require("path");
 
 async function getAllUser(req, res) {
   try {
