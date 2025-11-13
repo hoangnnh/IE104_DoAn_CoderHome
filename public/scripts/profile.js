@@ -13,6 +13,8 @@ async function loadWriteStoryButton() {
           <img src="" alt="" /> Tell us your story
         </button>
     `;
+  } else {
+    btnContainer.classList.add("hidden");
   }
 }
 async function loadUserInfo() {
@@ -37,7 +39,9 @@ async function loadPostedPost() {
     postedPostContainer.innerHTML = user.postedPost
       .map(
         (post) =>
-          ` <article class="post__card">
+          ` 
+        <hr class="divider">
+        <article class="post__card">
         <div class="post__author">
             <img src="${
               post.author.profilePicture
@@ -76,13 +80,15 @@ async function loadPostedPost() {
             </div>
             <img src="/images/post-thumbnail.png" class="post__img"/>
         </div>
-        <hr class="divider">
         </article>
     `
       )
       .join("");
   } else {
-    postedPostContainer.innerHTML = `<p class="user__no-po-cm-bio">This user hasn't posted any Post yet.</p>`;
+    postedPostContainer.innerHTML = `
+    <hr class="divider">
+    <p class="user__no-po-cm-bio">This user hasn't posted any Post yet.</p>
+    `;
   }
 }
 
@@ -96,6 +102,7 @@ async function loadComment() {
     commentsContainer.innerHTML = comments
       .map(
         (comment) => `
+        <hr class="divider"/>
     <div class="comment__container">
       <div class="comment__header">
           <a href="/post/${
@@ -109,12 +116,12 @@ async function loadComment() {
       </div>
       <p class="comment__content">${comment.content}</p>
     </div>
-    <hr class="comment__divider"/>
     `
       )
       .join("");
   } else {
     commentsContainer.innerHTML = `
+    <hr class="divider">
     <p class="user__no-po-cm-bio">No comment yet!!</p>
     `;
   }
@@ -130,6 +137,7 @@ async function loadBio() {
   `;
   } else {
     bioContainer.innerHTML = `
+    <hr class="divider">
   <p class="user__no-po-cm-bio">User has no bio yet!!</p>
   `;
   }
@@ -212,6 +220,7 @@ const mq = window.matchMedia("(max-width: 900px)");
 const bgImg = document.querySelector(".user__bg-img");
 const moreInfoContainer = document.querySelector(".more-info__container");
 const userAvt = document.querySelector(".user__avatar");
+
 function responsive(e) {
   if (e.matches) {
     nav.before(sideProfile);
@@ -248,8 +257,8 @@ tabs.forEach((tab) => {
 const more = document.querySelector(".side-profile__more");
 const socialLinksContainer = document.querySelector(".user__social-links");
 const moreInfo = document.querySelector(".user__more-info");
+const arrow = document.querySelector(".arrow");
 more.addEventListener("click", () => {
   sideProfile.classList.toggle("active");
-  socialLinksContainer.classList.toggle("active");
-  moreInfo.classList.toggle("active");
+  arrow.classList.toggle("active");
 });
