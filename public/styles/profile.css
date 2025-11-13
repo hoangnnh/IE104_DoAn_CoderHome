@@ -26,12 +26,12 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: minmax(0, 800px) minmax(0, 400px);
   grid-template-areas:
     "main sidebar"
     "main sidebar"
     "main sidebar";
-  max-width: 95%;
+  width: 90%;
   grid-column-gap: 2rem;
   justify-content: space-evenly;
   margin: 1.25rem;
@@ -40,7 +40,7 @@ body {
 .user__main {
   display: flex;
   grid-area: main;
-  width: 95%;
+  width: 100%;
   flex-direction: column;
   gap: 2.5rem;
 }
@@ -284,7 +284,7 @@ body {
   grid-area: sidebar;
   flex-direction: column;
   gap: 1.25rem;
-  width: 90%;
+  width: 100%;
   border-radius: 1.25rem;
 }
 .side-profile__more {

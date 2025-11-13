@@ -83,13 +83,11 @@ app.get("/profile/:id", (req, res) => {
   }
 });
 
-app.get("/following", (req, res) => {
+app.get("/following/:id", (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, "views/pages/following.html"));
   } else {
-    res.render("pages/landing", {
-      pageTitle: "Welcome to Coderhome",
-    });
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
 });
 
