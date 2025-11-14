@@ -83,6 +83,14 @@ app.get("/profile/:id", (req, res) => {
   }
 });
 
+app.get("/following/:id", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/following.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
+
 // --- Server Startup ---
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

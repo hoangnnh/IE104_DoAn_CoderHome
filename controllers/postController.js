@@ -17,9 +17,9 @@ async function createPost(req, res) {
     const post = new Post({
       title: title,
       description: description,
-      thumbnailUrl: thumbnailUrl || '/images/default-thumbnail.png',
+      thumbnailUrl: thumbnailUrl || "/images/default-thumbnail.png",
       content: content,
-      category: req.body.category || 'General',
+      category: req.body.category || "General",
       tags: tagsArray,
       author: authorId,
     });
@@ -31,7 +31,7 @@ async function createPost(req, res) {
     console.error("Create Post Error:", err);
     res.render("pages/new-post", {
       pageTitle: "Create New Post",
-      error: "An error occured while creating the post. Please try again."
+      error: "An error occured while creating the post. Please try again.",
     });
   }
 }

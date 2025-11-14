@@ -3,23 +3,20 @@ const Post = require("../models/post");
 const { Schema } = require("mongoose");
 
 async function addComment(req, res) {
-    try {
-        const { postId, content } = req.body;
-        const author = req.session.userId;
-        const comment = await Comment.create({
-            post: postId,
-            content,
-            author
-        });
-        await Post.updateOne(
-            { _id: postId },
-            { $inc: { responseCount: 1 } }
-        );
-        res.status(201).json(comment);
-    } catch (err) {
-        console.error("Add Response Error:", err);
-        res.status(500).json({ message: "Server Error" });
-    }
+  try {
+    const { postId, content } = req.body;
+    const author = req.session.userId;
+    const comment = await Comment.create({
+      post: postId,
+      content,
+      author,
+    });
+    await Post.updateOne({ _id: postId }, { $inc: { responseCount: 1 } });
+    res.status(201).json(comment);
+  } catch (err) {
+    console.error("Add Response Error:", err);
+    res.status(500).json({ message: "Server Error" });
+  }
 }
 
 async function getCommentByPostID(req, res) {

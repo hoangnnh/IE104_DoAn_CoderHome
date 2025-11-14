@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/following.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="page__title">Following</h1>
+      <nav class="following__nav">
+        <a href="#" class="nav__items active" data-tab="all"> All </a>
+
+        <a href="#" class="nav__items" data-tab="topic"> Topic </a>
+      </nav>
+      <div class="topic__container">
+        <div class="dropdown__container">
+          <div class="dropdown__header">
+            <div class="dropdown__header-item">Newest</div>
+            <span class="arrow"></span>
+          </div>
+          <div class="dropdown__selection">
+            <a href="" class="dropdown__item" data-value="Newest">Newest</a>
+            <a href="" class="dropdown__item" data-value="Oldest">Oldest</a>
+            <a href="" class="dropdown__item" data-value="Popular">Popular</a>
+          </div>
+        </div>
+        <hr class="ver__divider" />
+        <button class="scroll-btn left" id="scrollLeft">◀</button>
+        <a href="#" class="topic">CSS</a>
+        <a href="#" class="topic">HTML</a>
+        <a href="#" class="topic">JavaScript</a>
+        <a href="#" class="topic">C++</a>
+        <a href="#" class="topic">Python</a>
+        <a href="#" class="topic">NodeJS</a
+        ><button class="scroll-btn right" id="scrollRight">▶</button>
+      </div>
+      <div class="main__content"></div>
+    </main>
+  </body>
+  <script src="/scripts/following.js"></script>
+</html>
