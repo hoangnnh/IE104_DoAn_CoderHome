@@ -15,12 +15,33 @@ body {
   margin: 0;
   padding: 0;
 }
+
+p {
+  margin: 0;
+}
+
+
 .post__content,
 .post__footer {
   width: 1000px;
   max-width: 100%;
   margin: 0 auto;
 }
+
+.post__content figure {
+    position: relative;
+  z-index: 1;
+}
+
+.post__content img {
+  margin: 0 auto;  
+
+}
+
+.post__content {
+  text-align: justify;
+}
+
 button {
   padding: 12px 60px;
 }
@@ -96,7 +117,6 @@ button {
   border-radius: 1000px;
   object-fit: contain;
   width: 48x;
-
   height: 48px;
 }
 
