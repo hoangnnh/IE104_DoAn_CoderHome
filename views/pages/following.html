@@ -14,7 +14,7 @@
 
         <a href="#" class="nav__items" data-tab="topic"> Topic </a>
       </nav>
-      <div class="topic__container">
+      <div class="topic__nav">
         <div class="dropdown__container">
           <div class="dropdown__header">
             <div class="dropdown__header-item">Newest</div>
@@ -26,15 +26,21 @@
             <a href="" class="dropdown__item" data-value="Popular">Popular</a>
           </div>
         </div>
-        <hr class="ver__divider" />
-        <button class="scroll-btn left" id="scrollLeft">◀</button>
-        <a href="#" class="topic">CSS</a>
-        <a href="#" class="topic">HTML</a>
-        <a href="#" class="topic">JavaScript</a>
-        <a href="#" class="topic">C++</a>
-        <a href="#" class="topic">Python</a>
-        <a href="#" class="topic">NodeJS</a
-        ><button class="scroll-btn right" id="scrollRight">▶</button>
+        <hr class="divider" />
+        <div class="topic__container">
+          <button class="scroll-btn left" id="scrollLeft">◀</button>
+          <div class="topic__content">
+            <div class="fade fade-left"></div>
+            <a href="#" class="topic active" data-value="css">CSS</a>
+            <a href="#" class="topic" data-value="html">HTML</a>
+            <a href="#" class="topic" data-value="javascript">JavaScript</a>
+            <a href="#" class="topic" data-value="c++">C++</a>
+            <a href="#" class="topic" data-value="python">Python</a>
+            <a href="#" class="topic" data-value="nodejs">NodeJS</a>
+            <div class="fade fade-right"></div>
+          </div>
+          <button class="scroll-btn right" id="scrollRight">▶</button>
+        </div>
       </div>
       <div class="main__content"></div>
     </main>
