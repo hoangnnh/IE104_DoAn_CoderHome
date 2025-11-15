@@ -67,6 +67,8 @@ app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views/pages/register.html"));
 });
 
+// Post Route
+
 app.get("/post/:id", (req, res) => {
   if (req.session.isLoggedIn)
     res.sendFile(path.join(__dirname, "views/pages/post.html"));
@@ -75,6 +77,9 @@ app.get("/post/:id", (req, res) => {
   }
 });
 
+
+// Profile Route
+
 app.get("/profile/:id", (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, "views/pages/profile.html"));
@@ -82,6 +87,17 @@ app.get("/profile/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
 });
+
+
+// Other pages
+
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/pages/about.html"));
+})
+
+app.get("/help", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/pages/help.html"));
+})
 
 // --- Server Startup ---
 app.listen(PORT, () => {

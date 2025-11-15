@@ -36,26 +36,48 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  postedPost: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Post",
-    },
-  ],
-  liked: [
+  postedPosts: [
     {
       type: Schema.Types.ObjectId,
       ref: "Post",
       default: [],
     },
   ],
-  contributors: [
+  likedPost: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+      default: [],
+    },
+  ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+      default: [],
+    }
+  ],
+  readingHistory: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+      default: []
+    }
+  ],
+  followers: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: [],
-    },
+    }
   ],
+  followingAuthors: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      default: [],
+    }
+  ]
 });
 
 module.exports = mongoose.model("User", userSchema);
