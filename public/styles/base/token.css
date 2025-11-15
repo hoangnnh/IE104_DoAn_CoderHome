@@ -101,6 +101,10 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
     /* Post as card-view */
 
+    --z-index-header: 20;
+    --z-index-overlay: 25;
+    --z-index-modal: 30;  
+
     /* Breakpoints */
     /*
         480 > 768 > 1024 > 1280
