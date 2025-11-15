@@ -27,7 +27,9 @@ const headerHTML = `
     <button class=header__notification-btn title=Notifications>
       <img alt="notification icon" src=/images/notification-icon.png>
     </button>
-    <img alt="Your avatar" src="/images/user-avatar.jpg" class=header__avatar>
+    <a id="avatar-link" href="#" aria-label="Profile">
+      <img id="avatar-img" alt="Your avatar" src="/images/user-avatar.jpg" class=header__avatar>
+    </a>
   </div>
 </header>
 `;
@@ -43,7 +45,7 @@ class Header extends HTMLElement {
       const response = await fetch('/current');
       if (!response.ok) {
         if (!['/login', '/register', '/'].includes(location.pathname)) {
-            window.location.href = '/login';
+          window.location.href = '/login';
         }
         return;
       }
@@ -68,11 +70,12 @@ class Header extends HTMLElement {
     this.shadowRoot.getElementById('avatar-img').src = user.profilePicture;
     this.shadowRoot.getElementById('avatar-img').alt = `${user.username}'s avatar`;
 
-    // // Add event listener for the menu button
-    // this.shadowRoot.getElementById('menu-trigger-btn').addEventListener('click', () => {
-    //     // Create and dispatch a custom event that the menu can listen for
-    //     document.dispatchEvent(new CustomEvent('open-menu'));
-    // });
+    // Add event listener for the menu button
+    this.shadowRoot.getElementById('menu-trigger-btn').addEventListener('click', () => {
+      console.log('menu clicked');
+      // Create and dispatch a custom event that the menu can listen for
+      document.dispatchEvent(new CustomEvent('toggle-menu'));
+    });
   }
 }
 
