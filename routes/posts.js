@@ -1,5 +1,5 @@
 // routes/posts.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const postController = require('../controllers/postController');
 const isAuth = require('../middleware/isAuth');

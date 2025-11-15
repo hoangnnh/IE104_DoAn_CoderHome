@@ -1,8 +1,5 @@
 // 1. We get the CSS content for the component
 const headerCSS = `
-<link rel="stylesheet" href="/styles/base/reset.css">
-<link rel="stylesheet" href="/styles/base/fonts.css">
-<link rel="stylesheet" href="/styles/base/token.css">
 <link rel="stylesheet" href="/styles/partials/header.css">
 `;
 
@@ -20,14 +17,16 @@ const headerHTML = `
     </label>
   </div>
   <div class=header__right>
-    <a class=header__write-btn href=/posts/new title=Write>
+    <a class=header__write-btn href=/write title=Write>
       <img alt="write icon" src=/images/write-icon.png>
       <span>Write</span>
     </a>
     <button class=header__notification-btn title=Notifications>
       <img alt="notification icon" src=/images/notification-icon.png>
     </button>
-    <img alt="Your avatar" src="/images/user-avatar.jpg" class=header__avatar>
+    <a id="avatar-link" href="#" aria-label="Profile">
+      <img id="avatar-img" alt="Your avatar" src="/images/user-avatar.jpg" class=header__avatar>
+    </a>
   </div>
 </header>
 `;
@@ -36,43 +35,40 @@ class Header extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+
+    const template = document.createElement('template');
+    template.innerHTML = headerCSS + headerHTML;
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    // Dynamic elements
+    this.avatarLink = this.shadowRoot.getElementById('avatar-link');
+    this.avatarImg = this.shadowRoot.getElementById('avatar-img');
+    this.menuTrigger = this.shadowRoot.getElementById('menu-trigger-btn');
   }
 
   async connectedCallback() {
+    this.shadowRoot.getElementById('menu-trigger-btn').addEventListener('click', () => {
+      document.dispatchEvent(new CustomEvent('toggle-menu'));
+    });
+
+
     try {
       const response = await fetch('/current');
       if (!response.ok) {
         if (!['/login', '/register', '/'].includes(location.pathname)) {
-            window.location.href = '/login';
+          window.location.href = '/login';
         }
         return;
       }
       const user = await response.json();
 
-      this.render(user);
+      this.avatarLink.href = `/profile/${user._id}`;
+      this.avatarImg.src = user.profilePicture;
+      this.avatarImg.alt = `${user.username}'s avatar`;
 
     } catch (error) {
       console.error('Error fetching user for header:', error);
     }
-  }
-
-  render(user) {
-    const template = document.createElement('template');
-    template.innerHTML = headerCSS + headerHTML;
-
-    // Attach the template to the Shadow DOM
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-    // Populate the dynamic parts
-    this.shadowRoot.getElementById('avatar-link').href = `/profile/${user._id}`;
-    this.shadowRoot.getElementById('avatar-img').src = user.profilePicture;
-    this.shadowRoot.getElementById('avatar-img').alt = `${user.username}'s avatar`;
-
-    // // Add event listener for the menu button
-    // this.shadowRoot.getElementById('menu-trigger-btn').addEventListener('click', () => {
-    //     // Create and dispatch a custom event that the menu can listen for
-    //     document.dispatchEvent(new CustomEvent('open-menu'));
-    // });
   }
 }
 

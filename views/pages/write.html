@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write a Post</title>
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/fonts.css">
+  <link rel="stylesheet" href="/styles/base/token.css">
+  <link rel="stylesheet" href="/styles/pages/write.css">
+</head>
+
+<body>
+  <div class="page-container">
+    <header class="header header--write">
+      <nav class="navbar navbar--write">
+        <div class="navbar__group--left">
+          <a href="/" class="logo">
+            <img src="/images/coderhome-logo.png" alt="Coderhome Logo">
+          </a>
+          <span class="navbar__draft-status">Draft in @<span id="username-span">...</span></span>
+        </div>
+
+        <div class="navbar__group--right">
+          <button type="button" class="button button--primary" id="publish-button">
+            Publish
+          </button>
+          <a href="#" class="navbar__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </a>
+          <a id="avatar-link" href="/profile" class="navbar__avatar">
+            <img id="avatar-img" src="/images/default-avatar.png" alt="User Avatar">
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="write-container">
+      <form action="/posts" method="POST" class="post-form">
+        <fieldset class="form-group-meta">
+          <div class="form-field">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" name="title" class="form-control" required placeholder="Your post title...">
+          </div>
+          <div class="form-field">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" name="description" class="form-control" required
+              placeholder="A short, catchy description...">
+          </div>
+          <div class="form-field">
+            <label for="thumbnailUrl" class="form-label">Thumbnail URL</label>
+            <input type="url" id="thumbnailUrl" name="thumbnailUrl" class="form-control"
+              placeholder="https://... (Optional)">
+          </div>
+          <div class="form-field">
+            <label for="tags" class="form-label">Tags</label>
+            <input type="text" id="tags" name="tags" class="form-control"
+              placeholder="nodejs, express, mongo (comma-separated)">
+          </div>
+        </fieldset>
+
+        <!-- 
+              Markdown Editor
+              This is the two-pane section.
+            -->
+        <div class="editor-container">
+          <!-- 1. The Markdown Input -->
+          <div class="editor-pane">
+            <label for="content" class="form-label form-label--pane">Write your post using Markdown</label>
+            <textarea id="content" name="content" class="editor-textarea" required
+              placeholder="## Your Heading..."></textarea>
+          </div>
+
+          <!-- 2. The HTML Preview (not part of the form) -->
+          <div class="preview-pane">
+            <label class="form-label form-label--pane">Live Preview</label>
+            <div id="preview" class="editor-preview"></div>
+          </div>
+        </div>
+
+        <!-- This hidden submit button can be clicked by the header's "Publish" button -->
+        <button type="submit" id="form-submit-button" style="">Submit</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- 
+      Client-Side Libraries
+      We load these at the end for faster page load.
+    -->
+  <!-- 1. Marked.js (converts Markdown to HTML) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- 2. DOMPurify (sanitizes HTML to prevent XSS attacks) -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/dompurify.min.js"></script>
+
+  <!-- 3. Our custom script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Part 1: Header Population & Logic ---
+      const usernameSpan = document.getElementById('username-span');
+      const avatarLink = document.getElementById('avatar-link');
+      const avatarImg = document.getElementById('avatar-img');
+      const publishButton = document.getElementById('publish-button');
+
+      (async function populateHeader() {
+        try {
+          const response = await fetch('/current');
+          if (!response.ok) {
+            window.location.href = '/login';
+            return;
+          }
+          const user = await response.json();
+
+          usernameSpan.textContent = user.username;
+          avatarLink.href = `/profile/${user._id}`;
+          avatarImg.src = user.profilePicture;
+          avatarImg.alt = `${user.username}'s avatar`;
+
+        } catch (error) {
+          console.error('Error fetching user for write header:', error);
+        }
+      })();
+
+      publishButton.addEventListener('click', () => {
+        const form = document.getElementById('post-form');
+        if (form) {
+          const submitButton = form.querySelector('#form-submit-button');
+          if (submitButton) {
+            submitButton.click();
+          }
+        }
+      });
+
+
+      // --- Part 2: Markdown Preview Logic ---
+      const markdownInput = document.getElementById('content');
+      const previewOutput = document.getElementById('preview');
+
+      if (markdownInput && previewOutput) {
+        function updatePreview() {
+          const rawText = markdownInput.value;
+          // Use marked.parse() from the CDN script
+          const rawHtml = marked.parse(rawText);
+          // Use DOMPurify.sanitize() from the CDN script
+          const cleanHtml = DOMPurify.sanitize(rawText ? rawHtml : '');
+          previewOutput.innerHTML = cleanHtml;
+        }
+        markdownInput.addEventListener('input', updatePreview);
+        updatePreview(); // Initial render
+      }
+    });
+  </script>
+</body>
+
+</html>

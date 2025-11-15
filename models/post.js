@@ -11,7 +11,12 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  content: {
+  thumbnailUrl: {
+    type: String,
+    required: false,
+    default: '/images/default-thumbnail.png'
+  },
+  contentHTML: {
     type: String,
     required: true,
   },
@@ -32,11 +37,16 @@ const postSchema = new Schema({
 
   likes: [
     {
-      // <-- An array of users who liked the post
       type: Schema.Types.ObjectId,
       ref: "User",
     },
   ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ]
 });
 
 module.exports = mongoose.model("Post", postSchema);

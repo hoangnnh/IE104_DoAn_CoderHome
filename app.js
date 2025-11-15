@@ -115,17 +115,65 @@
   const livereload = require("livereload");
   const connectLivereload = require("connect-livereload");
 
-  // Bật live reload server
-  const liveReloadServer = livereload.createServer();
-  liveReloadServer.watch(path.join(__dirname, "public"));
-  liveReloadServer.watch(path.join(__dirname, "views"));
+// Post Route
 
-  // Tích hợp middleware vào Express
-  app.use(connectLivereload());
+app.get("/post/:id", (req, res) => {
+  if (req.session.isLoggedIn)
+    res.sendFile(path.join(__dirname, "views/pages/post.html"));
+  else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
 
-  // Khi server reload, gửi lệnh reload browser
-  liveReloadServer.server.once("connection", () => {
-    setTimeout(() => {
-      liveReloadServer.refresh("/");
-    }, 100);
-  });
+
+// Profile Route
+
+app.get("/profile/:id", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/profile.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
+
+
+// Write page
+
+app.get("/write", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/write.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+})
+
+// Other pages
+
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/pages/about.html"));
+})
+
+app.get("/help", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/pages/help.html"));
+})
+
+// --- Server Startup ---
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// ----Them draft ----
+const livereload = require("livereload");
+const connectLivereload = require("connect-livereload");
+
+const liveReloadServer = livereload.createServer();
+liveReloadServer.watch(path.join(__dirname, "public"));
+liveReloadServer.watch(path.join(__dirname, "views"));
+
+app.use(connectLivereload());
+
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 100);
+});

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/following.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="page__title">Following</h1>
+      <nav class="following__nav">
+        <a href="#" class="nav__items active" data-tab="all"> All </a>
+
+        <a href="#" class="nav__items" data-tab="topic"> Topic </a>
+      </nav>
+      <div class="topic__nav">
+        <div class="dropdown__container">
+          <div class="dropdown__header">
+            <div class="dropdown__header-item">Newest</div>
+            <span class="arrow"></span>
+          </div>
+          <div class="dropdown__selection">
+            <a href="" class="dropdown__item" data-value="Newest">Newest</a>
+            <a href="" class="dropdown__item" data-value="Oldest">Oldest</a>
+            <a href="" class="dropdown__item" data-value="Popular">Popular</a>
+          </div>
+        </div>
+        <hr class="divider" />
+        <div class="topic__container">
+          <button class="scroll-btn left" id="scrollLeft">◀</button>
+          <div class="topic__content">
+            <div class="fade fade-left"></div>
+            <a href="#" class="topic active" data-value="css">CSS</a>
+            <a href="#" class="topic" data-value="html">HTML</a>
+            <a href="#" class="topic" data-value="javascript">JavaScript</a>
+            <a href="#" class="topic" data-value="c++">C++</a>
+            <a href="#" class="topic" data-value="python">Python</a>
+            <a href="#" class="topic" data-value="nodejs">NodeJS</a>
+            <div class="fade fade-right"></div>
+          </div>
+          <button class="scroll-btn right" id="scrollRight">▶</button>
+        </div>
+      </div>
+      <div class="main__content"></div>
+    </main>
+  </body>
+  <script src="/scripts/following.js"></script>
+</html>

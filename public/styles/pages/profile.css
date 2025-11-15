@@ -30,12 +30,12 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: minmax(0, 700px) minmax(0, 300px);
   grid-template-areas:
     "main sidebar"
     "main sidebar"
     "main sidebar";
-  max-width: 95%;
+  width: 90%;
   grid-column-gap: 2rem;
   justify-content: space-evenly;
   margin: 1.25rem;
@@ -44,7 +44,7 @@ body {
 .user__main {
   display: flex;
   grid-area: main;
-  width: 95%;
+  width: 100%;
   flex-direction: column;
   gap: 2.5rem;
 }
@@ -72,6 +72,7 @@ body {
   display: flex;
   height: auto;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1.25rem;
   padding: 0.5rem;
@@ -281,6 +282,22 @@ body {
 .comment__content {
   font-size: 1rem;
 }
+/* ---- Bio ----- */
+.add-bio {
+  display: flex;
+  padding: 0.75rem 2.5rem;
+  width: fit-content;
+  border-radius: 1.25rem;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+}
+.add-bio:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
+}
 /* ---- Side Profile ---- */
 
 .side-profile {
@@ -288,7 +305,7 @@ body {
   grid-area: sidebar;
   flex-direction: column;
   gap: 1.25rem;
-  width: 90%;
+  width: 100%;
   border-radius: 1.25rem;
 }
 .side-profile__more {

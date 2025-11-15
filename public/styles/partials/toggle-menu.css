@@ -7,10 +7,14 @@
     background-color: var(--color-surface);
     box-shadow: var(--shadow-md);
     z-index: var(--z-index-modal, 30);
-    padding: var(--space-md);
-    
+    padding: 0;
+
     /* Hidden by default */
     transform: translateX(-100%);
+}
+
+.toggle-menu.menu-ready {
+    /* Only apply transition after JS confirms page is loaded */
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -19,90 +23,66 @@
     transform: translateX(0);
 }
 
-.toggle-menu__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: var(--space-md);
-}
-
-.toggle-menu__title {
-    font-family: var(--font-family-heading);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-lg);
-    color: var(--color-text-heading);
-}
-
-.toggle-menu__close-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--color-text-muted);
-    padding: var(--space-xs);
-}
-.toggle-menu__close-btn .icon {
-    width: 24px;
-    height: 24px;
-}
-.toggle-menu__close-btn:hover {
-    color: var(--color-text-body);
-}
-
 .toggle-menu__nav {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: 0;
+    padding-top: var(--header-height);
 }
 
 .toggle-menu__item {
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-lg);
     border-radius: var(--border-radius-md);
     text-decoration: none;
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-md);
+    font-family: var(--font-family-heading);
+    font-size: calc(1.05*var(--font-size-md));
     color: var(--color-text-body);
     font-weight: var(--font-weight-medium);
 }
+
 .toggle-menu__item .icon {
     color: var(--color-text-muted);
+    width: calc(0.6 * (var(--icon-base-width)));
 }
 
 .toggle-menu__item:hover {
-    background-color: var(--color-background);
+    background-color: var(--color-gray-lightest);
 }
 
 .toggle-menu__item.is-active {
     background-color: var(--color-gray-lightest);
     color: var(--color-text-heading);
+    font-weight: var(--font-weight-semibold);
 }
+
 .toggle-menu__item.is-active .icon {
     color: var(--color-text-heading);
 }
 
 .toggle-menu__divider {
     border: none;
-    border-top: 1px solid var(--color-border);
+    border-top: 2px solid var(--color-border);
     margin: var(--space-md) 0;
 }
 
-/* --- Overlay --- */
 .toggle-menu__overlay {
     position: fixed;
-    inset: 0; /* (top: 0, right: 0, bottom: 0, left: 0) */
-    background-color: rgba(0, 0, 0, 0.4);
+    inset: 0;
+    /* (top: 0, right: 0, bottom: 0, left: 0) */
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: var(--z-index-overlay, 25);
 
     /* Hidden by default */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear;
 }
 
 .toggle-menu__overlay.is-active {
-    /* Shown when active */
     opacity: 1;
     visibility: visible;
+    transition: opacity 0.3s ease;
 }

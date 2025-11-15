@@ -130,16 +130,36 @@ async function loadComment() {
 async function loadBio() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
+  const res2 = await fetch(`/current/`);
+  const currentUser = await res2.json();
   const bioContainer = document.querySelector(".profile-content");
-  if (user.bio && user.bio.trim() !== "") {
-    bioContainer.innerHTML = `
+
+  if (user._id == currentUser._id) {
+    if (user.bio && user.bio.trim() !== "") {
+      bioContainer.innerHTML = `
+      <hr class="divider">
+  <p class="user__bio">${user.bio}</p>
+  <button class="add-bio">Add Bio</button>
+  `;
+    } else {
+      bioContainer.innerHTML = `
+  <hr class="divider">
+  <p class="user__no-po-cm-bio">User has no bio yet!!</p>
+  <button class="add-bio">Add Bio</button>
+  `;
+    }
+  } else {
+    if (user.bio && user.bio.trim() !== "") {
+      bioContainer.innerHTML = `
+      <hr class="divider">
   <p class="user__bio">${user.bio}</p>
   `;
-  } else {
-    bioContainer.innerHTML = `
+    } else {
+      bioContainer.innerHTML = `
     <hr class="divider">
   <p class="user__no-po-cm-bio">User has no bio yet!!</p>
   `;
+    }
   }
 }
 
@@ -234,7 +254,7 @@ responsive(mq);
 // Event
 
 const tabs = document.querySelectorAll(".profile-nav__items");
-const contents = document.querySelectorAll(".profile-content");
+const contents = document.querySelector(".profile-content");
 
 // Khi bấm vào mỗi tab
 

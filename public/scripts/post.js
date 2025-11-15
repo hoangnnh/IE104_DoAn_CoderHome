@@ -97,13 +97,13 @@ async function loadPostID() {
   postAboutAuthor.innerHTML = `
     <img src="${post.author.profilePicture}" alt="avatar" class="post__author-img"/>
         <div class="post__author-content">
-            <p class="post__author-writenby">Writen by ${post.author.username}</p>
+            <a href="/profile/${post.author._id}" class="post__author-writenby">Writen by ${post.author.username}</a>
             <p class="post__author-bio">${post.author.bio}</p>
         </div>
     <button class="post__author-follow"><span>Follow</span></button>
     `;
 
-    postResponse.innerHTML = `
+  postResponse.innerHTML = `
     <p class="post__respones-title">Responses</p>
                     <a href="/profile/${currentUser._id}" class="user__info">
                         <img src="${currentUser.profilePicture}" alt="avatar" class="user__avatar" />
