@@ -1,5 +1,3 @@
-const userId = location.pathname.split("/").pop();
-
 // Function
 function filterPostsByTag(postsArray, targetTag) {
   const normalizedTag = targetTag.toLowerCase();

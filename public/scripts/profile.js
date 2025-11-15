@@ -35,8 +35,8 @@ async function loadPostedPost() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
   const postedPostContainer = document.querySelector(".profile-content");
-  if (user.postedPost && user.postedPost.length > 0) {
-    postedPostContainer.innerHTML = user.postedPost
+  if (user.postedPosts && user.postedPosts.length > 0) {
+    postedPostContainer.innerHTML = user.postedPosts
       .map(
         (post) =>
           ` 
@@ -105,9 +105,7 @@ async function loadComment() {
         <hr class="divider"/>
     <div class="comment__container">
       <div class="comment__header">
-          <a href="/post/${
-            comment.post?._id || "#"
-          }" class="post__title">${
+          <a href="/post/${comment.post?._id || "#"}" class="post__title">${
           comment.post?.title || "Post not found!"
         }</a>
           <p class="post__date">${new Date(
@@ -165,6 +163,8 @@ async function loadBio() {
 
 async function loadUserMoreInfo() {
   const res = await fetch(`/profiles/${userId}`);
+  const res2 = await fetch(`/comments/u/${userId}`);
+  const comments = await res2.json();
   const user = await res.json();
   const moreInfoContainer = document.querySelector(".user__more-info");
 
@@ -181,7 +181,7 @@ async function loadUserMoreInfo() {
     </div>
     <div class="more-info__details">
       <div class="more-info__follower">
-        <!-- ${user.follow} -->
+        <!-- ${user.followers?.length || "0"} -->
         <p>2</p>
         <p>Follower</p>
       </div>
@@ -192,15 +192,15 @@ async function loadUserMoreInfo() {
           <p>CoderHome Age</p>
         </div>
         <div class="more-info__items">
-          <p>${user.contributors.length}</p>
-          <p>Contributors</p>
+          <p>${user.followingAuthors?.length || "0"}</p>
+          <p>Following</p>
         </div>
         <div class="more-info__items">
-          <p>0*</p>
-          <p>Visit</p>
+          <p>${comments.length}</p>
+          <p>Comments</p>
         </div>
         <div class="more-info__items">
-          <p>${user.liked.length}</p>
+          <p>${user.likedPost?.length || "0"}</p>
           <p>Likes</p>
         </div>
       </div>
