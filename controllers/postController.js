@@ -37,7 +37,7 @@ async function getPost(req, res) {
     const postId = req.params.id;
     const post = await Post.findById(postId).populate({
       path: "author",
-      select: "username profilePicture bio",
+      select: "_id username profilePicture bio",
     });
     if (!post) {
       return res.status(404).json({ message: "Post Not Found" });
@@ -63,9 +63,27 @@ async function getAllPosts(req, res) {
   }
 }
 
+async function getStats (req, res) {
+  try {
+    const stats = await Post.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]);
+    res.json(stats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getNewPost,
   createPost,
   getPost,
   getAllPosts,
+  getStats
 };

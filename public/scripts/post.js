@@ -105,10 +105,10 @@ async function loadPostID() {
 
   postResponse.innerHTML = `
     <p class="post__respones-title">Responses</p>
-                    <div class="user__info">
+                    <a href="/profile/${currentUser._id}" class="user__info">
                         <img src="${currentUser.profilePicture}" alt="avatar" class="user__avatar" />
                         <p class="user__name"> ${currentUser.username}</p>
-                    </div>
+                    </a>
                         <form class="response-form">
                             <div class="response-input">
                                 <textarea id="response-content" placeholder="What are your thoughts?"></textarea>
@@ -157,7 +157,7 @@ async function loadPostID() {
     e.preventDefault();
     const content = textarea.value.trim();
 
-    await fetch("/comment/", {
+    await fetch("/comments/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

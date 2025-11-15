@@ -1,4 +1,19 @@
-async function loadPost() {
+const coderHome = document.querySelector(".coderhome");
+const devTo = document.querySelector(".devto");
+
+async function loadCoderhomePost() {
+  
+  coderHome.style.cssText = `
+    border-bottom: 2px solid #f2f2f2;
+    font-weight: bold;
+  `;
+
+  devTo.style.cssText = `
+    border-bottom: 0;
+    font-weight: normal;
+  `;
+
+
   const res = await fetch("/posts/");
   const posts = await res.json();
 
@@ -39,7 +54,7 @@ async function loadPost() {
                     </div>
                 </div>
             </div>
-            <img src="/images/post-thumbnail.png" class="post__img"/>
+            <img src="${p.thumbnailUrl}" class="post__img"/>
         </div>
         ${index !== posts.length - 1 ? '<hr class="divider">' : ""}
         </article>
@@ -47,4 +62,74 @@ async function loadPost() {
     )
     .join("");
 }
-loadPost();
+loadCoderhomePost();
+
+
+
+async function loadDevToPost(req, res) {
+    devTo.style.cssText = `
+    border-bottom: 2px solid #f2f2f2;
+    font-weight: bold;
+  `;
+
+  coderHome.style.cssText = `
+    border-bottom: 0;
+    font-weight: normal;
+  `;
+
+  try {
+    // Fetch 100 articles from Dev.to API
+    const res = await fetch("https://dev.to/api/articles?per_page=100");
+    const posts = await res.json();
+
+    const container = document.querySelector(".post");
+
+    container.innerHTML = posts
+      .map(
+        (p, index) =>
+          ` <article class="post__card">
+              <div class="post__author">
+                  <img src="${p.user.profile_image}" alt="author" class="post__author-img"/>
+                  <a href="https://dev.to/${p.user.username}" target="_blank" class="post__author-name">
+                    ${p.user.name || p.user.username}
+                  </a>
+              </div>
+
+              <div class="post__left">
+                <div class="post__left-text">
+                  <div class="post__content">
+                      <a href="${p.url}" target="_blank" class="post__content-title">${p.title}</a>
+                      <p class="post__content-overview">${p.description || ""}</p>
+                  </div>
+                  <div class="post__interact">
+                      <div class="post__interact-meta">
+                          <span class="created_date">${new Date(p.published_at).toLocaleDateString("vi-VN", {
+                            day: "2-digit",
+                            month: "2-digit",
+                          })}</span>
+                          <span><img src="/images/show-post-img/Heart.svg" class="react-icon-meta" style="display: inline;"/> ${p.public_reactions_count}</span>
+                          <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> ${p.comments_count}</span>
+                      </div>
+                      <div class="post__interact-action">
+                          <button class="icon-btn"><img src="/images/minus-circle-outline.svg" class="react-icon"/></button>
+                          <button class="icon-btn"><img src="/images/bookmark-outline.svg" class="react-icon"/></button>
+                          <button class="icon-btn"><img src="/images/dots-horizontal.svg" class="react-icon"/></button>
+                      </div>
+                  </div>
+                </div>
+
+                <img src="${p.cover_image || "/images/default-thumb.webp"}" class="post__img"/>
+              </div>
+
+              ${index !== posts.length - 1 ? '<hr class="divider">' : ""}
+            </article>
+          `
+      )
+      .join("");
+  } catch (err) {
+    console.error("Error fetching Dev.to posts:", err);
+  }
+}
+
+coderHome.addEventListener("click", loadCoderhomePost);
+devTo.addEventListener("click", loadDevToPost);

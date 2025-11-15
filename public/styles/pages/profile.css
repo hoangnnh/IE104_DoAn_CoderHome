@@ -8,6 +8,10 @@
   src: url("/fonts/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf");
 }
 
+* {
+  font-family: "Lora", serif;
+}
+
 nav a,
 button {
   font-family: "RobotoCondensed";
@@ -457,7 +461,6 @@ body {
     max-width: 900px;
     margin: 0 auto;
     justify-items: center;
-
     gap: 5rem;
   }
   .user__main {
@@ -468,6 +471,11 @@ body {
     max-width: 90%;
     box-sizing: border-box;
   }
+
+  .profile-nav {
+    justify-content: center;
+  }
+
   .side-profile {
     display: flex;
     max-height: 6rem;
@@ -493,6 +501,7 @@ body {
     height: 6rem;
     cursor: pointer;
   }
+
   .side-profile span {
     display: flex;
     height: 6rem;
@@ -550,10 +559,7 @@ body {
   .more-info__title {
     display: none;
   }
-  .more-info__name {
-  }
-  .more-info__share {
-  }
+
   .more-info__details {
     display: flex;
     flex-direction: row;

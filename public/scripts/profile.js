@@ -96,7 +96,7 @@ async function loadComment() {
   const res = await fetch(`/comments/u/${userId}`);
   const comments = await res.json();
   const commentsContainer = document.querySelector(".profile-content");
-  console.log("Loaded comments:", comments); // kiểm tra dữ liệu
+  console.log("Loaded comments:", comments);
 
   if (comments && comments.length > 0) {
     commentsContainer.innerHTML = comments
@@ -107,7 +107,7 @@ async function loadComment() {
       <div class="comment__header">
           <a href="/post/${
             comment.post?._id || "#"
-          }" class="post__title">Post: ${
+          }" class="post__title">${
           comment.post?.title || "Post not found!"
         }</a>
           <p class="post__date">${new Date(
