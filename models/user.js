@@ -71,6 +71,12 @@ const userSchema = new Schema({
       default: [],
     }
   ],
+
+  role: {
+    type: String, 
+    default: "User"
+  },
+  
   followingAuthors: [
     {
       type: Schema.Types.ObjectId,
