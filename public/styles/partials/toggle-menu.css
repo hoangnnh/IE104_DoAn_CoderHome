@@ -11,6 +11,10 @@
 
     /* Hidden by default */
     transform: translateX(-100%);
+}
+
+.toggle-menu.menu-ready {
+    /* Only apply transition after JS confirms page is loaded */
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -30,18 +34,18 @@
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-lg);
     border-radius: var(--border-radius-md);
     text-decoration: none;
     font-family: var(--font-family-heading);
-    font-size: var(--font-size-md);
+    font-size: calc(1.05*var(--font-size-md));
     color: var(--color-text-body);
     font-weight: var(--font-weight-medium);
 }
 
 .toggle-menu__item .icon {
     color: var(--color-text-muted);
-    width: calc(0.5 * (var(--icon-base-width)));
+    width: calc(0.6 * (var(--icon-base-width)));
 }
 
 .toggle-menu__item:hover {

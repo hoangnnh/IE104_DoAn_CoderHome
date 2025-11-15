@@ -89,6 +89,16 @@ app.get("/profile/:id", (req, res) => {
 });
 
 
+// Write page
+
+app.get("/write", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/write.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+})
+
 // Other pages
 
 app.get("/about", (req, res) => {

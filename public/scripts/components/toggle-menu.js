@@ -1,5 +1,4 @@
 const menuCSS = `
-<link rel="stylesheet" href="/styles/base/token.css">
 <link rel="stylesheet" href="/styles/partials/toggle-menu.css">
 `;
 
@@ -67,6 +66,12 @@ class ToggleMenu extends HTMLElement {
         } catch (e) {
             console.error("Could not set profile link in menu", e);
         }
+
+        // Wait for the browser to load before loading toggle menu animation
+        setTimeout(() => {
+        this.menuElement.classList.add('menu-ready');
+        this.overlayElement.classList.add('menu-ready');
+    }, 0);
     }
 
     open() {

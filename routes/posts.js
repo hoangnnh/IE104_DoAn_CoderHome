@@ -9,10 +9,6 @@ const isAuth = require("../middleware/isAuth"); // Import your auth guard
 // (We will set this prefix in app.js)
 // -----------------------------------------------------------------
 
-// GET /posts/new
-// Show the form to create a new post. Must be logged in.
-router.get("/new", isAuth, postController.getNewPost);
-
 router.get("/", isAuth, postController.getAllPosts);
 
 // POST /posts
