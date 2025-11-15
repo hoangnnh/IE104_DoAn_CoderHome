@@ -104,17 +104,6 @@
     }
   })
 
-   
-
-  // --- Server Startup ---
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
-
-  // ----Them draft ----
-  const livereload = require("livereload");
-  const connectLivereload = require("connect-livereload");
-
 // Post Route
 
 app.get("/post/:id", (req, res) => {
