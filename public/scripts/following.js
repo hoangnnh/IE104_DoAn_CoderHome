@@ -14,7 +14,8 @@ function filterPostsByTag(postsArray, targetTag) {
   });
 }
 
-async function loadNav(params) {}
+async function loadTopicNav() {}
+
 async function loadPost() {
   const res = await fetch(`/posts/`);
   const posts = await res.json();
@@ -130,26 +131,54 @@ async function loadPostByTopic(topic) {
   }
 }
 
-// Call Function
-loadPost();
-
 // Responsive
 
-// Event
+// Const
 const btnLeft = document.getElementById("scrollLeft");
 const btnRight = document.getElementById("scrollRight");
 const dropdownHeader = document.querySelector(".dropdown__header");
 const dropdownHeaderItem = document.querySelector(".dropdown__header-item");
+const arrow = document.querySelector(".arrow");
 const selection = document.querySelector(".dropdown__selection");
 const dropdownItems = document.querySelectorAll(".dropdown__item");
 const dropdown = document.querySelector(".dropdown__container");
+const tabs = document.querySelectorAll(".nav__items");
+const container = document.querySelector(".main__content");
+const topicContainer = document.querySelector(".topic__nav");
+const topicContent = document.querySelector(".topic__content");
+const topics = document.querySelectorAll(".topic");
+const fadeLeft = document.querySelector(".fade-left");
+const fadeRight = document.querySelector(".fade-right");
+//
+//Event
 
-//
-//
+// Khi bấm vào mỗi tab
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", async function (e) {
+    e.preventDefault();
+
+    tabs.forEach((t) => t.classList.remove("active"));
+    this.classList.add("active");
+
+    const type = this.dataset.tab;
+
+    if (type === "all") {
+      loadPost();
+      topicContainer.classList.remove("active");
+    } else if (type === "topic") {
+      // loadTopicNav();
+      // loadPostByTopic();
+      topicContainer.classList.add("active");
+      updateArrowsAndFade();
+    }
+  });
+});
 
 dropdownHeader.addEventListener("click", (e) => {
   e.preventDefault();
   dropdown.classList.toggle("active");
+  arrow.classList.toggle("active");
 });
 dropdownItems.forEach((item) => {
   item.addEventListener("click", (e) => {
@@ -162,21 +191,50 @@ dropdownItems.forEach((item) => {
 });
 
 // --------Test--------
-// function updateArrows() {
-//   const scrollLeft = nav.scrollLeft;
-//   const maxScroll = nav.scrollWidth - nav.clientWidth;
+function updateArrowsAndFade() {
+  const scrollLeft = topicContent.scrollLeft;
+  const maxScroll = topicContent.scrollWidth - topicContent.clientWidth;
 
-//   btnLeft.style.display = scrollLeft > 5 ? "block" : "none";
-//   btnRight.style.display = scrollLeft < maxScroll - 5 ? "block" : "none";
-// }
+  if (scrollLeft > 5) {
+    btnLeft.style.display = "block";
+    fadeLeft.style.display = "block";
+  } else {
+    btnLeft.style.display = "none";
+    fadeLeft.style.display = "none";
+  }
+  if (scrollLeft < maxScroll - 5) {
+    btnRight.style.display = "block";
+    fadeRight.style.display = "block";
+  } else {
+    btnRight.style.display = "none";
+    fadeRight.style.display = "none";
+  }
+}
 
-// btnLeft.addEventListener("click", () => {
-//   nav.scrollBy({ left: -150, behavior: "smooth" });
-// });
-// btnRight.addEventListener("click", () => {
-//   nav.scrollBy({ left: 150, behavior: "smooth" });
-// });
+btnLeft.addEventListener("click", () => {
+  topicContent.scrollBy({ left: -200, behavior: "smooth" });
+});
+btnRight.addEventListener("click", () => {
+  topicContent.scrollBy({ left: 200, behavior: "smooth" });
+});
 
-// nav.addEventListener("scroll", updateArrows);
-// window.addEventListener("resize", updateArrows);
-// updateArrows();
+topicContent.addEventListener("scroll", updateArrowsAndFade);
+window.addEventListener("resize", updateArrowsAndFade);
+
+topics.forEach((topic) => {
+  topic.addEventListener("click", async function (e) {
+    e.preventDefault();
+
+    topics.forEach((t) => t.classList.remove("active"));
+    this.classList.add("active");
+
+    const type = this.dataset.tab;
+
+    loadPostByTopic(type);
+    updateArrows();
+  });
+});
+
+// Call Function
+loadPost();
+updateArrowsAndFade();
