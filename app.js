@@ -143,11 +143,6 @@ app.get("/help", (req, res) => {
   res.sendFile(path.join(__dirname, "views/pages/help.html"));
 });
 
-// --- Server Startup ---
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
 // ----Them draft ----
 const livereload = require("livereload");
 const connectLivereload = require("connect-livereload");
