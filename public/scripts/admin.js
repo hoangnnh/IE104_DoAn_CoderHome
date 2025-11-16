@@ -125,7 +125,7 @@ async function loadManagePosts() {
                         <div class="table__cell action">
                             <button class="approve-btn">
                                 <img src="/images/check-outline.svg" alt="approve icon">
-                                <p>Approved</p>
+                                <p>Approve</p>
                             </button>
                             <button class="delete-btn">
                                 <img src="/images/trash-can-outline.svg" alt="delete icon">
