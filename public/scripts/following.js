@@ -165,13 +165,14 @@ tabs.forEach((tab) => {
       loadPost();
       topicContainer.classList.remove("active");
     } else if (type === "topic") {
-      // loadTopicNav();
-      // loadPostByTopic();
+      const activeTopic = document.querySelector(".topic.active");
+      loadPostByTopic(activeTopic.dataset.value);
       topicContainer.classList.add("active");
       updateArrowsAndFade();
     }
   });
 });
+
 //Dropdown
 dropdownHeader.addEventListener("click", (e) => {
   e.preventDefault();
