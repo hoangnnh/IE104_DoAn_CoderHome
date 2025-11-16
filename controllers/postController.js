@@ -10,7 +10,7 @@ function getNewPost(req, res) {
 
 async function createPost(req, res) {
   try {
-    const { title, description, thumbnailUrl, tags, content } = req.body;
+    const { title, description, thumbnailUrl, tags, contentHTML } = req.body;
     const authorId = req.session.userId;
     const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()) : [];
 
@@ -18,7 +18,7 @@ async function createPost(req, res) {
       title: title,
       description: description,
       thumbnailUrl: thumbnailUrl || "/images/default-thumbnail.png",
-      contentHTML: content,
+      contentHTML: contentHTML,
       category: req.body.category || "General",
       tags: tagsArray,
       author: authorId,
@@ -63,16 +63,16 @@ async function getAllPosts(req, res) {
   }
 }
 
-async function getStats (req, res) {
+async function getStats(req, res) {
   try {
     const stats = await Post.aggregate([
       {
         $group: {
           _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-          count: { $sum: 1 }
-        }
+          count: { $sum: 1 },
+        },
       },
-      { $sort: { _id: 1 } }
+      { $sort: { _id: 1 } },
     ]);
     res.json(stats);
   } catch (err) {
@@ -85,5 +85,5 @@ module.exports = {
   createPost,
   getPost,
   getAllPosts,
-  getStats
+  getStats,
 };

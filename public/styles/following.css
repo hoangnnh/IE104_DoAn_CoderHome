@@ -39,7 +39,7 @@ body {
   display: flex;
   padding: 0.75rem 2.5rem;
   background-color: #f2f2f2;
-  border: 3px solid #f2f2f2;
+  border: 2px solid #f2f2f2;
   border-radius: 2rem;
   transition: all 0.3s ease;
 }
@@ -86,14 +86,7 @@ body {
   height: 2.5rem;
   border-radius: 2rem;
 }
-/* .dropdown__container.active .dropdown__header {
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
-}
-.dropdown__container.active .dropdown__header:hover {
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
-} */
+
 .dropdown__header:hover {
   cursor: pointer;
 }
@@ -207,12 +200,7 @@ body {
   border-radius: 2rem;
   z-index: 2;
 }
-/* .topic:first-child {
-  margin-left: 1rem;
-}
-.topic:last-child {
-  margin-right: 1rem;
-} */
+
 .topic:hover {
   cursor: pointer;
 }
