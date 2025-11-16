@@ -147,6 +147,7 @@ const topicContent = document.querySelector(".topic__content");
 const topics = document.querySelectorAll(".topic");
 const fadeLeft = document.querySelector(".fade-left");
 const fadeRight = document.querySelector(".fade-right");
+const scrollBtn = document.querySelector(".scroll-top");
 //
 //Event
 
@@ -232,6 +233,22 @@ topics.forEach((topic) => {
 
     loadPostByTopic(type);
     updateArrows();
+  });
+});
+// Scroll top
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    scrollBtn.style.display = "block";
+  } else {
+    scrollBtn.style.display = "none";
+  }
+});
+
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
   });
 });
 
