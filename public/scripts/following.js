@@ -12,7 +12,7 @@ function filterPostsByTag(postsArray, targetTag) {
   });
 }
 
-async function loadTopicNav() {}
+// async function loadTopicNav() {}
 
 async function loadPost() {
   const res = await fetch(`/posts/`);
@@ -69,7 +69,7 @@ async function loadPost() {
 }
 async function loadPostByTopic(topic) {
   const res = await fetch("/posts/");
-  const posts = res.json();
+  const posts = await res.json();
   const filteredPosts = filterPostsByTag(posts, topic);
   const container = document.querySelector(".main__content");
 
@@ -172,7 +172,7 @@ tabs.forEach((tab) => {
     }
   });
 });
-
+//Dropdown
 dropdownHeader.addEventListener("click", (e) => {
   e.preventDefault();
   dropdown.classList.toggle("active");
@@ -188,7 +188,7 @@ dropdownItems.forEach((item) => {
   });
 });
 
-// --------Test--------
+// --------Topic arrow--------
 function updateArrowsAndFade() {
   const scrollLeft = topicContent.scrollLeft;
   const maxScroll = topicContent.scrollWidth - topicContent.clientWidth;
@@ -219,6 +219,7 @@ btnRight.addEventListener("click", () => {
 topicContent.addEventListener("scroll", updateArrowsAndFade);
 window.addEventListener("resize", updateArrowsAndFade);
 
+// load Topic
 topics.forEach((topic) => {
   topic.addEventListener("click", async function (e) {
     e.preventDefault();
@@ -226,7 +227,7 @@ topics.forEach((topic) => {
     topics.forEach((t) => t.classList.remove("active"));
     this.classList.add("active");
 
-    const type = this.dataset.tab;
+    const type = this.dataset.value;
 
     loadPostByTopic(type);
     updateArrows();
