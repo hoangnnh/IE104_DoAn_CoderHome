@@ -27,7 +27,7 @@ async function loadComment() {
                         <img src="/images/show-post-img/More action.svg" alt="more action button">
                     </button>
                 </div>
-                <p class="comment__content">${item.content}</p>
+                <div class="comment__content">${item.content}</div>
             </div>
             <hr class="post__divider"/>
         </li>
