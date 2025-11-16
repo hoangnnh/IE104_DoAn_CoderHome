@@ -35,8 +35,8 @@ async function getCommentByPostID(req, res) {
 async function getAllComments(req, res) {
   try {
     const comments = await Comment.find()
-    .populate("post", "title")
-    .populate("author", "username");
+      .populate("post", "title")
+      .populate("author", "username");
     res.json(comments);
   } catch (err) {
     console.error("Get Comments Error:", err);
@@ -49,7 +49,8 @@ async function getCommentByUserID(req, res) {
     const userId = req.params.id;
     const comments = await Comment.find({ author: userId })
       .populate({ path: "author", select: "_id username profilePicture" })
-      .populate({ path: "post", select: "title" });
+      .populate({ path: "post", select: "title" })
+      .sort({ createdAt: -1 });
     res.json(comments);
     console.log("Get User Comments Success!", comments);
   } catch (err) {
@@ -57,4 +58,9 @@ async function getCommentByUserID(req, res) {
     res.status(500).json({ message: "Server Error" });
   }
 }
-module.exports = { addComment, getCommentByPostID, getCommentByUserID, getAllComments };
+module.exports = {
+  addComment,
+  getCommentByPostID,
+  getCommentByUserID,
+  getAllComments,
+};
