@@ -197,7 +197,8 @@ li:hover {
     cursor: pointer;
 }
 
-.heart:active {
+.heart.active {
+    width: 14px;
     filter: brightness(0) saturate(100%) invert(14%) sepia(90%) saturate(4000%) hue-rotate(-5deg);
 }
 

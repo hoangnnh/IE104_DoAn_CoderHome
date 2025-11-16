@@ -61,6 +61,14 @@ async function loadCoderhomePost() {
     `
     )
     .join("");
+    document.querySelectorAll(".heart").forEach(item => {
+      item.addEventListener("click", () => {
+        if (item.classList.contains("active")) {
+          item.classList.remove("active");
+        }
+        else item.classList.add("active");
+      });
+    })
 }
 loadCoderhomePost(); // Goi lan dau khi truy cap trang index.html
 
