@@ -2,6 +2,13 @@
 const Post = require("../models/post");
 const User = require("../models/user");
 
+const { marked } = require('marked')
+const createDomPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = new JSDOM('').window;
+const DOMPurify = createDomPurify(window);
+
 function getNewPost(req, res) {
   res.render("pages/new-post", {
     pageTitle: "Create New Post",
@@ -10,15 +17,21 @@ function getNewPost(req, res) {
 
 async function createPost(req, res) {
   try {
-    const { title, description, thumbnailUrl, tags, contentHTML } = req.body;
+    const { title, description, thumbnailUrl, tags, content } = req.body;
     const authorId = req.session.userId;
     const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()) : [];
+
+    let cleanHTML = '';
+    if (content) {
+      const rawHTML = marked.parse(content);
+      cleanHTML = DOMPurify.sanitize(rawHTML);
+    }
 
     const post = new Post({
       title: title,
       description: description,
       thumbnailUrl: thumbnailUrl || "/images/default-thumbnail.png",
-      contentHTML: contentHTML,
+      contentHTML: cleanHTML,
       category: req.body.category || "General",
       tags: tagsArray,
       author: authorId,
@@ -26,7 +39,7 @@ async function createPost(req, res) {
 
     const savedPost = await post.save();
 
-    res.redirect(`/posts/${savedPost._id}`);
+    res.redirect(`/post/${savedPost._id}`);
   } catch (err) {
     console.error("Create Post Error:", err);
   }
