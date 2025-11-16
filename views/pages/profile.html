@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/base/reset.css">
+    <link rel="stylesheet" href="/styles/base/token.css">
+    <link rel="stylesheet" href="/styles/base/fonts.css">
     <link rel="stylesheet" href="/styles/pages/profile.css" />
     <title>Profile</title>
   </head>
   <!--  -->
   <body>
+    <coderhome-header></coderhome-header>
+    <toggle-menu></toggle-menu>
+    <toggle-avatar-option></toggle-avatar-option>
     <main class="container">
       <section class="user__main">
         <div class="user__info"></div>
@@ -32,6 +38,7 @@
         <div class="user__social-links"></div>
       </aside>
     </main>
+    <script type="module" src="/scripts/main.js"></script>
     <script src="/scripts/profile.js"></script>
   </body>
 </html>

@@ -4,9 +4,17 @@ const managePostsBtn = document.querySelector(".manage-posts");
 const dashboardIcon = document.querySelector(".dashboard-icon");
 const managePostsIcon = document.querySelector(".manage-posts-icon");
 const manageUsersIcon = document.querySelector(".manage-users-icon");
-
+const modalDelete = document.querySelector(".modal__delete");
+const overlay = document.querySelector(".overlay");
+const submitBtn = document.querySelector(".submit-btn");
+const cancelBtn = document.querySelector(".cancel-btn");
 const mainContent = document.querySelector(".main__content");
 
+
+cancelBtn.addEventListener("click", () => {
+    modalDelete.classList.remove("active");
+    overlay.classList.remove("active");
+});
 
 async function loadManageUsers() {
     const res = await fetch("/profiles/");
@@ -20,13 +28,13 @@ async function loadManageUsers() {
             <div class="main__list">
                 <div class="main__list-header">
                     <p class="list-title">User List</p>
-                    <div class="search">
+                    <label class="search">
                         <img src="/images/magnify.svg" alt="magnify icon" class="search-img">
-                        <p>Search User</p>
-                    </div>
+                        <input placeholder="Search User"></input>
+                    </label>
                 </div>
                 <div class="main__list-content">
-                    <div class="table__row">
+                    <div class="table__row-user">
                         <div class="table__row-header">No</div>
                         <div class="table__row-header">Profile</div>
                         <div class="table__row-header">Email</div>
@@ -39,7 +47,7 @@ async function loadManageUsers() {
     const mainListContent = document.querySelector(".main__list-content");
     const firstTableRow = mainListContent.innerHTML;
     const content = users.map((u, index) => `
-                    <div class="table__row">
+                    <div class="table__row-user">
                         <div class="table__cell">${index + 1}</div>
                         <div class="table__cell">${u.username}</div>
                         <div class="table__cell">${u.email}</div>
@@ -57,6 +65,19 @@ async function loadManageUsers() {
                     </div>
     `).join("");
     mainListContent.innerHTML = firstTableRow + content;
+
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            modalDelete.classList.add("active");
+            overlay.classList.add("active");
+            const row = this.closest(".table__row-user");
+            submitBtn.addEventListener("click", function () {
+                row.style.cssText = `display: none`;
+                modalDelete.classList.remove("active");
+                overlay.classList.remove("active");
+            });
+        })
+    })
 }
 
 async function loadManagePosts() {
@@ -66,15 +87,17 @@ async function loadManagePosts() {
     mainContent.innerHTML = `
     <div class="main__header">
                 <p class="main__header-title">Manage Posts</p>
-                <button class="main__header-button">Add Post</button>
+                <a href="/write" class="main__header-button" style="text-decoration: none">
+                    Add Post
+                </a>
             </div>
             <div class="main__list">
                 <div class="main__list-header">
                     <p class="list-title">Post List</p>
-                    <div class="search">
+                    <label class="search">
                         <img src="/images/magnify.svg" alt="magnify icon" class="search-img">
-                        <p>Search Post</p>
-                    </div>
+                        <input placeholder="Search Post"></input>
+                    </label>
                 </div>
                 <div class="main__list-content">
                     <div class="table__row">
@@ -82,6 +105,7 @@ async function loadManagePosts() {
                         <div class="table__row-header">Title</div>
                         <div class="table__row-header">Author</div>
                         <div class="table__row-header">Published Date</div>
+                        <div class="table__row-header">Status</div>
                         <div class="table__row-header">Action</div>
                     </div>
                 </div>
@@ -95,10 +119,11 @@ async function loadManagePosts() {
                         <div class="table__cell title">${p.title}</div>
                         <div class="table__cell">${p.author.username}</div>
                         <div class="table__cell">${new Date(p.createdAt).toLocaleDateString()}</div>
+                        <div class="table__cell status">Pending</div>
                         <div class="table__cell action">
-                            <button class="edit-btn">
-                                <img src="/images/square-edit-outline.svg" alt="edit icon">
-                                <p>Edit</p>
+                            <button class="approve-btn">
+                                <img src="/images/check-outline.svg" alt="approve icon">
+                                <p>Approved</p>
                             </button>
                             <button class="delete-btn">
                                 <img src="/images/trash-can-outline.svg" alt="delete icon">
@@ -109,6 +134,35 @@ async function loadManagePosts() {
     `).join("");
 
     mainListContent.innerHTML = firstTableRow + content;
+
+    document.querySelectorAll(".approve-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const row = this.closest(".table__row");
+            const statusCell = row.querySelector(".status");
+            statusCell.textContent = "Accepted";
+            statusCell.style.color = "green";
+            statusCell.style.fontWeight = "600";
+            this.style.cssText = `display: none`;
+        });
+    });
+
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            modalDelete.classList.add("active");
+            overlay.classList.add("active");
+            const row = this.closest(".table__row");
+            submitBtn.addEventListener("click", function () {
+                row.style.cssText = `display: none`;
+                modalDelete.classList.remove("active");
+                overlay.classList.remove("active");
+            });
+        })
+    })
+}
+
+
+async function loadManageComments() {
+    
 }
 
 

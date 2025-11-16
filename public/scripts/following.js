@@ -60,7 +60,7 @@ async function loadPost() {
                     </div>
                 </div>
             </div>
-            <img src="/images/post-thumbnail.png" class="post__img"/>
+            <img src="${post.thumbnailUrl}" class="post__img"/>
         </div>
         </article>
     `

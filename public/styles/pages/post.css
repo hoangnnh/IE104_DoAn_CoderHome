@@ -62,7 +62,8 @@ button {
   flex-direction: column;
   margin: auto;
   align-items: flex-start;
-  max-width: 100%;
+  max-width: 70%;
+  min-width: none;
 }
 
 /* Post header */
@@ -444,6 +445,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
 
 .item__header-info {
@@ -477,7 +479,7 @@ button {
 
 @media (max-width: 1023px) {
   body {
-    margin: 0 20px;
+    margin: 0 50px;
   }
 }
 
@@ -488,6 +490,10 @@ button {
 
   body {
     margin: 0 30px;
+  }
+
+  .post {
+    max-width: 100%;
   }
 
   .container {
@@ -524,6 +530,10 @@ button {
 
   html {
     font-size: 5px;
+  }
+
+  .post {
+    max-width: 100%;
   }
 
   .metadata__interaction-action {

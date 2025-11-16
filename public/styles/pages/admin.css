@@ -3,6 +3,10 @@
     src: url("/fonts/Source_Sans_3/SourceSans3-VariableFont_wght.ttf");
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -48,7 +52,6 @@ aside {
     gap: 1rem;
     cursor: pointer;
     transition: all 300ms ease-out;
-
 }
 
 .nav__list-item:hover {
@@ -87,6 +90,8 @@ aside {
     justify-content: space-between;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .main__header-button {
@@ -98,11 +103,13 @@ aside {
     border-radius: 30px;
     cursor: pointer;
     transition: all 300ms ease-in-out;
+    text-align: center;
+    display: inline-block;
 }
 
 .main__header-button:hover {
     background-color: #333364;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .main__list-header {
@@ -111,6 +118,8 @@ aside {
     justify-content: space-between;
     padding: 1.5rem 3rem;
     background-color: #fff;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .list-title {
@@ -121,18 +130,28 @@ aside {
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 1rem;
     width: 20rem;
-    padding: 0 1rem;
+    max-width: 100%;
+    padding: 1rem 1.5rem;
     border: 0;
     border-radius: 30px;
     background-color: #f3f3f3;
     color: #7e7e7e;
 }
 
+.search input {
+    padding: 0 1rem;
+    outline: 0;
+    border: 0;
+    background-color: #f3f3f3;
+    color: #7e7e7e;
+    width: 100%;
+}
+
 .search-img {
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
 }
 
 .main__list-content {
@@ -141,18 +160,39 @@ aside {
     border-top: 0;
     max-height: 500px;
     overflow-y: auto;
+    overflow-x: auto;
 }
 
 .main__list-content::-webkit-scrollbar {
-    display: none;
+    height: 8px;
+    width: 8px;
+}
+
+.main__list-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.main__list-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
 }
 
 .table__row {
     display: grid;
-    grid-template-columns: 1fr 3fr 4fr 2fr 5fr;
+    grid-template-columns: 1fr 3fr 2fr 2fr 2fr 5fr;
     min-height: 70px;
     background-color: #fff;
     transition: all 300ms ease-out;
+    min-width: 800px;
+}
+
+.table__row-user {
+    display: grid;
+    grid-template-columns: 1fr 2fr 4fr 2fr 5fr;
+    min-height: 70px;
+    background-color: #fff;
+    transition: all 300ms ease-out;
+    min-width: 700px;
 }
 
 .table__row-header {
@@ -161,6 +201,7 @@ aside {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem 0.5rem;
 }
 
 .table__cell {
@@ -181,39 +222,47 @@ aside {
 
 .action {
     display: flex;
-    gap: 1rem
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .edit-btn,
-.delete-btn {
+.delete-btn, 
+.approve-btn {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0rem 1rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
     border: 0 solid #eee;
     border-radius: 5px;
     cursor: pointer;
     transition: all 300ms ease-in-out;
-
+    white-space: nowrap;
 }
 
-.edit-btn:hover, .delete-btn:hover {
-    transform: scale(1.1);
+.edit-btn:hover, 
+.delete-btn:hover, 
+.approve-btn:hover {
+    transform: scale(1.05);
     background-color: #c3c3c3;
 }
 
 .edit-btn img,
-.delete-btn img {
+.delete-btn img,
+.approve-btn img {
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
 }
 
-.table__row:hover {
+.table__row:hover, 
+.table__row-user:hover {
     cursor: pointer;
     background-color: #f9f9f9;
 }
 
-.table__row:first-child {
+.table__row:first-child, 
+.table__row-user:first-child {
     position: sticky;
     top: 0;
     background-color: #f3f3f3;
@@ -221,17 +270,17 @@ aside {
     font-weight: bold;
 }
 
-
 .card__list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 3.5rem;
+    gap: 2rem;
     margin-bottom: 3rem;
 }
 
 .card__item {
     width: 200px;
+    min-width: 150px;
     border-radius: 20px;
     list-style-type: none;
     background-color: #144272;
@@ -265,7 +314,7 @@ aside {
     max-width: 1000px;
     margin: 0 auto;
     height: 75vh;
-    /* dùng vh thay vì px, chart sẽ co giãn theo màn hình */
+    min-height: 300px;
 }
 
 .chart-container canvas {
@@ -273,61 +322,322 @@ aside {
     height: 100% !important;
 }
 
+.modal__delete {
+    padding: 1.5rem 1.5rem;
+    position: fixed;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    width: 25rem;
+    max-width: 90%;
+    height: auto;
+    background-color: #fff;
+    display: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal__delete.active {
+    display: block;
+}
+
+.modal__delete p, 
+.modal__option {
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: center;
+    gap: 3rem;
+    margin: 0;
+}
+
+.modal__option {
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.cancel-btn, 
+.submit-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 15px;
+    border: 0;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.cancel-btn {
+    background-color: #f3f3f3;
+}
+
+.cancel-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.submit-btn {
+    background-color: #333;
+    color: #fff;
+}
+
+.submit-btn:hover {
+    background-color: var(--color-black);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Tablet (768px - 1023px) */
 @media (max-width: 1023px) {
     main {
         display: grid;
         grid-template-columns: none;
-        grid-template-rows: 1fr 8fr;
+        grid-template-rows: auto 1fr;
     }
 
     .sidebar {
         min-height: auto;
+        position: sticky;
+        top: 0;
+        z-index: 10;
     }
 
     .nav__list {
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        padding: 0;
+        padding: 1rem 0;
+        font-size: 1.2rem;
     }
 
     .nav__list-item {
-        padding: 0 2rem;
+        padding: 0.75rem 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .nav__list-item p {
+        font-size: 0.9rem;
+    }
+
+    .nav__list-item img {
+        width: 24px;
+        height: 24px;
     }
 
     .nav__list-item-logo {
         display: none;
+    }
+
+    .main__content {
+        margin: 1rem 1.5rem;
+    }
+
+    .main__list-header {
+        padding: 1rem 1.5rem;
+    }
+
+    .card__list {
+        gap: 1.5rem;
+    }
+
+    .card__item {
+        width: 180px;
+        padding: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .chart-container {
+        height: 60vh;
     }
 }
 
-
+/* Mobile (< 768px) */
 @media (max-width: 767px) {
     body {
-        font-size: 13px;
-    }
-
-    .sidebar {
-        min-height: auto;
+        font-size: 14px;
     }
 
     .nav__list {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        padding: 0;
+        padding: 0.5rem 0;
+        font-size: 1rem;
     }
 
     .nav__list-item {
-        height: 100%;
+        padding: 0.5rem 0.75rem;
+        gap: 0.25rem;
+    }
+
+    .nav__list-item p {
+        font-size: 0.75rem;
+    }
+
+    .nav__list-item img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .main__content {
+        margin: 0.5rem;
+    }
+
+    .main__header {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .main__header-title {
+        font-size: 1.3rem;
+    }
+
+    .main__header-button {
+        padding: 0.5rem 2rem;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .main__list-header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-title {
+        font-size: 1.2rem;
+    }
+
+    .search {
+        width: 100%;
+        padding: 0.75rem 1rem;
+    }
+
+    .card__list {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .card__item {
+        width: 100%;
+        max-width: 250px;
+        padding: 1.25rem;
+        font-size: 1.1rem;
+    }
+
+    .card__item-info {
+        font-size: 1.5rem;
+    }
+
+    .chart-container {
+        height: 50vh;
+        min-height: 250px;
+    }
+
+    .table__row,
+    .table__row-user {
+        font-size: 0.85rem;
+        min-width: 600px;
+    }
+
+    .table__cell {
+        padding: 0.75rem 0.25rem;
     }
 
     .edit-btn,
-    .delete-btn {
-        padding: 0rem 0.5rem;
-        gap: 0px;
+    .delete-btn,
+    .approve-btn {
+        padding: 0.4rem 0.6rem;
+        gap: 0.25rem;
+        font-size: 0.8rem;
     }
 
-    .nav__list-item-logo {
+    .edit-btn img,
+    .delete-btn img,
+    .approve-btn img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .edit-btn p,
+    .delete-btn p,
+    .approve-btn p {
         display: none;
+    }
+
+    .modal__delete {
+        width: 20rem;
+        padding: 1.25rem;
+    }
+
+    .modal__delete p {
+        font-size: 1.2rem;
+    }
+
+    .modal__option {
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        padding: 0.5rem 1.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra Small Mobile (< 480px) */
+@media (max-width: 480px) {
+    .nav__list-item p {
+        display: none;
+    }
+
+    .nav__list-item {
+        padding: 0.75rem;
+    }
+
+    .main__header {
+        font-size: 1rem;
+    }
+
+    .main__header-title {
+        font-size: 1.1rem;
+    }
+
+    .card__item {
+        font-size: 1rem;
+    }
+
+    .card__item-info {
+        font-size: 1.3rem;
+    }
+
+    .table__row,
+    .table__row-user {
+        font-size: 0.75rem;
+        min-width: 500px;
+    }
+
+    .modal__delete {
+        width: 18rem;
+    }
+
+    .modal__delete p {
+        font-size: 1rem;
+    }
+
+    .modal__option {
+        gap: 1rem;
     }
 }
