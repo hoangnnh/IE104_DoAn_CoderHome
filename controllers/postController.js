@@ -2,37 +2,53 @@
 const Post = require("../models/post");
 const User = require("../models/user");
 
+const markdownit = require('markdown-it')
+const createDomPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = new JSDOM('').window;
+const DOMPurify = createDomPurify(window);
+
 function getNewPost(req, res) {
   res.render("pages/new-post", {
     pageTitle: "Create New Post",
   });
 }
 
+
 async function createPost(req, res) {
+  const md = markdownit({
+    html: false,
+    breaks: true,
+    linkify: true
+  });
+
   try {
     const { title, description, thumbnailUrl, tags, content } = req.body;
     const authorId = req.session.userId;
-    const tagsArray = tags.split(",").map((tag) => tag.trim());
+    const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()) : [];
+
+    let cleanHTML = '';
+    if (content) {
+      const rawHTML = md.render(content);
+      cleanHTML = DOMPurify.sanitize(rawHTML);
+    }
 
     const post = new Post({
       title: title,
       description: description,
-      thumbnailUrl: thumbnailUrl || '/images/default-thumbnail.png',
-      content: content,
-      category: req.body.category || 'General',
+      thumbnailUrl: thumbnailUrl || "/images/default-thumbnail.png",
+      contentHTML: cleanHTML,
+      category: req.body.category || "General",
       tags: tagsArray,
       author: authorId,
     });
 
     const savedPost = await post.save();
 
-    res.redirect(`/posts/${savedPost._id}`);
+    res.redirect(`/post/${savedPost._id}`);
   } catch (err) {
     console.error("Create Post Error:", err);
-    res.render("pages/new-post", {
-      pageTitle: "Create New Post",
-      error: "An error occured while creating the post. Please try again."
-    });
   }
 }
 
@@ -41,7 +57,7 @@ async function getPost(req, res) {
     const postId = req.params.id;
     const post = await Post.findById(postId).populate({
       path: "author",
-      select: "username profilePicture bio",
+      select: "_id username profilePicture bio",
     });
     if (!post) {
       return res.status(404).json({ message: "Post Not Found" });
@@ -67,9 +83,27 @@ async function getAllPosts(req, res) {
   }
 }
 
+async function getStats(req, res) {
+  try {
+    const stats = await Post.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+    res.json(stats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getNewPost,
   createPost,
   getPost,
   getAllPosts,
+  getStats,
 };

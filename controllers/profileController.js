@@ -2,6 +2,16 @@ const User = require("../models/user");
 const Post = require("../models/post");
 const path = require("path");
 
+async function getAllUser(req, res) {
+  try {
+    const users = await User.find().sort({ createdAt: -1 });
+    res.json(users);
+  } catch (err) {
+    console.error("Get User Error:", err);
+    res.status(500).send("Server Error");
+  }
+}
+
 // Lay user bang ID, khi bam vao xem user khac.
 async function getUser(req, res) {
   try {
@@ -9,18 +19,18 @@ async function getUser(req, res) {
 
     const user = await User.findById(userId)
       .populate({
-        path: "postedPost",
+        path: "postedPosts",
         select:
           "title description content author thumbnailUrl category createdAt",
         populate: { path: "author", select: "username profilePicture" },
       })
       .populate({
-        path: "liked",
+        path: "likedPost",
         select: "title content author createdAt",
         populate: { path: "author", select: "username profilePicture" },
       })
       .populate({
-        path: "contributors",
+        path: "followers",
         select: "username profilePicture bio postedPost",
         populate: {
           path: "postedPost",
@@ -39,4 +49,4 @@ async function getUser(req, res) {
   }
 }
 
-module.exports = { getUser };
+module.exports = { getUser, getAllUser };

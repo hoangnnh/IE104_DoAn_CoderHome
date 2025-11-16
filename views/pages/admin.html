@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/styles/pages/admin.css">
+    <link rel="stylesheet" href="/styles/base/token.css">
+    <link rel="stylesheet" href="/styles/base/fonts.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <main>
+        <aside>
+            <nav class="sidebar">
+                <ul class="nav__list">
+                    <a href="/" class="nav__list-item-logo">
+                        <img src="/images/coderhome-logo.png" alt="Coderhome's logo">
+                    </a>
+                    <li class="nav__list-item dashboard">
+                        <img src="/images/chart-arc.svg" alt="Dashboard icon" class="dashboard-icon">
+                        <p>Dashboard</p>
+                    </li>
+                    <li class="nav__list-item manage-users">
+                        <img src="/images/account.svg" alt="User icon" class="manage-users-icon">
+                        <p>Manage Users</p>
+                    </li>
+                    <li class="nav__list-item manage-posts">
+                        <img src="/images/text-box-multiple-outline.svg" alt="Post icon" class="manage-posts-icon">
+                        <p>Manage Posts</p>
+                    </li>
+                    <li class="nav__list-item manage-comments">
+                        <img src="/images/chat-outline.svg" alt="Comment icon" class="manage-comments-icon">
+                        <p>Manage Comments</p>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="main__content">
+
+        </section>
+    </main>
+    <div class="modal__delete">
+        <p>Do you want to delete?</p>
+        <div class="modal__option">
+            <button class="cancel-btn">Cancel</button>
+            <button class="submit-btn">Delete</button>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    <script src="/scripts/admin.js" defer></script>
+</body>
+
+</html>

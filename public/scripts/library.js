@@ -63,7 +63,7 @@ async function loadHistory() {
         <h3>${post.title}</h3>
         <p>${post.description.substring(0, 100)}...</p>
       </div>
-      <div class="list-thumbnail">
+      <div class="list-thumbnail1">
         <img src="${post.thumbnailUrl}" />
       </div>
     </div>

@@ -3,7 +3,10 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 
 function getRegister(req, res) {
-  res.sendFile(path.join(__dirname, "views/pages/register.html"));
+  res.render('pages/register', {
+    pageTitle: 'Register',
+    error: null
+  });
 };
 
 async function postRegister(req, res) {
@@ -16,10 +19,8 @@ async function postRegister(req, res) {
 
     // If exists, re-render the page with an error
     if (existingUser) {
-      console.log('Email already in use, please sign in.');
-      return res.sendFile(path.join(__dirname, "views/pages/register.html"));
+      return res.redirect('/login');
     }
-
     // Password encryption
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -29,7 +30,7 @@ async function postRegister(req, res) {
       email,
       password: hashedPassword,
       bio: '',
-      profilePicture: '/images/default-avatar.png'
+      profilePicture: '/images/user-avatar.jpg'
     });
     await user.save();
     console.log('User created successfully!');
@@ -51,20 +52,20 @@ async function postLogin(req, res) {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      console.log('Invalid email!');
-      res.sendFile(path.join(__dirname, "views/pages/login.html"));
+      return res.json({state: "invalid"});
     }
 
     const doMatch = await bcrypt.compare(password, user.password);
 
     if (!doMatch) {
-      console.log('Invalid password.');
-      return res.sendFile(path.join(__dirname, "views/pages/index.html"));
+      return res.json({state: "invalid"});
     }
+    const isAdmin = user.role;
 
     req.session.userId = user._id;
     req.session.username = user.username;
     req.session.isLoggedIn = true;
+    req.session.isAdmin = (isAdmin === "Admin") ? 1 : 0;
     req.session.profilePicture = user.profilePicture;
 
     req.session.save((err) => {
@@ -72,12 +73,15 @@ async function postLogin(req, res) {
         console.error('Session save error:', err);
       }
       console.log('Login successful, session created.');
-      res.redirect('/');
+
+      if (req.session.isAdmin === 0)
+      return res.json({state: "success", redirectUrl: "/"});
+      else return res.json({state: "success", redirectUrl: "/admin"});
     });
 
   } catch (err) {
     console.error('Login Error:', err);
-    res.redirect('/login');
+    return res.json({state: "error", redirectUrl: "/login"});
   }
 };
 

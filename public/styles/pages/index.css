@@ -1,95 +1,5 @@
-@font-face {
-    font-family: "Lora";
-    src: url("/fonts/Lora/Lora-VariableFont_wght.ttf");
-}
-
-@font-face {
-    font-family: "RobotoCondensed";
-    src: url("/fonts/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf");
-}
-
-
-/* Thanh điều hướng */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 40px;
-    background: var(--bg);
-    border-bottom: 2px solid #f2f2f2;
-    height: 60px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.logo img {
-    width: 200px;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-}
-
-.navbar__links {
-    color: #000;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    height: 100%;
-
-}
-
-.navbar__item {
-    text-decoration: none;
-    color: var(--text);
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-a {
-    text-decoration: none;
-    color: var(--text);
-    margin-left: 20px;
-}
-
-/* From Uiverse.io by TCdesign-dev */
-#bottone1 {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    border-radius: 14px;
-    background: #000000;
-    border: none;
-    font-family: inherit;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.4s;
-    color: #fff;
-    font-family: 'Roboto Condensed', sans-serif;
-}
-
-#bottone1:hover {
-    box-shadow: 7px 5px 56px -14px #000000;
-}
-
-#bottone1:active {
-    transform: scale(0.97);
-    box-shadow: 7px 5px 56px -10px #000000;
-}
-
-
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
+html {
+  scroll-behavior: smooth;
 }
 
 h2,
@@ -98,38 +8,79 @@ h3,
 .post__author-name,
 .name,
 .bio {
-    font-family: "Lora", sans-serif;
+    font-family: var(--font-family-heading);
     padding: 0;
     margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text);
+    margin-left: 20px;
 }
 
 p,
 span,
 a,
 li {
-    font-family: "RobotoCondensed";
+    font-family: var(--font-family-body);
 }
 
 li:hover {
     cursor: pointer;
 }
 
+.nav {
+    min-width: none;
+    max-width: 800px;
+    font-size: 1.25rem;
+    margin-left: 10rem;
+    border-right: 2px solid #f2f2f2;
+
+}
+
+.nav p {
+    font-family: var(--font-family-body), serif;
+
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.nav__list {
+    display: flex;
+    gap: 5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.nav__item {
+    list-style-type: none;
+}
+
+.nav__item:hover {
+    color: #565656;
+}
+
 .container {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .post {
-    width: 900px;
+    max-width: 800px;
+    min-width: 0;
     padding-top: 2rem;
     margin-left: 10rem;
     border-right: 2px solid #f2f2f2;
 }
 
 .post__card {
-    max-width: 1000px;
-    min-width: 700px;
+    max-width: 100%;
+    min-width: 0;
     margin-bottom: 2rem;
 }
 
@@ -151,17 +102,19 @@ li:hover {
 .post__left {
     display: flex;
     max-width: 85%;
-    gap: 3rem;
+    gap: 7rem;
     align-items: start;
     justify-content: space-between;
 }
 
 .post__left-text {
-    min-width: 515.64px;
+    min-width: 0;
 }
 
 .post__interact {
     display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
     margin-top: 3rem;
     justify-content: space-between;
     align-items: center;
@@ -206,6 +159,8 @@ li:hover {
 
 .post__img {
     width: 200px;
+    height: 132px;
+    border-radius: 20px;
 }
 
 .react-icon-meta {
@@ -218,11 +173,17 @@ li:hover {
     height: 25px;
     filter: brightness(0) saturate(100%)
     invert(44%) sepia(5%) saturate(0%) brightness(85%) contrast(85%);
+    cursor: pointer;
 }
 
 .post__interact-meta .react-icon:hover,
 .react-icon-meta:hover {
     cursor: pointer;
+}
+
+.heart.active {
+    width: 14px;
+    filter: brightness(0) saturate(100%) invert(14%) sepia(90%) saturate(4000%) hue-rotate(-5deg);
 }
 
 .divider {
@@ -234,13 +195,19 @@ li:hover {
 }
 
 aside {
+    width: 300px;
+    max-width: 100%;
+    flex-shrink: 1;
     padding: 2rem 1rem;
     position: sticky;
     top: 0;
+    z-index: 2;
 }
 
 .recommend {
-    width: 250px;
+     width: 100%;
+    max-width: 250px;
+    min-width: none;
 }
 
 .recommend>a,
@@ -266,11 +233,20 @@ aside {
     padding: 0.5rem 1rem;
     background: #f2f2f2;
     border-radius: 100px;
+    transition: all 300ms ease-in-out;
+}
+
+.recommend__topic-list-item:hover {
+    transform: scale(1.1);
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .rcm__follow {
     margin-top: 5rem;
-    width: 350px;
+    max-width: 350px;
+    min-width: none;
+
     position: sticky;
     top: 0;
 }
@@ -293,6 +269,7 @@ aside {
     margin: 0 1.5rem;
     justify-content: start;
     align-items: start;
+    min-width: 40%;
 }
 
 .avatar {
@@ -320,6 +297,26 @@ aside {
     color: #fff;
 }
 
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 12px 16px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #333;
+    color: white;
+    display: none;
+    transition:all 0.3s ease-in;
+}
+
+.scroll-top:hover {
+    background: #555;
+}
+
+
 /* ---------- Tablet (768px - 1023px) ---------- */
 @media (max-width: 1023px) {
     .container {
@@ -335,11 +332,26 @@ aside {
         display: none;
     }
 
+
+    .nav {
+        width: 95%;
+        margin: 0 auto;
+        border: 0;
+    }
+
+    .nav__list {
+        justify-content: center;
+    }
+
+    .main__content {
+        margin: 0 auto;
+    }
+
     .post {
-        width: 90%;
-        margin-left: 0;
-        height: auto;
-        border: 0px
+        width: 95%;
+        margin: 0 auto;
+        padding-top: 1rem;
+        border: 0;
     }
 
     .post__left {
@@ -373,13 +385,30 @@ aside {
 
     aside {
         display: none;
-        /* Ẩn sidebar trên mobile để tập trung vào nội dung */
+    }
+
+    .nav {
+        width: 95%;
+        margin: 0 auto;
+        border: 0;
+
+    }
+
+    .nav__list {
+        justify-content: center;
+    }
+
+    .main__content {
+        width: 95%;
+        margin: 0 auto;
     }
 
     .post {
         width: 95%;
-        margin-left: 0;
+        margin: 0 auto;
         padding-top: 1rem;
+        border: 0;
+
     }
 
     .post__card {
@@ -397,9 +426,14 @@ aside {
     }
 
     .post__interact {
-        flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
+
+    }
+
+    .post__interact-action img {
+        width: 22px;
+        height: 22px;
     }
 
     .post__interact-meta {
@@ -409,15 +443,5 @@ aside {
     .react-icon {
         width: 16px;
         height: 16px;
-    }
-}
-
-@media (max-width: 1431px) and (min-width: 1023px) {
-    .created_date {
-        display: none;
-    }
-
-    aside {
-        display: none;
     }
 }

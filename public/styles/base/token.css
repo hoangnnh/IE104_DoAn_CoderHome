@@ -4,6 +4,7 @@
     --color-gray-darkest: #333333;
     --color-gray-medium: #7D7D7D;
     --color-gray-lightest: #F7F7F7;
+    --color-gray-raw: #f2f2f2;
     --color-red: #D93025;
     --color-blue: #2166E5;
     --color-cream: #F8F5EF;
@@ -66,10 +67,6 @@
     --font-size-display: 3.5rem;
     /* 56px (For hero title) */
 
-    /* Primary font weight */
-    --font-weight-regular: 400;
-    --font-weight-bold: 700;
-
     /* Line height */
     --line-height-body: 1.6;
     --line-height-heading: 1.2;
@@ -100,6 +97,10 @@
     /* Navbar */
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
     /* Post as card-view */
+
+    --z-index-header: 20;
+    --z-index-overlay: 25;
+    --z-index-modal: 30;  
 
     /* Breakpoints */
     /*

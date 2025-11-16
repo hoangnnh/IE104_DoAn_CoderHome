@@ -35,8 +35,8 @@ async function loadPostedPost() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
   const postedPostContainer = document.querySelector(".profile-content");
-  if (user.postedPost && user.postedPost.length > 0) {
-    postedPostContainer.innerHTML = user.postedPost
+  if (user.postedPosts && user.postedPosts.length > 0) {
+    postedPostContainer.innerHTML = user.postedPosts
       .map(
         (post) =>
           ` 
@@ -96,7 +96,7 @@ async function loadComment() {
   const res = await fetch(`/comments/u/${userId}`);
   const comments = await res.json();
   const commentsContainer = document.querySelector(".profile-content");
-  console.log("Loaded comments:", comments); // kiểm tra dữ liệu
+  console.log("Loaded comments:", comments);
 
   if (comments && comments.length > 0) {
     commentsContainer.innerHTML = comments
@@ -105,9 +105,7 @@ async function loadComment() {
         <hr class="divider"/>
     <div class="comment__container">
       <div class="comment__header">
-          <a href="/post/${
-            comment.post?._id || "#"
-          }" class="post__title">Post: ${
+          <a href="/post/${comment.post?._id || "#"}" class="post__title">${
           comment.post?.title || "Post not found!"
         }</a>
           <p class="post__date">${new Date(
@@ -130,21 +128,43 @@ async function loadComment() {
 async function loadBio() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
+  const res2 = await fetch(`/current/`);
+  const currentUser = await res2.json();
   const bioContainer = document.querySelector(".profile-content");
-  if (user.bio && user.bio.trim() !== "") {
-    bioContainer.innerHTML = `
+
+  if (user._id == currentUser._id) {
+    if (user.bio && user.bio.trim() !== "") {
+      bioContainer.innerHTML = `
+      <hr class="divider">
+  <p class="user__bio">${user.bio}</p>
+  <button class="add-bio">Add Bio</button>
+  `;
+    } else {
+      bioContainer.innerHTML = `
+  <hr class="divider">
+  <p class="user__no-po-cm-bio">User has no bio yet!!</p>
+  <button class="add-bio">Add Bio</button>
+  `;
+    }
+  } else {
+    if (user.bio && user.bio.trim() !== "") {
+      bioContainer.innerHTML = `
+      <hr class="divider">
   <p class="user__bio">${user.bio}</p>
   `;
-  } else {
-    bioContainer.innerHTML = `
+    } else {
+      bioContainer.innerHTML = `
     <hr class="divider">
   <p class="user__no-po-cm-bio">User has no bio yet!!</p>
   `;
+    }
   }
 }
 
 async function loadUserMoreInfo() {
   const res = await fetch(`/profiles/${userId}`);
+  const res2 = await fetch(`/comments/u/${userId}`);
+  const comments = await res2.json();
   const user = await res.json();
   const moreInfoContainer = document.querySelector(".user__more-info");
 
@@ -161,7 +181,7 @@ async function loadUserMoreInfo() {
     </div>
     <div class="more-info__details">
       <div class="more-info__follower">
-        <!-- ${user.follow} -->
+        <!-- ${user.followers?.length || "0"} -->
         <p>2</p>
         <p>Follower</p>
       </div>
@@ -172,15 +192,15 @@ async function loadUserMoreInfo() {
           <p>CoderHome Age</p>
         </div>
         <div class="more-info__items">
-          <p>${user.contributors.length}</p>
-          <p>Contributors</p>
+          <p>${user.followingAuthors?.length || "0"}</p>
+          <p>Following</p>
         </div>
         <div class="more-info__items">
-          <p>0*</p>
-          <p>Visit</p>
+          <p>${comments.length}</p>
+          <p>Comments</p>
         </div>
         <div class="more-info__items">
-          <p>${user.liked.length}</p>
+          <p>${user.likedPost?.length || "0"}</p>
           <p>Likes</p>
         </div>
       </div>
@@ -234,7 +254,7 @@ responsive(mq);
 // Event
 
 const tabs = document.querySelectorAll(".profile-nav__items");
-const contents = document.querySelectorAll(".profile-content");
+const contents = document.querySelector(".profile-content");
 
 // Khi bấm vào mỗi tab
 

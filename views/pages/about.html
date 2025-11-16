@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About us</title>
-        <link rel="stylesheet" href="../../public/styles/base/reset.css">
-        <link rel="stylesheet" href="../../public/styles/About.css">
+        <link rel="stylesheet" href="styles/base/reset.css">
+        <link rel="stylesheet" href="styles/pages/about.css">
     </head>
     <body>
                 <div class="header_container">
                     <div class="container_logo">
-                    <a href ="#"><img src="../../public/images/coderhome-logo.png" alt="" class = "logo_img"></a>
+                    <a href ="#"><img src="images/coderhome-logo.png" alt="" class = "logo_img"></a>
                 </div>
                 <button class="container_btn">
                     Visit Coderhome
@@ -23,7 +23,7 @@
                 <div class="body_welcome">
                     <div class="welcome_text">
                         <div class="text_caption">
-                            <img src="../../public/images/meta_ai-logo_brandlogos.net_xjwry-512x504.png" alt="">
+                            <img src="images/meta_ai-logo_brandlogos.net_xjwry-512x504.png" alt="">
                             <h3> We offer</h3>
                         </div>
                         <h2>One Adaptive Service</h2>
@@ -31,13 +31,13 @@
                 </div>  
                 <div class="img_blur">
                     <div class="blur_text">
-                        <img src="../../public/images/img2.png" alt="" class="blur_img">
+                        <img src="images/img2.png" alt="" class="blur_img">
                         <h1>One Vision</h1>
                         <p>Freedom for every individual in business.</p>
                     </div>
                      <div class="founder_container">
                          <div class="founder_caption">
-                            <img src="../../public/images/4906311.png" alt="" class="img_caption">
+                            <img src="images/4906311.png" alt="" class="img_caption">
                             <h3>Who we are</h3>
                          </div>
                         <h2>Meet the founders</h2>
@@ -48,7 +48,7 @@
                 <div class="body_script">
                     <div class="script_founder">
                          <div class="founder_item">
-                             <img src="../../public/images/download.jpg" alt="" class="founder_img">
+                             <img src="images/download.jpg" alt="" class="founder_img">
                              <div class="item_text">
                                 <p class = "p_opa">Leader</p>
                                 <h2>Hoàng Pepsi</h2>
@@ -57,7 +57,7 @@
                          </div>
 
                          <div class="founder_item">
-                            <img src="../../public/images/download (1).jpg" alt="" class="founder_img">
+                            <img src="images/download (1).jpg" alt="" class="founder_img">
                             <div class="item_text">
                                 <p class = "p_opa">Vice Leader</p>
                                 <h2>Khoa béo</h2>
@@ -66,7 +66,7 @@
                         </div>
 
                          <div class="founder_item">
-                            <img src="../../public/images/download (2).jpg" alt="" class="founder_img">
+                            <img src="images/download (2).jpg" alt="" class="founder_img">
                         <div class="item_text"> 
                             <p class = "p_opa">Member</p>
                             <h2>3 tàu 6 champ</h2>
@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="founder_item">
-                             <img src="../../public/images/download (3).jpg" alt="" class="founder_img">
+                             <img src="images/download (3).jpg" alt="" class="founder_img">
                              <div class="item_text">
                                 <p class = "p_opa">Member</p>
                                 <h2>Khôi Loli</h2>
@@ -84,7 +84,7 @@
                          </div>
 
                          <div class="founder_item">
-                            <img src="../../public/images/download (4).jpg" alt="" class="founder_img">
+                            <img src="images/download (4).jpg" alt="" class="founder_img">
                             <div class="item_text">
                                 <p class = "p_opa">Member</p>
                                 <h2>Ba rọi béo</h2>
@@ -129,16 +129,16 @@
             <div class="world_map">
                     <div class="map_text">
                         <div class="map_caption">
-                            <img src="../../public/images/map.png" alt="" class ="map_img">
+                            <img src="images/map.png" alt="" class ="map_img">
                             <h3>We with you</h3>
                         </div>
                         <h2>Everywhere you are, We still here</h2>
                     </div>
                 <?xml version="1.0"?>
 <!--
-*************Map created by Simplemaps.com********************		
-*************Attribution is highly appreciated!***************
-*************http://simplemaps.com****************************
+************Map created by Simplemaps.com*******************		
+************Attribution is highly appreciated!**************
+************http://simplemaps.com***************************
 
 The MIT License (MIT)
 
@@ -1113,7 +1113,7 @@ THE SOFTWARE.
 </svg>
 
             <div class="world_script">
-                <img src="../../public/images/flower1.avif" alt="" class="world_script_img">
+                <img src="images/flower1.avif" alt="" class="world_script_img">
                 <h2>At Coderhome, we empower our colleagues to take ownership, do meaningful work and live an extraordinary Life.</h2>
             </div>
                 </div>
@@ -1133,28 +1133,5 @@ THE SOFTWARE.
                     </nav>
                 </div>
             </footer>
-            <script>
-  const welcomeSection = document.querySelector('.body_welcome');
-  const text = document.querySelector('.welcome_script');
-
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-
-    // Giới hạn hiệu ứng trong khoảng 0 → 600px cuộn
-    const start = 0;
-    const end = 600;
-    const progress = Math.min(Math.max((scrollY - start) / end, 0), 1);
-
-    // Zoom nền: 70% → 95%
-    const zoom = 70 + progress * 25;
-    welcomeSection.style.backgroundSize = `${zoom}%`;
-
-    // Zoom chữ tương ứng (1 → 1.15 lần)
-    const textScale = 1 + progress * 0.15;
-    text.style.transform = `scale(${textScale}) translateY(${progress * 10}px)`;
-    text.style.transition = 'transform 0.1s ease-out';
-    text.style.transformOrigin = 'center';
-  });
-</script>
     </body>
 </html>

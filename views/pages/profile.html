@@ -3,16 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/profile.css" />
+    <link rel="stylesheet" href="/styles/base/reset.css">
+    <link rel="stylesheet" href="/styles/base/token.css">
+    <link rel="stylesheet" href="/styles/base/fonts.css">
+    <link rel="stylesheet" href="/styles/pages/profile.css" />
     <title>Profile</title>
   </head>
   <!--  -->
   <body>
+    <coderhome-header></coderhome-header>
+    <toggle-menu></toggle-menu>
+    <toggle-avatar-option></toggle-avatar-option>
     <main class="container">
       <section class="user__main">
         <div class="user__info"></div>
         <nav class="profile-nav">
-          <!-- <button class="scroll-btn left" id="scrollLeft">◀</button> -->
           <a href="#" class="profile-nav__items active" data-tab="posts">
             Posts
           </a>
@@ -20,16 +25,6 @@
             Comments
           </a>
           <a href="#" class="profile-nav__items" data-tab="bio"> Biography </a>
-          <!-- Test -->
-          <!-- <a href="#" class="profile-nav__items" data-tab="posts"> Posts </a>
-            <a href="#" class="profile-nav__items" data-tab="comments">
-              Comments
-            </a>
-            <a href="#" class="profile-nav__items" data-tab="bio">
-              Biography
-            </a> -->
-          <!-- _____END______ -->
-          <!-- <button class="scroll-btn right" id="scrollRight">▶</button> -->
         </nav>
         <div class="button-container"></div>
         <div class="profile-content"></div>
@@ -43,6 +38,7 @@
         <div class="user__social-links"></div>
       </aside>
     </main>
+    <script type="module" src="/scripts/main.js"></script>
     <script src="/scripts/profile.js"></script>
   </body>
 </html>

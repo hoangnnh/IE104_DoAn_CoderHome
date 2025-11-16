@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write a Post</title>
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/fonts.css">
+  <link rel="stylesheet" href="/styles/base/token.css">
+  <link rel="stylesheet" href="/styles/pages/write.css">
+</head>
+
+<body>
+  <div class="page-container">
+    <header class="header header--write">
+      <nav class="navbar navbar--write">
+        <div class="navbar__group--left">
+          <a href="/" class="logo">
+            <img src="/images/coderhome-logo.png" alt="Coderhome Logo">
+          </a>
+          <span class="navbar__draft-status">Draft in <span id="username-span">...</span></span>
+        </div>
+
+        <div class="navbar__group--right">
+          <button type="button" class="button button--primary" id="publish-button">
+            Publish
+          </button>
+          <div class="navbar__icon notification-icon">
+            <img alt="notification icon" src=/images/notification-icon.png>
+          </div>
+          <div id="avatar-link" class="navbar__avatar">
+            <img id="avatar-img" src="/images/default-avatar.png" alt="User Avatar">
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="write-container">
+      <form action="/posts" method="POST" class="post-form">
+        <fieldset class="form-group-meta">
+          <div class="form-field">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" name="title" class="form-control" required placeholder="Your post title...">
+          </div>
+          <div class="form-field">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" name="description" class="form-control" required
+              placeholder="A short, catchy description...">
+          </div>
+          <div class="form-field">
+            <label for="thumbnailUrl" class="form-label">Thumbnail URL</label>
+            <input type="url" id="thumbnailUrl" name="thumbnailUrl" class="form-control"
+              placeholder="https://... (Optional)">
+          </div>
+          <div class="form-field">
+            <label for="tags" class="form-label">Tags</label>
+            <input type="text" id="tags" name="tags" class="form-control"
+              placeholder="nodejs, express, mongo (comma-separated)">
+          </div>
+        </fieldset>
+
+        <div class="section-guide">
+          <p>Write your post using <a href=" https://www.markdownguide.org/basic-syntax/">Markdown</a> format.</p>
+          <p>For more details about markdown format, visit <a
+              href=" https://www.markdownguide.org/basic-syntax/">https://www.markdownguide.org/basic-syntax/</a></p>
+        </div>
+        <div class="editor-container">
+          <div class="editor-pane">
+            <label for="content" class="form-label form-label--pane">
+              Write your content here:
+            </label>
+            <textarea id="content" name="content" class="editor-textarea" required
+              placeholder="## Your Heading..."></textarea>
+            <!-- oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'> -->
+          </div>
+
+          <div class="preview-pane">
+            <label class="form-label form-label--pane">Live Preview</label>
+            <div id="preview" class="editor-preview"></div>
+          </div>
+        </div>
+        <button type="submit" id="form-submit-button" style="display: none;">Submit</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  <script src="/scripts/write.js"></script>
+</body>
+
+</html>
