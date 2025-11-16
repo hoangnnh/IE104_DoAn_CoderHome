@@ -1,7 +1,3 @@
-@font-face {
-    font-family: "RobotoCondensed";
-    src: url("/fonts/Source_Sans_3/SourceSans3-VariableFont_wght.ttf");
-}
 
 * {
     box-sizing: border-box;
@@ -10,12 +6,12 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "RobotoCondensed", sans-serif;
+    font-family: "Source Sans 3", sans-serif;
     background-color: #f3f3f3;
 }
 
 button {
-    font-family: "RobotoCondensed", sans-serif;
+    font-family: "Source Sans 3", sans-serif;
 }
 
 main {
@@ -186,7 +182,7 @@ aside {
     min-width: 800px;
 }
 
-.table__row-user {
+.table__row-user, .table__row-comment {
     display: grid;
     grid-template-columns: 1fr 2fr 4fr 2fr 5fr;
     min-height: 70px;
