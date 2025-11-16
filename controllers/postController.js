@@ -2,7 +2,7 @@
 const Post = require("../models/post");
 const User = require("../models/user");
 
-const { marked } = require('marked')
+const markdownit = require('markdown-it')
 const createDomPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 
@@ -15,7 +15,14 @@ function getNewPost(req, res) {
   });
 }
 
+
 async function createPost(req, res) {
+  const md = markdownit({
+    html: false,
+    breaks: true,
+    linkify: true
+  });
+
   try {
     const { title, description, thumbnailUrl, tags, content } = req.body;
     const authorId = req.session.userId;
@@ -23,7 +30,7 @@ async function createPost(req, res) {
 
     let cleanHTML = '';
     if (content) {
-      const rawHTML = marked.parse(content);
+      const rawHTML = md.render(content);
       cleanHTML = DOMPurify.sanitize(rawHTML);
     }
 
