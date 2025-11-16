@@ -67,7 +67,7 @@ body{
 /*main_search part*/
 .main .main_search{
     margin-top: 65px;
-    background-image: url('../../public/images/help_pic.webp');
+    background-image: url('../images/help_pic.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -322,4 +322,11 @@ body{
 
 }
 
+/* Mobile (≤ 350px) */
+@media (max-width: 350px) {
+    .help_container .help_item{
+        width: 250px;
+        min-width: 250px;
+    }
+}
 

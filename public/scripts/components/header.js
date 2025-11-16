@@ -1,0 +1,79 @@
+// 1. We get the CSS content for the component
+const headerCSS = `
+<link rel="stylesheet" href="/styles/base/reset.css">
+<link rel="stylesheet" href="/styles/base/fonts.css">
+<link rel="stylesheet" href="/styles/base/token.css">
+<link rel="stylesheet" href="/styles/partials/header.css">
+`;
+
+const headerHTML = `
+<header class=header>
+  <div class=header__left>
+    <button id="menu-trigger-btn" class=header__menu-btn aria-label="Open menu">
+      <img alt="toggle menu" src=/images/toggle-menu.png>
+    </button>
+    <a class=header__logo href="/">
+      <img alt=Logo src=/images/coderhome-logo.png class=header__logo-img>
+    </a>
+    <label aria-label=Search class=header__search><img alt="search icon" src=/images/search-icon.png class=header__search-icon>
+      <input class=header__search-input name="search-value" placeholder=Search type=search>
+    </label>
+  </div>
+  <div class=header__right>
+    <a class=header__write-btn href=/posts/new title=Write>
+      <img alt="write icon" src=/images/write-icon.png>
+      <span>Write</span>
+    </a>
+    <button class=header__notification-btn title=Notifications>
+      <img alt="notification icon" src=/images/notification-icon.png>
+    </button>
+    <img alt="Your avatar" src="/images/user-avatar.jpg" class=header__avatar>
+  </div>
+</header>
+`;
+
+class Header extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+
+  async connectedCallback() {
+    try {
+      const response = await fetch('/current');
+      if (!response.ok) {
+        if (!['/login', '/register', '/'].includes(location.pathname)) {
+            window.location.href = '/login';
+        }
+        return;
+      }
+      const user = await response.json();
+
+      this.render(user);
+
+    } catch (error) {
+      console.error('Error fetching user for header:', error);
+    }
+  }
+
+  render(user) {
+    const template = document.createElement('template');
+    template.innerHTML = headerCSS + headerHTML;
+
+    // Attach the template to the Shadow DOM
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    // Populate the dynamic parts
+    this.shadowRoot.getElementById('avatar-link').href = `/profile/${user._id}`;
+    this.shadowRoot.getElementById('avatar-img').src = user.profilePicture;
+    this.shadowRoot.getElementById('avatar-img').alt = `${user.username}'s avatar`;
+
+    // // Add event listener for the menu button
+    // this.shadowRoot.getElementById('menu-trigger-btn').addEventListener('click', () => {
+    //     // Create and dispatch a custom event that the menu can listen for
+    //     document.dispatchEvent(new CustomEvent('open-menu'));
+    // });
+  }
+}
+
+customElements.define('coderhome-header', Header);

@@ -106,7 +106,7 @@ input[type="password"]:focus {
 }
 
 .form-btn:hover {
-  background: var(--color-primary-hover);
+  background: var(--color-gray-darkest);
   box-shadow: var(--shadow-md);
 }
 

@@ -20,10 +20,6 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  thumbnailUrl: {
-    type: String,
-    default: "/images/post-thumbnail.png",
-  },
   createdAt: {
     type: Date,
     default: Date.now,

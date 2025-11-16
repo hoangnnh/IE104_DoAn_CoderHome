@@ -56,6 +56,13 @@ const userSchema = new Schema({
       default: [],
     },
   ],
+  history: [
+  {
+    type: Schema.Types.ObjectId,
+    ref: "Post",
+    default: [],
+  }
+],
 });
 
 module.exports = mongoose.model("User", userSchema);
