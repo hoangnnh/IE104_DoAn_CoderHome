@@ -34,7 +34,9 @@ async function getCommentByPostID(req, res) {
 
 async function getAllComments(req, res) {
   try {
-    const comments = await Comment.find();
+    const comments = await Comment.find()
+    .populate("post", "title")
+    .populate("author", "username");
     res.json(comments);
   } catch (err) {
     console.error("Get Comments Error:", err);

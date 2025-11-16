@@ -1,9 +1,11 @@
 const dashboardBtn = document.querySelector(".dashboard");
 const manageUsersBtn = document.querySelector(".manage-users");
 const managePostsBtn = document.querySelector(".manage-posts");
+const manageCommentsBtn = document.querySelector(".manage-comments");
 const dashboardIcon = document.querySelector(".dashboard-icon");
 const managePostsIcon = document.querySelector(".manage-posts-icon");
 const manageUsersIcon = document.querySelector(".manage-users-icon");
+const manageCommentsIcon = document.querySelector(".manage-comments-icon")
 const modalDelete = document.querySelector(".modal__delete");
 const overlay = document.querySelector(".overlay");
 const submitBtn = document.querySelector(".submit-btn");
@@ -162,7 +164,67 @@ async function loadManagePosts() {
 
 
 async function loadManageComments() {
-    
+    const res = await fetch("/comments/");
+    const comments = await res.json();
+    mainContent.innerHTML = "";
+    mainContent.innerHTML = `
+    <div class="main__header">
+                <p class="main__header-title">Manage Comments</p>
+                <button class="main__header-button">Add Comments</button>
+            </div>
+            <div class="main__list">
+                <div class="main__list-header">
+                    <p class="list-title">Comment List</p>
+                    <label class="search">
+                        <img src="/images/magnify.svg" alt="magnify icon" class="search-img">
+                        <input placeholder="Search Comment"></input>
+                    </label>
+                </div>
+                <div class="main__list-content">
+                    <div class="table__row-comment">
+                        <div class="table__row-header">No</div>
+                        <div class="table__row-header">Post</div>
+                        <div class="table__row-header">Content</div>
+                        <div class="table__row-header">Author</div>
+                        <div class="table__row-header">Action</div>
+                    </div>
+                </div>
+            </div>
+    `;
+    const mainListContent = document.querySelector(".main__list-content");
+    const firstTableRow = mainListContent.innerHTML;
+    const content = comments.map((c, index) => `
+                    <div class="table__row-comment">
+                        <div class="table__cell">${index + 1}</div>
+                        <div class="table__cell title">${c.post.title}</div>
+                        <div class="table__cell">${c.content}</div>
+                        <div class="table__cell">${c.author.username}</div>
+                        <div class="table__cell action">
+                            <button class="edit-btn">
+                                <img src="/images/square-edit-outline.svg" alt="edit icon">
+                                <p>Edit</p>
+                            </button>
+                            <button class="delete-btn">
+                                <img src="/images/trash-can-outline.svg" alt="delete icon">
+                                <p>Delete</p>
+                            </button>
+                        </div>
+                    </div>
+    `).join("");
+    mainListContent.innerHTML = firstTableRow + content;
+
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            modalDelete.classList.add("active");
+            overlay.classList.add("active");
+            const row = this.closest(".table__row-comment");
+            submitBtn.addEventListener("click", function () {
+                row.style.cssText = `display: none`;
+                modalDelete.classList.remove("active");
+                overlay.classList.remove("active");
+            });
+        })
+    })
 }
 
 
@@ -255,7 +317,9 @@ loadPostStats();
 
 managePostsBtn.addEventListener("click", loadManagePosts);
 manageUsersBtn.addEventListener("click", loadManageUsers);
+manageCommentsBtn.addEventListener("click", loadManageComments);
 dashboardBtn.addEventListener("click", loadPostStats);
+
 
 managePostsBtn.addEventListener("mouseenter", () => {
     managePostsIcon.classList.add("hover-img");
@@ -269,6 +333,13 @@ manageUsersBtn.addEventListener("mouseenter", () => {
 });
 manageUsersBtn.addEventListener("mouseleave", () => {
     manageUsersIcon.classList.remove("hover-img");
+});
+
+manageCommentsBtn.addEventListener("mouseenter", () => {
+    manageCommentsIcon.classList.add("hover-img");
+});
+manageCommentsBtn.addEventListener("mouseleave", () => {
+    manageCommentsIcon.classList.remove("hover-img");
 });
 
 dashboardBtn.addEventListener("mouseenter", () => {

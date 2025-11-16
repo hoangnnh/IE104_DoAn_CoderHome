@@ -186,7 +186,7 @@ aside {
     min-width: 800px;
 }
 
-.table__row-user {
+.table__row-user, .table__row-comment {
     display: grid;
     grid-template-columns: 1fr 2fr 4fr 2fr 5fr;
     min-height: 70px;
