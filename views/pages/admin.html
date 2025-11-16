@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="stylesheet" href="/styles/pages/admin.css">
+    <link rel="stylesheet" href="/styles/base/token.css">
+    <link rel="stylesheet" href="/styles/base/fonts.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -14,9 +16,9 @@
         <aside>
             <nav class="sidebar">
                 <ul class="nav__list">
-                    <li class="nav__list-item-logo">
+                    <a href="/" class="nav__list-item-logo">
                         <img src="/images/coderhome-logo.png" alt="Coderhome's logo">
-                    </li>
+                    </a>
                     <li class="nav__list-item dashboard">
                         <img src="/images/chart-arc.svg" alt="Dashboard icon" class="dashboard-icon">
                         <p>Dashboard</p>
@@ -33,9 +35,17 @@
             </nav>
         </aside>
         <section class="main__content">
-             
+
         </section>
     </main>
+    <div class="modal__delete">
+        <p>Do you want to delete?</p>
+        <div class="modal__option">
+            <button class="cancel-btn">Cancel</button>
+            <button class="submit-btn">Delete</button>
+        </div>
+    </div>
+    <div class="overlay"></div>
     <script src="/scripts/admin.js" defer></script>
 </body>
 

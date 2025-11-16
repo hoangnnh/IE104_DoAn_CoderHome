@@ -1,4 +1,3 @@
-// 1. We get the CSS content for the component
 const headerCSS = `
 <link rel="stylesheet" href="/styles/partials/header.css">
 `;
@@ -51,6 +50,10 @@ class Header extends HTMLElement {
       document.dispatchEvent(new CustomEvent('toggle-menu'));
     });
 
+    this.avatarLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.dispatchEvent(new CustomEvent("toggle-avatar-option"));
+    });
 
     try {
       const response = await fetch('/current');
@@ -62,7 +65,6 @@ class Header extends HTMLElement {
       }
       const user = await response.json();
 
-      this.avatarLink.href = `/profile/${user._id}`;
       this.avatarImg.src = user.profilePicture;
       this.avatarImg.alt = `${user.username}'s avatar`;
 

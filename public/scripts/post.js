@@ -81,7 +81,7 @@ async function loadPostID() {
         </div>
 `;
 
-  postContent.innerHTML = `${post.content}`;
+  postContent.innerHTML = `${post.contentHTML}`;
   postTags.innerHTML = post.tags
     .map(
       (tag, index) => `
