@@ -143,7 +143,6 @@ app.get("/help", (req, res) => {
   res.sendFile(path.join(__dirname, "views/pages/help.html"));
 });
 
-// ----Them draft ----
 const livereload = require("livereload");
 const connectLivereload = require("connect-livereload");
 

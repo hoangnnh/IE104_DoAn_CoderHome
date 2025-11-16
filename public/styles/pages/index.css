@@ -1,21 +1,5 @@
-@font-face {
-    font-family: "Lora";
-    src: url("/fonts/Lora/Lora-VariableFont_wght.ttf");
-}
-
-@font-face {
-    font-family: "RobotoCondensed";
-    src: url("/fonts/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf");
-}
-
 html {
   scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
 }
 
 h2,
@@ -24,7 +8,7 @@ h3,
 .post__author-name,
 .name,
 .bio {
-    font-family: "Lora", sans-serif;
+    font-family: var(--font-family-heading);
     padding: 0;
     margin: 0;
 }
@@ -39,7 +23,7 @@ p,
 span,
 a,
 li {
-    font-family: "RobotoCondensed";
+    font-family: var(--font-family-body);
 }
 
 li:hover {
@@ -56,7 +40,7 @@ li:hover {
 }
 
 .nav p {
-    font-family: "Lora", serif;
+    font-family: var(--font-family-body), serif;
 
     padding-top: 2rem;
     padding-bottom: 1rem;
