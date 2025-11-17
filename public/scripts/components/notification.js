@@ -23,91 +23,123 @@ const modalHTML = `
 
 // Mock Data
 const mockNotifications = [
-    { id: 1, user: { name: 'Khoibui', avatar: '/images/author-logo.png' }, text: 'has just posted a new article...', time: '2 min ago', unread: true },
-    { id: 2, user: { name: 'Hoang Teddy', avatar: '/images/user-avatar.jpg' }, text: 'liked your comment.', time: '15 min ago', unread: true },
-    { id: 3, user: { name: 'Nguyen Kien', avatar: '/images/author-logo.png' }, text: 'started following you.', time: '1 hour ago', unread: false },
-    { id: 4, user: { name: 'Khoibui', avatar: '/images/author-logo.png' }, text: 'has just posted a new article...', time: '2 hour ago', unread: false },
-    { id: 5, user: { name: 'Admin', avatar: '/images/coderhome-logo.png' }, text: 'Welcome to Coderhome!', time: '1 day ago', unread: false },
+  {
+    id: 1,
+    user: { name: "Khoibui", avatar: "/images/user-avatar.jpg" },
+    text: "has just posted a new article...",
+    time: "2 min ago",
+    unread: true,
+  },
+  {
+    id: 2,
+    user: { name: "Hoang Teddy", avatar: "/images/user-avatar.jpg" },
+    text: "liked your comment.",
+    time: "15 min ago",
+    unread: true,
+  },
+  {
+    id: 3,
+    user: { name: "Nguyen Kien", avatar: "/images/samples/default-avt.png" },
+    text: "started following you.",
+    time: "1 hour ago",
+    unread: false,
+  },
+  {
+    id: 4,
+    user: { name: "Khoibui", avatar: "/images/samples/author-avt-1.png" },
+    text: "has just posted a new article...",
+    time: "2 hour ago",
+    unread: false,
+  },
+  {
+    id: 5,
+    user: { name: "Admin", avatar: "/images/user-avatar.jpg" },
+    text: "Welcome to Coderhome!",
+    time: "1 day ago",
+    unread: false,
+  },
 ];
 
-
 class NotificationModal extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.isOpen = false;
-        this.filter = 'all'; // 'all' or 'unread'
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.isOpen = false;
+    this.filter = "all"; // 'all' or 'unread'
+  }
 
-    connectedCallback() {
-        // Render the component's static HTML and CSS
-        const template = document.createElement('template');
-        template.innerHTML = modalCSS + modalHTML;
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+  connectedCallback() {
+    // Render the component's static HTML and CSS
+    const template = document.createElement("template");
+    template.innerHTML = modalCSS + modalHTML;
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-        // Find internal elements
-        this.modal = this.shadowRoot.getElementById('modalContent');
-        this.overlay = this.shadowRoot.getElementById('modalOverlay');
-        this.list = this.shadowRoot.getElementById('notificationList');
-        this.closeBtn = this.shadowRoot.getElementById('modalCloseBtn');
-        this.tabButtons = this.shadowRoot.querySelectorAll('.modal__tab-btn');
+    // Find internal elements
+    this.modal = this.shadowRoot.getElementById("modalContent");
+    this.overlay = this.shadowRoot.getElementById("modalOverlay");
+    this.list = this.shadowRoot.getElementById("notificationList");
+    this.closeBtn = this.shadowRoot.getElementById("modalCloseBtn");
+    this.tabButtons = this.shadowRoot.querySelectorAll(".modal__tab-btn");
 
-        // Add event listeners
-        this.closeBtn.addEventListener('click', () => this.close());
-        this.overlay.addEventListener('click', () => this.close());
-        document.addEventListener('toggle-notifications', () => this.toggle());
+    // Add event listeners
+    this.closeBtn.addEventListener("click", () => this.close());
+    this.overlay.addEventListener("click", () => this.close());
+    document.addEventListener("toggle-notifications", () => this.toggle());
 
-        this.tabButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Set the new filter
-                this.filter = btn.dataset.tab;
-                // Update active tab style
-                this.tabButtons.forEach(t => t.classList.remove('is-active'));
-                btn.classList.add('is-active');
-                // Re-render the list with the new filter
-                this.renderNotifications();
-            });
-        });
-    }
-
-    toggle() {
-        console.log("notification button");
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.open();
-        else this.close();
-    }
-
-    open() {
-        this.modal.classList.add('is-active');
-        this.overlay.classList.add('is-active');
-        this.isOpen = true;
-        // Fetch and render notifications when opened
+    this.tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Set the new filter
+        this.filter = btn.dataset.tab;
+        // Update active tab style
+        this.tabButtons.forEach((t) => t.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        // Re-render the list with the new filter
         this.renderNotifications();
+      });
+    });
+  }
+
+  toggle() {
+    console.log("notification button");
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) this.open();
+    else this.close();
+  }
+
+  open() {
+    this.modal.classList.add("is-active");
+    this.overlay.classList.add("is-active");
+    this.isOpen = true;
+    // Fetch and render notifications when opened
+    this.renderNotifications();
+  }
+
+  close() {
+    this.modal.classList.remove("is-active");
+    this.overlay.classList.remove("is-active");
+    this.isOpen = false;
+  }
+
+  renderNotifications() {
+    // Filter the mock data
+    const filteredData = mockNotifications.filter((n) => {
+      if (this.filter === "unread") return n.unread;
+      return true; // 'all' filter
+    });
+
+    if (filteredData.length === 0) {
+      this.list.innerHTML = `<li class="notification-item--empty">No new notifications</li>`;
+      return;
     }
 
-    close() {
-        this.modal.classList.remove('is-active');
-        this.overlay.classList.remove('is-active');
-        this.isOpen = false;
-    }
-
-    renderNotifications() {
-        // Filter the mock data
-        const filteredData = mockNotifications.filter(n => {
-            if (this.filter === 'unread') return n.unread;
-            return true; // 'all' filter
-        });
-
-        if (filteredData.length === 0) {
-            this.list.innerHTML = `<li class="notification-item--empty">No new notifications</li>`;
-            return;
-        }
-
-        // Render list
-        this.list.innerHTML = filteredData.map(n => {
-            return `
-                <li class="notification-item ${n.unread ? 'is-unread' : ''}">
-                    <img src="${n.user.avatar}" alt="${n.user.name}'s avatar" class="notification-item__avatar">
+    // Render list
+    this.list.innerHTML = filteredData
+      .map((n) => {
+        return `
+                <li class="notification-item ${n.unread ? "is-unread" : ""}">
+                    <img src="${n.user.avatar}" alt="${
+          n.user.name
+        }'s avatar" class="notification-item__avatar">
                     <div class="notification-item__content">
                         <p class="notification-item__text">
                             <strong>${n.user.name}</strong> ${n.text}
@@ -116,8 +148,9 @@ class NotificationModal extends HTMLElement {
                     </div>
                 </li>
             `;
-        }).join('');
-    }
+      })
+      .join("");
+  }
 }
 
-customElements.define('toggle-notification', NotificationModal);
+customElements.define("toggle-notification", NotificationModal);
