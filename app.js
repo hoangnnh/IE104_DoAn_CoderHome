@@ -133,6 +133,14 @@ app.get("/write", (req, res) => {
   }
 });
 
+app.get("/search", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/search.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
+
 // Other pages
 
 app.get("/about", (req, res) => {
