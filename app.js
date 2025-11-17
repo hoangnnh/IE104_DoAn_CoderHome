@@ -58,12 +58,15 @@ const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/profiles");
 const currentRoutes = require("./routes/current");
 const commentRoutes = require("./routes/comments");
+const searchRoutes = require("./routes/search");
+
 
 app.use(authRoutes);
 app.use("/posts", postRoutes);
 app.use("/profiles", userRoutes);
 app.use("/current", currentRoutes);
 app.use("/comments", commentRoutes);
+app.use("/search", searchRoutes);
 
 // Homepage
 app.get("/", (req, res) => {
@@ -133,7 +136,7 @@ app.get("/write", (req, res) => {
   }
 });
 
-app.get("/search", (req, res) => {
+app.get("/search-result", (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, "views/pages/search.html"));
   } else {
