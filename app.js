@@ -58,12 +58,15 @@ const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/profiles");
 const currentRoutes = require("./routes/current");
 const commentRoutes = require("./routes/comments");
+const searchRoutes = require("./routes/search");
+
 
 app.use(authRoutes);
 app.use("/posts", postRoutes);
 app.use("/profiles", userRoutes);
 app.use("/current", currentRoutes);
 app.use("/comments", commentRoutes);
+app.use("/search", searchRoutes);
 
 // Homepage
 app.get("/", (req, res) => {
@@ -90,10 +93,6 @@ app.get("/admin", async (req, res) => {
   }
 });
 
-// --- Server Startup ---
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
 
 // Post Route
 
@@ -123,11 +122,33 @@ app.get("/following", (req, res) => {
     res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
 });
+
+// Library Page Route
+ app.get("/library", (req, res) => {
+    if (req.session.isLoggedIn) {
+      res.sendFile(path.join(__dirname, "views/pages/library.html"));
+    } else {
+      res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+    }
+  });
+
+// History Route
+ const historyRoutes = require("./routes/history");
+ app.use("/history", historyRoutes);
+ 
 // Write page
 
 app.get("/write", (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, "views/pages/write.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
+
+app.get("/search-result", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/search.html"));
   } else {
     res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
@@ -141,6 +162,19 @@ app.get("/about", (req, res) => {
 
 app.get("/help", (req, res) => {
   res.sendFile(path.join(__dirname, "views/pages/help.html"));
+});
+
+app.get("/settings", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/setting.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
+
+// --- Server Startup ---
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 const livereload = require("livereload");

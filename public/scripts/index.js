@@ -4,7 +4,6 @@ const scrollBtn = document.getElementById("scrollTopBtn");
 
 // Function dung de load Post cua Coderhome (duoc luu trong Database)
 async function loadCoderhomePost() {
-
   coderHome.style.cssText = `
     border-bottom: 2px solid #f2f2f2;
     font-weight: bold;
@@ -44,8 +43,8 @@ async function loadCoderhomePost() {
           day: "2-digit",
           month: "2-digit",
         })}</span>
-                        <span><img src="/images/show-post-img/Heart.svg" class="react-icon-meta heart" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem" ><img src="/images/show-post-img/Heart.svg" class="react-icon-meta heart"/> 5.5K</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
                         <button class="icon-btn"><img src="/images/minus-circle-outline.svg" class="react-icon"/></button>
