@@ -6,25 +6,26 @@ const headerHTML = `
 <header class=header>
   <div class=header__left>
     <button id="menu-trigger-btn" class=header__menu-btn aria-label="Open menu">
-      <img alt="toggle menu" src=/images/toggle-menu.png>
+      <img alt="toggle menu" src=/images/icons/menu-icon.svg>
     </button>
     <a class=header__logo href="/">
       <img alt=Logo src=/images/logos/website-logo.png class=header__logo-img>
     </a>
-    <label aria-label=Search class=header__search><img alt="search icon" src=/images/search-icon.png class=header__search-icon>
+    <label aria-label=Search class=header__search>
+    <img alt="search icon" src=/images/icons/search-icon.svg class=header__search-icon>
       <input class=header__search-input name="search-value" placeholder=Search type=search>
     </label>
   </div>
   <div class=header__right>
     <a class=header__write-btn href=/write title=Write>
-      <img alt="write icon" src=/images/write-icon.png>
+      <img alt="write icon" src=/images/icons/write-icon.svg>
       <span>Write</span>
     </a>
     <button id="notification-trigger-btn" class=header__notification-btn title=Notifications>
       <img alt="notification icon" src=/images/icons/notification-icon.svg>
     </button>
     <a id="avatar-link" href="#" aria-label="Profile">
-      <img id="avatar-img" alt="Your avatar" src="/images/user-avatar.jpg" class=header__avatar>
+      <img id="avatar-img" alt="Your avatar" src="/images/samples/author-avt-2.jpg" class=header__avatar>
     </a>
   </div>
 </header>

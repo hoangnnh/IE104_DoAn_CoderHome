@@ -93,22 +93,22 @@ h2{
 
 .star.star1{
     animation-delay: 0s;
-    background-image: url(../../images/star1.png);
+    background-image: url(/images/pages/about/star1.png);
 }
 
 .star.star2{
     animation-delay: 1s;
-    background-image: url(../../images/star2.png);
+    background-image: url(/images/pages/about/star2.png);
 }
 
 .star.star3{
     animation-delay: 2s;
-    background-image: url(../../images/star3.png);
+    background-image: url(/images/pages/about/star3.png);
 }
 
 .star.star4{
     animation-delay: 3s;
-    background-image: url(../../images/star4.png);
+    background-image: url(/images/pages/about/star4.png);
 }
 
 @keyframes animate{

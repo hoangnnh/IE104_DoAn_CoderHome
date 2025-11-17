@@ -24,7 +24,7 @@ async function loadComment() {
                         <a href="/profile/${item.author._id}" class="comment__name">${item.author.username}</a>
                     </div>
                     <button class="more-action-btn">
-                        <img src="/images/show-post-img/More action.svg" alt="more action button">
+                        <img src="/images/icons/three-dots-icon.svg" alt="more action button">
                     </button>
                 </div>
                 <div class="comment__content">${item.content}</div>
@@ -63,19 +63,18 @@ async function loadPostID() {
             <div class="metadata__interaction-action">
                 <div class="metadata__interaction">
                     <div class="interaction__items">
-                        <img src="/images/show-post-img/Comment.svg" alt="comment-icon" class="heart-icon"/>
+                        <img src="/images/icons/comment-icon.svg" alt="comment-icon" class="heart-icon"/>
                         <p>3.7K</p>
                     </div>
                     <div class="interaction__items">
-                        <img src="/images/show-post-img/Heart.svg" alt="heart-icon" class="comment-icon"/>
+                        <img src="/images/icons/heart-icon.svg" alt="heart-icon" class="comment-icon"/>
                         <p>4.2K</p>
                     </div>
                 </div>
                 <div class="metadata__action">
-                    <img src="/images/show-post-img/Close.svg" alt="" class="close-icon"/>
-                    <img src="/images/show-post-img/Bookmark.svg" alt="" class="bookmark-icon"/>
-                    <img src="/images/show-post-img/Share button.svg" alt="" class="share-icon"/>
-                    <img src="/images/show-post-img/More action.svg" alt="" class="more-action-icon"/>
+                    <img src="/images/icons/remove-icon.svg" alt="" class="close-icon"/>
+                    <img src="/images/icons/bookmark-icon.svg" alt="" class="bookmark-icon"/>
+                    <img src="/images/icons/share-icon.svg" alt="" class="share-icon"/>
                 </div>
             </div>
         </div>

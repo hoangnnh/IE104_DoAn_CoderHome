@@ -75,7 +75,7 @@ async function loadPostedPost() {
                     </div>
                 </div>
             </div>
-            <img src="/images/post-thumbnail.png" class="post__img"/>
+            <img src="/images/samples/default-thumbnail.png" class="post__img"/>
         </div>
         </article>
     `
@@ -173,7 +173,7 @@ async function loadUserMoreInfo() {
     <div class="more-info__title">
       <div class="more-info__name">${user.username}</div>
       <button class="more-info__share" style="display: flex; gap: 0.5rem; align-items: center"><img style="width: 25px; 
-      filter: invert(1) brightness(2);" src="/images/share.svg"/>Share</button>
+      filter: invert(1) brightness(2);" src="/images/icons/classic-share-icon.svg"/>Share</button>
     </div>
     <div class="more-info__details">
       <div class="more-info__follower">
@@ -217,7 +217,7 @@ async function loadUserSocialLink() {
       <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/icons/facebook-icon.svg"/>Facebook</a>
     </div>
     <button class="add-social-link-button" style="display: flex; align-items: center; gap: 0.5rem"><img style="width: 25px; 
-    filter: invert(1) brightness(2);" src="/images/plus.svg"/>Add</button>
+    filter: invert(1) brightness(2);" src="/images/icons/plus-icon.svg"/>Add</button>
 
   `;
 }
