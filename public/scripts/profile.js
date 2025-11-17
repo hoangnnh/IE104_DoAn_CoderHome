@@ -72,9 +72,9 @@ async function loadPostedPost() {
                         <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/minus-circle-outline.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/bookmark-outline.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/dots-horizontal.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                     </div>
                 </div>
             </div>
@@ -218,8 +218,8 @@ async function loadUserSocialLink() {
   socialLinksContainer.innerHTML = `
   <p>Social Link</p>
     <div class="social-links__items">
-      <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/instagram.svg"/>Instagram</a>
-      <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/facebook.svg"/>Facebook</a>
+      <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/icons/instagram-icon.svg"/>Instagram</a>
+      <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/icons/facebook-icon.svg"/>Facebook</a>
     </div>
     <button class="add-social-link-button" style="display: flex; align-items: center; gap: 0.5rem"><img style="width: 25px; 
     filter: invert(1) brightness(2);" src="/images/plus.svg"/>Add</button>

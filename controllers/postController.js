@@ -37,7 +37,7 @@ async function createPost(req, res) {
     const post = new Post({
       title: title,
       description: description,
-      thumbnailUrl: thumbnailUrl || "/images/default-thumbnail.png",
+      thumbnailUrl: thumbnailUrl || "/images/samples/default-thumbnail.png",
       contentHTML: cleanHTML,
       category: req.body.category || "General",
       tags: tagsArray,

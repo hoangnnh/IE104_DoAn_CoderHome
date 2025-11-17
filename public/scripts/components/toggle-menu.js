@@ -7,20 +7,20 @@ const menuHTML = `
 <aside class="toggle-menu" id="toggleMenu">
     <nav class="toggle-menu__nav">
         <a href="/" class="toggle-menu__item is-active">
-            <img class="icon" src="/images/home-icon.png" alt="home icon">
+            <img class="icon" src="/images/icons/home-icon.svg" alt="home icon">
             <span>Home</span>
         </a>
         <a href="/library" class="toggle-menu__item">
-            <img src="/images/bookmark-icon.png" alt="bookmark icon" class="icon">
+            <img src="/images/icons/bookmark-icon.svg" alt="bookmark icon" class="icon">
             <span>Library</span>
         </a>
         <a id="profile-link" href="#" class="toggle-menu__item profile-link">
-            <img src="/images/profile-icon.png" alt="profile icon" class="icon">
+            <img src="/images/icons/profile-icon.svg" alt="profile icon" class="icon">
             <span>Profile</span>
         </a>
         <hr class="toggle-menu__divider">
         <a href="/following" class="toggle-menu__item">
-            <img src="/images/like-icon.png" alt="like icon" class="icon">
+            <img src="/images/icons/heart-icon.svg" alt="like icon" class="icon">
             <span>Following</span>
         </a>
     </nav>
