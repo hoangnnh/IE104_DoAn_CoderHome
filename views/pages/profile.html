@@ -10,7 +10,6 @@
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <title>Profile</title>
   </head>
-  <!--  -->
   <body>
     <coderhome-header></coderhome-header>
     <toggle-menu></toggle-menu>
@@ -43,4 +42,17 @@
     <script type="module" src="/scripts/main.js"></script>
     <script src="/scripts/profile.js"></script>
   </body>
+  <div class="edit-profile__form">
+        <label for="username">Change your username</label>
+        <input type="text" name="username" id="username" placeholder="Enter your alias">
+        <label for="email">Change your email</label>
+        <input type="email" name="email" id="email" placeholder="Enter your email">
+        <label for="bio">Biography</label>
+        <textarea name="bio" id="bio" placeholder="Tell people your biography"></textarea>
+        <div class="form__option">
+          <button class="cancel-btn">Cancel</button>
+          <button class="submit-btn">Submit</button>
+        </div>
+      </div>
+      <div class="overlay"></div>
 </html>

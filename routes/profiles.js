@@ -8,4 +8,6 @@ router.get("/", isAuth, profileController.getAllUser);
 
 router.get("/:id", profileController.getUser);
 
+router.put("/:id", profileController.editUserProfile);
+
 module.exports = router;
