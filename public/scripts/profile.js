@@ -226,12 +226,49 @@ async function loadUserSocialLink() {
 
   `;
 }
+async function loadUserSetting() {
+  const res = await fetch(`/current/`);
+  const currentUser = await res.json();
+  const res2 = await fetch(`/profiles/${userId}`);
+  const user = await res2.json();
+  const settingContainer = document.querySelector(".user__settings");
 
+  if (user._id == currentUser._id) {
+    settingContainer.innerHTML = `
+      <div class="setting__content">
+        <div>
+          <p class="setting__title">Profile</p>
+          <p class="setting__description">Customize your Profile</p>
+        </div>
+        <button class="setting__update-btn">Update</button>
+      </div>
+      <div class="setting__content">
+        <div>
+          <p class="setting__title">Privacy</p>
+          <p class="setting__description">
+            Manage who can view your Profile
+          </p>
+        </div>
+        <button class="setting__update-btn">Update</button>
+      </div>
+      <div class="setting__content">
+        <div>
+          <p class="setting__title">Avatar</p>
+          <p class="setting__description">Change your Avatar</p>
+        </div>
+        <button class="setting__update-btn">Update</button>
+      </div>
+    `;
+  } else {
+    settingContainer.classList.add("hidden");
+  }
+}
 //
 loadWriteStoryButton();
 loadUserInfo();
 loadPostedPost();
 loadUserMoreInfo();
+loadUserSetting();
 loadUserSocialLink();
 
 // Responsive
