@@ -36,7 +36,7 @@ async function loadManageUsers() {
                 <div class="main__list-header">
                     <p class="list-title">User List</p>
                     <label class="search">
-                        <img src="/images/magnify.svg" alt="magnify icon" class="search-img">
+                        <img src="/images/icons/admin/magnify.svg" alt="magnify icon" class="search-img">
                         <input placeholder="Search User"></input>
                     </label>
                 </div>
@@ -61,11 +61,11 @@ async function loadManageUsers() {
                         <div class="table__cell">${u.role}</div>
                         <div class="table__cell action">
                             <button class="edit-btn">
-                                <img src="/images/square-edit-outline.svg" alt="edit icon">
+                                <img src="/images/icons/admin/square-edit-outline.svg" alt="edit icon">
                                 <p>Edit</p>
                             </button>
                             <button class="delete-btn">
-                                <img src="/images/trash-can-outline.svg" alt="delete icon">
+                                <img src="/images/icons/admin/trash-can-outline.svg" alt="delete icon">
                                 <p>Delete</p>
                             </button>
                         </div>
@@ -102,7 +102,7 @@ async function loadManagePosts() {
                 <div class="main__list-header">
                     <p class="list-title">Post List</p>
                     <label class="search">
-                        <img src="/images/magnify.svg" alt="magnify icon" class="search-img">
+                        <img src="/images/icons/admin/magnify.svg" alt="magnify icon" class="search-img">
                         <input placeholder="Search Post"></input>
                     </label>
                 </div>
@@ -129,11 +129,11 @@ async function loadManagePosts() {
                         <div class="table__cell status">Pending</div>
                         <div class="table__cell action">
                             <button class="approve-btn">
-                                <img src="/images/check-outline.svg" alt="approve icon">
+                                <img src="/images/icons/admin/check-outline.svg" alt="approve icon">
                                 <p>Approve</p>
                             </button>
                             <button class="delete-btn">
-                                <img src="/images/trash-can-outline.svg" alt="delete icon">
+                                <img src="/images/icons/admin/trash-can-outline.svg" alt="delete icon">
                                 <p>Delete</p>
                             </button>
                         </div>
@@ -180,7 +180,7 @@ async function loadManageComments() {
                 <div class="main__list-header">
                     <p class="list-title">Comment List</p>
                     <label class="search">
-                        <img src="/images/magnify.svg" alt="magnify icon" class="search-img">
+                        <img src="/images/icons/admin/magnify.svg" alt="magnify icon" class="search-img">
                         <input placeholder="Search Comment"></input>
                     </label>
                 </div>
@@ -205,11 +205,11 @@ async function loadManageComments() {
                         <div class="table__cell">${c.author.username}</div>
                         <div class="table__cell action">
                             <button class="edit-btn">
-                                <img src="/images/square-edit-outline.svg" alt="edit icon">
+                                <img src="/images/icons/admin/square-edit-outline.svg" alt="edit icon">
                                 <p>Edit</p>
                             </button>
                             <button class="delete-btn">
-                                <img src="/images/trash-can-outline.svg" alt="delete icon">
+                                <img src="/images/icons/admin/trash-can-outline.svg" alt="delete icon">
                                 <p>Delete</p>
                             </button>
                         </div>
@@ -246,21 +246,21 @@ async function loadPostStats() {
                     <li class="card__item">
                         <p>Total Users</p>
                         <div class="card__item-info">
-                            <img src="/images/account.svg" alt="User icon">
+                            <img src="/images/icons/admin/account.svg" alt="User icon">
                             <p class="count">${users.length}</p>
                         </div>
                     </li>
                     <li class="card__item">
                         <p>Total Posts</p>
                         <div class="card__item-info">
-                            <img src="/images/text-box-multiple-outline.svg" alt="Post icon">
+                            <img src="/images/icons/admin/text-box-multiple-outline.svg" alt="Post icon">
                             <p class="count">${posts.length}</p>
                         </div>
                     </li>
                     <li class="card__item">
                         <p>Total Comments</p>
                         <div class="card__item-info">
-                            <img src="/images/comment-regular-full.svg" alt="Comment icon">
+                            <img src="/images/icons/admin/comment-regular-full.svg" alt="Comment icon">
                             <p class="count">${comments.length}</p>
                         </div>
                     </li>

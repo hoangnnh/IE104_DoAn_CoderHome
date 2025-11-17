@@ -21,9 +21,12 @@
   padding: var(--space-md) var(--space-lg);
 }
 
+.logo:hover {
+  cursor: pointer;
+}
 
 .logo img {
-  height: 30px;
+  height: var(--icon-base-height);
 }
 
 .navbar__links {

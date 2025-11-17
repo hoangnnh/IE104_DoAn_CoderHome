@@ -9,7 +9,7 @@ const headerHTML = `
       <img alt="toggle menu" src=/images/toggle-menu.png>
     </button>
     <a class=header__logo href="/">
-      <img alt=Logo src=/images/coderhome-logo.png class=header__logo-img>
+      <img alt=Logo src=/images/logos/website-logo.png class=header__logo-img>
     </a>
     <label aria-label=Search class=header__search><img alt="search icon" src=/images/search-icon.png class=header__search-icon>
       <input class=header__search-input name="search-value" placeholder=Search type=search>
@@ -21,7 +21,7 @@ const headerHTML = `
       <span>Write</span>
     </a>
     <button id="notification-trigger-btn" class=header__notification-btn title=Notifications>
-      <img alt="notification icon" src=/images/notification-icon.png>
+      <img alt="notification icon" src=/images/icons/notification-icon.svg>
     </button>
     <a id="avatar-link" href="#" aria-label="Profile">
       <img id="avatar-img" alt="Your avatar" src="/images/user-avatar.jpg" class=header__avatar>
