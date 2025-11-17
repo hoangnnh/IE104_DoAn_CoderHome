@@ -312,11 +312,15 @@ body {
   gap: 1rem;
 }
 
-.post__interact-action .icon-btn {
+.icon-btn {
   background-color: #fff;
   border: 0px;
+  transition: all 0.2s ease;
 }
-
+.icon-btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
 .post__author-name {
   font-size: 1.5rem;
   font-weight: bold;
@@ -348,6 +352,7 @@ body {
 .react-icon-meta {
   width: 1rem;
   height: 1rem;
+  transition: all 0.2s ease;
 }
 
 .react-icon {
@@ -355,11 +360,13 @@ body {
   height: 1.25rem;
   filter: brightness(0) saturate(100%) invert(44%) sepia(5%) saturate(0%)
     brightness(85%) contrast(85%);
+  transition: all 0.2s ease;
 }
 
 .post__interact-meta .react-icon:hover,
 .react-icon-meta:hover {
   cursor: pointer;
+  transform: scale(1.05);
 }
 
 .divider {
