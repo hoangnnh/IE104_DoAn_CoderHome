@@ -162,7 +162,6 @@ async function loadManagePosts() {
     })
 }
 
-
 async function loadManageComments() {
     const res = await fetch("/comments/");
     const comments = await res.json();

@@ -177,7 +177,8 @@ async function loadUserMoreInfo() {
   <div class="more-info__container">
     <div class="more-info__title">
       <div class="more-info__name">${user.username}</div>
-      <button class="more-info__share">Share</button>
+      <button class="more-info__share" style="display: flex; gap: 0.5rem; align-items: center"><img style="width: 25px; 
+      filter: invert(1) brightness(2);" src="/images/share.svg"/>Share</button>
     </div>
     <div class="more-info__details">
       <div class="more-info__follower">
@@ -217,10 +218,11 @@ async function loadUserSocialLink() {
   socialLinksContainer.innerHTML = `
   <p>Social Link</p>
     <div class="social-links__items">
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
+      <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/instagram.svg"/>Instagram</a>
+      <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/facebook.svg"/>Facebook</a>
     </div>
-    <button class="add-social-link-button">Add</button>
+    <button class="add-social-link-button" style="display: flex; align-items: center; gap: 0.5rem"><img style="width: 25px; 
+    filter: invert(1) brightness(2);" src="/images/plus.svg"/>Add</button>
 
   `;
 }
