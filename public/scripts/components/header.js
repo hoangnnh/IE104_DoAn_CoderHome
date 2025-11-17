@@ -60,6 +60,17 @@ class Header extends HTMLElement {
       document.dispatchEvent(new CustomEvent("toggle-avatar-option"));
     });
 
+      const searchInput = this.shadowRoot.querySelector(".header__search-input");
+    searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (query) {
+        window.location.href = `/search-result?q=${encodeURIComponent(query)}`;
+      }
+    }
+    });
+
     try {
       const response = await fetch('/current');
       if (!response.ok) {
