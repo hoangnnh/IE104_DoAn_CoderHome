@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
     publishButton.addEventListener('click', () => {
-        const form = document.getElementById('post-form');
+        const form = document.querySelector('.post-form');
         if (form) {
             const submitButton = form.querySelector('#form-submit-button');
             if (submitButton) {
@@ -35,37 +35,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Part 2: Markdown Preview Logic ---
+    // Markdown Preview Logic
     const markdownInput = document.getElementById('content');
     const previewOutput = document.getElementById('preview');
 
+    const baseMinEditorHeight = parseInt(
+        getComputedStyle(document.documentElement)
+            .getPropertyValue('--editor-min-height')
+    ) || 300;
+
     if (markdownInput && previewOutput) {
+        const md = window.markdownit({
+            html: false,
+            breaks: true,
+            linkify: true
+        });
+
         function updatePreview() {
             const rawText = markdownInput.value;
-            
-            // Use marked.parse() from the CDN script
-            const rawHtml = marked.parse(rawText);
-            
+
+            // Use render() in markdown-it from CDN script
+            const rawHtml = md.render(rawText);
+
             // Use DOMPurify.sanitize() from the CDN script
             const cleanHtml = DOMPurify.sanitize(rawText ? rawHtml : '');
-            
+
             previewOutput.innerHTML = cleanHtml;
 
-            // --- Auto-expand logic ---
-            // 1. Reset height to auto to shrink if text is deleted
-            markdownInput.style.height = 'auto'; 
-            
-            // 2. Set the new height based on scroll content
-            const newHeight = markdownInput.scrollHeight;
-            markdownInput.style.height = newHeight + 'px';
+            // Reset height to auto to shrink if text is deleted
+            markdownInput.style.height = 'auto';
 
-            // 3. Make the preview pane match the editor height
+            const newHeight = Math.max(markdownInput.scrollHeight, baseMinEditorHeight);
+            markdownInput.style.height = newHeight + 'px';
             previewOutput.style.minHeight = newHeight + 'px';
         }
-        
-        // This is now the ONLY input listener
+
         markdownInput.addEventListener('input', updatePreview);
-        
-        updatePreview(); // Initial render
+
+        updatePreview();
     }
 });

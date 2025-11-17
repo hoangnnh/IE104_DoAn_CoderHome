@@ -5,7 +5,6 @@
 }
 
 .write-container {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
@@ -147,7 +146,7 @@
     text-decoration: underline;
 }
 
-/* --- Editor: Two-Pane Layout --- */
+/* Editor & Preview */
 .editor-container {
     display: flex;
     flex-grow: 1;
@@ -174,9 +173,14 @@
 
 .editor-textarea,
 .editor-preview {
-    flex-grow: 1;
+    /* flex-grow: 1;
     padding: var(--space-lg);
-    min-height: 500px;
+    min-height: 500px; */
+
+    flex: 0 0 auto;
+    /* stop flexbox from stretching it */
+    padding: var(--space-lg);
+    min-height: 300px;
 }
 
 .editor-textarea {
@@ -252,7 +256,8 @@
         flex-direction: column;
     }
 
-    .editor-pane, .preview-pane {
+    .editor-pane,
+    .preview-pane {
         width: 100%;
         min-height: 400px;
     }

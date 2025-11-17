@@ -71,8 +71,9 @@
             <label for="content" class="form-label form-label--pane">
               Write your content here:
             </label>
-            <textarea id="content" name="content" class="editor-textarea" required placeholder="## Your Heading..."
-              oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+            <textarea id="content" name="content" class="editor-textarea" required
+              placeholder="## Your Heading..."></textarea>
+            <!-- oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'> -->
           </div>
 
           <div class="preview-pane">
@@ -80,16 +81,14 @@
             <div id="preview" class="editor-preview"></div>
           </div>
         </div>
-
-        <!-- This hidden submit button can be clicked by the header's "Publish" button -->
-        <button type="submit" id="form-submit-button" style="">Submit</button>
+        <button type="submit" id="form-submit-button" style="display: none;">Submit</button>
       </form>
     </main>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" defer></script>
-  <script src="/scripts/write.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  <script src="/scripts/write.js"></script>
 </body>
 
 </html>
