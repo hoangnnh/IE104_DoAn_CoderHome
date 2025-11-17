@@ -58,12 +58,15 @@ const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/profiles");
 const currentRoutes = require("./routes/current");
 const commentRoutes = require("./routes/comments");
+const searchRoutes = require("./routes/search");
+
 
 app.use(authRoutes);
 app.use("/posts", postRoutes);
 app.use("/profiles", userRoutes);
 app.use("/current", currentRoutes);
 app.use("/comments", commentRoutes);
+app.use("/search", searchRoutes);
 
 // Homepage
 app.get("/", (req, res) => {
@@ -119,11 +122,33 @@ app.get("/following", (req, res) => {
     res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
 });
+
+// Library Page Route
+ app.get("/library", (req, res) => {
+    if (req.session.isLoggedIn) {
+      res.sendFile(path.join(__dirname, "views/pages/library.html"));
+    } else {
+      res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+    }
+  });
+
+// History Route
+ const historyRoutes = require("./routes/history");
+ app.use("/history", historyRoutes);
+ 
 // Write page
 
 app.get("/write", (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, "views/pages/write.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
+
+app.get("/search-result", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/search.html"));
   } else {
     res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }

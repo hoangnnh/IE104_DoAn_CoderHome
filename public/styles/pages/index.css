@@ -245,8 +245,6 @@ aside {
 .rcm__follow {
     margin-top: 5rem;
     max-width: 350px;
-    min-width: none;
-
     position: sticky;
     top: 0;
 }
@@ -268,7 +266,6 @@ aside {
     flex-direction: column;
     margin: 0 1.5rem;
     justify-content: start;
-    align-items: start;
     min-width: 40%;
 }
 
