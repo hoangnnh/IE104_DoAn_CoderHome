@@ -93,10 +93,6 @@ app.get("/admin", async (req, res) => {
   }
 });
 
-// --- Server Startup ---
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
 
 // Post Route
 
@@ -152,6 +148,19 @@ app.get("/about", (req, res) => {
 
 app.get("/help", (req, res) => {
   res.sendFile(path.join(__dirname, "views/pages/help.html"));
+});
+
+app.get("/settings", (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, "views/pages/setting.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+  }
+});
+
+// --- Server Startup ---
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 const livereload = require("livereload");
