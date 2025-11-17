@@ -7,11 +7,11 @@ router.post("/add", async (req, res) => {
     if (!req.session.userId)
       return res.status(401).json({ message: "Not logged in" });
 
-    const { postId } = req.body;
+    const { historyPostId } = req.body;
 
     await User.findByIdAndUpdate(
       req.session.userId,
-      { $addToSet: { history: postId } }, 
+      { $addToSet: { history: historyPostId } }, 
       { new: true }
     );
 

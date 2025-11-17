@@ -49,4 +49,50 @@ async function getUser(req, res) {
   }
 }
 
-module.exports = { getUser, getAllUser };
+async function editUserProfile(req, res) {
+  try {
+    const { id } = req.params;
+
+    // Filter out undefined/null values
+    const updateData = {};
+    if (req.body.username !== undefined) updateData.username = req.body.username;
+    if (req.body.email !== undefined) updateData.email = req.body.email;
+    if (req.body.bio !== undefined) updateData.bio = req.body.bio;
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ message: "No valid fields to update" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.json({
+      message: "Profile updated successfully",
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error(error);
+
+    // Handle specific MongoDB errors
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({
+        message: "Validation error",
+        errors: error.errors
+      });
+    }
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    return res.status(500).json({ message: "Server error" });
+  }
+}
+
+module.exports = { getUser, getAllUser, editUserProfile };

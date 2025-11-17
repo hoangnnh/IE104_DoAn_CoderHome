@@ -47,7 +47,7 @@
 /*main_search part*/
 .main .main_search {
     margin-top: var(--header-height);
-    background-image: url('/images/help_pic.webp');
+    background-image: url('/images/pages/help-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -7,14 +7,31 @@ const managePostsIcon = document.querySelector(".manage-posts-icon");
 const manageUsersIcon = document.querySelector(".manage-users-icon");
 const manageCommentsIcon = document.querySelector(".manage-comments-icon")
 const modalDelete = document.querySelector(".modal__delete");
+const editProfileForm = document.querySelector(".edit-profile__form");
+const editCommentForm = document.querySelector(".edit-comment__form");
 const overlay = document.querySelector(".overlay");
-const submitBtn = document.querySelector(".submit-btn");
-const cancelBtn = document.querySelector(".cancel-btn");
+const submitBtnDeleteForm = document.querySelector(".submit-btn");
+const submitBtnEditProfileForm = document.querySelector(".edit-profile__form .submit-btn");
+const submitBtnEditCommentForm = document.querySelector(".edit-comment__form .submit-btn");
+const cancelBtnDeleteForm = document.querySelector(".cancel-btn");
+const cancelBtnEditProfileForm = document.querySelector(".edit-profile__form .cancel-btn");
+const cancelBtnEditCommentForm = document.querySelector(".edit-comment__form .cancel-btn");
 const mainContent = document.querySelector(".main__content");
 
 
-cancelBtn.addEventListener("click", () => {
+cancelBtnDeleteForm.addEventListener("click", () => {
     modalDelete.classList.remove("active");
+    overlay.classList.remove("active");
+});
+
+cancelBtnEditProfileForm.addEventListener("click", () => {
+    editProfileForm.classList.remove("active");
+    overlay.classList.remove("active");
+});
+
+overlay.addEventListener("click", () => {
+    modalDelete.classList.remove("active");
+    editProfileForm.classList.remove("active");
     overlay.classList.remove("active");
 });
 
@@ -51,9 +68,9 @@ async function loadManageUsers() {
     const content = users.map((u, index) => `
                     <div class="table__row-user">
                         <div class="table__cell">${index + 1}</div>
-                        <div class="table__cell">${u.username}</div>
-                        <div class="table__cell">${u.email}</div>
-                        <div class="table__cell">${u.role}</div>
+                        <div class="table__cell cell-username">${u.username}</div>
+                        <div class="table__cell cell-email">${u.email}</div>
+                        <div class="table__cell cell-role">${u.role}</div>
                         <div class="table__cell action">
                             <button class="edit-btn">
                                 <img src="/images/icons/admin/square-edit-outline.svg" alt="edit icon">
@@ -73,13 +90,38 @@ async function loadManageUsers() {
             modalDelete.classList.add("active");
             overlay.classList.add("active");
             const row = this.closest(".table__row-user");
-            submitBtn.addEventListener("click", function () {
+            submitBtnDeleteForm.addEventListener("click", function () {
                 row.style.cssText = `display: none`;
                 modalDelete.classList.remove("active");
                 overlay.classList.remove("active");
             });
         })
     })
+
+    let currentRow = null;
+
+    document.querySelectorAll(".edit-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            editProfileForm.classList.add("active");
+            overlay.classList.add("active");
+            currentRow = this.closest(".table__row-user");
+        });
+    });
+
+    submitBtnEditProfileForm.addEventListener("click", function () {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const role = document.getElementById("role").value;
+
+        if (currentRow) {
+            currentRow.querySelector(".cell-username").textContent = username;
+            currentRow.querySelector(".cell-email").textContent = email;
+            currentRow.querySelector(".cell-role").textContent = role;
+        }
+
+        editProfileForm.classList.remove("active");
+        overlay.classList.remove("active");
+    });
 }
 
 async function loadManagePosts() {
@@ -153,13 +195,14 @@ async function loadManagePosts() {
             modalDelete.classList.add("active");
             overlay.classList.add("active");
             const row = this.closest(".table__row");
-            submitBtn.addEventListener("click", function () {
+            submitBtnDeleteForm.addEventListener("click", function () {
                 row.style.cssText = `display: none`;
                 modalDelete.classList.remove("active");
                 overlay.classList.remove("active");
             });
         })
     })
+
 }
 
 async function loadManageComments() {
@@ -196,7 +239,7 @@ async function loadManageComments() {
                     <div class="table__row-comment">
                         <div class="table__cell">${index + 1}</div>
                         <div class="table__cell title">${c.post.title}</div>
-                        <div class="table__cell">${c.content}</div>
+                        <div class="table__cell cell-content">${c.content}</div>
                         <div class="table__cell">${c.author.username}</div>
                         <div class="table__cell action">
                             <button class="edit-btn">
@@ -217,13 +260,33 @@ async function loadManageComments() {
             modalDelete.classList.add("active");
             overlay.classList.add("active");
             const row = this.closest(".table__row-comment");
-            submitBtn.addEventListener("click", function () {
+            submitBtnDeleteForm.addEventListener("click", function () {
                 row.style.cssText = `display: none`;
                 modalDelete.classList.remove("active");
                 overlay.classList.remove("active");
             });
         })
     })
+
+    let currentRow = null;
+
+    document.querySelectorAll(".edit-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            editCommentForm.classList.add("active");
+            overlay.classList.add("active");
+            currentRow = this.closest(".table__row-comment");
+        });
+    });
+
+    submitBtnEditCommentForm.addEventListener("click", function () {
+        const content = document.getElementById("content").value;
+        if (currentRow) {
+            currentRow.querySelector(".cell-content").textContent = content;
+        }
+        editCommentForm.classList.remove("active");
+        overlay.classList.remove("active");
+    });
+
 }
 
 
