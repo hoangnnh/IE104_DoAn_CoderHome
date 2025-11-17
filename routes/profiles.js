@@ -6,8 +6,8 @@ const isAuth = require("../middleware/isAuth");
 
 router.get("/", isAuth, profileController.getAllUser);
 
-router.get("/:id", profileController.getUser);
+router.get("/:id", isAuth, profileController.getUser);
 
-router.put("/:id", profileController.editUserProfile);
+router.patch("/:id", isAuth, profileController.editUserProfile);
 
 module.exports = router;

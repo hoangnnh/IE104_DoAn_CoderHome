@@ -287,16 +287,23 @@ async function loadUserSetting() {
     overlay.classList.add("active");
     username.placeholder = currentUser.username;
     email.placeholder = currentUser.email;
-    bio.textContent = currentUser.bio;
+    bio.value = currentUser.bio;
   });
 
   submitBtn.addEventListener("click", async () => {
-    const usernameContent = (!username.textContent.length) ? username.placeholder : username.textContent;
-    const emailContent = (!email.textContent.length) ? email.placeholder : email.textContent;
-    const bioContent = (!bio.textContent.length) ? bio.placeholder : bio.textContent;
+    const usernameContent = username.value.trim() || username.placeholder;
+    const emailContent = email.value.trim() || email.placeholder;
+    const bioContent = bio.value.trim() || bio.value;
+
+    console.log('Current User ID:', currentUser._id);
+    console.log('Data to send:', {
+      username: usernameContent,
+      email: emailContent,
+      bio: bioContent
+    });
 
     await fetch(`/profiles/${currentUser._id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
@@ -307,7 +314,7 @@ async function loadUserSetting() {
       })
     });
     window.location.reload();
-  })
+  });
 }
 //
 loadWriteStoryButton();
