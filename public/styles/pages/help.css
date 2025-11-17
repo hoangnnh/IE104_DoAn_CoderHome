@@ -161,16 +161,16 @@
 }
 
 .help_container .help_item {
-    /* height: 450px;
+    height: 450px;
     width: 330px;
     min-width: 310px;
     float: left;
     border-radius: 1em;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding: 20px; */
+    padding: 20px; 
 
     flex-basis: 330px; /* Base width */
-    flex-grow: 1;
+    flex-grow: 0;
     min-width: 310px;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
@@ -242,4 +242,10 @@
         font-size: 0.8rem;
     }
 
+}
+
+@media (max-width: 350px){
+    .help_container .help_item {
+        min-width: 280px;
+    }
 }

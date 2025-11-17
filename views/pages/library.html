@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/token.css">
+  <link rel="stylesheet" href="/styles/base/fonts.css">
+  <link rel="stylesheet" href="/styles/pages/library.css">
+  <link rel="stylesheet" href="/fonts/themify-icons/themify-icons.css">
+</head>
+
+<body>
+  <coderhome-header></coderhome-header>
+  <toggle-menu></toggle-menu>
+  <toggle-avatar-option></toggle-avatar-option>
+  <div class="library-body">
+    <div class="body-container">
+      <div class="container-main-part">
+        
+        <div class="main-header">
+          <h1>Your Library</h1>
+
+          <nav class="library-nav">
+            <a href="#" class="library-nav__items active" data-tab="yourlist">
+              Your List
+            </a>
+
+            <a href="#" class="library-nav__items" data-tab="history">
+              History
+            </a>
+          </nav>
+        </div>
+
+        <div id="section-yourlist" class="library-section">
+          <div class="create-box">
+            <p class="create-title">Create your own list</p>
+            <p class="create-desc">Organize and Share stories</p>
+            <button id="btnCreateList" class="create-btn">Get started</button>
+          </div>
+
+          <div id="yourListContainer" class="list-container">
+          </div>
+        </div>
+
+        <div id="section-history" class="library-section" style="display:none;">
+          <h3 class="history-title">Your Reading History</h3>
+          <button class = "btn-delete">Delete History</button>
+          <div id="historyContainer" class="list-container">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/scripts/library.js"></script>
+  <script type="module" src="/scripts/main.js"></script>
+</body>
+</html>
