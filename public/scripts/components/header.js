@@ -20,7 +20,7 @@ const headerHTML = `
       <img alt="write icon" src=/images/write-icon.png>
       <span>Write</span>
     </a>
-    <button class=header__notification-btn title=Notifications>
+    <button id="notification-trigger-btn" class=header__notification-btn title=Notifications>
       <img alt="notification icon" src=/images/notification-icon.png>
     </button>
     <a id="avatar-link" href="#" aria-label="Profile">
@@ -43,11 +43,16 @@ class Header extends HTMLElement {
     this.avatarLink = this.shadowRoot.getElementById('avatar-link');
     this.avatarImg = this.shadowRoot.getElementById('avatar-img');
     this.menuTrigger = this.shadowRoot.getElementById('menu-trigger-btn');
+    this.notificationTrigger = this.shadowRoot.getElementById('notification-trigger-btn');
   }
 
   async connectedCallback() {
-    this.shadowRoot.getElementById('menu-trigger-btn').addEventListener('click', () => {
+    this.menuTrigger.addEventListener('click', () => {
       document.dispatchEvent(new CustomEvent('toggle-menu'));
+    });
+
+    this.notificationTrigger.addEventListener('click', () => {
+      document.dispatchEvent(new CustomEvent('toggle-notifications'));
     });
 
     this.avatarLink.addEventListener("click", (e) => {
