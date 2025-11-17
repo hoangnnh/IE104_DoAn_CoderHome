@@ -47,7 +47,7 @@ async function loadCoderhomePost() {
                         <span style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                     </div>
@@ -118,7 +118,7 @@ async function loadDevToPost(req, res) {
                           <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> ${p.comments_count}</span>
                       </div>
                       <div class="post__interact-action">
-                          <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
+                          <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                       </div>
