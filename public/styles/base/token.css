@@ -72,6 +72,8 @@
     --line-height-heading: 1.2;
 
     /* Spacing */
+    --space-xxs: 2px;
+    /* 0.125rem */
     --space-xs: 4px;
     /* 0.25rem */
     --space-sm: 8px;
