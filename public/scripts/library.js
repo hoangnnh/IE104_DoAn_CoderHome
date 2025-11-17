@@ -58,16 +58,24 @@ async function loadHistory() {
   const container = document.getElementById("historyContainer");
 
   container.innerHTML = data.map(post => `
-    <div class="list-card">
-      <div class="list-info">
-        <h3>${post.title}</h3>
-        <p>${post.description.substring(0, 100)}...</p>
-      </div>
-      <div class="list-thumbnail1">
-        <img src="${post.thumbnailUrl}" />
-      </div>
+  <div class="list-card" data-id="${post._id}">
+    <div class="list-info">
+      <h3>${post.title}</h3>
+      <p>${post.description.substring(0, 100)}...</p>
     </div>
-  `).join("");
+    <div class="list-thumbnail1">
+      <img src="${post.thumbnailUrl}" />
+    </div>
+  </div>
+`).join("");
+
+//Thêm sự kiện click sau khi render
+document.querySelectorAll(".list-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const id = card.dataset.id;
+    window.location.href = `/post/${id}`;
+  });
+});
 }
 
 // Delete History
