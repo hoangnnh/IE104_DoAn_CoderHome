@@ -18,6 +18,11 @@ cancelBtn.addEventListener("click", () => {
     overlay.classList.remove("active");
 });
 
+overlay.addEventListener("click", () => {
+    modalDelete.classList.remove("active");
+    overlay.classList.remove("active");
+});
+
 async function loadManageUsers() {
     const res = await fetch("/profiles/");
     const users = await res.json();

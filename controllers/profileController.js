@@ -49,4 +49,30 @@ async function getUser(req, res) {
   }
 }
 
-module.exports = { getUser, getAllUser };
+async function editUserProfile(req, res) {
+  try {
+    const { id } = req.params;
+        const updateData = {
+            username: req.body.username,
+            email: req.body.email,
+            bio: req.body.bio
+        };
+
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $set: updateData },
+            { new: true, runValidators: true }
+        );
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        return res.json({
+            message: "Profile updated successfully",
+            user: updatedUser
+        });
+  } catch (error) {
+    
+  }
+}
+
+module.exports = { getUser, getAllUser, editUserProfile };

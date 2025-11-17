@@ -1,5 +1,6 @@
 const userId = location.pathname.split("/").pop();
 
+
 async function loadWriteStoryButton() {
   const res = await fetch(`/current/`);
   const currentUser = await res.json();
@@ -9,9 +10,9 @@ async function loadWriteStoryButton() {
 
   if (user._id == currentUser._id) {
     btnContainer.innerHTML = `
-        <button class="tell-story-button">
+        <a href="/write" class="tell-story-button">
           <img src="" alt="" /> Tell us your story
-        </button>
+        </a>
     `;
   } else {
     btnContainer.classList.add("hidden");
@@ -43,31 +44,27 @@ async function loadPostedPost() {
         <hr class="divider">
         <article class="post__card">
         <div class="post__author">
-            <img src="${
-              post.author.profilePicture
-            }" alt="author" class="post__author-img"/>
-                <a href="/profile/${
-                  post.author._id
-                }" class="post__author-name">${
-            post.author?.username || "Unknown"
+            <img src="${post.author.profilePicture
+          }" alt="author" class="post__author-img"/>
+                <a href="/profile/${post.author._id
+          }" class="post__author-name">${post.author?.username || "Unknown"
           }</a>
         </div>
         <div class="post__left">
             <div class="post__left-text">
                 <div class="post__content">
-                    <a href="/post/${post._id}" class="post__content-title">${
-            post.title
+                    <a href="/post/${post._id}" class="post__content-title">${post.title
           }</a>
                     <p class="post__content-overview">${post.description}</p>
                 </div>
                 <div class="post__interact">
                     <div class="post__interact-meta">
                         <span class="created_date">${new Date(
-                          post.createdAt
-                        ).toLocaleDateString("vi-VN", {
-                          day: "2-digit",
-                          month: "2-digit",
-                        })}</span>
+            post.createdAt
+          ).toLocaleDateString("vi-VN", {
+            day: "2-digit",
+            month: "2-digit",
+          })}</span>
                         <span><img src="/images/show-post-img/Heart.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
                         <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
@@ -105,9 +102,8 @@ async function loadComment() {
         <hr class="divider"/>
     <div class="comment__container">
       <div class="comment__header">
-          <a href="/post/${comment.post?._id || "#"}" class="post__title">${
-          comment.post?.title || "Post not found!"
-        }</a>
+          <a href="/post/${comment.post?._id || "#"}" class="post__title">${comment.post?.title || "Post not found!"
+          }</a>
           <p class="post__date">${new Date(
             comment.createdAt
           ).toDateString()}</p>
@@ -137,7 +133,6 @@ async function loadBio() {
       bioContainer.innerHTML = `
       <hr class="divider">
   <p class="user__bio">${user.bio}</p>
-  <button class="add-bio">Add Bio</button>
   `;
     } else {
       bioContainer.innerHTML = `
@@ -240,7 +235,7 @@ async function loadUserSetting() {
           <p class="setting__title">Profile</p>
           <p class="setting__description">Customize your Profile</p>
         </div>
-        <button class="setting__update-btn">Update</button>
+        <button class="setting__update-btn edit-profile">Update</button>
       </div>
       <div class="setting__content">
         <div>
@@ -262,6 +257,57 @@ async function loadUserSetting() {
   } else {
     settingContainer.classList.add("hidden");
   }
+
+
+  // Them chuc nang edit profile
+  const editProfileForm = document.querySelector(".edit-profile__form");
+  const cancelBtn = document.querySelector(".cancel-btn");
+  const submitBtn = document.querySelector(".submit-btn");
+  const overlay = document.querySelector(".overlay");
+  const username = document.getElementById("username");
+  const email = document.getElementById("email");
+  const bio = document.getElementById("bio");
+
+
+
+  const settingUpdateBtnProfile = document.querySelector(".edit-profile");
+
+  cancelBtn.addEventListener("click", () => {
+    editProfileForm.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+
+  overlay.addEventListener("click", () => {
+    editProfileForm.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+
+  settingUpdateBtnProfile.addEventListener("click", function () {
+    editProfileForm.classList.add("active");
+    overlay.classList.add("active");
+    username.placeholder = currentUser.username;
+    email.placeholder = currentUser.email;
+    bio.textContent = currentUser.bio;
+  });
+
+  submitBtn.addEventListener("click", async () => {
+    const usernameContent = (!username.textContent.length) ? username.placeholder : username.textContent;
+    const emailContent = (!email.textContent.length) ? email.placeholder : email.textContent;
+    const bioContent = (!bio.textContent.length) ? bio.placeholder : bio.textContent;
+
+    await fetch(`/profiles/${currentUser._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: usernameContent,
+        email: emailContent,
+        bio: bioContent
+      })
+    });
+    window.location.reload();
+  })
 }
 //
 loadWriteStoryButton();
@@ -290,7 +336,6 @@ function responsive(e) {
 
 mq.addEventListener("change", responsive);
 responsive(mq);
-// Event
 
 const tabs = document.querySelectorAll(".profile-nav__items");
 const contents = document.querySelector(".profile-content");
