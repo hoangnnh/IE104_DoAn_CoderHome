@@ -14,7 +14,7 @@ const postSchema = new Schema({
   thumbnailUrl: {
     type: String,
     required: false,
-    default: '/images/default-thumbnail.png'
+    default: "/images/samples/default-thumbnail.png",
   },
   contentHTML: {
     type: String,
@@ -44,9 +44,9 @@ const postSchema = new Schema({
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Comment"
-    }
-  ]
+      ref: "Comment",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Post", postSchema);
