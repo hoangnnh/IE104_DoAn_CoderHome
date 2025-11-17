@@ -407,6 +407,58 @@ body {
   color: #666;
   margin: 4px 0;
 }
+/* Setting */
+.user__settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1rem 1rem;
+  background-color: #f7f7f7;
+  border-radius: 1.25rem;
+  height: auto;
+}
+.user__settings.hidden {
+  display: none;
+}
+.setting__content {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.setting__content div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.setting__title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+.setting__description {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #666;
+  margin: 0;
+}
+.setting__update-btn {
+  border-radius: 9999px;
+  border: none;
+  height: 3rem;
+  background-color: black;
+  color: white;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+.setting__update-btn:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
 /* Social Links */
 
 .user__social-links {
@@ -471,11 +523,11 @@ body {
     max-width: 90%;
     box-sizing: border-box;
   }
-
+  /* Nav */
   .profile-nav {
     justify-content: center;
   }
-
+  /* side profile */
   .side-profile {
     display: flex;
     max-height: 6rem;
@@ -512,6 +564,7 @@ body {
     align-items: center;
     line-height: normal;
   }
+  /* About - Sideprofile */
   .about {
     font-size: 1.75rem;
     font-weight: bold;
@@ -598,12 +651,22 @@ body {
   }
   .user__posted-post {
   }
-
+  /* Setting */
+  .setting__content {
+    margin: 0 1rem;
+  }
+  .setting__title {
+    font-size: 1.5rem;
+  }
+  .setting__description {
+    font-size: 1.255rem;
+  }
+  /* Social Links */
   .user__social-links {
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     gap: 1.25rem;
     width: -webkit-fill-available;
     height: auto;
