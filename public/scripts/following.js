@@ -54,7 +54,7 @@ async function loadPost() {
                         <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                     </div>
@@ -109,13 +109,13 @@ async function loadPostByTopic(topic) {
                         <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                     </div>
                 </div>
             </div>
-            <img src="/images/post-thumbnail.png" class="post__img"/>
+            <img src="/images/samples/default-thumbnail.png" class="post__img"/>
         </div>
         </article>
     `

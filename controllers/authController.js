@@ -14,23 +14,21 @@ async function postRegister(req, res) {
     const { firstName, lastName, email, password } = req.body;
     const username = `${firstName}${lastName}`.toLowerCase();
 
-    // Check if a user is already existed
     const existingUser = await User.findOne({ email: email });
 
-    // If exists, re-render the page with an error
     if (existingUser) {
       return res.redirect('/login');
     }
-    // Password encryption
+
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Save new user to DB
+
     const user = new User({
       username,
       email,
       password: hashedPassword,
       bio: '',
-      profilePicture: '/images/user-avatar.jpg'
+      profilePicture: '/images/samples/default-avt.png'
     });
     await user.save();
     console.log('User created successfully!');
