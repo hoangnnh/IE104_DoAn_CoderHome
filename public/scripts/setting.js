@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </span>
                     <span class="right">
                         <p class="p1">Như Hinh Trịnh</p>
-                        <img src="../../public/images/user-avatar.jpg" alt="" class="right_img">
+                        <img src="images/user-avatar.jpg" alt="" class="right_img">
                     </span>
                 </div>
             </button>

@@ -119,6 +119,20 @@ app.get("/following", (req, res) => {
     res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
 });
+
+// Library Page Route
+ app.get("/library", (req, res) => {
+    if (req.session.isLoggedIn) {
+      res.sendFile(path.join(__dirname, "views/pages/library.html"));
+    } else {
+      res.sendFile(path.join(__dirname, "views/pages/landing.html"));
+    }
+  });
+
+// History Route
+ const historyRoutes = require("./routes/history");
+ app.use("/history", historyRoutes);
+ 
 // Write page
 
 app.get("/write", (req, res) => {
