@@ -16,19 +16,19 @@ const avatarOptionHTML = `
     <ul class="option__list">
         <a href="" class="option__item" id="userProfile">
             <p>Information</p>
-            <img src="/images/account-circle-outline.svg" class="option__item-image">
+            <img src="/images/icons/account-outline-icon.svg" class="option__item-image">
         </a>
         <a href="/settings" class="option__item">
             <p>Setting</p>
-            <img src="/images/cog-outline.svg" class="option__item-image">
+            <img src="/images/icons/gear-icon.svg" class="option__item-image">
         </a>
         <a href="/help" class="option__item">
             <p>Help</p>
-            <img src="/images/help-circle-outline.svg" class="option__item-image">
+            <img src="/images/icons/question-outline-icon.svg" class="option__item-image">
         </a>
         <a href="/logout" class="option__item" id="logoutBtn">
             <p>Log Out</p>
-            <img src="/images/logout.svg" class="option__item-image">
+            <img src="/images/icons/exit-icon.svg" class="option__item-image">
         </a>
     </ul>
 

@@ -74,7 +74,7 @@ h2{
     height: 100vh;
     align-items: center;
     justify-content: center;
-    background-image: url(../../images/body_img.png);
+    background-image: url('/images/pages/about-main-bg.png');
     background-size: 75%;
     background-repeat: no-repeat;
     background-position: center;

@@ -45,7 +45,7 @@
 
 .toggle-menu__item .icon {
     color: var(--color-text-muted);
-    width: calc(0.6 * (var(--icon-base-width)));
+    width: calc(0.8 * (var(--icon-base-width)));
 }
 
 .toggle-menu__item:hover {

@@ -77,12 +77,17 @@
 
 .navbar__icon:hover {
     background: var(--color-gray-lightest);
+    cursor: pointer;
 }
 
 .navbar__avatar {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.navbar__avatar:hover {
+    cursor: pointer;
 }
 
 .navbar__avatar img {

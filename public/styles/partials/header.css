@@ -136,11 +136,11 @@
     cursor: pointer;
     transition: background .2s;
     color: var(--color-text-muted);
-    flex-shrink: 0;
+    padding: var(--space-lg);
 }
 
 .header__notification-btn img {
-    width: 100%;
+    width: var(--icon-base-width);
 }
 
 .header__notification-btn:hover {
