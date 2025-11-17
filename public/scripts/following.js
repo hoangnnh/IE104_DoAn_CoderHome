@@ -50,8 +50,8 @@ async function loadPost() {
                           day: "2-digit",
                           month: "2-digit",
                         })}</span>
-                        <span><img src="/images/show-post-img/Heart.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
+                        <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
+                        <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
                         <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
@@ -105,8 +105,8 @@ async function loadPostByTopic(topic) {
                           day: "2-digit",
                           month: "2-digit",
                         })}</span>
-                        <span><img src="/images/show-post-img/Heart.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/show-post-img/Comment.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
+                        <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
+                        <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
                         <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
