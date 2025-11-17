@@ -12,7 +12,7 @@ function filterPostsByTag(postsArray, targetTag) {
   });
 }
 
-async function loadTopicNav() {}
+// async function loadTopicNav() {}
 
 async function loadPost() {
   const res = await fetch(`/posts/`);
@@ -69,7 +69,7 @@ async function loadPost() {
 }
 async function loadPostByTopic(topic) {
   const res = await fetch("/posts/");
-  const posts = res.json();
+  const posts = await res.json();
   const filteredPosts = filterPostsByTag(posts, topic);
   const container = document.querySelector(".main__content");
 
@@ -147,6 +147,7 @@ const topicContent = document.querySelector(".topic__content");
 const topics = document.querySelectorAll(".topic");
 const fadeLeft = document.querySelector(".fade-left");
 const fadeRight = document.querySelector(".fade-right");
+const scrollBtn = document.querySelector(".scroll-top");
 //
 //Event
 
@@ -165,14 +166,15 @@ tabs.forEach((tab) => {
       loadPost();
       topicContainer.classList.remove("active");
     } else if (type === "topic") {
-      // loadTopicNav();
-      // loadPostByTopic();
+      const activeTopic = document.querySelector(".topic.active");
+      loadPostByTopic(activeTopic.dataset.value);
       topicContainer.classList.add("active");
       updateArrowsAndFade();
     }
   });
 });
 
+//Dropdown
 dropdownHeader.addEventListener("click", (e) => {
   e.preventDefault();
   dropdown.classList.toggle("active");
@@ -188,7 +190,7 @@ dropdownItems.forEach((item) => {
   });
 });
 
-// --------Test--------
+// --------Topic arrow--------
 function updateArrowsAndFade() {
   const scrollLeft = topicContent.scrollLeft;
   const maxScroll = topicContent.scrollWidth - topicContent.clientWidth;
@@ -219,6 +221,7 @@ btnRight.addEventListener("click", () => {
 topicContent.addEventListener("scroll", updateArrowsAndFade);
 window.addEventListener("resize", updateArrowsAndFade);
 
+// load Topic
 topics.forEach((topic) => {
   topic.addEventListener("click", async function (e) {
     e.preventDefault();
@@ -226,10 +229,26 @@ topics.forEach((topic) => {
     topics.forEach((t) => t.classList.remove("active"));
     this.classList.add("active");
 
-    const type = this.dataset.tab;
+    const type = this.dataset.value;
 
     loadPostByTopic(type);
     updateArrows();
+  });
+});
+// Scroll top
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    scrollBtn.style.display = "block";
+  } else {
+    scrollBtn.style.display = "none";
+  }
+});
+
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
   });
 });
 
