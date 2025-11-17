@@ -84,7 +84,7 @@ async function loadPostedPost() {
   } else {
     postedPostContainer.innerHTML = `
     <hr class="divider">
-    <p class="user__no-po-cm-bio">This user hasn't posted any Post yet.</p>
+    <p class="user__no-po-cm-bio">This user hasn't posted any posts yet.</p>
     `;
   }
 }
@@ -166,7 +166,7 @@ async function loadUserMoreInfo() {
   moreInfoContainer.innerHTML = `
   <img
     src="${user.backgroundImg}"
-    alt="<%= user.profilePicture %>-bgm"
+    alt="User background"
     class="user__bg-img"
   />
   <div class="more-info__container">
