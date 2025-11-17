@@ -16,19 +16,19 @@ const avatarOptionHTML = `
     <ul class="option__list">
         <a href="" class="option__item" id="userProfile">
             <p>Information</p>
-            <img src="/images/account-circle-outline.svg" class="option__item-image">
+            <img src="/images/profile-circled-gray.svg" class="option__item-image">
         </a>
         <a href="/settings" class="option__item">
             <p>Setting</p>
-            <img src="/images/cog-outline.svg" class="option__item-image">
+            <img src="/images/settings-gray.svg" class="option__item-image">
         </a>
         <a href="/help" class="option__item">
             <p>Help</p>
-            <img src="/images/help-circle-outline.svg" class="option__item-image">
+            <img src="/images/help-gray.svg" class="option__item-image">
         </a>
         <a href="/logout" class="option__item" id="logoutBtn">
             <p>Log Out</p>
-            <img src="/images/logout.svg" class="option__item-image">
+            <img src="/images/log-out-gray.svg" class="option__item-image">
         </a>
     </ul>
 
@@ -46,62 +46,63 @@ const avatarOptionHTML = `
 `;
 
 class AvatarOption extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: "open" });
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+
+  async connectedCallback() {
+    const template = document.createElement("template");
+    template.innerHTML = avatarOptionCSS + avatarOptionHTML;
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    // DOM elements
+    this.optionBox = this.shadowRoot.getElementById("avatarOption");
+    this.overlay = this.shadowRoot.getElementById("avatarOverlay");
+
+    // Close when clicking outside
+    this.overlay.addEventListener("click", () => this.close());
+
+    // Listen for open/close event from header
+    document.addEventListener("toggle-avatar-option", () => {
+      if (this.optionBox.classList.contains("is-active")) {
+        this.close();
+      } else {
+        this.open();
+      }
+    });
+
+    // Load user info
+    try {
+      const res = await fetch("/current");
+      if (res.ok) {
+        const user = await res.json();
+        this.shadowRoot.getElementById("avatarImg").src = user.profilePicture;
+        this.shadowRoot.getElementById("userName").textContent = user.username;
+        this.shadowRoot.getElementById(
+          "userProfile"
+        ).href = `/profile/${user._id}`;
+      }
+    } catch (e) {
+      console.error("Cannot load user info in avatar option:", e);
     }
 
-    async connectedCallback() {
-        const template = document.createElement("template");
-        template.innerHTML = avatarOptionCSS + avatarOptionHTML;
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+    // Enable animation after render
+    setTimeout(() => {
+      this.optionBox.classList.add("ready");
+      this.overlay.classList.add("ready");
+    }, 0);
+  }
 
-        // DOM elements
-        this.optionBox = this.shadowRoot.getElementById("avatarOption");
-        this.overlay = this.shadowRoot.getElementById("avatarOverlay");
+  open() {
+    this.optionBox.classList.add("is-active");
+    this.overlay.classList.add("is-active");
+  }
 
-        // Close when clicking outside
-        this.overlay.addEventListener("click", () => this.close());
-
-        // Listen for open/close event from header
-        document.addEventListener("toggle-avatar-option", () => {
-            if (this.optionBox.classList.contains("is-active")) {
-                this.close();
-            } else {
-                this.open();
-            }
-        });
-
-        // Load user info
-        try {
-            const res = await fetch("/current");
-            if (res.ok) {
-                const user = await res.json();
-                this.shadowRoot.getElementById("avatarImg").src = user.profilePicture;
-                this.shadowRoot.getElementById("userName").textContent = user.username;
-                this.shadowRoot.getElementById("userProfile").href = `/profile/${user._id}`;
-                
-            }
-        } catch (e) {
-            console.error("Cannot load user info in avatar option:", e);
-        }
-
-        // Enable animation after render
-        setTimeout(() => {
-            this.optionBox.classList.add("ready");
-            this.overlay.classList.add("ready");
-        }, 0);
-    }
-
-    open() {
-        this.optionBox.classList.add("is-active");
-        this.overlay.classList.add("is-active");
-    }
-
-    close() {
-        this.optionBox.classList.remove("is-active");
-        this.overlay.classList.remove("is-active");
-    }
+  close() {
+    this.optionBox.classList.remove("is-active");
+    this.overlay.classList.remove("is-active");
+  }
 }
 
 customElements.define("toggle-avatar-option", AvatarOption);
