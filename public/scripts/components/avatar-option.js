@@ -18,7 +18,7 @@ const avatarOptionHTML = `
             <p>Information</p>
             <img src="/images/account-circle-outline.svg" class="option__item-image">
         </a>
-        <a href="/setting" class="option__item">
+        <a href="/settings" class="option__item">
             <p>Setting</p>
             <img src="/images/cog-outline.svg" class="option__item-image">
         </a>
