@@ -26,11 +26,11 @@ const userSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    default: "/images/samples/default-avt.png",
+    default: "/images/samples/author-avt-2.jpg",
   },
   backgroundImg: {
     type: String,
-    default: "/images/samples/default-bg.jpg",
+    default: "/images/samples/user-bg.jpg",
   },
   createdAt: {
     type: Date,
@@ -55,43 +55,43 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Comment",
       default: [],
-    }
+    },
   ],
   readingHistory: [
     {
       type: Schema.Types.ObjectId,
       ref: "Post",
-      default: []
-    }
+      default: [],
+    },
   ],
   followers: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: [],
-    }
+    },
   ],
 
   role: {
-    type: String, 
-    default: "User"
+    type: String,
+    default: "User",
   },
-  
+
   followingAuthors: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: [],
-    }
+    },
   ],
 
-    history: [
-  {
-    type: Schema.Types.ObjectId,
-    ref: "Post",
-    default: [],
-  }
-],
+  history: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+      default: [],
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);
