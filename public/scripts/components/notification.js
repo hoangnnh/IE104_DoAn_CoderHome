@@ -25,14 +25,14 @@ const modalHTML = `
 const mockNotifications = [
   {
     id: 1,
-    user: { name: "Khoibui", avatar: "/images/user-avatar.jpg" },
+    user: { name: "Khoibui", avatar: "/images/samples/author-avt-2.jpg" },
     text: "has just posted a new article...",
     time: "2 min ago",
     unread: true,
   },
   {
     id: 2,
-    user: { name: "Hoang Teddy", avatar: "/images/user-avatar.jpg" },
+    user: { name: "Hoang Teddy", avatar: "/images/samples/author-avt-2.jpg" },
     text: "liked your comment.",
     time: "15 min ago",
     unread: true,
@@ -53,7 +53,7 @@ const mockNotifications = [
   },
   {
     id: 5,
-    user: { name: "Admin", avatar: "/images/user-avatar.jpg" },
+    user: { name: "Admin", avatar: "/images/samples/author-avt-2.jpg" },
     text: "Welcome to Coderhome!",
     time: "1 day ago",
     unread: false,

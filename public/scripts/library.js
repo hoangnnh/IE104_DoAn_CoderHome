@@ -31,7 +31,7 @@ function loadYourList() {
   container.innerHTML = `
     <div class="list-card">
       <div class="list-info">
-        <img class="avatar" src="/images/user-avatar.jpg" />
+        <img class="avatar" src="/images/samples/author-avt-2.jpg"/>
         <p class="list-author">YourName</p>
         <h3 class="list-title">Web Dev List</h3>
         <p class="list-count">3 posts</p>

@@ -12,7 +12,7 @@ function getRegister(req, res) {
 async function postRegister(req, res) {
   try {
     const { firstName, lastName, email, password } = req.body;
-    const username = `${firstName}${lastName}`.toLowerCase();
+    const username = `${firstName} ${lastName}`.trim();
 
     const existingUser = await User.findOne({ email: email });
 
@@ -27,8 +27,6 @@ async function postRegister(req, res) {
       username,
       email,
       password: hashedPassword,
-      bio: '',
-      profilePicture: '/images/samples/default-avt.png'
     });
     await user.save();
     console.log('User created successfully!');

@@ -9,12 +9,6 @@ const { JSDOM } = require('jsdom');
 const window = new JSDOM('').window;
 const DOMPurify = createDomPurify(window);
 
-function getNewPost(req, res) {
-  res.render("pages/new-post", {
-    pageTitle: "Create New Post",
-  });
-}
-
 
 async function createPost(req, res) {
   const md = markdownit({
@@ -44,7 +38,30 @@ async function createPost(req, res) {
       author: authorId,
     });
 
+
+
     const savedPost = await post.save();
+
+    // await User.findByIdAndUpdate(req.user._id, {
+    //   $push: { postedPosts: post._id } // use $push/$addToSet per your intended behavior
+    // });
+
+    const userId = (req.user && req.user._id) || (req.session && req.session.userId) || null;
+    if (!userId) {
+      console.error('createPost: No authenticated user found (req.user missing). Post created but not linked to any user:', post._id);
+    } else {
+      // Use $addToSet to avoid duplicate entries; use $push if you explicitly want duplicates
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $addToSet: { postedPosts: post._id } },
+        { new: true, select: '_id postedPosts' }
+      );
+      if (!updatedUser) {
+        console.error('createPost: Failed to update user postedPosts for userId:', userId);
+      } else {
+        console.log('createPost: User postedPosts updated. userId:', userId, 'newCount:', updatedUser.postedPosts.length);
+      }
+    }
 
     res.redirect(`/post/${savedPost._id}`);
   } catch (err) {
@@ -101,7 +118,6 @@ async function getStats(req, res) {
 }
 
 module.exports = {
-  getNewPost,
   createPost,
   getPost,
   getAllPosts,
