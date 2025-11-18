@@ -441,9 +441,15 @@ a {
   border-radius: var(--border-radius-pill);
   border: none;
   background-color: var(--color-black);
+<<<<<<< HEAD
   color: var(--color-white);
   padding: var(--space-sm) var(--space-lg);
   font-size: var(--font-size-md);
+=======
+  color: white;
+  padding: 0.15rem 1rem;
+  font-size: 1rem;
+>>>>>>> 199bf9f35a454feb65b86a8d98fe05dd4374d810
   transition: all 0.3s ease;
 }
 

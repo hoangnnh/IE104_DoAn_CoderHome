@@ -17,7 +17,7 @@ async function postRegister(req, res) {
     const existingUser = await User.findOne({ email: email });
 
     if (existingUser) {
-      return res.redirect('/login');
+      return res.json({state: "existed", redirectUrl: "/login"});
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -30,10 +30,10 @@ async function postRegister(req, res) {
     });
     await user.save();
     console.log('User created successfully!');
-    res.redirect('/login');
+    return res.json({state: "success", redirectUrl: "/login"})
   } catch (err) {
     console.error('Registration Error:', err);
-    res.redirect('/register');
+    return res.json({state: "error", redirectUrl: "/register"});
   }
 };
 
