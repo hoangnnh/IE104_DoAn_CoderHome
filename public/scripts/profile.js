@@ -36,51 +36,107 @@ async function loadPostedPost() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
   const postedPostContainer = document.querySelector(".profile-content");
-  if (user.postedPosts && user.postedPosts.length > 0) {
-    postedPostContainer.innerHTML = user.postedPosts
-      .map(
-        (post) =>
-          ` 
+
+  const posts = Array.isArray(user.postedPosts) ? user.postedPosts.slice() : [];
+
+  if (posts.length > 0) {
+    // Sort newest first by createdAt (fallback to _id timestamp if createdAt missing)
+    posts.sort((a, b) => {
+      const aTime = a?.createdAt ? new Date(a.createdAt).getTime() : (a?._id ? parseInt(a._id.substring(0, 8), 16) * 1000 : 0);
+      const bTime = b?.createdAt ? new Date(b.createdAt).getTime() : (b?._id ? parseInt(b._id.substring(0, 8), 16) * 1000 : 0);
+      return bTime - aTime;
+    });
+
+    postedPostContainer.innerHTML = posts
+      .map((post) => {
+        const author = post.author || {};
+        const authorAvatar = author.profilePicture || '/images/samples/default-avt.png';
+        const authorName = author.username || 'Unknown';
+        const authorId = author._id || (author.id ? author.id : '#');
+
+        const createdDate = post.createdAt ? new Date(post.createdAt) : null;
+        const formattedDate = createdDate
+          ? createdDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })
+          : '';
+
+        return ` 
         <hr class="divider">
         <article class="post__card">
-        <div class="post__author">
-            <img src="${post.author.profilePicture
-          }" alt="author" class="post__author-img"/>
-                <a href="/profile/${post.author._id
-          }" class="post__author-name">${post.author?.username || "Unknown"
-          }</a>
-        </div>
-        <div class="post__left">
+          <div class="post__author">
+            <img src="${authorAvatar}" alt="author" class="post__author-img"/>
+            <a href="/profile/${authorId}" class="post__author-name">${authorName}</a>
+          </div>
+          <div class="post__left">
             <div class="post__left-text">
-                <div class="post__content">
-                    <a href="/post/${post._id}" class="post__content-title">${post.title
-          }</a>
-                    <p class="post__content-overview">${post.description}</p>
+              <div class="post__content">
+                <a href="/post/${post._id}" class="post__content-title">${post.title}</a>
+                <p class="post__content-overview">${post.description || ''}</p>
+              </div>
+              <div class="post__interact">
+                <div class="post__interact-meta">
+                  <span class="created_date">${formattedDate}</span>
+                  <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
+                  <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                 </div>
-                <div class="post__interact">
-                    <div class="post__interact-meta">
-                        <span class="created_date">${new Date(
-            post.createdAt
-          ).toLocaleDateString("vi-VN", {
-            day: "2-digit",
-            month: "2-digit",
-          })}</span>
-                        <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
-                    </div>
-                    <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-                    </div>
+                <div class="post__interact-action">
+                  <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
+                  <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                  <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                 </div>
+              </div>
             </div>
-            <img src="/images/samples/default-thumbnail.png" class="post__img"/>
-        </div>
+            <img src="${post.thumbnailUrl || '/images/samples/default-thumbnail.png'}" class="post__img"/>
+          </div>
         </article>
-    `
-      )
-      .join("");
+      `;
+      })
+      .join('');
+
+    // if (user.postedPosts && user.postedPosts.length > 0) {
+    //   postedPostContainer.innerHTML = user.postedPosts
+    //     .map(
+    //       (post) =>
+    //         ` 
+    //       <hr class="divider">
+    //       <article class="post__card">
+    //       <div class="post__author">
+    //           <img src="${post.author.profilePicture
+    //         }" alt="author" class="post__author-img"/>
+    //               <a href="/profile/${post.author._id
+    //         }" class="post__author-name">${post.author?.username || "Unknown"
+    //         }</a>
+    //       </div>
+    //       <div class="post__left">
+    //           <div class="post__left-text">
+    //               <div class="post__content">
+    //                   <a href="/post/${post._id}" class="post__content-title">${post.title
+    //         }</a>
+    //                   <p class="post__content-overview">${post.description}</p>
+    //               </div>
+    //               <div class="post__interact">
+    //                   <div class="post__interact-meta">
+    //                       <span class="created_date">${new Date(
+    //           post.createdAt
+    //         ).toLocaleDateString("vi-VN", {
+    //           day: "2-digit",
+    //           month: "2-digit",
+    //         })}</span>
+    //                       <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
+    //                       <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
+    //                   </div>
+    //                   <div class="post__interact-action">
+    //                       <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
+    //                       <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+    //                       <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
+    //                   </div>
+    //               </div>
+    //           </div>
+    //           <img src="/images/samples/default-thumbnail.png" class="post__img"/>
+    //       </div>
+    //       </article>
+    //   `
+    //     )
+    //     .join("");
   } else {
     postedPostContainer.innerHTML = `
     <hr class="divider">
