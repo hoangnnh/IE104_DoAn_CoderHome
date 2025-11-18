@@ -408,23 +408,12 @@ body {
     font-size: 1.75rem;
   }
   /* Chỉnh nav */
-
   .nav__items {
     padding: 0.375rem 1.25rem;
     font-size: 0.75rem;
     border: 1px solid #fff;
   }
   /* Topic nav */
-  /* .dropdown__header-item,
-  .dropdown__item,
-  .topic {
-    padding: 0.375rem 1.25rem;
-    font-size: 0.75rem;
-  }
-  .dropdown__container,
-  .topic.active {
-    border: 1px solid #111;
-  } */
   .following__nav {
     gap: 0.5rem;
   }
