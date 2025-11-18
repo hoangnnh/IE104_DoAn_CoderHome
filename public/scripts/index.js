@@ -191,13 +191,6 @@ async function loadDevToPost(isInitial = true) {
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
-    // Add loading indicator if there are more posts
-    if (hasMore) {
-      addLoadingIndicator();
-    } else {
-      removeLoadingIndicator();
-    }
-
     currentPage++;
   } catch (err) {
     console.error("Error fetching Dev.to posts:", err);
