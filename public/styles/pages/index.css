@@ -67,7 +67,14 @@ li:hover {
     justify-content: center;
     max-width: 1280px;
     margin: 0 auto;
+    align-items: flex-start;
     box-sizing: border-box;
+}
+
+.main__content {
+    max-width: 800px;
+    min-width: 0;
+    flex: 1;
 }
 
 .post {
@@ -124,7 +131,7 @@ li:hover {
 .post__interact-meta {
     display: flex;
     gap: 1rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 .post__interact-action {
