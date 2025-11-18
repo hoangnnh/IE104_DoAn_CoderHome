@@ -21,7 +21,7 @@ async function getUser(req, res) {
       .populate({
         path: "postedPosts",
         select:
-          "title description content author thumbnailUrl category createdAt",
+          "title description contentHTML author thumbnailUrl category createdAt",
         populate: { path: "author", select: "username profilePicture" },
       })
       .populate({

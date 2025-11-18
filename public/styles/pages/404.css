@@ -1,0 +1,59 @@
+body {
+    background-color: var(--color-surface);
+    font-family: var(--font-family-heading);
+    color: var(--color-text-body);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.container-404 {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.title-404 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    font-size: 8rem; /* 128px */
+    color: var(--color-text-heading);
+    line-height: 1;
+    margin: 0;
+}
+
+.subtitle-404 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xxl);
+    color: var(--color-text-heading);
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.message-404 {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+}
+
+.button-404 {
+    /* Reusing button styles from your token system */
+    font-family: var(--font-family-heading);
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    border: var(--border-width) solid var(--color-primary);
+    border-radius: var(--border-radius-pill);
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+}
+
+.button-404:hover {
+    background-color: var(--color-gray-darkest);
+    transform: translateY(-1px);
+}

@@ -11,7 +11,7 @@ const Post = require("./models/post");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// --- Database Connection ---
+// Database Connection
 const MONGODB_URI =
   "mongodb+srv://23520532:23520532@coderhome.0rpsyv7.mongodb.net/?appName=CoderHome";
 
@@ -20,11 +20,10 @@ mongoose
   .then(() => console.log("Successfully connected to MongoDB!"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// --- View Engine Setup ---
-// Set EJS to template engine
-app.set("view engine", "ejs");
-// Set views folder
-app.set("views", path.join(__dirname, "views"));
+// // Set EJS to template engine
+// app.set("view engine", "ejs");
+// // Set views folder
+// app.set("views", path.join(__dirname, "views"));
 
 // --- Middleware ---
 // Serve static files (like CSS, images) from the 'public' folder
@@ -51,7 +50,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// --- Routes ---
 // import routes from auth.js
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
@@ -170,6 +168,11 @@ app.get("/settings", (req, res) => {
   } else {
     res.sendFile(path.join(__dirname, "views/pages/landing.html"));
   }
+});
+
+// 404 pages
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, "views/pages/404.html"));
 });
 
 // --- Server Startup ---
