@@ -20,7 +20,6 @@ async function submitLogInForm(e) {
     }
 
     else if (loginState.state === "success") {
-        alert("Login Successful!");
         window.location.href = loginState.redirectUrl;
     }
 
