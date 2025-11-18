@@ -8,7 +8,6 @@ a {
 }
 body {
   font-family: "Lora";
-  font-size: 16px;
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -288,7 +287,6 @@ body {
 .post__left-text {
   display: flex;
   flex: 1;
-  min-width: 15rem;
   flex-direction: column;
   width: 100%s;
 }
@@ -369,6 +367,11 @@ body {
   transform: scale(1.05);
 }
 
+.post__interact-meta span {
+  gap: 0.25rem;
+  display: inline-flex;
+  font-size: 0.625rem;
+}
 .divider {
   border: none;
   height: 2px;
@@ -388,7 +391,6 @@ body {
   body {
     width: 100%;
     height: 100%;
-    font-size: 6px;
   }
   .container {
     display: flex;
@@ -397,20 +399,125 @@ body {
     justify-content: center;
     gap: 1rem;
   }
+  /* Xóa date */
+  .created_date {
+    display: none !important;
+  }
+  /* Page Title */
+  .page__title {
+    font-size: 1.75rem;
+  }
+  /* Chỉnh nav */
+
+  .nav__items {
+    padding: 0.375rem 1.25rem;
+    font-size: 0.75rem;
+    border: 1px solid #fff;
+  }
+  /* Topic nav */
+  /* .dropdown__header-item,
+  .dropdown__item,
+  .topic {
+    padding: 0.375rem 1.25rem;
+    font-size: 0.75rem;
+  }
   .dropdown__container,
   .topic.active {
     border: 1px solid #111;
+  } */
+  .following__nav {
+    gap: 0.5rem;
   }
   .nav__items {
-    border: 1px solid #fff;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.7rem;
   }
+
+  /* Dropdown */
+  .dropdown__container {
+    max-width: 9rem;
+    border-width: 1px;
+  }
+  .dropdown__header {
+    height: 1.75rem !important;
+  }
+  .dropdown__header-item,
+  .dropdown__item {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.7rem;
+  }
+  .arrow {
+    margin: 0 0.5rem;
+  }
+
+  /* Topic Container */
+  .topic__container {
+    gap: 0.5rem;
+  }
+  /* Thanh scroll trái phải */
+  .scroll-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  /* Ẩn fade khi màn hình quá nhỏ (che mất nội dung) */
+  .fade {
+    display: none !important;
+  }
+  /* Topic item */
+  .topic {
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.75rem;
+    line-height: 1 !important;
+    height: auto;
+    white-space: nowrap;
+    border-radius: 1.5rem;
+  }
+  .topic.active {
+    padding: 0.2rem 0.5rem !important;
+    border-width: 1px;
+  }
+
+  /* Post */
+  .post__left {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .post__left-text {
+    width: 100%;
+  }
+  .post__interact-action {
+    gap: 0.25rem;
+  }
+  .post__interact-meta span {
+    display: inline-flex;
+    gap: 0.1rem;
+    align-items: center;
+  }
+  .post__img {
+    width: 100%;
+    height: auto;
+    align-self: center;
+  }
+  .react-icon-meta {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+  .react-icon {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+
   .post__author-name {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
   .post__content-title {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
   .post__content-overview {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+  }
+  .divider {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
   }
 }
