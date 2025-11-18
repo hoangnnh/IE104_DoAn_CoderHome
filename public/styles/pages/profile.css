@@ -43,7 +43,7 @@ a {
 
 .user__avatar {
   border-radius: var(--border-radius-pill);
-  height: calc(1.5*var(--icon-base-height));
+  height: calc(1.5 * var(--icon-base-height));
 }
 
 .user__name {
@@ -231,7 +231,8 @@ a {
 .react-icon {
   width: 1.25rem;
   height: 1.25rem;
-  filter: brightness(0) saturate(100%) invert(44%) sepia(5%) saturate(0%) brightness(85%) contrast(85%);
+  filter: brightness(0) saturate(100%) invert(44%) sepia(5%) saturate(0%)
+    brightness(85%) contrast(85%);
 }
 
 .post__interact-meta .react-icon:hover,
@@ -497,7 +498,6 @@ a {
   transform: translateY(-2px);
 }
 
-
 .edit-profile__form {
   display: none;
   font-family: var(--font-family-heading);
@@ -529,7 +529,6 @@ input {
   padding: 0.5rem 0.8rem;
   width: auto;
 }
-
 
 .form__option {
   display: flex;
@@ -604,7 +603,6 @@ textarea::placeholder {
 }
 
 @media (max-width: 900px) {
-
   body,
   html {
     width: 100%;
@@ -629,7 +627,7 @@ textarea::placeholder {
     display: flex;
     flex-direction: column;
     grid-area: main;
-    width: 90%;
+    width: 60%;
     max-width: 90%;
     box-sizing: border-box;
   }
