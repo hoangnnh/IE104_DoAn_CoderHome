@@ -24,7 +24,7 @@
         </div>
 
         <div class="navbar__group--right">
-          <button type="button" class="button button--primary" id="publish-button">
+          <button type="submit" form="post-form" class="button button--primary" id="publish-button">
             Publish
           </button>
           <div class="navbar__icon notification-icon">
@@ -38,7 +38,7 @@
     </header>
 
     <main class="write-container">
-      <form action="/posts" method="POST" class="post-form">
+      <form action="/posts" id="post-form" method="POST" class="post-form">
         <fieldset class="form-group-meta">
           <div class="form-field">
             <label for="title" class="form-label">Title</label>
