@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Markdown Preview Logic'
-    // const form = document.querySelector('.post-form');
+    const form = document.querySelector('.post-form');
     const markdownInput = document.getElementById('content');
     const previewOutput = document.getElementById('preview');
 

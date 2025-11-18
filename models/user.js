@@ -26,11 +26,11 @@ const userSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    default: "/images/samples/author-avt-2.jpg",
+    default: "/images/samples/default-avt.png",
   },
   backgroundImg: {
     type: String,
-    default: "/images/samples/user-bg.jpg",
+    default: "/images/samples/default-bg.jpg",
   },
   createdAt: {
     type: Date,
