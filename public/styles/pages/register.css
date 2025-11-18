@@ -259,6 +259,11 @@ input[type="password"]:focus {
     flex-direction: column;
   }
 
+
+  .btn-social {
+    width: 100%;
+    font-size: var(--font-size-sm);
+  }
   .divider {
     margin: var(--space-md) 0;
   }

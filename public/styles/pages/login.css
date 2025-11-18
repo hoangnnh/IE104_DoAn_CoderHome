@@ -219,7 +219,7 @@ input[type="password"]:focus {
 
   .login-left .logo img {
     width: 120px;
-    margin-bottom: var(--space-lg);
+    margin-bottom: 0;
   }
 
   .login-left .illustration {
@@ -252,7 +252,7 @@ input[type="password"]:focus {
 
   .login-left .logo img {
     width: 100px;
-    margin-bottom: var(--space-md);
+    margin-bottom: 0;
   }
 
   .login-right {
