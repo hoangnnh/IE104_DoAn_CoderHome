@@ -1,6 +1,5 @@
 const userId = location.pathname.split("/").pop();
 
-
 async function loadWriteStoryButton() {
   const res = await fetch(`/current/`);
   const currentUser = await res.json();
@@ -21,6 +20,7 @@ async function loadWriteStoryButton() {
 async function loadUserInfo() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
+  document.title = user.username;
   const userInfo = document.querySelector(".user__info");
   userInfo.innerHTML = `
   <img
