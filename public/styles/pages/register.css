@@ -188,3 +188,44 @@ input[type="password"]:focus {
 .signup-text a:hover {
   text-decoration: underline;
 }
+
+/*responsive tablet*/
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+    max-width: 500px;
+  }
+
+  .register-left {
+    flex-basis: auto;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .register-left .logo img{
+    width: 120px;
+    margin-bottom: 0;
+  }
+
+  .register-left .illustration{
+    display: none;
+  }
+
+  .register-right {
+    padding: var(--space-lg);
+  }
+
+  .form-fullname {
+    margin-bottom: 0;
+  }
+}
+
+/*responsive mobile*/
+@media (max-width: 480px) {
+  .register-right h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .form-fullname {
+    flex-direction: column;
+  }
+}
