@@ -7,9 +7,6 @@ const modalHTML = `
 <div class="modal__content" id="modalContent">
     <div class="modal__header">
         <h2 class="modal__title">Notification</h2>
-        <button class="modal__close-btn" id="modalCloseBtn" aria-label="Close notifications">
-             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
     </div>
     <div class="modal__tabs">
         <button class="modal__tab-btn is-active" data-tab="all">All</button>
@@ -78,11 +75,9 @@ class NotificationModal extends HTMLElement {
     this.modal = this.shadowRoot.getElementById("modalContent");
     this.overlay = this.shadowRoot.getElementById("modalOverlay");
     this.list = this.shadowRoot.getElementById("notificationList");
-    this.closeBtn = this.shadowRoot.getElementById("modalCloseBtn");
     this.tabButtons = this.shadowRoot.querySelectorAll(".modal__tab-btn");
 
     // Add event listeners
-    this.closeBtn.addEventListener("click", () => this.close());
     this.overlay.addEventListener("click", () => this.close());
     document.addEventListener("toggle-notifications", () => this.toggle());
 

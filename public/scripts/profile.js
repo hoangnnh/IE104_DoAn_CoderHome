@@ -92,51 +92,6 @@ async function loadPostedPost() {
       })
       .join('');
 
-    // if (user.postedPosts && user.postedPosts.length > 0) {
-    //   postedPostContainer.innerHTML = user.postedPosts
-    //     .map(
-    //       (post) =>
-    //         ` 
-    //       <hr class="divider">
-    //       <article class="post__card">
-    //       <div class="post__author">
-    //           <img src="${post.author.profilePicture
-    //         }" alt="author" class="post__author-img"/>
-    //               <a href="/profile/${post.author._id
-    //         }" class="post__author-name">${post.author?.username || "Unknown"
-    //         }</a>
-    //       </div>
-    //       <div class="post__left">
-    //           <div class="post__left-text">
-    //               <div class="post__content">
-    //                   <a href="/post/${post._id}" class="post__content-title">${post.title
-    //         }</a>
-    //                   <p class="post__content-overview">${post.description}</p>
-    //               </div>
-    //               <div class="post__interact">
-    //                   <div class="post__interact-meta">
-    //                       <span class="created_date">${new Date(
-    //           post.createdAt
-    //         ).toLocaleDateString("vi-VN", {
-    //           day: "2-digit",
-    //           month: "2-digit",
-    //         })}</span>
-    //                       <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-    //                       <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
-    //                   </div>
-    //                   <div class="post__interact-action">
-    //                       <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
-    //                       <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
-    //                       <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-    //                   </div>
-    //               </div>
-    //           </div>
-    //           <img src="/images/samples/default-thumbnail.png" class="post__img"/>
-    //       </div>
-    //       </article>
-    //   `
-    //     )
-    //     .join("");
   } else {
     postedPostContainer.innerHTML = `
     <hr class="divider">
@@ -227,18 +182,15 @@ async function loadUserMoreInfo() {
   <div class="more-info__container">
     <div class="more-info__title">
       <div class="more-info__name">${user.username}</div>
-      <button class="more-info__share" style="display: flex; gap: 0.5rem; align-items: center"><img style="width: 25px; 
-      filter: invert(1) brightness(2);" src="/images/icons/classic-share-icon.svg"/>Share</button>
+      <button class="more-info__share"><img src="/images/icons/classic-share-icon.svg"/>Share</button>
     </div>
     <div class="more-info__details">
       <div class="more-info__follower">
-        <!-- ${user.followers?.length || "0"} -->
         <p>2</p>
-        <p>Follower</p>
+        <p>Followers</p>
       </div>
       <div class="more-info__content">
         <div class="more-info__items">
-          <!-- ${new Date(user.createdAt).toDateString()} -->
           <p>5d</p>
           <p>CoderHome Age</p>
         </div>

@@ -12,12 +12,12 @@ a {
 
 .avatar__option {
     position: fixed;
-    top: 20px;
+    top: var(--header-height);
     right: 0px;
     z-index: var(--z-index-modal, 30);
     max-width: 250px;
     width: 100%;
-    margin: 3rem;
+    margin-right: var(--space-md);
     background-color: #fff;
     border: 1px solid var(--color-gray-raw);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
