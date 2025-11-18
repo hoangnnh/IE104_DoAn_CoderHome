@@ -114,8 +114,8 @@ async function loadDevToPost(req, res) {
             day: "2-digit",
             month: "2-digit",
           })}</span>
-                          <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> ${p.public_reactions_count}</span>
-                          <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> ${p.comments_count}</span>
+                          <span  style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/icons/heart-icon.svg" class="react-icon-meta"/> ${p.public_reactions_count}</span>
+                          <span  style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/icons/comment-icon.svg" class="react-icon-meta"/> ${p.comments_count}</span>
                       </div>
                       <div class="post__interact-action">
                           <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
