@@ -53,13 +53,13 @@ async function loadPosts() {
                     day: "2-digit",
                     month: "2-digit",
                 })}</span>
-                        <span><img src="/images/icons/heart-icon" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/icons/comment-icon" class="react-icon-meta" style="display: inline;"/> 170</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/minus-circle-outline.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/bookmark-outline.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/dots-horizontal.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                     </div>
                 </div>
             </div>
