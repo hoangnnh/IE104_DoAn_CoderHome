@@ -214,18 +214,53 @@ input[type="password"]:focus {
     padding: var(--space-lg);
   }
 
-  .form-fullname {
-    margin-bottom: 0;
-  }
 }
 
 /*responsive mobile*/
 @media (max-width: 480px) {
-  .register-right h1 {
+  .register-page-wrapper{
+    padding: var(--space-md);
+  }
+
+  .register-container{
+    box-shadow: none;
+    margin: 0;
+  }
+
+  .register-left{
+    padding: var(--space-md);
+  }
+
+  .register-left .logo img{
+    width: 130px;
+  }
+
+  .register-right{
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .register-right h1{
     font-size: var(--font-size-xl);
   }
 
-  .form-fullname {
+  input[type="email"],
+  input[type="password"] {
+    padding: var(--space-sm);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .form-btn{
+    padding: var(--space-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  .social-login {
     flex-direction: column;
   }
+
+  .divider {
+    margin: var(--space-md) 0;
+  }
+  
 }
