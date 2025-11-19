@@ -14,10 +14,19 @@ function filterPostsByTag(postsArray, targetTag) {
 
 // async function loadTopicNav() {}
 
-async function loadPost() {
+async function loadFollowedPost() {
   const res = await fetch(`/posts/`);
-  const posts = await res.json();
+  const res2 = await fetch(`/current/`);
+
+  const user = await res2.json();
+  const allposts = await res.json();
+  const followingIds = user.followingAuthors.map((id) => id.toString());
   const container = document.querySelector(".main__content");
+
+  const posts = allposts
+    .filter((post) => followingIds.includes(post.author._id))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   container.innerHTML = posts
     .map(
       (post) =>
@@ -163,7 +172,7 @@ tabs.forEach((tab) => {
     const type = this.dataset.tab;
 
     if (type === "all") {
-      loadPost();
+      loadFollowedPost();
       topicContainer.classList.remove("active");
     } else if (type === "topic") {
       const activeTopic = document.querySelector(".topic.active");
@@ -253,5 +262,5 @@ scrollBtn.addEventListener("click", () => {
 });
 
 // Call Function
-loadPost();
+loadFollowedPost();
 updateArrowsAndFade();

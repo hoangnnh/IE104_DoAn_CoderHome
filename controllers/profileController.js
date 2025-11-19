@@ -55,7 +55,8 @@ async function editUserProfile(req, res) {
 
     // Filter out undefined/null values
     const updateData = {};
-    if (req.body.username !== undefined) updateData.username = req.body.username;
+    if (req.body.username !== undefined)
+      updateData.username = req.body.username;
     if (req.body.email !== undefined) updateData.email = req.body.email;
     if (req.body.bio !== undefined) updateData.bio = req.body.bio;
 
@@ -75,19 +76,19 @@ async function editUserProfile(req, res) {
 
     return res.json({
       message: "Profile updated successfully",
-      user: updatedUser
+      user: updatedUser,
     });
   } catch (error) {
     console.error(error);
 
     // Handle specific MongoDB errors
-    if (error.name === 'ValidationError') {
+    if (error.name === "ValidationError") {
       return res.status(400).json({
         message: "Validation error",
-        errors: error.errors
+        errors: error.errors,
       });
     }
-    if (error.name === 'CastError') {
+    if (error.name === "CastError") {
       return res.status(400).json({ message: "Invalid user ID" });
     }
 
