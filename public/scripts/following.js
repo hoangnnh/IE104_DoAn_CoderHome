@@ -76,14 +76,23 @@ async function loadFollowedPost() {
     )
     .join("");
 }
+
 async function loadPostByTopic(topic) {
-  const res = await fetch("/posts/");
-  const posts = await res.json();
-  const filteredPosts = filterPostsByTag(posts, topic);
+  const res = await fetch(`/posts/`);
+  const res2 = await fetch(`/current/`);
+  const allposts = await res.json();
+  const user = await res2.json();
+  const followingIds = user.followingAuthors.map((id) => id.toString());
+
+  const filteredTopicPosts = filterPostsByTag(allposts, topic);
   const container = document.querySelector(".main__content");
 
-  if (filteredPosts && filteredPosts.length > 0) {
-    container.innerHTML = filteredPosts
+  const fillteredPosts = filteredTopicPosts
+    .filter((post) => followingIds.includes(post.author._id))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  if (fillteredPosts && fillteredPosts.length > 0) {
+    container.innerHTML = fillteredPosts
       .map(
         (post) => `
         <hr class="divider">

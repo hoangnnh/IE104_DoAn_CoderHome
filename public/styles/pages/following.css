@@ -382,6 +382,7 @@ body {
 .error__not-found {
   font-size: 2rem;
   align-items: center;
+  text-align: center;
 }
 
 /* Responsive */
