@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  font-family: var(--font-family-heading);
 }
 
 .register-container {
@@ -53,7 +54,6 @@
 }
 
 .register-right h1 {
-  font-family: var(--font-family-heading);
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-bold);
   margin-top: 0;
@@ -104,7 +104,6 @@ input[type="password"]:focus {
 .form-btn {
   width: 100%;
   padding: var(--space-sm) var(--space-lg);
-  font-family: var(--font-family-heading);
   font-weight: var(--font-weight-bold);
   border-radius: var(--border-radius-pill);
   border: var(--border-width) solid var(--color-primary);
@@ -122,6 +121,19 @@ input[type="password"]:focus {
 
 .form-btn:active {
   box-shadow: none;
+}
+
+.auth-switch-link {
+  font-size: var(--font-size-sm);
+}
+
+.auth-switch-link a {
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+.auth-switch-link a:hover {
+  text-decoration: underline;
 }
 
 .divider {
@@ -159,7 +171,6 @@ input[type="password"]:focus {
   align-items: center;
   gap: var(--space-sm);
   font-weight: var(--font-weight-semibold);
-  font-family: var(--font-family-heading);
   background-color: var(--color-background);
   color: var(--color-text-body);
   cursor: pointer;
