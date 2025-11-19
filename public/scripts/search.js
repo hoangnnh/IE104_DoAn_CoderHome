@@ -56,8 +56,8 @@ async function loadPosts() {
                           day: "2-digit",
                           month: "2-digit",
                         })}</span>
-                        <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem"><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
                     </div>
                     <div class="post__interact-action">
                         <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>

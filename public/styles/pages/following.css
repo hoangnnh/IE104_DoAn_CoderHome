@@ -395,7 +395,7 @@ body {
   .container {
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 80%;
     justify-content: center;
     gap: 1rem;
   }
