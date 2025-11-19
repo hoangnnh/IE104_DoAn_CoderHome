@@ -52,16 +52,6 @@ body{
   text-decoration: none;
 }
 
-.library-nav::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -20px; 
-  height: 1px;
-  background-color: #afafaf;
-}
-
 .library-nav__items {
   display: flex;
   padding: var(--space-sm) var(--space-xl);
