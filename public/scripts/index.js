@@ -10,7 +10,7 @@ const posts_per_page = 10;
 
 // Function to load Coderhome's posts
 async function loadCoderhomePost(isInitial = true) {
-  if(isInitial) {
+  if (isInitial) {
     currentPage = 1;
     hasMore = true;
     coderHome.style.cssText = `
@@ -24,19 +24,19 @@ async function loadCoderhomePost(isInitial = true) {
     currentTab = "coderhome";
   }
 
-  if(isLoading || !hasMore) return;
+  if (isLoading || !hasMore) return;
   isLoading = true;
 
   try {
     // get all posts from DB
     const res = await fetch("/posts/");
     const allPosts = await res.json();
-    
+
     // Calculate each posts of 1 load
     const startIndex = (currentPage - 1) * posts_per_page;
     const endIndex = startIndex + posts_per_page;
     const posts = allPosts.slice(startIndex, endIndex);
-    
+
     // Check if there are more posts
     hasMore = endIndex < allPosts.length;
     const container = document.querySelector(".post");
@@ -51,21 +51,29 @@ async function loadCoderhomePost(isInitial = true) {
       .map((p, index) => {
         const isLastInBatch = index === posts.length - 1;
         const showDivider = !isLastInBatch || hasMore;
-        
+
         return `<article class="post__card">
           <div class="post__author">
-            <img src="${p.author.profilePicture}" alt="author" class="post__author-img"/>
-            <a href="/profile/${p.author._id}" class="post__author-name">${p.author?.username || "Unknown"}</a>
+            <img src="${
+              p.author.profilePicture
+            }" alt="author" class="post__author-img"/>
+            <a href="/profile/${p.author._id}" class="post__author-name">${
+          p.author?.username || "Unknown"
+        }</a>
           </div>
           <div class="post__left">
             <div class="post__left-text">
               <div class="post__content">
-                <a href="/post/${p._id}" class="post__content-title">${p.title}</a>
+                <a href="/post/${p._id}" class="post__content-title">${
+          p.title
+        }</a>
                 <p class="post__content-overview">${p.description}</p>
               </div>
               <div class="post__interact">
                 <div class="post__interact-meta">
-                  <span class="created_date">${new Date(p.createdAt).toLocaleDateString("vi-VN", {
+                  <span class="created_date">${new Date(
+                    p.createdAt
+                  ).toLocaleDateString("vi-VN", {
                     day: "2-digit",
                     month: "2-digit",
                   })}</span>
@@ -90,9 +98,9 @@ async function loadCoderhomePost(isInitial = true) {
       })
       .join("");
 
-      container.insertAdjacentHTML("beforeend", postsHTML);
+    container.insertAdjacentHTML("beforeend", postsHTML);
 
-      // Add heart icon click listeners to new posts
+    // Add heart icon click listeners to new posts
     document.querySelectorAll(".heart").forEach((item) => {
       item.addEventListener("click", () => {
         item.classList.toggle("active");
@@ -100,7 +108,6 @@ async function loadCoderhomePost(isInitial = true) {
     });
 
     currentPage++;
-
   } catch (err) {
     console.error("Error loading Coderhome posts:", err);
   } finally {
@@ -148,31 +155,43 @@ async function loadDevToPost(isInitial = true) {
       .map((p, index) => {
         const isLastInBatch = index === posts.length - 1;
         const showDivider = !isLastInBatch || hasMore;
-        
+
         return `<article class="post__card">
           <div class="post__author">
-            <img src="${p.user.profile_image}" alt="author" class="post__author-img"/>
-            <a href="https://dev.to/${p.user.username}" target="_blank" class="post__author-name">
+            <img src="${
+              p.user.profile_image
+            }" alt="author" class="post__author-img"/>
+            <a href="https://dev.to/${
+              p.user.username
+            }" target="_blank" class="post__author-name">
               ${p.user.name || p.user.username}
             </a>
           </div>
           <div class="post__left">
             <div class="post__left-text">
               <div class="post__content">
-                <a href="${p.url}" target="_blank" class="post__content-title">${p.title}</a>
+                <a href="${
+                  p.url
+                }" target="_blank" class="post__content-title">${p.title}</a>
                 <p class="post__content-overview">${p.description || ""}</p>
               </div>
               <div class="post__interact">
                 <div class="post__interact-meta">
-                  <span class="created_date">${new Date(p.published_at).toLocaleDateString("vi-VN", {
+                  <span class="created_date">${new Date(
+                    p.published_at
+                  ).toLocaleDateString("vi-VN", {
                     day: "2-digit",
                     month: "2-digit",
                   })}</span>
                   <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-icon.svg" class="react-icon-meta"/> ${p.public_reactions_count}
+                    <img src="/images/icons/heart-icon.svg" class="react-icon-meta"/> ${
+                      p.public_reactions_count
+                    }
                   </span>
                   <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta"/> ${p.comments_count}
+                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta"/> ${
+                      p.comments_count
+                    }
                   </span>
                 </div>
                 <div class="post__interact-action">
@@ -182,7 +201,9 @@ async function loadDevToPost(isInitial = true) {
                 </div>
               </div>
             </div>
-            <img src="${p.cover_image || "/images/samples/default-thumbnail.png"}" class="post__img"/>
+            <img src="${
+              p.cover_image || "/images/samples/default-thumbnail.png"
+            }" class="post__img"/>
           </div>
           ${showDivider ? '<hr class="divider">' : ""}
         </article>`;
@@ -219,7 +240,7 @@ function handleScroll() {
 }
 
 coderHome.addEventListener("click", () => {
-    loadCoderhomePost(true)
+  loadCoderhomePost(true);
 });
 devTo.addEventListener("click", () => {
   loadDevToPost(true);
@@ -228,20 +249,20 @@ devTo.addEventListener("click", () => {
 window.addEventListener("scroll", handleScroll);
 
 window.addEventListener("scroll", () => {
-    if (window.scrollY > 200) {
-        scrollBtn.style.display = "block";
-    } else {
-        scrollBtn.style.display = "none";
-    }
+  if (window.scrollY > 200) {
+    scrollBtn.style.display = "block";
+  } else {
+    scrollBtn.style.display = "none";
+  }
 });
 
 scrollBtn.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadCoderhomePost(true)
-})
+  loadCoderhomePost(true);
+});

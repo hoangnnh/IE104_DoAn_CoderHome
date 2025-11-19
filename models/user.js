@@ -55,43 +55,43 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Comment",
       default: [],
-    }
+    },
   ],
   readingHistory: [
     {
       type: Schema.Types.ObjectId,
       ref: "Post",
-      default: []
-    }
+      default: [],
+    },
   ],
   followers: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: [],
-    }
+    },
   ],
 
   role: {
-    type: String, 
-    default: "User"
+    type: String,
+    default: "User",
   },
-  
+
   followingAuthors: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: [],
-    }
+    },
   ],
 
-    history: [
-  {
-    type: Schema.Types.ObjectId,
-    ref: "Post",
-    default: [],
-  }
-],
+  history: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+      default: [],
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);
