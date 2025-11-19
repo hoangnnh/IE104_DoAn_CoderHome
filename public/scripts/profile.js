@@ -1,3 +1,5 @@
+import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
+
 const userId = location.pathname.split("/").pop();
 
 async function loadWriteStoryButton() {
@@ -75,12 +77,15 @@ async function loadPostedPost() {
               <div class="post__interact">
                 <div class="post__interact-meta">
                   <span class="created_date">${formattedDate}</span>
-                  <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                  <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
+                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
+                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
+                    <span>${getRandomLikeCount()}</span>
+                   </div>
+                   <span style="display: flex; align-items: center; gap: 0.5rem">
+                   <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/>170</span>
                 </div>
                 <div class="post__interact-action">
-                  <button class="icon-btn"><img src="/images/icons/restrict-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                  <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
                   <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                 </div>
               </div>
@@ -92,9 +97,11 @@ async function loadPostedPost() {
       })
       .join('');
 
+    handleLikeClick();
+    handleBookmarkClick();
+
   } else {
     postedPostContainer.innerHTML = `
-    <hr class="divider">
     <p class="user__no-po-cm-bio">This user hasn't posted any posts yet.</p>
     `;
   }

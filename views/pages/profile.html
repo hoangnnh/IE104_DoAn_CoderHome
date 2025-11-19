@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/base/reset.css">
-    <link rel="stylesheet" href="/styles/base/token.css">
-    <link rel="stylesheet" href="/styles/base/fonts.css">
-    <link rel="stylesheet" href="/styles/pages/profile.css"/>
-    <link rel="icon" type="image/png" href="/images/logos/favicon.png">
-    <title>Profile</title>
-  </head>
-  <body>
-    <coderhome-header></coderhome-header>
-    <toggle-menu></toggle-menu>
-    <toggle-avatar-option></toggle-avatar-option>
-    <toggle-notification></toggle-notification>
-    <main class="container">
-      <section class="user__main">
-        <div class="user__info"></div>
-        <nav class="profile-nav">
-          <a href="#" class="profile-nav__items active" data-tab="posts">
-            Posts
-          </a>
-          <a href="#" class="profile-nav__items" data-tab="comments">
-            Comments
-          </a>
-          <a href="#" class="profile-nav__items" data-tab="bio"> Biography </a>
-        </nav>
-        <div class="button-container"></div>
-        <div class="profile-content"></div>
-      </section>
-      <aside class="side-profile">
-        <div class="side-profile__more">
-          <span class="about">About</span>
-          <span class="arrow"></span>
-        </div>
-        <div class="user__more-info"></div>
-        <div class="user__settings"></div>
-        <div class="user__social-links"></div>
-      </aside>
-    </main>
-    <script type="module" src="/scripts/main.js"></script>
-    <script src="/scripts/profile.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/token.css">
+  <link rel="stylesheet" href="/styles/base/fonts.css">
+  <link rel="stylesheet" href="/styles/pages/profile.css" />
+  <link rel="icon" type="image/png" href="/images/logos/favicon.png">
+  <title>Profile</title>
+</head>
+
+<body>
+  <coderhome-header></coderhome-header>
+  <toggle-menu></toggle-menu>
+  <toggle-avatar-option></toggle-avatar-option>
+  <toggle-notification></toggle-notification>
+  <main class="container">
+    <section class="user__main">
+      <div class="user__info"></div>
+      <nav class="profile-nav">
+        <a href="#" class="profile-nav__items active" data-tab="posts">
+          Posts
+        </a>
+        <a href="#" class="profile-nav__items" data-tab="comments">
+          Comments
+        </a>
+        <a href="#" class="profile-nav__items" data-tab="bio"> Biography </a>
+      </nav>
+      <div class="button-container"></div>
+      <div class="profile-content"></div>
+    </section>
+    <aside class="side-profile">
+      <div class="side-profile__more">
+        <span class="about">About</span>
+        <span class="arrow"></span>
+      </div>
+      <div class="user__more-info"></div>
+      <div class="user__settings"></div>
+      <div class="user__social-links"></div>
+    </aside>
+  </main>
   <div class="edit-profile__form">
-        <label for="username">Change your username</label>
-        <input type="text" name="username" id="username" placeholder="Enter your alias">
-        <label for="email">Change your email</label>
-        <input type="email" name="email" id="email" placeholder="Enter your email">
-        <label for="bio">Biography</label>
-        <textarea name="bio" id="bio" placeholder="Tell people your biography"></textarea>
-        <div class="form__option">
-          <button class="cancel-btn">Cancel</button>
-          <button class="submit-btn">Submit</button>
-        </div>
+    <label for="username">Change your username</label>
+    <input type="text" name="username" id="username" placeholder="Enter your alias">
+    <label for="email">Change your email</label>
+    <input type="email" name="email" id="email" placeholder="Enter your email">
+    <label for="bio">Biography</label>
+    <textarea name="bio" id="bio" placeholder="Tell people your biography"></textarea>
+    <div class="form__option">
+      <button class="cancel-btn">Cancel</button>
+      <button class="submit-btn">Submit</button>
+    </div>
   </div>
   <div class="overlay"></div>
+  <script type="module" src="/scripts/main.js"></script>
+  <script type="module" src="/scripts/profile.js"></script>
+</body>
+
 </html>
