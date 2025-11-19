@@ -52,8 +52,6 @@ body{
   text-decoration: none;
 }
 
-
-
 .library-nav__items {
   display: flex;
   padding: var(--space-sm) var(--space-xl);
