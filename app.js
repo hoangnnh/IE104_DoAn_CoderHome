@@ -75,13 +75,17 @@ app.get("/", (req, res) => {
   }
 });
 
-app.get("/login", async (req, res) => {
+app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views/pages/login.html"));
 });
 
-app.get("/register", async (req, res) => {
+app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views/pages/register.html"));
 });
+
+app.get("/reset-pw", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/pages/reset-password.html"));
+})
 
 app.get("/admin", async (req, res) => {
   if (req.session.isLoggedIn && req.session.isAdmin === 1) {
