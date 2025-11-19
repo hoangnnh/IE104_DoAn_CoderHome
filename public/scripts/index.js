@@ -54,31 +54,23 @@ async function loadCoderhomePost(isInitial = true) {
 
         return `<article class="post__card">
           <div class="post__author">
-            <img src="${
-              p.author.profilePicture
-            }" alt="author" class="post__author-img"/>
-            <a href="/profile/${p.author._id}" class="post__author-name">${
-          p.author?.username || "Unknown"
-        }</a>
+            <img src="${p.author.profilePicture}" alt="author" class="post__author-img"/>
+            <a href="/profile/${p.author._id}" class="post__author-name">${p.author?.username || "Unknown"}</a>
           </div>
           <div class="post__left">
             <div class="post__left-text">
               <div class="post__content">
-                <a href="/post/${p._id}" class="post__content-title">${
-          p.title
-        }</a>
+                <a href="/post/${p._id}" class="post__content-title">${p.title}</a>
                 <p class="post__content-overview">${p.description}</p>
               </div>
               <div class="post__interact">
                 <div class="post__interact-meta">
-                  <span class="created_date">${new Date(
-                    p.createdAt
-                  ).toLocaleDateString("vi-VN", {
-                    day: "2-digit",
-                    month: "2-digit",
-                  })}</span>
+                  <span class="created_date">${new Date(p.createdAt).toLocaleDateString("vi-VN", {
+          day: "2-digit",
+          month: "2-digit",
+        })}</span>
                   <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-icon.svg" class="react-icon-meta heart"/> 5.5K
+                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>5.5K
                   </span>
                   <span style="display: flex; align-items: center; gap: 0.5rem">
                     <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
@@ -104,10 +96,16 @@ async function loadCoderhomePost(isInitial = true) {
     document.querySelectorAll(".heart").forEach((item) => {
       item.addEventListener("click", () => {
         item.classList.toggle("active");
+        if (item.classList.contains("active")) {
+          item.src = "/images/icons/heart-filled-icon.svg";
+        } else {
+          item.src = "/images/icons/heart-outline-icon.svg";
+        }
       });
     });
 
     currentPage++;
+
   } catch (err) {
     console.error("Error loading Coderhome posts:", err);
   } finally {
@@ -158,40 +156,28 @@ async function loadDevToPost(isInitial = true) {
 
         return `<article class="post__card">
           <div class="post__author">
-            <img src="${
-              p.user.profile_image
-            }" alt="author" class="post__author-img"/>
-            <a href="https://dev.to/${
-              p.user.username
-            }" target="_blank" class="post__author-name">
+            <img src="${p.user.profile_image}" alt="author" class="post__author-img"/>
+            <a href="https://dev.to/${p.user.username}" target="_blank" class="post__author-name">
               ${p.user.name || p.user.username}
             </a>
           </div>
           <div class="post__left">
             <div class="post__left-text">
               <div class="post__content">
-                <a href="${
-                  p.url
-                }" target="_blank" class="post__content-title">${p.title}</a>
+                <a href="${p.url}" target="_blank" class="post__content-title">${p.title}</a>
                 <p class="post__content-overview">${p.description || ""}</p>
               </div>
               <div class="post__interact">
                 <div class="post__interact-meta">
-                  <span class="created_date">${new Date(
-                    p.published_at
-                  ).toLocaleDateString("vi-VN", {
-                    day: "2-digit",
-                    month: "2-digit",
-                  })}</span>
+                  <span class="created_date">${new Date(p.published_at).toLocaleDateString("vi-VN", {
+          day: "2-digit",
+          month: "2-digit",
+        })}</span>
+                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
+                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/> <span>${p.public_reactions_count}</span>
+                  </div>
                   <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-icon.svg" class="react-icon-meta"/> ${
-                      p.public_reactions_count
-                    }
-                  </span>
-                  <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta"/> ${
-                      p.comments_count
-                    }
+                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta"/> ${p.comments_count}
                   </span>
                 </div>
                 <div class="post__interact-action">
@@ -201,9 +187,7 @@ async function loadDevToPost(isInitial = true) {
                 </div>
               </div>
             </div>
-            <img src="${
-              p.cover_image || "/images/samples/default-thumbnail.png"
-            }" class="post__img"/>
+            <img src="${p.cover_image || "/images/samples/default-thumbnail.png"}" class="post__img"/>
           </div>
           ${showDivider ? '<hr class="divider">' : ""}
         </article>`;
@@ -211,6 +195,20 @@ async function loadDevToPost(isInitial = true) {
       .join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
+
+    document.querySelectorAll(".like-count").forEach((item) => {
+      item.querySelector(".heart").addEventListener("click", () => {
+        item.classList.toggle("active");
+        const currentLikeCount = item.querySelector("span");
+        if (item.classList.contains("active")) {
+          item.querySelector("img").src = "/images/icons/heart-filled-icon.svg";
+          currentLikeCount.textContent = Number(currentLikeCount.textContent.trim()) + 1;
+        } else {
+          item.querySelector("img").src = "/images/icons/heart-outline-icon.svg";
+          currentLikeCount.textContent = Number(currentLikeCount.textContent.trim()) - 1;
+        }
+      });
+    });
 
     currentPage++;
   } catch (err) {
@@ -240,7 +238,7 @@ function handleScroll() {
 }
 
 coderHome.addEventListener("click", () => {
-  loadCoderhomePost(true);
+  loadCoderhomePost(true)
 });
 devTo.addEventListener("click", () => {
   loadDevToPost(true);
@@ -259,10 +257,10 @@ window.addEventListener("scroll", () => {
 scrollBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
+    behavior: "smooth"
   });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadCoderhomePost(true);
-});
+  loadCoderhomePost(true)
+})

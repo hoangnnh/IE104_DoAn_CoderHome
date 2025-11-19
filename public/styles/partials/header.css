@@ -151,6 +151,8 @@
 }
 
 .header__avatar {
+    display: flex;
+    align-items: center;
     width: var(--icon-base-width);
     height: var(--icon-base-width);
     border-radius: 50%;
@@ -190,8 +192,8 @@
 
     .header__right {
         flex: 0.5;
-        gap: var(--space-xs);
-        padding-right: 0;
+        gap: var(--space-sm);
+        padding-right: var(--space-sm);
     }
 
     .header__write-btn span {
@@ -201,6 +203,7 @@
 
 /* Extra Small Mobile (< 480px) */
 @media (max-width: 480px) {
+
     .header__left {
         gap: var(--space-xs);
     }
