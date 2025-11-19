@@ -160,28 +160,6 @@
     flex-shrink: 0;
 }
 
-/* Tablet Responsive (768px - 1023px) */
-/* @media (max-width: 1023px) {
-    .header__left {
-        gap: var(--space-sm);
-    }
-
-    .header__search {
-        max-width: calc(8 * var(--icon-base-width));
-        padding: 0 var(--space-sm);
-    }
-
-    .header__right {
-        gap: var(--space-sm);
-        padding-right: var(--space-sm);
-    }
-
-    .header__write-btn span {
-        display: none;
-    }
-} */
-
-/* Mobile Responsive (< 768px) */
 @media (max-width: 768px) {
     .header {
         padding: 0;
