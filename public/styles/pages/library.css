@@ -40,15 +40,16 @@ body{
   display: flex;
   height: auto;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem;
-  padding: 0.5rem;
-  position: relative;
+  justify-content: flex-start;
+  gap: var(--space-md);
 }
 
 .library-nav a{
   width: auto;
   text-align: center;
+  text-decoration: none;
 }
 
 .library-nav::after {
@@ -63,14 +64,13 @@ body{
 
 .library-nav__items {
   display: flex;
-  padding: 0.75rem 2.5rem;
-  background-color: #ffffff;
-  font-size: 1.5rem;
-  border-radius: 9999px;
-  color: #666666;
+  padding: var(--space-sm) var(--space-xl);
+  background-color: var(--color-white);
+  font-size: var(--font-size-md);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-gray-medium);
   transition: all 0.2s ease;
   margin: 0;
-  text-decoration: none;
 }
 
 .library-nav__items:active {
@@ -363,14 +363,13 @@ body{
     height: auto;
   }
 
-  .main-header {
+  .container-main-part .main-header {
     padding: 40px 15px;
   }
 
   .main-header h1 {
     font-size: 26px;
     padding-bottom: 35px;
-    text-align: center;
   }
 
   .library-nav {
@@ -422,5 +421,18 @@ body{
     position: static;
     width: 100%;
   }
+
+    .main-header h1 {
+    text-align: center;
+  }
+
+    .library-nav {
+    justify-content: center;
+  }
 }
 
+@media (max-width: 340px){
+  .history-title{
+    font-size: 22px;
+  }
+}
