@@ -20,11 +20,6 @@ mongoose
   .then(() => console.log("Successfully connected to MongoDB!"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// // Set EJS to template engine
-// app.set("view engine", "ejs");
-// // Set views folder
-// app.set("views", path.join(__dirname, "views"));
-
 // --- Middleware ---
 // Serve static files (like CSS, images) from the 'public' folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -174,7 +169,7 @@ app.get("/settings", (req, res) => {
   }
 });
 
-// 404 pages
+// 404 page
 app.use((req, res, next) => {
   res.status(404).sendFile(path.join(__dirname, "views/pages/404.html"));
 });

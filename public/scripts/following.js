@@ -1,18 +1,4 @@
-// Function
-function filterPostsByTag(postsArray, targetTag) {
-  const normalizedTag = targetTag.toLowerCase();
-
-  return postsArray.filter((post) => {
-    // 1. Kiểm tra xem post có thuộc tính 'tags' là một mảng không
-    if (post.tags && Array.isArray(post.tags)) {
-      // 2. Kiểm tra xem mảng 'tags' có chứa tag mục tiêu không
-      return post.tags.some((tag) => tag.toLowerCase() === normalizedTag);
-    }
-    return false; // Loại bỏ post nếu không có mảng tags hợp lệ
-  });
-}
-
-// async function loadTopicNav() {}
+import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
 
 async function loadFollowedPost() {
   const res = await fetch(`/posts/`);
@@ -26,11 +12,11 @@ async function loadFollowedPost() {
   const posts = allposts
     .filter((post) => followingIds.includes(post.author._id))
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-  container.innerHTML = posts
-    .map(
-      (post) =>
-        ` 
+  if (posts && posts.length > 0) {
+    container.innerHTML = posts
+      .map(
+        (post) =>
+          ` 
         <hr class="divider">
         <article class="post__card">
         <div class="post__author">
@@ -40,31 +26,35 @@ async function loadFollowedPost() {
                 <a href="/profile/${
                   post.author._id
                 }" class="post__author-name">${
-          post.author?.username || "Unknown"
-        }</a>
+            post.author?.username || "Unknown"
+          }</a>
         </div>
         <div class="post__left">
             <div class="post__left-text">
                 <div class="post__content">
                     <a href="/post/${post._id}" class="post__content-title">${
-          post.title
-        }</a>
+            post.title
+          }</a>
                     <p class="post__content-overview">${post.description}</p>
                 </div>
                 <div class="post__interact">
                     <div class="post__interact-meta">
                         <span class="created_date">${new Date(
-                          post.createdAt
-                        ).toLocaleDateString("vi-VN", {
-                          day: "2-digit",
-                          month: "2-digit",
-                        })}</span>
-                        <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
+          post.createdAt
+        ).toLocaleDateString("vi-VN", {
+          day: "2-digit",
+          month: "2-digit",
+        })}</span>
+                        <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
+                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
+                    <span>${getRandomLikeCount()}</span>
+                  </div>
+                  <span style="display: flex; align-items: center; gap: 0.5rem">
+                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
+                  </span>
                     </div>
                     <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                     </div>
                 </div>
@@ -73,8 +63,16 @@ async function loadFollowedPost() {
         </div>
         </article>
     `
-    )
-    .join("");
+      )
+      .join("");  
+  handleLikeClick();
+  handleBookmarkClick();
+  } else {
+    container.innerHTML = `
+    <hr class="divider"></hr>
+    <p  class="error__not-found">You haven't Follow any one yet!!</p>
+    `;
+  }
 }
 
 async function loadPostByTopic(topic) {
@@ -87,48 +85,49 @@ async function loadPostByTopic(topic) {
   const filteredTopicPosts = filterPostsByTag(allposts, topic);
   const container = document.querySelector(".main__content");
 
-  const fillteredPosts = filteredTopicPosts
+  const filteredPosts = filteredTopicPosts
     .filter((post) => followingIds.includes(post.author._id))
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  if (fillteredPosts && fillteredPosts.length > 0) {
-    container.innerHTML = fillteredPosts
+  if (filteredPosts && filteredPosts.length > 0) {
+    container.innerHTML = filteredPosts
       .map(
         (post) => `
         <hr class="divider">
         <article class="post__card">
         <div class="post__author">
-            <img src="${
-              post.author.profilePicture
-            }" alt="author" class="post__author-img"/>
-                <a href="/profile/${
-                  post.author._id
-                }" class="post__author-name">${
-          post.author?.username || "Unknown"
-        }</a>
+            <img src="${post.author.profilePicture
+          }" alt="author" class="post__author-img"/>
+                <a href="/profile/${post.author._id
+          }" class="post__author-name">${post.author?.username || "Unknown"
+          }</a>
         </div>
         <div class="post__left">
             <div class="post__left-text">
                 <div class="post__content">
-                    <a href="/post/${post._id}" class="post__content-title">${
-          post.title
-        }</a>
+                    <a href="/post/${post._id}" class="post__content-title">${post.title
+          }</a>
                     <p class="post__content-overview">${post.description}</p>
                 </div>
                 <div class="post__interact">
-                    <div class="post__interact-meta">
-                        <span class="created_date">${new Date(
-                          post.createdAt
-                        ).toLocaleDateString("vi-VN", {
-                          day: "2-digit",
-                          month: "2-digit",
-                        })}</span>
-                        <span><img src="/images/icons/heart-icon.svg" class="react-icon-meta" style="display: inline;"/> 5.5K</span>
-                        <span><img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170</span>
-                    </div>
+                  <div class="post__interact-meta">
+                    <span class="created_date">${new Date(
+            post.createdAt
+          ).toLocaleDateString("vi-VN", {
+            day: "2-digit",
+            month: "2-digit",
+          })}
+                    </span>
+                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
+                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
+                    <span>${getRandomLikeCount()}</span>
+                  </div>
+                  <span style="display: flex; align-items: center; gap: 0.5rem">
+                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
+                  </span>
+                </div>
                     <div class="post__interact-action">
-                        <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                        <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
                         <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                     </div>
                 </div>
@@ -139,10 +138,13 @@ async function loadPostByTopic(topic) {
     `
       )
       .join("");
+
+    handleLikeClick();
+    handleBookmarkClick();
   } else {
     container.innerHTML = `
     <hr class="divider"></hr>
-    <p  class="error__not-found">Post Not Found!!</p>
+    <p  class="error__not-found">Can't find post of this Topic! It's maybe you haven't Follow any one yet Or no post of this topic!!</p>
     `;
   }
 }
@@ -229,6 +231,19 @@ function updateArrowsAndFade() {
   }
 }
 
+function filterPostsByTag(postsArray, targetTag) {
+  const normalizedTag = targetTag.toLowerCase();
+
+  return postsArray.filter((post) => {
+    // 1. Kiểm tra xem post có thuộc tính 'tags' là một mảng không
+    if (post.tags && Array.isArray(post.tags)) {
+      // 2. Kiểm tra xem mảng 'tags' có chứa tag mục tiêu không
+      return post.tags.some((tag) => tag.toLowerCase() === normalizedTag);
+    }
+    return false; // Loại bỏ post nếu không có mảng tags hợp lệ
+  });
+}
+
 btnLeft.addEventListener("click", () => {
   topicContent.scrollBy({ left: -200, behavior: "smooth" });
 });
@@ -250,7 +265,7 @@ topics.forEach((topic) => {
     const type = this.dataset.value;
 
     loadPostByTopic(type);
-    updateArrows();
+    updateArrowsAndFade();
   });
 });
 // Scroll top

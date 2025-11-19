@@ -1,25 +1,17 @@
-body{
-    margin: 0;
+* {
+    font-family: var(--font-family-heading);
+}
+
+body {
     background-color: #13101c;
 }
 
-h2{
+h2 {
     margin: 0;
 }
 
-/* font */
-@font-face {
-    font-family: 'Lora';
-    src: url(../fonts/Lora/Lora-VariableFont_wght.ttf), format(truetype);
-}
-
-@font-face {
-    font-family: 'robto';
-    src: url(../fonts/Roboto_Condensed/RobotoCondensed-Medium.ttf), format(truetype);
-}
-
 /* header part */
-.header_container{
+.header_container {
     justify-self: center;
     margin-left: auto;
     margin-right: auto;
@@ -38,22 +30,22 @@ h2{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.header_container .container_logo{
+.header_container .container_logo {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container_logo a{
+.container_logo a {
     display: inline-block;
 }
 
-.container_logo .logo_img{
+.container_logo .logo_img {
     width: 10em;
     display: block;
 }
 
-.header_container .container_btn{
+.header_container .container_btn {
     margin-right: 0;
     position: absolute;
     right: 50px;
@@ -67,7 +59,7 @@ h2{
 }
 
 /*body part*/
-.body_welcome{
+.body_welcome {
     padding: 0 6%;
     background-color: #13101c;
     display: flex;
@@ -81,7 +73,7 @@ h2{
     position: relative;
 }
 
-.star{
+.star {
     position: absolute;
     top: 0;
     left: 0;
@@ -91,52 +83,60 @@ h2{
     animation: animate 8s ease-in-out infinite;
 }
 
-.star.star1{
+.star.star1 {
     animation-delay: 0s;
     background-image: url(/images/pages/about/star1.png);
 }
 
-.star.star2{
+.star.star2 {
     animation-delay: 1s;
     background-image: url(/images/pages/about/star2.png);
 }
 
-.star.star3{
+.star.star3 {
     animation-delay: 2s;
     background-image: url(/images/pages/about/star3.png);
 }
 
-.star.star4{
+.star.star4 {
     animation-delay: 3s;
     background-image: url(/images/pages/about/star4.png);
 }
 
-@keyframes animate{
-    0%, 20%, 40%, 60%, 80%, 100%
-    {
+@keyframes animate {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    80%,
+    100% {
         opacity: 0;
     }
-    10%, 30%, 50%, 70%, 90%
-    {
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
         opacity: 1;
     }
 }
 
-.body_welcome .welcome_text{
-    font-family: 'lora';
+.body_welcome .welcome_text {
     font-size: 1.5vw;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    flex-direction: column; 
-    align-items: center;   
-    text-align: center;    
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     display: flex;
     width: 90%;
 }
 
-.welcome_text h2{
+.welcome_text h2 {
     background: linear-gradient(90deg, #6dd5fa, #c471ed, #f64f59);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -145,9 +145,9 @@ h2{
     font-size: 3.5vw;
 }
 
-.welcome_text .text_caption{
+.welcome_text .text_caption {
     width: auto;
-    display:inline-flex;
+    display: inline-flex;
     align-items: center;
     background-color: #32375f;
     border-radius: 2em;
@@ -156,25 +156,25 @@ h2{
     gap: 1vh;
 }
 
-.text_caption img{
+.text_caption img {
     width: 3.5vh;
     vertical-align: middle;
 }
 
-.text_caption h3{
-    margin:0;
+.text_caption h3 {
+    margin: 0;
     font-size: 1vw;
     color: white;
 }
 
-.main_body .body_content{
+.main_body .body_content {
     height: auto;
     display: flex;
     background-color: #13101c;
     overflow: hidden;
 }
 
-.body_content .content_container{
+.body_content .content_container {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 30px;
@@ -182,16 +182,16 @@ h2{
     justify-content: center;
 }
 
-svg path{
-    cursor:pointer;
-    fill: rgb(36,36,36);
+svg path {
+    cursor: pointer;
+    fill: rgb(36, 36, 36);
 }
 
-svg path:hover{
-    fill:#ccc;
+svg path:hover {
+    fill: #ccc;
 }
 
-.img_blur{
+.img_blur {
     background-image: url(https://cdn.prod.website-files.com/6720dd1ab6df0da205830ab1/68760fa2a03250f66313c101_gradient-blur.avif);
     background-position: 50% 0;
     background-repeat: no-repeat;
@@ -204,33 +204,33 @@ svg path:hover{
     top: 0px;
 }
 
-.img_blur .blur_text{
-    padding-top:80px;
+.img_blur .blur_text {
+    padding-top: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: column;
 }
 
-.img_blur .blur_img{
+.img_blur .blur_img {
     width: 80px;
 }
 
-.img_blur .blur_text h1{
-    margin:0;
-    color:#fff;
+.img_blur .blur_text h1 {
+    margin: 0;
+    color: #fff;
     padding-top: 50px;
     font-size: 60px;
-    font-family: 'lora';
+
 }
 
-.blur_text p{
+.blur_text p {
     color: #a997ce;
     font-size: 23px;
-    font-family: 'lora';
+
 }
 
-.body_script{
+.body_script {
     width: 100%;
     height: auto;
     background-color: #f9f9f9;
@@ -239,17 +239,17 @@ svg path:hover{
     padding-bottom: 120px;
 }
 
-.founder_container{
+.founder_container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.founder_container .founder_caption{
+.founder_container .founder_caption {
     margin-top: 200px;
     display: inline-flex;
-    font-family: 'lora';
+
     position: relative;
     align-items: center;
     text-align: center;
@@ -262,18 +262,18 @@ svg path:hover{
     gap: 10px;
 }
 
-.founder_container .founder_caption h3{
+.founder_container .founder_caption h3 {
     margin: 0;
     color: #000;
 }
 
-.founder_caption .img_caption{
+.founder_caption .img_caption {
     width: 45px;
 }
 
-.founder_container h2{
+.founder_container h2 {
     padding-top: 30px;
-    font-family: 'lora';
+
     font-size: 4vw;
     color: #1A0B54;
 }
@@ -285,13 +285,13 @@ svg path:hover{
     gap: 50px;
     padding-top: 80px;
     padding-bottom: 120px;
-    max-width: calc(3 * 350px + 2 * 50px); 
+    max-width: calc(3 * 350px + 2 * 50px);
     margin: 0 auto;
 }
 
 .script_founder .founder_item {
     width: 350px;
-    flex: 0 0 auto; 
+    flex: 0 0 auto;
     background-color: #fff;
     padding: 24px;
     border-radius: 2em;
@@ -301,39 +301,40 @@ svg path:hover{
     align-items: center;
 }
 
-.script_founder .founder_img{
+.script_founder .founder_img {
     width: 250px;
     height: 250px;
     border-radius: 50%;
     display: block;
 }
 
-.founder_item .item_text{
+.founder_item .item_text {
     text-align: center;
-    font-family: 'lora';
+
 }
 
-.item_text .p_opa{
+.item_text .p_opa {
     opacity: 0.5;
     padding-bottom: 10px;
     font-size: 1vw;
 }
 
-.item_text .p_jus{
+.item_text .p_jus {
+    font-size: var(--font-size-md);
     text-align: justify;
 }
 
-.values_container{
+.values_container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.values_container .values_caption{
+.values_container .values_caption {
     margin-top: 100px;
     display: inline-flex;
-    font-family: 'lora';
+
     position: relative;
     align-items: center;
     text-align: center;
@@ -345,24 +346,24 @@ svg path:hover{
     gap: 10px;
 }
 
-.values_container .values_caption h3{
+.values_container .values_caption h3 {
     margin: 0;
     color: #000;
     padding-left: 15px;
 }
 
-.values_caption .img_values{
+.values_caption .img_values {
     width: 45px;
 }
 
-.values_container h2{
+.values_container h2 {
     padding-top: 50px;
-    font-family: 'lora';
+
     font-size: 4.5vw;
     color: #1A0B54;
 }
 
-.script_values .life_box{
+.script_values .life_box {
     display: flex;
     gap: 20px;
     padding: 80px 20px;
@@ -370,7 +371,7 @@ svg path:hover{
     flex-wrap: wrap;
 }
 
-.life_box  .box {
+.life_box .box {
     width: 150px;
     height: 150px;
     background-color: #fff;
@@ -385,7 +386,7 @@ svg path:hover{
     cursor: pointer;
 }
 
-.box span{
+.box span {
     background: linear-gradient(90deg, #6dd5fa, #c471ed, #f64f59);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -393,10 +394,11 @@ svg path:hover{
     font-weight: bold;
 }
 
-.short, .long {
+.short,
+.long {
     position: absolute;
     transition: opacity 0.4s ease, transform 0.4s ease;
-    font-family: 'lora';
+
 }
 
 .long {
@@ -419,24 +421,24 @@ svg path:hover{
     transform: translateY(0);
 }
 
-.world_map{
+.world_map {
     background-color: #13101c;
     width: 100%;
     height: 230vh;
     border-radius: 0 0 2em 2em;
 }
 
-.world_map .map_text{
+.world_map .map_text {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.map_text .map_caption{
+.map_text .map_caption {
     display: inline-flex;
     align-items: center;
-    font-family: 'lora';
+
     font-size: 1vw;
     background-color: #32375f;
     color: #fff;
@@ -446,13 +448,13 @@ svg path:hover{
     gap: 10px;
 }
 
-.map_text .map_caption h3{
+.map_text .map_caption h3 {
     margin: 0;
     padding-left: 10px;
 }
 
-.map_text h2{
-    font-family: 'lora';
+.map_text h2 {
+
     font-size: 4vw;
     color: #f9f9f9;
     padding-top: 60px;
@@ -460,24 +462,24 @@ svg path:hover{
     text-align: center;
 }
 
-.map_caption .map_img{
+.map_caption .map_img {
     width: 30px;
 }
 
-.world_map .world_script{
+.world_map .world_script {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.world_script .world_script_img{
+.world_script .world_script_img {
     padding-top: 250px;
     width: 4.5vw;
 }
 
-.world_script h2{
-    font-family: 'lora';
+.world_script h2 {
+
     color: #fff;
     padding-top: 100px;
     font-size: 3.5vw;
@@ -486,7 +488,7 @@ svg path:hover{
     text-align: center;
 }
 
-.footer{
+.footer {
     background-color: #13101c;
     height: 75px;
     border-top: #000 1px solid;
@@ -495,24 +497,24 @@ svg path:hover{
     justify-content: center;
 }
 
-.footer_container{
+.footer_container {
     padding-top: 200px;
 }
 
-.footer nav li{
+.footer nav li {
     display: inline-block;
     color: #fff;
     padding: 0 24px;
 }
 
-nav li a{
+nav li a {
     text-decoration: none;
     text-align: center;
     cursor: pointer;
     opacity: 0.5;
 }
 
-nav li a:hover{
+nav li a:hover {
     opacity: 1;
 }
 
@@ -520,387 +522,391 @@ nav li a:hover{
 /* ===== MEDIA QUERIES ===== */
 
 /* Desktop lớn > 1500px */
-@media only screen and (min-width:1501px){
-    .body_welcome{
+@media only screen and (min-width:1501px) {
+    .body_welcome {
         height: 100vh;
     }
-    
-    .welcome_text h2{
+
+    .welcome_text h2 {
         font-size: 60px;
     }
-    
-    .text_caption h3{
+
+    .text_caption h3 {
         font-size: 16px;
     }
-    
-    .text_caption img{
+
+    .text_caption img {
         width: 35px;
     }
-    
-    .founder_container .founder_caption{
+
+    .founder_container .founder_caption {
         margin-top: 200px;
         font-size: 16px;
         padding: 10px 24px;
     }
-    
-    .founder_caption .img_caption{
+
+    .founder_caption .img_caption {
         width: 45px;
     }
-    
-    .founder_container h2{
+
+    .founder_container h2 {
         font-size: 60px;
     }
-    
-    .values_container .values_caption{
+
+    .values_container .values_caption {
         margin-top: 100px;
         font-size: 16px;
         padding: 10px 24px;
     }
-    
-    .values_caption .img_values{
+
+    .values_caption .img_values {
         width: 45px;
     }
-    
-    .values_container h2{
+
+    .values_container h2 {
         font-size: 60px;
     }
-    
-    .world_map{
+
+    .world_map {
         height: 230vh;
     }
-    
-    .map_text .map_caption{
+
+    .map_text .map_caption {
         font-size: 16px;
         padding: 10px 24px;
         margin-top: 150px;
     }
-    
-    .map_caption .map_img{
+
+    .map_caption .map_img {
         width: 35px;
     }
-    
-    .map_text h2{
+
+    .map_text h2 {
         font-size: 60px;
         padding-bottom: 150px;
     }
-    
-    .world_script h2{
+
+    .world_script h2 {
         font-size: 50px;
         padding-top: 100px;
     }
-    
-    .body_script{
+
+    .body_script {
         padding-bottom: 120px;
     }
 
     .body_script .script_founder {
         gap: 50px;
-        max-width: calc(3 * 350px + 2 * 50px); 
+        max-width: calc(3 * 350px + 2 * 50px);
     }
 
     .script_founder .founder_item {
         width: 350px;
     }
-    
-    .script_founder .founder_img{
+
+    .script_founder .founder_img {
         width: 250px;
         height: 250px;
     }
-    
-    .item_text h2{
+
+    .item_text h2 {
         font-size: 1.2vw;
     }
+
     .item_text .p_opa,
-    .item_text .p_jus{
+    .item_text .p_jus {
         font-size: 1.2vw;
     }
 }
 
 /* Desktop vừa 1201px - 1500px */
-@media only screen and (max-width:1500px){
-    .body_welcome{
+@media only screen and (max-width:1500px) {
+    .body_welcome {
         height: 85vh;
     }
-    
-    .welcome_text h2{
+
+    .welcome_text h2 {
         font-size: 52px;
     }
-    
-    .text_caption h3{
+
+    .text_caption h3 {
         font-size: 15px;
     }
-    
-    .text_caption img{
+
+    .text_caption img {
         width: 32px;
     }
-    
-    .founder_container{
+
+    .founder_container {
         display: none;
     }
-    
-    .values_container .values_caption{
+
+    .values_container .values_caption {
         margin-top: 80px;
         font-size: 15px;
         padding: 8px 20px;
     }
-    
-    .values_caption .img_values{
+
+    .values_caption .img_values {
         width: 40px;
     }
-    
-    .values_container h2{
+
+    .values_container h2 {
         font-size: 52px;
         padding-top: 40px;
     }
-    
-    .world_map{
+
+    .world_map {
         height: 200vh;
     }
-    
-    .map_text .map_caption{
+
+    .map_text .map_caption {
         font-size: 15px;
         padding: 8px 20px;
         margin-top: 120px;
     }
-    
-    .map_caption .map_img{
+
+    .map_caption .map_img {
         width: 32px;
     }
-    
-    .map_text h2{
+
+    .map_text h2 {
         font-size: 52px;
         padding-bottom: 120px;
     }
-    
-    .world_script h2{
+
+    .world_script h2 {
         font-size: 44px;
         padding-top: 80px;
     }
-    
-    .body_script{
+
+    .body_script {
         padding-bottom: 100px;
     }
 
     .body_script .script_founder {
         gap: 50px;
-        max-width: calc(3 * 350px + 2 * 50px); 
+        max-width: calc(3 * 350px + 2 * 50px);
     }
 
     .script_founder .founder_item {
         width: 350px;
     }
-    
-    .script_founder .founder_img{
+
+    .script_founder .founder_img {
         width: 220px;
         height: 220px;
     }
-    
-    .item_text h2{
+
+    .item_text h2 {
         font-size: 1.5vw;
     }
-    .item_text .p_opa,
-    .item_text .p_jus{
+
+    .item_text .p_opa {
         font-size: 0.9vw;
     }
 }
 
 /* Tablet lớn 1025px - 1200px */
-@media only screen and (max-width:1200px){
+@media only screen and (max-width:1200px) {
 
-    .header_container .container_btn{
+    .header_container .container_btn {
         display: none;
     }
-    .body_welcome{
+
+    .body_welcome {
         height: 75vh;
     }
-    
-    .welcome_text h2{
+
+    .welcome_text h2 {
         font-size: 44px;
     }
-    
-    .text_caption h3{
+
+    .text_caption h3 {
         font-size: 14px;
     }
-    
-    .text_caption img{
+
+    .text_caption img {
         width: 28px;
     }
-    
-    .img_blur{
+
+    .img_blur {
         display: none;
     }
-    
-    .values_container .values_caption{
+
+    .values_container .values_caption {
         margin-top: 70px;
         font-size: 14px;
         padding: 8px 18px;
     }
-    
-    .values_caption .img_values{
+
+    .values_caption .img_values {
         width: 38px;
     }
-    
-    .values_container h2{
+
+    .values_container h2 {
         font-size: 44px;
         padding-top: 35px;
     }
-    
-    .world_map{
+
+    .world_map {
         height: 170vh;
     }
-    
-    .map_text .map_caption{
+
+    .map_text .map_caption {
         font-size: 14px;
         padding: 8px 18px;
         margin-top: 100px;
     }
-    
-    .map_caption .map_img{
+
+    .map_caption .map_img {
         width: 28px;
     }
-    
-    .map_text h2{
+
+    .map_text h2 {
         font-size: 44px;
         padding-top: 50px;
         padding-bottom: 100px;
     }
-    
-    .world_script h2{
+
+    .world_script h2 {
         font-size: 38px;
         padding-top: 70px;
         padding-left: 60px;
         padding-right: 60px;
     }
-    
-    .body_script{
+
+    .body_script {
         padding-bottom: 80px;
     }
 
     .body_script .script_founder {
         gap: 50px;
-        max-width: calc(3 * 350px + 2 * 50px); 
+        max-width: calc(3 * 350px + 2 * 50px);
     }
 
     .script_founder .founder_item {
         width: 350px;
     }
-    
-    .script_founder .founder_img{
+
+    .script_founder .founder_img {
         width: 180px;
         height: 180px;
     }
-    
-    .item_text h2{
+
+    .item_text h2 {
         font-size: 18px;
     }
+
     .item_text .p_opa,
-    .item_text .p_jus{
+    .item_text .p_jus {
         font-size: 14px;
     }
 
-    .script_values .life_box{
+    .script_values .life_box {
         gap: 20px;
         padding: 70px 20px;
     }
 }
 
 /* Tablet nhỏ 768px - 1024px */
-@media only screen and (max-width:1024px){
-    .body_welcome{
+@media only screen and (max-width:1024px) {
+    .body_welcome {
         height: 65vh;
         background-size: 85%;
     }
-    
-    .welcome_text h2{
+
+    .welcome_text h2 {
         font-size: 38px;
     }
-    
-    .text_caption h3{
+
+    .text_caption h3 {
         font-size: 13px;
     }
-    
-    .text_caption img{
+
+    .text_caption img {
         width: 26px;
     }
-    
-    .text_caption{
+
+    .text_caption {
         padding: 6px 16px;
     }
-    
-    .values_container .values_caption{
+
+    .values_container .values_caption {
         margin-top: 60px;
         font-size: 13px;
         padding: 7px 16px;
     }
-    
-    .values_caption .img_values{
+
+    .values_caption .img_values {
         width: 35px;
     }
-    
-    .values_container h2{
+
+    .values_container h2 {
         font-size: 38px;
         padding-top: 30px;
     }
-    
-    .world_map{
+
+    .world_map {
         height: 150vh;
     }
-    
-    .map_text .map_caption{
+
+    .map_text .map_caption {
         font-size: 13px;
         padding: 7px 16px;
         margin-top: 80px;
     }
-    
-    .map_caption .map_img{
+
+    .map_caption .map_img {
         width: 26px;
     }
-    
-    .map_text h2{
+
+    .map_text h2 {
         font-size: 38px;
         padding-top: 45px;
         padding-bottom: 80px;
     }
-    
-    .world_script h2{
+
+    .world_script h2 {
         font-size: 34px;
         padding-top: 60px;
         padding-left: 50px;
         padding-right: 50px;
     }
-    
-    .body_script{
+
+    .body_script {
         padding-bottom: 70px;
     }
 
     .body_script .script_founder {
         gap: 50px;
-        max-width: calc(3 * 350px + 2 * 50px); 
+        max-width: calc(3 * 350px + 2 * 50px);
     }
 
     .script_founder .founder_item {
         width: 350px;
     }
-    
-    .script_founder .founder_img{
+
+    .script_founder .founder_img {
         width: 160px;
         height: 160px;
     }
-    
-    .item_text h2{
+
+    .item_text h2 {
         font-size: 16px;
     }
+
     .item_text .p_opa,
-    .item_text .p_jus{
+    .item_text .p_jus {
         font-size: 13px;
     }
 
-    .script_values .life_box{
+    .script_values .life_box {
         gap: 15px;
         padding: 60px 20px;
     }
-    
-    .life_box .box{
+
+    .life_box .box {
         width: 130px;
         height: 130px;
         font-size: 40px;
@@ -908,112 +914,113 @@ nav li a:hover{
 }
 
 /* Mobile 480px - 767px */
-@media only screen and (max-width:767px){
-    .body_welcome{
+@media only screen and (max-width:767px) {
+    .body_welcome {
         height: 55vh;
         background-size: 95%;
     }
-    
-    .welcome_text h2{
+
+    .welcome_text h2 {
         font-size: 30px;
         padding-top: 15px;
     }
-    
-    .text_caption h3{
+
+    .text_caption h3 {
         font-size: 12px;
     }
-    
-    .text_caption img{
+
+    .text_caption img {
         width: 22px;
     }
-    
-    .text_caption{
+
+    .text_caption {
         padding: 5px 14px;
     }
-    
-    .values_container .values_caption{
+
+    .values_container .values_caption {
         margin-top: 50px;
         font-size: 12px;
         padding: 6px 14px;
     }
-    
-    .values_caption .img_values{
+
+    .values_caption .img_values {
         width: 30px;
     }
-    
-    .values_container h2{
+
+    .values_container h2 {
         font-size: 32px;
         padding-top: 25px;
     }
-    
-    .world_map{
+
+    .world_map {
         height: 130vh;
     }
-    
-    .map_text .map_caption{
+
+    .map_text .map_caption {
         font-size: 12px;
         padding: 6px 14px;
         margin-top: 60px;
     }
-    
-    .map_caption .map_img{
+
+    .map_caption .map_img {
         width: 22px;
     }
-    
-    .map_text h2{
+
+    .map_text h2 {
         font-size: 32px;
         padding-top: 40px;
         padding-bottom: 60px;
         padding-left: 20px;
         padding-right: 20px;
     }
-    
-    .world_script h2{
+
+    .world_script h2 {
         font-size: 28px;
         padding-top: 50px;
         padding-left: 30px;
         padding-right: 30px;
     }
-    
-    .world_script .world_script_img{
+
+    .world_script .world_script_img {
         padding-top: 150px;
         width: 60px;
     }
-    
-    .body_script{
+
+    .body_script {
         padding-bottom: 60px;
     }
 
     .body_script .script_founder {
         gap: 50px;
-        max-width: calc(3 * 350px + 2 * 50px); 
+        max-width: calc(3 * 350px + 2 * 50px);
     }
 
     .script_founder .founder_item {
         width: 350px;
     }
-    
-    .script_founder .founder_img{
+
+    .script_founder .founder_img {
         width: 140px;
         height: 140px;
     }
-    
-    .item_text h2{
+
+    .item_text h2 {
         font-size: 14px;
     }
+
     .item_text .p_opa,
-    .item_text .p_jus{
+    .item_text .p_jus {
         font-size: 12px;
     }
 
-    .script_values .life_box{
+    .script_values .life_box {
         flex-direction: column;
         gap: 15px;
         padding: 40px 15px;
         align-items: center;
     }
-    
-    .life_box .box{
+
+    .life_box .box {
         width: 100%;
         max-width: 280px;
         height: 100px;
@@ -1022,41 +1029,41 @@ nav li a:hover{
 }
 
 /* Mobile nhỏ < 480px */
-@media only screen and (max-width:480px){
-    .body_welcome{
+@media only screen and (max-width:480px) {
+    .body_welcome {
         height: 50vh;
         background-size: 105%;
         padding: 0 3%;
     }
-    
-    .welcome_text{
+
+    .welcome_text {
         width: 95%;
     }
-    
-    .welcome_text h2{
+
+    .welcome_text h2 {
         font-size: 24px;
         padding-top: 12px;
     }
-    
-    .text_caption h3{
+
+    .text_caption h3 {
         font-size: 11px;
     }
-    
-    .text_caption img{
+
+    .text_caption img {
         width: 20px;
     }
-    
-    .text_caption{
+
+    .text_caption {
         padding: 4px 12px;
     }
-    
+
     /* Fix body_script width */
-    .body_script{
+    .body_script {
         padding-bottom: 50px;
         padding-left: 10px;
         padding-right: 10px;
     }
-    
+
     /* Fix founder items */
     .body_script .script_founder {
         gap: 30px;
@@ -1066,70 +1073,71 @@ nav li a:hover{
         padding-right: 15px;
         max-width: 100%;
     }
-    
+
     .script_founder .founder_item {
         width: 100%;
         max-width: 280px;
         padding: 20px;
     }
-    
-    .script_founder .founder_img{
+
+    .script_founder .founder_img {
         width: 100px;
         height: 100px;
     }
-    
-    .item_text h2{
+
+    .item_text h2 {
         font-size: 16px;
     }
+
     .item_text .p_opa,
-    .item_text .p_jus{
+    .item_text .p_jus {
         font-size: 13px;
     }
-    
+
     /* Fix values section */
-    .values_container .values_caption{
+    .values_container .values_caption {
         margin-top: 40px;
         font-size: 11px;
         padding: 5px 12px;
     }
-    
-    .values_caption .img_values{
+
+    .values_caption .img_values {
         width: 26px;
     }
-    
-    .values_container h2{
+
+    .values_container h2 {
         font-size: 26px;
         padding-top: 20px;
         padding-left: 15px;
         padding-right: 15px;
     }
-    
+
     /* Fix world map section */
-    .world_map{
+    .world_map {
         height: 110vh;
         padding-left: 10px;
         padding-right: 10px;
     }
-    
-    .map_text .map_caption{
+
+    .map_text .map_caption {
         font-size: 11px;
         padding: 5px 12px;
         margin-top: 50px;
     }
-    
-    .map_caption .map_img{
+
+    .map_caption .map_img {
         width: 20px;
     }
-    
-    .map_text h2{
+
+    .map_text h2 {
         font-size: 26px;
         padding-top: 35px;
         padding-bottom: 50px;
         padding-left: 15px;
         padding-right: 15px;
     }
-    
-    .world_script h2{
+
+    .world_script h2 {
         font-size: 24px;
         padding-top: 40px;
         padding-left: 20px;
