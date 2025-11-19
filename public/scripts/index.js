@@ -1,3 +1,5 @@
+import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
+
 const coderHome = document.querySelector(".coderhome");
 const devTo = document.querySelector(".devto");
 const scrollBtn = document.getElementById("scrollTopBtn");
@@ -69,16 +71,17 @@ async function loadCoderhomePost(isInitial = true) {
           day: "2-digit",
           month: "2-digit",
         })}</span>
-                  <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>5.5K
-                  </span>
+                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
+                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
+                    <span>${getRandomLikeCount()}</span>
+                  </div>
                   <span style="display: flex; align-items: center; gap: 0.5rem">
                     <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
                   </span>
                 </div>
                 <div class="post__interact-action">
-                  <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                  <button class="icon-btn remove-post"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
+                  <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
                   <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                 </div>
               </div>
@@ -92,17 +95,8 @@ async function loadCoderhomePost(isInitial = true) {
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
-    // Add heart icon click listeners to new posts
-    document.querySelectorAll(".heart").forEach((item) => {
-      item.addEventListener("click", () => {
-        item.classList.toggle("active");
-        if (item.classList.contains("active")) {
-          item.src = "/images/icons/heart-filled-icon.svg";
-        } else {
-          item.src = "/images/icons/heart-outline-icon.svg";
-        }
-      });
-    });
+    handleLikeClick();
+    handleBookmarkClick();
 
     currentPage++;
 
@@ -181,8 +175,8 @@ async function loadDevToPost(isInitial = true) {
                   </span>
                 </div>
                 <div class="post__interact-action">
-                  <button class="icon-btn"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn"><img src="/images/icons/bookmark-icon.svg" class="react-icon"/></button>
+                  <button class="icon-btn remove-post"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
+                  <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
                   <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
                 </div>
               </div>
@@ -196,19 +190,8 @@ async function loadDevToPost(isInitial = true) {
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
-    document.querySelectorAll(".like-count").forEach((item) => {
-      item.querySelector(".heart").addEventListener("click", () => {
-        item.classList.toggle("active");
-        const currentLikeCount = item.querySelector("span");
-        if (item.classList.contains("active")) {
-          item.querySelector("img").src = "/images/icons/heart-filled-icon.svg";
-          currentLikeCount.textContent = Number(currentLikeCount.textContent.trim()) + 1;
-        } else {
-          item.querySelector("img").src = "/images/icons/heart-outline-icon.svg";
-          currentLikeCount.textContent = Number(currentLikeCount.textContent.trim()) - 1;
-        }
-      });
-    });
+    handleLikeClick();
+    handleBookmarkClick();
 
     currentPage++;
   } catch (err) {
@@ -217,6 +200,7 @@ async function loadDevToPost(isInitial = true) {
     isLoading = false;
   }
 }
+
 
 // Infinite scroll handler
 function handleScroll() {
@@ -227,7 +211,7 @@ function handleScroll() {
 
   // Calculate if user is near bottom (within 200px)
   const isNearBottom = scrollTop + windowHeight >= documentHeight - 200;
-
+  
   if (isNearBottom && !isLoading && hasMore) {
     if (currentTab === "coderhome") {
       loadCoderhomePost(false);
@@ -236,6 +220,29 @@ function handleScroll() {
     }
   }
 }
+
+// Handle remove post (UI only)
+document.addEventListener("click", (e) => {
+  const removeBtn = e.target.closest(".remove-post");
+  if (!removeBtn) return;
+  
+  const postCard = removeBtn.closest(".post__card");
+  if (postCard) {
+    postCard.classList.add("hidden");
+    
+    setTimeout(() => {
+      postCard.style.display = "none";
+    }, 400); // match CSS transition time
+  }
+})
+
+document.querySelectorAll(".follow__btn").forEach((item) => {
+  item.addEventListener("click", () => {
+    item.classList.toggle("followed");
+
+    item.textContent = item.classList.contains("followed") ? "Following" : "Follow";
+  })
+})
 
 coderHome.addEventListener("click", () => {
   loadCoderhomePost(true)
