@@ -192,6 +192,8 @@ svg path:hover {
     fill: #ccc;
 }
 
+
+/* blur image section */
 .img_blur {
     background-image: url(https://cdn.prod.website-files.com/6720dd1ab6df0da205830ab1/68760fa2a03250f66313c101_gradient-blur.avif);
     background-position: 50% 0;
@@ -240,6 +242,7 @@ svg path:hover {
     padding-bottom: 120px;
 }
 
+/* founder section */
 .founder_container {
     display: flex;
     align-items: center;
@@ -332,6 +335,8 @@ svg path:hover {
     flex-direction: column;
 }
 
+
+/* values section */
 .values_container .values_caption {
     margin-top: 100px;
     display: inline-flex;
@@ -387,6 +392,7 @@ svg path:hover {
     cursor: pointer;
 }
 
+/* Gradient animation */
 .box span {
     background: linear-gradient(90deg, #6dd5fa, #c471ed, #f64f59);
     -webkit-background-clip: text;
@@ -422,6 +428,8 @@ svg path:hover {
     transform: translateY(0);
 }
 
+
+/* world map section */
 .world_map {
     background-color: #13101c;
     width: 100%;
@@ -489,6 +497,7 @@ svg path:hover {
     text-align: center;
 }
 
+/* footer part */
 .footer {
     background-color: #13101c;
     height: 75px;
@@ -520,9 +529,8 @@ nav li a:hover {
 }
 
 
-/* ===== MEDIA QUERIES ===== */
-
-/* Desktop lớn > 1500px */
+/* reponsive */
+/* desktop */
 @media only screen and (min-width:1501px) {
     .body_welcome {
         height: 100vh;
@@ -620,7 +628,7 @@ nav li a:hover {
     }
 }
 
-/* Desktop vừa 1201px - 1500px */
+/* desktop < 1500px */
 @media only screen and (max-width:1500px) {
     .body_welcome {
         height: 85vh;
@@ -708,7 +716,7 @@ nav li a:hover {
     }
 }
 
-/* Tablet lớn 1025px - 1200px */
+/* tablet */
 @media only screen and (max-width:1200px) {
 
     .header_container .container_btn {
@@ -810,7 +818,7 @@ nav li a:hover {
     }
 }
 
-/* Tablet nhỏ 768px - 1024px */
+/* tablet < 1024px */
 @media only screen and (max-width:1024px) {
     .body_welcome {
         height: 65vh;
@@ -914,7 +922,7 @@ nav li a:hover {
     }
 }
 
-/* Mobile 480px - 767px */
+/* mobile */
 @media only screen and (max-width:767px) {
     .body_welcome {
         height: 55vh;
@@ -1029,7 +1037,7 @@ nav li a:hover {
     }
 }
 
-/* Mobile nhỏ < 480px */
+/* mobile  < 480px */
 @media only screen and (max-width:480px) {
     .body_welcome {
         height: 50vh;
