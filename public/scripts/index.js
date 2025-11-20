@@ -1,20 +1,30 @@
 import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
 
-const coderHome = document.querySelector(".coderhome");
-const devTo = document.querySelector(".devto");
-const scrollBtn = document.getElementById("scrollTopBtn");
+// Lấy phần tử giao diện
+// Get UI elements
+const coderHome = document.querySelector(".coderhome"); // Tab Coderhome
+const devTo = document.querySelector(".devto"); // Tab Dev.to
+const scrollBtn = document.getElementById("scrollTopBtn"); // Nút scroll to top
 
+// Biến trạng thái phân trang
+// Pagination state variables
 let currentPage = 1;
 let currentTab = "coderhome";
-let isLoading = false;
-let hasMore = true;
+let isLoading = false; // Ngăn load trùng
+let hasMore = true; // Còn bài để load hay không
 const posts_per_page = 10;
 
-// Function to load Coderhome's posts
+// ---------------------------------------------
+// Load bài viết từ Coderhome
+// Load Coderhome posts
+// ---------------------------------------------
 async function loadCoderhomePost(isInitial = true) {
   if (isInitial) {
+    // Reset phân trang khi load lần đầu
+    // Reset pagination for initial load
     currentPage = 1;
     hasMore = true;
+
     coderHome.style.cssText = `
       border-bottom: 2px solid #f2f2f2;
       font-weight: bold;
@@ -26,33 +36,39 @@ async function loadCoderhomePost(isInitial = true) {
     currentTab = "coderhome";
   }
 
-  if (isLoading || !hasMore) return;
+  if (isLoading || !hasMore) return; // Nếu đang load hoặc hết bài → thoát
   isLoading = true;
 
   try {
-    // get all posts from DB
+    // Lấy tất cả bài viết từ DB
+    // Fetch all posts from database
     const res = await fetch("/posts/");
     const allPosts = await res.json();
 
-    // Calculate each posts of 1 load
+    // Tính vị trí bài trong 1 lần load
+    // Calculate post slice for current page
     const startIndex = (currentPage - 1) * posts_per_page;
     const endIndex = startIndex + posts_per_page;
     const posts = allPosts.slice(startIndex, endIndex);
 
-    // Check if there are more posts
+    // Kiểm tra còn bài hay không
+    // Check if more posts exist
     hasMore = endIndex < allPosts.length;
+
     const container = document.querySelector(".post");
 
-    // If this is the first load, clear container
+    // Xóa bài cũ khi load tab mới
+    // Clear container on initial load
     if (isInitial) {
       container.innerHTML = "";
     }
 
-    // Append new posts
+    // Render danh sách bài viết
+    // Render post list
     const postsHTML = posts
       .map((p, index) => {
         const isLastInBatch = index === posts.length - 1;
-        const showDivider = !isLastInBatch || hasMore;
+        const showDivider = !isLastInBatch || hasMore; // Hiện HR nếu còn dữ liệu
 
         return `<article class="post__card">
           <div class="post__author">
@@ -73,7 +89,7 @@ async function loadCoderhomePost(isInitial = true) {
         })}</span>
                   <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
                     <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
-                    <span>${getRandomLikeCount()}</span>
+                    <span>${getRandomLikeCount()}</span> <!-- Random số like -->
                   </div>
                   <span style="display: flex; align-items: center; gap: 0.5rem">
                     <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
@@ -95,10 +111,12 @@ async function loadCoderhomePost(isInitial = true) {
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
+    // Thêm event like + bookmark sau khi render
+    // Rebind like & bookmark handlers
     handleLikeClick();
     handleBookmarkClick();
 
-    currentPage++;
+    currentPage++; // Tăng trang
 
   } catch (err) {
     console.error("Error loading Coderhome posts:", err);
@@ -106,11 +124,16 @@ async function loadCoderhomePost(isInitial = true) {
     isLoading = false;
   }
 }
-// Function to load posts from Dev.to
+
+// ---------------------------------------------
+// Load bài viết từ Dev.to
+// Load Dev.to posts
+// ---------------------------------------------
 async function loadDevToPost(isInitial = true) {
   if (isInitial) {
     currentPage = 1;
     hasMore = true;
+
     devTo.style.cssText = `
       border-bottom: 2px solid #f2f2f2;
       font-weight: bold;
@@ -126,23 +149,20 @@ async function loadDevToPost(isInitial = true) {
   isLoading = true;
 
   try {
-    // Fetch posts with pagination from Dev.to API
+    // Lấy bài viết từ Dev.to API
+    // Fetch posts from Dev.to API
     const res = await fetch(
       `https://dev.to/api/articles?page=${currentPage}&per_page=${posts_per_page}`
     );
     const posts = await res.json();
 
-    // Check if there are more posts
+    // Kiểm tra còn bài không
     hasMore = posts.length === posts_per_page;
 
     const container = document.querySelector(".post");
 
-    // If initial load, clear container
-    if (isInitial) {
-      container.innerHTML = "";
-    }
+    if (isInitial) container.innerHTML = "";
 
-    // Append new posts
     const postsHTML = posts
       .map((p, index) => {
         const isLastInBatch = index === posts.length - 1;
@@ -201,73 +221,69 @@ async function loadDevToPost(isInitial = true) {
   }
 }
 
-
+// ---------------------------------------------
+// Infinite Scroll để load thêm bài
 // Infinite scroll handler
+// ---------------------------------------------
 function handleScroll() {
-  // Get the scroll position
   const scrollTop = window.scrollY;
   const windowHeight = window.innerHeight;
   const documentHeight = document.documentElement.scrollHeight;
 
-  // Calculate if user is near bottom (within 200px)
+  // Kiểm tra user gần chạm đáy 200px
+  // Check if near bottom
   const isNearBottom = scrollTop + windowHeight >= documentHeight - 200;
   
   if (isNearBottom && !isLoading && hasMore) {
-    if (currentTab === "coderhome") {
-      loadCoderhomePost(false);
-    } else if (currentTab === "devto") {
-      loadDevToPost(false);
-    }
+    if (currentTab === "coderhome") loadCoderhomePost(false);
+    else if (currentTab === "devto") loadDevToPost(false);
   }
 }
 
-// Handle remove post (UI only)
+// ---------------------------------------------
+// Xóa bài viết (chỉ ẩn UI, không xóa DB)
+// Remove post from UI only
+// ---------------------------------------------
 document.addEventListener("click", (e) => {
   const removeBtn = e.target.closest(".remove-post");
   if (!removeBtn) return;
   
   const postCard = removeBtn.closest(".post__card");
-  if (postCard) {
-    postCard.classList.add("hidden");
-    
-    setTimeout(() => {
-      postCard.style.display = "none";
-    }, 400); // match CSS transition time
-  }
-})
 
+  if (postCard) {
+    postCard.classList.add("hidden"); // Thêm hiệu ứng CSS
+    setTimeout(() => {
+      postCard.style.display = "none"; // Ẩn hoàn toàn
+    }, 400);
+  }
+});
+
+// Follow/unfollow button
 document.querySelectorAll(".follow__btn").forEach((item) => {
   item.addEventListener("click", () => {
     item.classList.toggle("followed");
-
     item.textContent = item.classList.contains("followed") ? "Following" : "Follow";
   })
-})
-
-coderHome.addEventListener("click", () => {
-  loadCoderhomePost(true)
-});
-devTo.addEventListener("click", () => {
-  loadDevToPost(true);
 });
 
+// Chuyển tab
+coderHome.addEventListener("click", () => loadCoderhomePost(true));
+devTo.addEventListener("click", () => loadDevToPost(true));
+
+// Lắng nghe scroll
 window.addEventListener("scroll", handleScroll);
 
+// Hiện nút scroll-to-top
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 200) {
-    scrollBtn.style.display = "block";
-  } else {
-    scrollBtn.style.display = "none";
-  }
+  scrollBtn.style.display = window.scrollY > 200 ? "block" : "none";
 });
 
+// Cuộn lên đầu trang
 scrollBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
+// Load lần đầu
 document.addEventListener("DOMContentLoaded", () => {
-  loadCoderhomePost(true)
-})
+  loadCoderhomePost(true);
+});

@@ -1,7 +1,9 @@
 import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
 
+// Lấy userId từ URL
 const userId = location.pathname.split("/").pop();
 
+// Load nút "Tell us your story" nếu là chính chủ
 async function loadWriteStoryButton() {
   const res = await fetch(`/current/`);
   const currentUser = await res.json();
@@ -10,15 +12,19 @@ async function loadWriteStoryButton() {
   const btnContainer = document.querySelector(".button-container");
 
   if (user._id == currentUser._id) {
+    // Hiển thị nút viết bài nếu là chính chủ
     btnContainer.innerHTML = `
         <a href="/write" class="tell-story-button">
           <img src="" alt="" /> Tell us your story
         </a>
     `;
   } else {
+    // Ẩn container nếu không phải chính chủ
     btnContainer.classList.add("hidden");
   }
 }
+
+// Load thông tin cơ bản của user
 async function loadUserInfo() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
@@ -34,6 +40,7 @@ async function loadUserInfo() {
   `;
 }
 
+// Load các bài viết đã đăng của user
 async function loadPostedPost() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
@@ -42,13 +49,14 @@ async function loadPostedPost() {
   const posts = Array.isArray(user.postedPosts) ? user.postedPosts.slice() : [];
 
   if (posts.length > 0) {
-    // Sort newest first by createdAt (fallback to _id timestamp if createdAt missing)
+    // Sắp xếp bài viết mới nhất lên đầu
     posts.sort((a, b) => {
       const aTime = a?.createdAt ? new Date(a.createdAt).getTime() : (a?._id ? parseInt(a._id.substring(0, 8), 16) * 1000 : 0);
       const bTime = b?.createdAt ? new Date(b.createdAt).getTime() : (b?._id ? parseInt(b._id.substring(0, 8), 16) * 1000 : 0);
       return bTime - aTime;
     });
 
+    // Render danh sách bài viết
     postedPostContainer.innerHTML = posts
       .map((post) => {
         const author = post.author || {};
@@ -97,16 +105,18 @@ async function loadPostedPost() {
       })
       .join('');
 
-    handleLikeClick();
-    handleBookmarkClick();
+    handleLikeClick(); // Kích hoạt chức năng like
+    handleBookmarkClick(); // Kích hoạt chức năng bookmark
 
   } else {
+    // Hiển thị thông báo nếu chưa có bài viết
     postedPostContainer.innerHTML = `
     <p class="user__no-po-cm-bio">This user hasn't posted any posts yet.</p>
     `;
   }
 }
 
+// Load comment của user
 async function loadComment() {
   const res = await fetch(`/comments/u/${userId}`);
   const comments = await res.json();
@@ -114,14 +124,14 @@ async function loadComment() {
   console.log("Loaded comments:", comments);
 
   if (comments && comments.length > 0) {
+    // Render danh sách comment
     commentsContainer.innerHTML = comments
       .map(
         (comment) => `
         <hr class="divider"/>
     <div class="comment__container">
       <div class="comment__header">
-          <a href="/post/${comment.post?._id || "#"}" class="post__title">${comment.post?.title || "Post not found!"
-          }</a>
+          <a href="/post/${comment.post?._id || "#"}" class="post__title">${comment.post?.title || "Post not found!"}</a>
           <p class="post__date">${new Date(
             comment.createdAt
           ).toDateString()}</p>
@@ -130,8 +140,9 @@ async function loadComment() {
     </div>
     `
       )
-      .join("");
+      .join('');
   } else {
+    // Thông báo nếu chưa có comment
     commentsContainer.innerHTML = `
     <hr class="divider">
     <p class="user__no-po-cm-bio">No comment yet!!</p>
@@ -139,6 +150,7 @@ async function loadComment() {
   }
 }
 
+// Load bio của user
 async function loadBio() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
@@ -173,6 +185,7 @@ async function loadBio() {
   }
 }
 
+// Load thông tin chi tiết hơn của user
 async function loadUserMoreInfo() {
   const res = await fetch(`/profiles/${userId}`);
   const res2 = await fetch(`/comments/u/${userId}`);
@@ -219,6 +232,8 @@ async function loadUserMoreInfo() {
 
   `;
 }
+
+// Load social link của user
 async function loadUserSocialLink() {
   const res = await fetch(`/profiles/${userId}`);
   const user = await res.json();
@@ -235,6 +250,8 @@ async function loadUserSocialLink() {
 
   `;
 }
+
+// Load cài đặt user
 async function loadUserSetting() {
   const res = await fetch(`/current/`);
   const currentUser = await res.json();
@@ -243,6 +260,7 @@ async function loadUserSetting() {
   const settingContainer = document.querySelector(".user__settings");
 
   if (user._id == currentUser._id) {
+    // Hiển thị cài đặt nếu là chính chủ
     settingContainer.innerHTML = `
       <div class="setting__content">
         <div>
@@ -269,11 +287,11 @@ async function loadUserSetting() {
       </div>
     `;
   } else {
+    // Ẩn cài đặt nếu không phải chính chủ
     settingContainer.classList.add("hidden");
   }
 
-
-  // Them chuc nang edit profile
+  // Thêm chức năng edit profile
   const editProfileForm = document.querySelector(".edit-profile__form");
   const cancelBtn = document.querySelector(".cancel-btn");
   const submitBtn = document.querySelector(".submit-btn");
@@ -281,11 +299,9 @@ async function loadUserSetting() {
   const username = document.getElementById("username");
   const email = document.getElementById("email");
   const bio = document.getElementById("bio");
-
-
-
   const settingUpdateBtnProfile = document.querySelector(".edit-profile");
 
+  // Hủy edit
   cancelBtn.addEventListener("click", () => {
     editProfileForm.classList.remove("active");
     overlay.classList.remove("active");
@@ -296,6 +312,7 @@ async function loadUserSetting() {
     overlay.classList.remove("active");
   });
 
+  // Mở form edit
   settingUpdateBtnProfile.addEventListener("click", function () {
     editProfileForm.classList.add("active");
     overlay.classList.add("active");
@@ -304,6 +321,7 @@ async function loadUserSetting() {
     bio.value = currentUser.bio;
   });
 
+  // Submit form edit
   submitBtn.addEventListener("click", async () => {
     const usernameContent = username.value.trim() || username.placeholder;
     const emailContent = email.value.trim() || email.placeholder;
@@ -327,10 +345,12 @@ async function loadUserSetting() {
         bio: bioContent
       })
     });
+    // Reload page sau khi update
     window.location.reload();
   });
 }
-//
+
+// Gọi các hàm load ban đầu
 loadWriteStoryButton();
 loadUserInfo();
 loadPostedPost();
@@ -338,7 +358,7 @@ loadUserMoreInfo();
 loadUserSetting();
 loadUserSocialLink();
 
-// Responsive
+// Responsive layout
 const sideProfile = document.querySelector(".side-profile");
 const nav = document.querySelector(".profile-nav");
 const userMain = document.querySelector(".user__main");
@@ -347,6 +367,7 @@ const bgImg = document.querySelector(".user__bg-img");
 const moreInfoContainer = document.querySelector(".more-info__container");
 const userAvt = document.querySelector(".user__avatar");
 
+// Chuyển vị trí layout theo media query
 function responsive(e) {
   if (e.matches) {
     nav.before(sideProfile);
@@ -361,8 +382,7 @@ responsive(mq);
 const tabs = document.querySelectorAll(".profile-nav__items");
 const contents = document.querySelector(".profile-content");
 
-// Khi bấm vào mỗi tab
-
+// Click vào các tab
 tabs.forEach((tab) => {
   tab.addEventListener("click", async function (e) {
     e.preventDefault();
@@ -378,12 +398,12 @@ tabs.forEach((tab) => {
   });
 });
 
-//Khi bam vao More
+// Khi bấm vào More
 const more = document.querySelector(".side-profile__more");
 const socialLinksContainer = document.querySelector(".user__social-links");
 const moreInfo = document.querySelector(".user__more-info");
 const arrow = document.querySelector(".arrow");
 more.addEventListener("click", () => {
-  sideProfile.classList.toggle("active");
-  arrow.classList.toggle("active");
+  sideProfile.classList.toggle("active"); // Ẩn/hiện side profile
+  arrow.classList.toggle("active"); // Thêm hiệu ứng arrow
 });

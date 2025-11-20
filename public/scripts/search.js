@@ -1,13 +1,19 @@
+// Lấy giá trị query từ URL
 const urlParams = new URLSearchParams(window.location.search);
 const query = urlParams.get("q") || "";
 
+// Lấy nút scroll top và các tab
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 const tabs = document.querySelectorAll(".nav__items");
 
+// Lấy tab cụ thể
 const userTab = document.getElementById("tab-users");
 const postTab = document.getElementById("tab-posts");
+
+// Container hiển thị kết quả
 const resultContainer = document.getElementById("main__content");
 
+// Hàm fetch dữ liệu search từ server theo type và keyword
 async function fetchSearch(type, keyword) {
   const res = await fetch(
     `/search?type=${type}&q=${encodeURIComponent(keyword)}`
@@ -16,14 +22,19 @@ async function fetchSearch(type, keyword) {
   return data;
 }
 
+// Hàm load bài viết
 async function loadPosts() {
   const posts = await fetchSearch("posts", query);
   const container = document.querySelector(".main__content");
   container.innerHTML = ``;
+
+  // Nếu không tìm thấy bài viết
   if (!posts.length) {
     container.innerHTML = `<p style="display: flex; justify-content: center; font-size: 2.5rem; font-weight: bold;">No post found!</p>`;
     return;
   }
+
+  // Render danh sách bài viết
   container.innerHTML = posts
     .map(
       (post) =>
@@ -73,15 +84,20 @@ async function loadPosts() {
     )
     .join("");
 }
+
+// Hàm load người dùng
 async function loadUsers() {
   const users = await fetchSearch("users", query);
   const container = document.querySelector(".main__content");
   container.innerHTML = ``;
 
+  // Nếu không tìm thấy người dùng
   if (!users.length) {
     container.innerHTML = `<p style="display: flex; justify-content: center; font-size: 2.5rem; font-weight: bold;">No user found!</p>`;
     return;
   }
+
+  // Render danh sách người dùng
   container.innerHTML = users
     .map(
       (user) =>
@@ -104,27 +120,29 @@ async function loadUsers() {
     .join("");
 }
 
+// Thêm sự kiện click cho các tab
 tabs.forEach((tab) => {
   tab.addEventListener("click", async function (e) {
     e.preventDefault();
 
+    // Xóa class active của tất cả tab
     tabs.forEach((t) => t.classList.remove("active"));
+    // Thêm class active cho tab hiện tại
     this.classList.add("active");
 
     const type = this.dataset.tab;
 
     if (type === "post") {
-      loadPosts();
+      loadPosts(); // Load bài viết
       userTab.classList.remove("active");
     } else if (type === "user") {
-      loadUsers();
+      loadUsers(); // Load người dùng
       userTab.classList.add("active");
     }
   });
 });
 
-// Scroll top
-
+// Hiển thị nút scroll top khi scroll xuống > 200px
 window.addEventListener("scroll", () => {
   if (window.scrollY > 200) {
     scrollTopBtn.style.display = "block";
@@ -133,6 +151,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
+// Click nút scroll top → cuộn lên đầu trang
 scrollTopBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
@@ -140,5 +159,5 @@ scrollTopBtn.addEventListener("click", () => {
   });
 });
 
-// Call Function
+// Gọi loadPosts lần đầu khi load trang
 loadPosts();
