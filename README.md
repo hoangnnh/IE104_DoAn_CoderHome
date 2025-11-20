@@ -1,8 +1,6 @@
-# CoderHome
+# CoderHome 🏠
 
 Dự án **CoderHome** là một ứng dụng web đơn giản được xây dựng bằng **HTML, CSS, JavaScript thuần**, kết hợp với **Express.js** để tạo API backend và thao tác với MongoDB.
-
-Mục tiêu của dự án:
 
 ---
 
@@ -23,16 +21,25 @@ Mục tiêu của dự án:
 ## 📁 Cấu trúc thư mục
 
 ```
-project/
-├── public/             # HTML, CSS, JS client
-├── src/
-│   ├── routes/         # API routes Express
-│   ├── controllers/    # Controller xử lý logic
-│   ├── models/         # Mongoose schemas
-│   ├── server.js       # File khởi chạy server
-├── .env.example        # File mẫu cấu hình
-├── package.json
-└── README.md
+IE104_DoAn_CoderHome/
+├── .gitignore              # Danh sách file/thư mục không đưa vào Git
+├── app.js                  # File khởi tạo ứng dụng Express
+├── controllers             # Chứa các controller xử lý logic cho route
+├── middleware              # Middleware tùy chỉnh (auth, logger, …)
+├── models                  # Mô hình dữ liệu (MongoDB/Mongoose)
+├── node_modules            # Thư viện cài bằng npm (tự tạo, không commit)
+├── package-lock.json       # Lưu phiên bản chính xác của từng dependency
+├── package.json            # Metadata project + scripts + danh sách thư viện
+├── public                  # Static files phục vụ client
+│   ├── fonts               # Font chữ
+│   ├── images              # Hình ảnh tĩnh
+│   ├── scripts             # JavaScript chạy ở client
+│   └── styles              # CSS, stylesheet
+├── README.md               # Tài liệu mô tả project
+├── routes                  # Định nghĩa các route của hệ thống
+└── views                   # Template giao diện (EJS, Handlebars,…)
+    └── pages               # Các trang giao diện cụ thể
+
 ```
 
 ---
@@ -74,7 +81,14 @@ http://localhost:3000
 
 ## 🔑 Tài khoản test
 
-Dưới đây là tài khoản Admin để bạn trải nghiệm tính năng quản trị (UI) :
+**Tài khoản User:**
+
+```
+Email: kien234@gmail.com
+Mật khẩu: 123
+```
+
+Dưới đây là tài khoản Admin để bạn trải nghiệm tính năng quản trị (UI):
 
 **Tài khoản Admin:**
 
@@ -82,8 +96,6 @@ Dưới đây là tài khoản Admin để bạn trải nghiệm tính năng qua
 Email: kien123@gmail.com
 Mật khẩu: 123
 ```
-
-> Lưu ý: Tài khoản này chỉ dành cho mục đích demo.
 
 ---
 
@@ -105,6 +117,8 @@ Mật khẩu: 123
 
 ## 📩 Liên hệ
 
-Nếu các bạn muốn cải tiến dự án hoặc gặp lỗi, các bạn có thể liên hệ với nhóm mình qua Gmail: 23520532@gmail.com.
+Nếu các bạn muốn cải tiến dự án hoặc gặp lỗi, các bạn có thể liên hệ với nhóm mình qua Gmail: 23520532@gm.uit.edu.vn.
 
 Chúc bạn trải nghiệm vui vẻ! 🚀
+
+
