@@ -309,7 +309,7 @@ a {
 }
 
 .post__left-text {
-  flex: 3
+  flex: 3;
 }
 
 .post__interact {
@@ -332,7 +332,6 @@ a {
   gap: var(--space-md);
 }
 
-
 .post__interact-action .icon-btn {
   background-color: var(--color-surface);
   border: none;
@@ -344,7 +343,7 @@ a {
 }
 
 .post__author-img {
-  width: calc(0.8*var(--icon-base-width));
+  width: calc(0.8 * var(--icon-base-width));
   border-radius: var(--border-radius-pill);
 }
 
@@ -368,9 +367,8 @@ a {
 
 .react-icon-meta,
 .react-icon {
-  width: calc(0.6*var(--icon-base-width));
+  width: calc(0.6 * var(--icon-base-width));
   transition: all 0.3s ease;
-
 }
 
 .react-icon:hover,
@@ -388,11 +386,48 @@ a {
   align-items: center;
   text-align: center;
 }
+/* Author more to follow */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.user__list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--space-md)) 0;
+}
+
+.user__info {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+p.bio {
+  padding: 0;
+  margin: 0;
+}
+
+.follow__btn {
+  background-color: #ffffff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 100px;
+  transition: all 0.5s ease;
+}
+
+.follow__btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #000;
+  color: #fff;
+}
 
 /* Responsive */
 
 @media (max-width: 650px) {
-
   html,
   body {
     width: 100%;
