@@ -61,7 +61,7 @@ class Header extends HTMLElement {
       document.dispatchEvent(new CustomEvent("toggle-avatar-option"));
     });
 
-      const searchInput = this.shadowRoot.querySelector(".header__search-input");
+    const searchInput = this.shadowRoot.querySelector(".header__search-input");
     searchInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
