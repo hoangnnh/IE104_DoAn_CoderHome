@@ -273,114 +273,6 @@ a {
   margin-top: 1rem;
 }
 
-/* Post */
-.post__card {
-  max-width: 100%;
-  padding: var(--space-lg) 0;
-  border-bottom: 2px solid var(--color-gray-lightest);
-}
-
-.post__content-title {
-  display: block;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  padding: 0;
-  margin-left: 0;
-  margin-top: var(--space-md);
-}
-
-.post__author {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.post__author-name {
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-md);
-}
-
-.post__left {
-  display: flex;
-  max-width: 100%;
-  gap: var(--space-md);
-  align-items: start;
-  justify-content: space-between;
-}
-
-.post__left-text {
-  flex: 3;
-}
-
-.post__interact {
-  display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-  justify-content: space-between;
-  align-items: center;
-  color: var(--color-gray-medium);
-}
-
-.post__interact-meta {
-  display: flex;
-  gap: var(--space-md);
-  font-size: var(--font-size-sm);
-}
-
-.post__interact-action {
-  display: flex;
-  gap: var(--space-md);
-}
-
-.post__interact-action .icon-btn {
-  background-color: var(--color-surface);
-  border: none;
-}
-
-.icon-btn:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-}
-
-.post__author-img {
-  width: calc(0.8 * var(--icon-base-width));
-  border-radius: var(--border-radius-pill);
-}
-
-.post__content-overview {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-md);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.post__img {
-  height: auto;
-  width: 100%;
-  max-width: 250px;
-  border-radius: var(--border-radius-lg);
-}
-
-.react-icon-meta,
-.react-icon {
-  width: calc(0.6 * var(--icon-base-width));
-  transition: all 0.3s ease;
-}
-
-.react-icon:hover,
-.react-icon-meta:hover {
-  cursor: pointer;
-  transform: scale(1.2);
-}
-
-.divider {
-  display: none;
-}
-
 .error__not-found {
   font-size: var(--font-size-lg);
   align-items: center;
@@ -521,4 +413,8 @@ p.bio {
     padding: 0.2rem 0.5rem !important;
     border-width: 1px;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5a7e1e4 (resolve conflict in following page)
