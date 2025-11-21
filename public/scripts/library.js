@@ -23,7 +23,7 @@ navItems.forEach(item => {
   });
 });
 
-//Load List (FE only) 
+// Load List (FE only) 
 
 function loadYourList() {
   const container = document.getElementById("yourListContainer");
@@ -49,7 +49,7 @@ function loadYourList() {
 loadYourList();
 
 
-//Load History (from backend)
+// Load History (from backend)
 
 async function loadHistory() {
   const res = await fetch("/history");
@@ -69,7 +69,7 @@ async function loadHistory() {
   </div>
 `).join("");
 
-//Thêm sự kiện click sau khi render
+// Link to an already read post in history section 
 document.querySelectorAll(".list-card").forEach(card => {
   card.addEventListener("click", () => {
     const id = card.dataset.id;
@@ -83,13 +83,13 @@ const btnDelete = document.querySelector(".btn-delete");
 
 if (btnDelete) {
   btnDelete.addEventListener("click", async () => {
-    const confirmDelete = confirm("Bạn có chắc muốn xóa lịch sử xem hem?");
+    const confirmDelete = confirm("Are you sure that you want to delete history?");
     if (!confirmDelete) return;
 
     await fetch("/history/clear", {
       method: "DELETE"
     });
 
-    loadHistory(); //reload history after delect
+    loadHistory(); // reload history after delete
   });
 }

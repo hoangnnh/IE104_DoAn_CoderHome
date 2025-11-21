@@ -51,7 +51,7 @@ async function loadCoderhomePost(isInitial = true) {
 
     // Append new posts
     const postsHTML = posts
-      .map(p => renderPostCard(p, 1, 1)).join("");
+      .map(p => renderPostCard(p)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
@@ -104,7 +104,7 @@ async function loadDevToPost(isInitial = true) {
 
     // Append new posts
     const postsHTML = posts
-      .map(p => renderPostCard(p, 1, 0)).join("");
+      .map(p => renderPostCard(p, 0, 1)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 

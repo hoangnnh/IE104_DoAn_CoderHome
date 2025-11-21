@@ -1,6 +1,6 @@
 import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
 
-const renderPostCard = (post, showRemoveBtn = 1, ownSrc = 1) => {
+const renderPostCard = (post, ownSrc = 1, showRemoveBtn = 1) => {
   // ownSrc = 1: Posts' source is from DB
   // ownSrc = 0: Posts' source is from dev.to
 

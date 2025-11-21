@@ -1,4 +1,5 @@
-import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
+import { handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
+import { renderPostCard } from '/scripts/components/post-card.js';
 
 const userId = location.pathname.split("/").pop();
 
@@ -50,52 +51,7 @@ async function loadPostedPost() {
     });
 
     postedPostContainer.innerHTML = posts
-      .map((post) => {
-        const author = post.author || {};
-        const authorAvatar = author.profilePicture || '/images/samples/default-avt.png';
-        const authorName = author.username || 'Unknown';
-        const authorId = author._id || (author.id ? author.id : '#');
-
-        const createdDate = post.createdAt ? new Date(post.createdAt) : null;
-        const formattedDate = createdDate
-          ? createdDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })
-          : '';
-
-        return ` 
-        <hr class="divider">
-        <article class="post__card">
-          <div class="post__author">
-            <img src="${authorAvatar}" alt="author" class="post__author-img"/>
-            <a href="/profile/${authorId}" class="post__author-name">${authorName}</a>
-          </div>
-          <div class="post__left">
-            <div class="post__left-text">
-              <div class="post__content">
-                <a href="/post/${post._id}" class="post__content-title">${post.title}</a>
-                <p class="post__content-overview">${post.description || ''}</p>
-              </div>
-              <div class="post__interact">
-                <div class="post__interact-meta">
-                  <span class="created_date">${formattedDate}</span>
-                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
-                    <span>${getRandomLikeCount()}</span>
-                   </div>
-                   <span style="display: flex; align-items: center; gap: 0.5rem">
-                   <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/>170</span>
-                </div>
-                <div class="post__interact-action">
-                  <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-                </div>
-              </div>
-            </div>
-            <img src="${post.thumbnailUrl || '/images/samples/default-thumbnail.png'}" class="post__img"/>
-          </div>
-        </article>
-      `;
-      })
-      .join('');
+      .map(p => renderPostCard(p, 1, 0)).join('');
 
     handleLikeClick();
     handleBookmarkClick();
