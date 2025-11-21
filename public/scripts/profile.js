@@ -4,10 +4,10 @@ import { renderPostCard } from '/scripts/components/post-card.js';
 const userId = location.pathname.split("/").pop();
 
 async function loadWriteStoryButton() {
-  const res = await fetch(`/current/`);
-  const currentUser = await res.json();
-  const res2 = await fetch(`/profiles/${userId}`);
-  const user = await res2.json();
+  const currentUser = await fetch('/current/')
+    .then(c => c.json());
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
   const btnContainer = document.querySelector(".button-container");
 
   if (user._id == currentUser._id) {
@@ -20,10 +20,11 @@ async function loadWriteStoryButton() {
     btnContainer.classList.add("hidden");
   }
 }
+
 async function loadUserInfo() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
-  document.title = user.username;
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  document.title = `${user.username}'s Profile`;
   const userInfo = document.querySelector(".user__info");
   userInfo.innerHTML = `
   <img
@@ -36,8 +37,8 @@ async function loadUserInfo() {
 }
 
 async function loadPostedPost() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
   const postedPostContainer = document.querySelector(".profile-content");
 
   const posts = Array.isArray(user.postedPosts) ? user.postedPosts.slice() : [];
@@ -64,10 +65,9 @@ async function loadPostedPost() {
 }
 
 async function loadComment() {
-  const res = await fetch(`/comments/u/${userId}`);
-  const comments = await res.json();
+  const comments = await fetch(`/comments/u/${userId}`)
+    .then(c => c.json());
   const commentsContainer = document.querySelector(".profile-content");
-  console.log("Loaded comments:", comments);
 
   if (comments && comments.length > 0) {
     commentsContainer.innerHTML = comments
@@ -96,44 +96,31 @@ async function loadComment() {
 }
 
 async function loadBio() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
-  const res2 = await fetch(`/current/`);
-  const currentUser = await res2.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  // const currentUser = await fetch('/current/')
+  //   .then(c => c.json());
+
   const bioContainer = document.querySelector(".profile-content");
 
-  if (user._id == currentUser._id) {
-    if (user.bio && user.bio.trim() !== "") {
-      bioContainer.innerHTML = `
-      <hr class="divider">
-  <p class="user__bio">${user.bio}</p>
-  `;
-    } else {
-      bioContainer.innerHTML = `
-  <hr class="divider">
-  <p class="user__no-po-cm-bio">User has no bio yet!!</p>
-  `;
-    }
-  } else {
-    if (user.bio && user.bio.trim() !== "") {
-      bioContainer.innerHTML = `
-      <hr class="divider">
-  <p class="user__bio">${user.bio}</p>
-  `;
-    } else {
-      bioContainer.innerHTML = `
+  if (user.bio && user.bio.trim() !== "") {
+    bioContainer.innerHTML = `
     <hr class="divider">
-  <p class="user__no-po-cm-bio">User has no bio yet!!</p>
+    <p class="user__bio">${user.bio}</p>
   `;
-    }
+  } else {
+    bioContainer.innerHTML = `
+    <hr class="divider">
+    <p class="user__no-po-cm-bio">User has no bio yet!!</p>
+  `;
   }
 }
 
 async function loadUserMoreInfo() {
-  const res = await fetch(`/profiles/${userId}`);
-  const res2 = await fetch(`/comments/u/${userId}`);
-  const comments = await res2.json();
-  const user = await res.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  const comments = await fetch(`/comments/u/${userId}`)
+    .then(c => c.json());
   const moreInfoContainer = document.querySelector(".user__more-info");
 
   moreInfoContainer.innerHTML = `
@@ -176,8 +163,10 @@ async function loadUserMoreInfo() {
   `;
 }
 async function loadUserSocialLink() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  const currentUser = await fetch('/current/')
+    .then(c => c.json());
   const socialLinksContainer = document.querySelector(".user__social-links");
 
   socialLinksContainer.innerHTML = `
@@ -186,16 +175,14 @@ async function loadUserSocialLink() {
       <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/icons/instagram.svg"/>Instagram</a>
       <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/icons/facebook-icon.svg"/>Facebook</a>
     </div>
-    <button class="add-social-link-button" style="display: flex; align-items: center; gap: 0.5rem"><img style="width: 25px; 
-    filter: invert(1) brightness(2);" src="/images/icons/plus-icon.svg"/>Add</button>
-
+    ${user._id !== currentUser._id ? `<button class="add-social-link-button" style="display: flex; align-items: center; gap: 0.5rem">Add</button>` : ''}
   `;
 }
 async function loadUserSetting() {
-  const res = await fetch(`/current/`);
-  const currentUser = await res.json();
-  const res2 = await fetch(`/profiles/${userId}`);
-  const user = await res2.json();
+  const currentUser = await fetch(`/current/`)
+    .then(c => c.json());
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
   const settingContainer = document.querySelector(".user__settings");
 
   if (user._id == currentUser._id) {
@@ -229,7 +216,7 @@ async function loadUserSetting() {
   }
 
 
-  // Them chuc nang edit profile
+  // Profile editor
   const editProfileForm = document.querySelector(".edit-profile__form");
   const cancelBtn = document.querySelector(".cancel-btn");
   const submitBtn = document.querySelector(".submit-btn");
