@@ -52,7 +52,65 @@ async function loadPostByTopic(topic) {
     `;
   }
 }
+async function loadAuthor() {
+  console.log("loadAuthor called");
+  try {
+    const res = await fetch(`/profiles/`);
+    const allAuthor = await res.json();
+    const res2 = await fetch(`/current/`);
+    const currentUser = await res2.json();
+    const container = document.querySelector(".main__content");
 
+    const followingIds = currentUser.followingAuthors.map(
+      (author) => author._id || author
+    );
+    const filteredAuthors = allAuthor.filter((author) => {
+      return (
+        author._id !== currentUser._id && !followingIds.includes(author._id)
+      );
+    });
+
+    container.innerHTML = filteredAuthors
+      .map(
+        (author) => `
+                    <div class="user__list-item">
+                <div class="user__info">
+                    <img src="${author.profilePicture}" alt="Blogger's avatar" class="avatar">
+                    <div class="content">
+                        <a href="/profile/${author._id}" style="font-weight: bold;" class="name">${author.username}</a>
+                    <p class="bio">${author.bio}</p>
+                </div>
+                </div>
+                <button class="follow__btn" data-value="${author._id}">
+                Follow
+                </button>
+            </div>
+            <hr class="divider">
+    `
+      )
+      .join("");
+    // const followBtn = document.querySelectorAll(".follow__btn");
+    // followBtn.addEventListener("click", () => {
+    //   addFollow();
+    //   followBtn.classList.toggle("active");
+    // });
+    console.log("Success");
+  } catch (err) {
+    console.log("Fail");
+  }
+}
+async function addFollow(id) {
+  await fetch(`/profiles/follow/add/${id}`, {
+    method: "POST",
+  });
+  console.log(id);
+}
+async function deleteFollow(id) {
+  await fetch(`/profiles/follow/delete/${id}`, {
+    method: "DELETE",
+  });
+  console.log(id);
+}
 // Responsive
 
 // Const
@@ -72,6 +130,7 @@ const topics = document.querySelectorAll(".topic");
 const fadeLeft = document.querySelector(".fade-left");
 const fadeRight = document.querySelector(".fade-right");
 const scrollBtn = document.querySelector(".scroll-top");
+
 //
 //Event
 
@@ -94,6 +153,9 @@ tabs.forEach((tab) => {
       loadPostByTopic(activeTopic.dataset.value);
       topicContainer.classList.add("active");
       updateArrowsAndFade();
+    } else if (type === "more-to-follow") {
+      topicContainer.classList.remove("active");
+      loadAuthor();
     }
   });
 });
@@ -187,6 +249,24 @@ scrollBtn.addEventListener("click", () => {
     top: 0,
     behavior: "smooth",
   });
+});
+// Follow Btn
+document.addEventListener("click", async function (e) {
+  if (e.target.closest(".follow__btn")) {
+    const btn = e.target.closest(".follow__btn");
+    const authorId = btn.dataset.value;
+
+    // Toggle UI
+    if (btn.classList.contains("active")) {
+      await deleteFollow(authorId);
+      btn.classList.remove("active");
+      btn.textContent = "Follow";
+    } else {
+      await addFollow(authorId);
+      btn.classList.add("active");
+      btn.textContent = "Following";
+    }
+  }
 });
 
 // Call Function

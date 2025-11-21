@@ -4,7 +4,12 @@ const path = require("path");
 
 async function getAllUser(req, res) {
   try {
-    const users = await User.find().sort({ createdAt: -1 });
+    const users = await User.find()
+      .populate({
+        path: "followingAuthors",
+        select: "_id username bio profilePicture",
+      })
+      .sort({ createdAt: -1 });
     res.json(users);
   } catch (err) {
     console.error("Get User Error:", err);
@@ -95,5 +100,42 @@ async function editUserProfile(req, res) {
     return res.status(500).json({ message: "Server error" });
   }
 }
+async function addFollow(req, res) {
+  const authorId = req.params.id;
+  try {
+    if (!req.session.userId)
+      return res.status(401).json({ message: "Not logged in" });
 
-module.exports = { getUser, getAllUser, editUserProfile };
+    await User.findByIdAndUpdate(
+      req.session.userId,
+      { $addToSet: { followingAuthors: authorId } },
+      { new: true }
+    );
+    res.json({ message: "Added to followed" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+async function deleteFollow(req, res) {
+  const authorId = req.params.id;
+  try {
+    if (!req.session.userId)
+      return res.status(401).json({ message: "Not logged in" });
+
+    await User.findByIdAndUpdate(
+      req.session.userId,
+      { $pull: { followingAuthors: authorId } }, // XÓA khỏi mảng
+      { new: true }
+    );
+    res.json({ message: "Unfollowed" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+module.exports = {
+  getUser,
+  getAllUser,
+  editUserProfile,
+  addFollow,
+  deleteFollow,
+};

@@ -2,19 +2,18 @@
 const Post = require("../models/post");
 const User = require("../models/user");
 
-const markdownit = require('markdown-it')
-const createDomPurify = require('dompurify');
-const { JSDOM } = require('jsdom');
+const markdownit = require("markdown-it");
+const createDomPurify = require("dompurify");
+const { JSDOM } = require("jsdom");
 
-const window = new JSDOM('').window;
+const window = new JSDOM("").window;
 const DOMPurify = createDomPurify(window);
-
 
 async function createPost(req, res) {
   const md = markdownit({
     html: false,
     breaks: true,
-    linkify: true
+    linkify: true,
   });
 
   try {
@@ -22,7 +21,7 @@ async function createPost(req, res) {
     const authorId = req.session.userId;
     const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()) : [];
 
-    let cleanHTML = '';
+    let cleanHTML = "";
     if (content) {
       const rawHTML = md.render(content);
       cleanHTML = DOMPurify.sanitize(rawHTML);
@@ -38,28 +37,38 @@ async function createPost(req, res) {
       author: authorId,
     });
 
-
-
     const savedPost = await post.save();
 
     // await User.findByIdAndUpdate(req.user._id, {
     //   $push: { postedPosts: post._id } // use $push/$addToSet per your intended behavior
     // });
 
-    const userId = (req.user && req.user._id) || (req.session && req.session.userId) || null;
+    const userId =
+      (req.user && req.user._id) || (req.session && req.session.userId) || null;
     if (!userId) {
-      console.error('createPost: No authenticated user found (req.user missing). Post created but not linked to any user:', post._id);
+      console.error(
+        "createPost: No authenticated user found (req.user missing). Post created but not linked to any user:",
+        post._id
+      );
     } else {
       // Use $addToSet to avoid duplicate entries; use $push if you explicitly want duplicates
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { $addToSet: { postedPosts: post._id } },
-        { new: true, select: '_id postedPosts' }
+        { new: true, select: "_id postedPosts" }
       );
       if (!updatedUser) {
-        console.error('createPost: Failed to update user postedPosts for userId:', userId);
+        console.error(
+          "createPost: Failed to update user postedPosts for userId:",
+          userId
+        );
       } else {
-        console.log('createPost: User postedPosts updated. userId:', userId, 'newCount:', updatedUser.postedPosts.length);
+        console.log(
+          "createPost: User postedPosts updated. userId:",
+          userId,
+          "newCount:",
+          updatedUser.postedPosts.length
+        );
       }
     }
 
