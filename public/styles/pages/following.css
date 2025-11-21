@@ -51,7 +51,39 @@ a {
   width: 100%;
 }
 
-.nav__items {
+/* Post Nav */
+.post__nav {
+  display: none;
+  width: 100%;
+  flex-direction: row;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  max-height: 0;
+  transition: max-height 0.4s ease-in-out;
+}
+.post__nav.active {
+  display: flex;
+  max-height: 20rem;
+}
+
+/* Author Nav */
+.author__nav {
+  display: none;
+  width: 100%;
+  flex-direction: row;
+  gap: 1rem;
+  max-height: 0;
+  margin-bottom: 2rem;
+  transition: max-height 0.4s ease-in-out;
+}
+.author__nav.active {
+  display: flex;
+  max-height: 20rem;
+}
+/* Author, Post, Following Nav Items */
+.nav__items,
+.author-nav__items,
+.post-nav__items {
   display: flex;
   padding: var(--space-md) var(--space-xxl);
   background-color: var(--color-gray-light);
@@ -62,19 +94,24 @@ a {
   font-size: var(--font-size-lg);
 }
 
-.nav__items:hover {
+.nav__items:hover,
+.author-nav__items:hover,
+.post-nav__items:hover {
   transform: scale(1.05);
   transform: translateY(-2px);
 }
 
-.nav__items.active {
+.nav__items.active,
+.author-nav__items.active,
+.post-nav__items.active {
   border-color: var(--color-gray-medium);
 }
 
-.nav__items.active:hover {
+.nav__items.active:hover,
+.author-nav__items.active:hover,
+.post-nav__items.active:hover {
   cursor: pointer;
 }
-
 /* Topic */
 .topic__nav {
   display: none;
@@ -273,110 +310,6 @@ a {
   margin-top: 1rem;
 }
 
-/* Post */
-.post__card {
-  max-width: 100%;
-  padding: var(--space-lg) 0;
-  border-bottom: 2px solid var(--color-gray-lightest);
-}
-
-.post__content-title {
-  display: block;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  padding: 0;
-  margin-left: 0;
-  margin-top: var(--space-md);
-}
-
-.post__author {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.post__author-name {
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-md);
-}
-
-.post__left {
-  display: flex;
-  max-width: 100%;
-  gap: var(--space-md);
-  align-items: start;
-  justify-content: space-between;
-}
-
-.post__left-text {
-  flex: 3;
-}
-
-.post__interact {
-  display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-  justify-content: space-between;
-  align-items: center;
-  color: var(--color-gray-medium);
-}
-
-.post__interact-meta {
-  display: flex;
-  gap: var(--space-md);
-  font-size: var(--font-size-sm);
-}
-
-.post__interact-action {
-  display: flex;
-  gap: var(--space-md);
-}
-
-.post__interact-action .icon-btn {
-  background-color: var(--color-surface);
-  border: none;
-}
-
-.icon-btn:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-}
-
-.post__author-img {
-  width: calc(0.8 * var(--icon-base-width));
-  border-radius: var(--border-radius-pill);
-}
-
-.post__content-overview {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-md);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.post__img {
-  height: auto;
-  width: 100%;
-  max-width: 250px;
-  border-radius: var(--border-radius-lg);
-}
-
-.react-icon-meta,
-.react-icon {
-  width: calc(0.6 * var(--icon-base-width));
-  transition: all 0.3s ease;
-}
-
-.react-icon:hover,
-.react-icon-meta:hover {
-  cursor: pointer;
-  transform: scale(1.2);
-}
-
 .divider {
   display: none;
 }
@@ -518,54 +451,6 @@ p.bio {
   .topic.active {
     padding: 0.2rem 0.5rem !important;
     border-width: 1px;
-  }
-
-  /* Post */
-  .post__left {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .post__left-text {
-    width: 100%;
-  }
-
-  .post__interact-action {
-    gap: 0.25rem;
-  }
-
-  .post__interact-meta span {
-    display: inline-flex;
-    gap: 0.1rem;
-    align-items: center;
-  }
-
-  .post__img {
-    width: 100%;
-    height: auto;
-    align-self: center;
-  }
-
-  .react-icon-meta {
-    width: 0.75rem;
-    height: 0.75rem;
-  }
-
-  .react-icon {
-    width: 0.625rem;
-    height: 0.625rem;
-  }
-
-  .post__author-name {
-    font-size: 0.75rem;
-  }
-
-  .post__content-title {
-    font-size: 1rem;
-  }
-
-  .post__content-overview {
-    font-size: 0.75rem;
   }
 
   .divider {
