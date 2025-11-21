@@ -232,6 +232,7 @@ aside {
     padding: 0;
     gap: var(--space-md);
     overflow: hidden;
+    margin: 32px 0;
 }
 
 .footer__nav__item {
