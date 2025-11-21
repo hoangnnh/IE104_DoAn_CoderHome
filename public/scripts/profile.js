@@ -1,12 +1,13 @@
-import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
+import { handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
+import { renderPostCard } from '/scripts/components/post-card.js';
 
 const userId = location.pathname.split("/").pop();
 
 async function loadWriteStoryButton() {
-  const res = await fetch(`/current/`);
-  const currentUser = await res.json();
-  const res2 = await fetch(`/profiles/${userId}`);
-  const user = await res2.json();
+  const currentUser = await fetch('/current/')
+    .then(c => c.json());
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
   const btnContainer = document.querySelector(".button-container");
 
   if (user._id == currentUser._id) {
@@ -19,10 +20,11 @@ async function loadWriteStoryButton() {
     btnContainer.classList.add("hidden");
   }
 }
+
 async function loadUserInfo() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
-  document.title = user.username;
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  document.title = `${user.username}'s Profile`;
   const userInfo = document.querySelector(".user__info");
   userInfo.innerHTML = `
   <img
@@ -35,8 +37,8 @@ async function loadUserInfo() {
 }
 
 async function loadPostedPost() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
   const postedPostContainer = document.querySelector(".profile-content");
 
   const posts = Array.isArray(user.postedPosts) ? user.postedPosts.slice() : [];
@@ -50,52 +52,7 @@ async function loadPostedPost() {
     });
 
     postedPostContainer.innerHTML = posts
-      .map((post) => {
-        const author = post.author || {};
-        const authorAvatar = author.profilePicture || '/images/samples/default-avt.png';
-        const authorName = author.username || 'Unknown';
-        const authorId = author._id || (author.id ? author.id : '#');
-
-        const createdDate = post.createdAt ? new Date(post.createdAt) : null;
-        const formattedDate = createdDate
-          ? createdDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })
-          : '';
-
-        return ` 
-        <hr class="divider">
-        <article class="post__card">
-          <div class="post__author">
-            <img src="${authorAvatar}" alt="author" class="post__author-img"/>
-            <a href="/profile/${authorId}" class="post__author-name">${authorName}</a>
-          </div>
-          <div class="post__left">
-            <div class="post__left-text">
-              <div class="post__content">
-                <a href="/post/${post._id}" class="post__content-title">${post.title}</a>
-                <p class="post__content-overview">${post.description || ''}</p>
-              </div>
-              <div class="post__interact">
-                <div class="post__interact-meta">
-                  <span class="created_date">${formattedDate}</span>
-                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
-                    <span>${getRandomLikeCount()}</span>
-                   </div>
-                   <span style="display: flex; align-items: center; gap: 0.5rem">
-                   <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/>170</span>
-                </div>
-                <div class="post__interact-action">
-                  <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-                </div>
-              </div>
-            </div>
-            <img src="${post.thumbnailUrl || '/images/samples/default-thumbnail.png'}" class="post__img"/>
-          </div>
-        </article>
-      `;
-      })
-      .join('');
+      .map(p => renderPostCard(p, 1, 0)).join('');
 
     handleLikeClick();
     handleBookmarkClick();
@@ -108,10 +65,9 @@ async function loadPostedPost() {
 }
 
 async function loadComment() {
-  const res = await fetch(`/comments/u/${userId}`);
-  const comments = await res.json();
+  const comments = await fetch(`/comments/u/${userId}`)
+    .then(c => c.json());
   const commentsContainer = document.querySelector(".profile-content");
-  console.log("Loaded comments:", comments);
 
   if (comments && comments.length > 0) {
     commentsContainer.innerHTML = comments
@@ -140,44 +96,31 @@ async function loadComment() {
 }
 
 async function loadBio() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
-  const res2 = await fetch(`/current/`);
-  const currentUser = await res2.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  // const currentUser = await fetch('/current/')
+  //   .then(c => c.json());
+
   const bioContainer = document.querySelector(".profile-content");
 
-  if (user._id == currentUser._id) {
-    if (user.bio && user.bio.trim() !== "") {
-      bioContainer.innerHTML = `
-      <hr class="divider">
-  <p class="user__bio">${user.bio}</p>
-  `;
-    } else {
-      bioContainer.innerHTML = `
-  <hr class="divider">
-  <p class="user__no-po-cm-bio">User has no bio yet!!</p>
-  `;
-    }
-  } else {
-    if (user.bio && user.bio.trim() !== "") {
-      bioContainer.innerHTML = `
-      <hr class="divider">
-  <p class="user__bio">${user.bio}</p>
-  `;
-    } else {
-      bioContainer.innerHTML = `
+  if (user.bio && user.bio.trim() !== "") {
+    bioContainer.innerHTML = `
     <hr class="divider">
-  <p class="user__no-po-cm-bio">User has no bio yet!!</p>
+    <p class="user__bio">${user.bio}</p>
   `;
-    }
+  } else {
+    bioContainer.innerHTML = `
+    <hr class="divider">
+    <p class="user__no-po-cm-bio">User has no bio yet!!</p>
+  `;
   }
 }
 
 async function loadUserMoreInfo() {
-  const res = await fetch(`/profiles/${userId}`);
-  const res2 = await fetch(`/comments/u/${userId}`);
-  const comments = await res2.json();
-  const user = await res.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  const comments = await fetch(`/comments/u/${userId}`)
+    .then(c => c.json());
   const moreInfoContainer = document.querySelector(".user__more-info");
 
   moreInfoContainer.innerHTML = `
@@ -220,8 +163,10 @@ async function loadUserMoreInfo() {
   `;
 }
 async function loadUserSocialLink() {
-  const res = await fetch(`/profiles/${userId}`);
-  const user = await res.json();
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
+  const currentUser = await fetch('/current/')
+    .then(c => c.json());
   const socialLinksContainer = document.querySelector(".user__social-links");
 
   socialLinksContainer.innerHTML = `
@@ -230,16 +175,14 @@ async function loadUserSocialLink() {
       <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/icons/instagram.svg"/>Instagram</a>
       <a href="#" style="display: flex; align-items: center; gap: 0.5rem;"><img style="width: 20px" src="/images/icons/facebook-icon.svg"/>Facebook</a>
     </div>
-    <button class="add-social-link-button" style="display: flex; align-items: center; gap: 0.5rem"><img style="width: 25px; 
-    filter: invert(1) brightness(2);" src="/images/icons/plus-icon.svg"/>Add</button>
-
+    ${user._id !== currentUser._id ? `<button class="add-social-link-button" style="display: flex; align-items: center; gap: 0.5rem">Add</button>` : ''}
   `;
 }
 async function loadUserSetting() {
-  const res = await fetch(`/current/`);
-  const currentUser = await res.json();
-  const res2 = await fetch(`/profiles/${userId}`);
-  const user = await res2.json();
+  const currentUser = await fetch(`/current/`)
+    .then(c => c.json());
+  const user = await fetch(`/profiles/${userId}`)
+    .then(u => u.json());
   const settingContainer = document.querySelector(".user__settings");
 
   if (user._id == currentUser._id) {
@@ -273,7 +216,7 @@ async function loadUserSetting() {
   }
 
 
-  // Them chuc nang edit profile
+  // Profile editor
   const editProfileForm = document.querySelector(".edit-profile__form");
   const cancelBtn = document.querySelector(".cancel-btn");
   const submitBtn = document.querySelector(".submit-btn");

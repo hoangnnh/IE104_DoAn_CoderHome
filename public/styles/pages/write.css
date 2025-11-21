@@ -178,12 +178,7 @@
 
 .editor-textarea,
 .editor-preview {
-    /* flex-grow: 1;
-    padding: var(--space-lg);
-    min-height: 500px; */
-
     flex: 0 0 auto;
-    /* stop flexbox from stretching it */
     padding: var(--space-lg);
     min-height: 300px;
 }
@@ -192,7 +187,7 @@
     resize: none;
     border: none;
     outline: none;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--font-family-body);
     font-size: var(--font-size-md);
     line-height: var(--line-height-body);
     overflow: hidden;

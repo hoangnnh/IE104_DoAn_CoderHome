@@ -1,4 +1,5 @@
 import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
+import { renderPostCard } from "/scripts/components/post-card.js";
 
 const coderHome = document.querySelector(".coderhome");
 const devTo = document.querySelector(".devto");
@@ -50,48 +51,7 @@ async function loadCoderhomePost(isInitial = true) {
 
     // Append new posts
     const postsHTML = posts
-      .map((p, index) => {
-        const isLastInBatch = index === posts.length - 1;
-        const showDivider = !isLastInBatch || hasMore;
-
-        return `<article class="post__card">
-          <div class="post__author">
-            <img src="${p.author.profilePicture}" alt="author" class="post__author-img"/>
-            <a href="/profile/${p.author._id}" class="post__author-name">${p.author?.username || "Unknown"}</a>
-          </div>
-          <div class="post__left">
-            <div class="post__left-text">
-              <div class="post__content">
-                <a href="/post/${p._id}" class="post__content-title">${p.title}</a>
-                <p class="post__content-overview">${p.description}</p>
-              </div>
-              <div class="post__interact">
-                <div class="post__interact-meta">
-                  <span class="created_date">${new Date(p.createdAt).toLocaleDateString("vi-VN", {
-          day: "2-digit",
-          month: "2-digit",
-        })}</span>
-                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
-                    <span>${getRandomLikeCount()}</span>
-                  </div>
-                  <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
-                  </span>
-                </div>
-                <div class="post__interact-action">
-                  <button class="icon-btn remove-post"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-                </div>
-              </div>
-            </div>
-            <img src="${p.thumbnailUrl}" class="post__img"/>
-          </div>
-          ${showDivider ? '<hr class="divider">' : ""}
-        </article>`;
-      })
-      .join("");
+      .map(p => renderPostCard(p)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
@@ -144,49 +104,7 @@ async function loadDevToPost(isInitial = true) {
 
     // Append new posts
     const postsHTML = posts
-      .map((p, index) => {
-        const isLastInBatch = index === posts.length - 1;
-        const showDivider = !isLastInBatch || hasMore;
-
-        return `<article class="post__card">
-          <div class="post__author">
-            <img src="${p.user.profile_image}" alt="author" class="post__author-img"/>
-            <a href="https://dev.to/${p.user.username}" target="_blank" class="post__author-name">
-              ${p.user.name || p.user.username}
-            </a>
-          </div>
-          <div class="post__left">
-            <div class="post__left-text">
-              <div class="post__content">
-                <a href="${p.url}" target="_blank" class="post__content-title">${p.title}</a>
-                <p class="post__content-overview">${p.description || ""}</p>
-              </div>
-              <div class="post__interact">
-                <div class="post__interact-meta">
-                  <span class="created_date">${new Date(p.published_at).toLocaleDateString("vi-VN", {
-          day: "2-digit",
-          month: "2-digit",
-        })}</span>
-                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/> <span>${p.public_reactions_count}</span>
-                  </div>
-                  <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta"/> ${p.comments_count}
-                  </span>
-                </div>
-                <div class="post__interact-action">
-                  <button class="icon-btn remove-post"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
-                  <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-                </div>
-              </div>
-            </div>
-            <img src="${p.cover_image || "/images/samples/default-thumbnail.png"}" class="post__img"/>
-          </div>
-          ${showDivider ? '<hr class="divider">' : ""}
-        </article>`;
-      })
-      .join("");
+      .map(p => renderPostCard(p, 0, 1)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
@@ -211,7 +129,7 @@ function handleScroll() {
 
   // Calculate if user is near bottom (within 200px)
   const isNearBottom = scrollTop + windowHeight >= documentHeight - 200;
-  
+
   if (isNearBottom && !isLoading && hasMore) {
     if (currentTab === "coderhome") {
       loadCoderhomePost(false);
@@ -225,11 +143,11 @@ function handleScroll() {
 document.addEventListener("click", (e) => {
   const removeBtn = e.target.closest(".remove-post");
   if (!removeBtn) return;
-  
+
   const postCard = removeBtn.closest(".post__card");
   if (postCard) {
     postCard.classList.add("hidden");
-    
+
     setTimeout(() => {
       postCard.style.display = "none";
     }, 400); // match CSS transition time
@@ -247,6 +165,7 @@ document.querySelectorAll(".follow__btn").forEach((item) => {
 coderHome.addEventListener("click", () => {
   loadCoderhomePost(true)
 });
+
 devTo.addEventListener("click", () => {
   loadDevToPost(true);
 });

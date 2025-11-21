@@ -1,4 +1,5 @@
-import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
+import { handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
+import { renderPostCard } from "/scripts/components/post-card.js";
 
 async function loadFollowedPost() {
   const res = await fetch(`/posts/`);
@@ -14,62 +15,12 @@ async function loadFollowedPost() {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   if (posts && posts.length > 0) {
     container.innerHTML = posts
-      .map(
-        (post) =>
-          ` 
-        <hr class="divider">
-        <article class="post__card">
-        <div class="post__author">
-            <img src="${
-              post.author.profilePicture
-            }" alt="author" class="post__author-img"/>
-                <a href="/profile/${
-                  post.author._id
-                }" class="post__author-name">${
-            post.author?.username || "Unknown"
-          }</a>
-        </div>
-        <div class="post__left">
-            <div class="post__left-text">
-                <div class="post__content">
-                    <a href="/post/${post._id}" class="post__content-title">${
-            post.title
-          }</a>
-                    <p class="post__content-overview">${post.description}</p>
-                </div>
-                <div class="post__interact">
-                    <div class="post__interact-meta">
-                        <span class="created_date">${new Date(
-          post.createdAt
-        ).toLocaleDateString("vi-VN", {
-          day: "2-digit",
-          month: "2-digit",
-        })}</span>
-                        <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
-                    <span>${getRandomLikeCount()}</span>
-                  </div>
-                  <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
-                  </span>
-                    </div>
-                    <div class="post__interact-action">
-                        <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-                    </div>
-                </div>
-            </div>
-            <img src="${post.thumbnailUrl}" class="post__img"/>
-        </div>
-        </article>
-    `
-      )
-      .join("");  
-  handleLikeClick();
-  handleBookmarkClick();
+      .map(p => renderPostCard(p, 1, 0)).join("");
+
+    handleLikeClick();
+    handleBookmarkClick();
   } else {
     container.innerHTML = `
-    <hr class="divider"></hr>
     <p  class="error__not-found">You haven't Follow any one yet!!</p>
     `;
   }
@@ -91,64 +42,75 @@ async function loadPostByTopic(topic) {
 
   if (filteredPosts && filteredPosts.length > 0) {
     container.innerHTML = filteredPosts
-      .map(
-        (post) => `
-        <hr class="divider">
-        <article class="post__card">
-        <div class="post__author">
-            <img src="${post.author.profilePicture
-          }" alt="author" class="post__author-img"/>
-                <a href="/profile/${post.author._id
-          }" class="post__author-name">${post.author?.username || "Unknown"
-          }</a>
-        </div>
-        <div class="post__left">
-            <div class="post__left-text">
-                <div class="post__content">
-                    <a href="/post/${post._id}" class="post__content-title">${post.title
-          }</a>
-                    <p class="post__content-overview">${post.description}</p>
-                </div>
-                <div class="post__interact">
-                  <div class="post__interact-meta">
-                    <span class="created_date">${new Date(
-            post.createdAt
-          ).toLocaleDateString("vi-VN", {
-            day: "2-digit",
-            month: "2-digit",
-          })}
-                    </span>
-                  <div class="like-count" style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
-                    <span>${getRandomLikeCount()}</span>
-                  </div>
-                  <span style="display: flex; align-items: center; gap: 0.5rem">
-                    <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> 170
-                  </span>
-                </div>
-                    <div class="post__interact-action">
-                        <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
-                        <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
-                    </div>
-                </div>
-            </div>
-            <img src="/images/samples/default-thumbnail.png" class="post__img"/>
-        </div>
-        </article>
-    `
-      )
-      .join("");
+      .map(p => renderPostCard(p, 1, 0)).join("");
 
     handleLikeClick();
     handleBookmarkClick();
   } else {
     container.innerHTML = `
-    <hr class="divider"></hr>
     <p  class="error__not-found">Can't find post of this Topic! It's maybe you haven't Follow any one yet Or no post of this topic!!</p>
     `;
   }
 }
+async function loadAuthor() {
+  console.log("loadAuthor called");
+  try {
+    const res = await fetch(`/profiles/`);
+    const allAuthor = await res.json();
+    const res2 = await fetch(`/current/`);
+    const currentUser = await res2.json();
+    const container = document.querySelector(".main__content");
 
+    const followingIds = currentUser.followingAuthors.map(
+      (author) => author._id || author
+    );
+    const filteredAuthors = allAuthor.filter((author) => {
+      return (
+        author._id !== currentUser._id && !followingIds.includes(author._id)
+      );
+    });
+
+    container.innerHTML = filteredAuthors
+      .map(
+        (author) => `
+                    <div class="user__list-item">
+                <div class="user__info">
+                    <img src="${author.profilePicture}" alt="Blogger's avatar" class="avatar">
+                    <div class="content">
+                        <a href="/profile/${author._id}" style="font-weight: bold;" class="name">${author.username}</a>
+                    <p class="bio">${author.bio}</p>
+                </div>
+                </div>
+                <button class="follow__btn" data-value="${author._id}">
+                Follow
+                </button>
+            </div>
+            <hr class="divider">
+    `
+      )
+      .join("");
+    // const followBtn = document.querySelectorAll(".follow__btn");
+    // followBtn.addEventListener("click", () => {
+    //   addFollow();
+    //   followBtn.classList.toggle("active");
+    // });
+    console.log("Success");
+  } catch (err) {
+    console.log("Fail");
+  }
+}
+async function addFollow(id) {
+  await fetch(`/profiles/follow/add/${id}`, {
+    method: "POST",
+  });
+  console.log(id);
+}
+async function deleteFollow(id) {
+  await fetch(`/profiles/follow/delete/${id}`, {
+    method: "DELETE",
+  });
+  console.log(id);
+}
 // Responsive
 
 // Const
@@ -168,6 +130,7 @@ const topics = document.querySelectorAll(".topic");
 const fadeLeft = document.querySelector(".fade-left");
 const fadeRight = document.querySelector(".fade-right");
 const scrollBtn = document.querySelector(".scroll-top");
+
 //
 //Event
 
@@ -190,6 +153,9 @@ tabs.forEach((tab) => {
       loadPostByTopic(activeTopic.dataset.value);
       topicContainer.classList.add("active");
       updateArrowsAndFade();
+    } else if (type === "more-to-follow") {
+      topicContainer.classList.remove("active");
+      loadAuthor();
     }
   });
 });
@@ -283,6 +249,24 @@ scrollBtn.addEventListener("click", () => {
     top: 0,
     behavior: "smooth",
   });
+});
+// Follow Btn
+document.addEventListener("click", async function (e) {
+  if (e.target.closest(".follow__btn")) {
+    const btn = e.target.closest(".follow__btn");
+    const authorId = btn.dataset.value;
+
+    // Toggle UI
+    if (btn.classList.contains("active")) {
+      await deleteFollow(authorId);
+      btn.classList.remove("active");
+      btn.textContent = "Follow";
+    } else {
+      await addFollow(authorId);
+      btn.classList.add("active");
+      btn.textContent = "Following";
+    }
+  }
 });
 
 // Call Function
