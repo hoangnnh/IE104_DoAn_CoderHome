@@ -80,6 +80,9 @@ class NotificationModal extends HTMLElement {
     // Add event listeners
     this.overlay.addEventListener("click", () => this.close());
     document.addEventListener("toggle-notifications", () => this.toggle());
+    document.addEventListener('close-all',  () => {
+      this.close();
+    });
 
     this.tabButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
