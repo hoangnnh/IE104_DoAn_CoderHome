@@ -190,3 +190,13 @@ scrollBtn.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   loadCoderhomePost(true)
 })
+
+// Redirect "See more suggestions" to /following
+document.querySelectorAll("aside a").forEach((link) => {
+  if (link.textContent.trim() === "See more suggestions") {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "/following";
+    });
+  }
+});
