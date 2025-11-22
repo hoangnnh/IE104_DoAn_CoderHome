@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             <button class="mail_name_btn mail_btn">
                 <span class="big_span">
                     <span class="left"><p>Email address</p></span>
-                    <span class="right"><p>{{email}}</p></span>
+                    <span class="right mail_output"><p>{{email}}</p></span>
                 </span>
             </button>
 
             <button class="mail_name_btn username_btn">
                 <span class="big_span">
                     <span class="left"><p>Username</p></span>
-                    <span class="right"><p>@{{username}}</p></span>
+                    <span class="right username_output"><p>@{{username}}</p></span>
                 </span>
             </button>
 
@@ -268,12 +268,20 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // overlay part
 function overlayClick() {
-const overlay = document.querySelector(".overlay");
-const mailOverlay = document.querySelector(".overlay_mail");
+const overlay = document.querySelector(".overlay")
+const mailOverlay = document.querySelector(".overlay_mail")
 const usernameOverlay = document.querySelector(".overlay_username")
 const mailBtn = document.querySelector(".mail_btn")
 const userBtn = document.querySelector(".username_btn")
 const close = document.querySelectorAll(".btn_cancel")
+const mailInput = document.querySelector(".mail_input")
+const mailOutput= document.querySelector(".mail_output")
+const nameInput = document.querySelector(".username_input")
+const nameOutput = document.querySelector(".username_output")
+const saveMailBtn = document.querySelector(".btn_save_mail")
+const saveNameBtn = document.querySelector(".btn_save_name")
+
+
 
 // mail part
 if (mailBtn){
@@ -303,5 +311,25 @@ if (close){
     usernameOverlay.style.display = "none";
     }
 });
+}
+
+if (saveMailBtn){
+    saveMailBtn.onclick = () =>{
+    overlay.style.display = "none"
+    const newMail = mailInput.value.trim();
+    if (newMail !== "") {
+        mailOutput.innerText = newMail;
+    }
+    }
+}
+
+if (saveNameBtn){
+    saveNameBtn.onclick = () =>{
+    overlay.style.display = "none"
+    const newName = nameInput.value.trim();
+    if (newName !== "") {
+        nameOutput.innerText = newName;
+    }
+    }
 }
 }
