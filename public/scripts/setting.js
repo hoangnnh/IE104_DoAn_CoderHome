@@ -9,21 +9,21 @@ document.addEventListener("DOMContentLoaded", async function () {
     const tabContents = {
         // ACCOUNT TAB
         account: `
-            <button class="mail_name_btn">
+            <button class="mail_name_btn mail_btn">
                 <span class="big_span">
                     <span class="left"><p>Email address</p></span>
                     <span class="right"><p>{{email}}</p></span>
                 </span>
             </button>
 
-            <button class="mail_name_btn">
+            <button class="mail_name_btn username_btn">
                 <span class="big_span">
                     <span class="left"><p>Username</p></span>
                     <span class="right"><p>@{{username}}</p></span>
                 </span>
             </button>
 
-            <button class="setting_btn">
+            <button class="setting_btn profile_info_btn">
                 <div class="big_span">
                     <span class="left">
                         <p>Profile information</p><br>
@@ -250,6 +250,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         if (currentUser) {
             flexBox.innerHTML = parseTemplate(rawHTML, currentUser);
+            overlayClick();
         } 
     }
  
@@ -263,4 +264,45 @@ document.addEventListener("DOMContentLoaded", async function () {
     switchTab("Account");
 
 });
+
+
+// overlay part
+function overlayClick() {
+const overlay = document.querySelector(".overlay");
+const mailOverlay = document.querySelector(".overlay_mail");
+const usernameOverlay = document.querySelector(".overlay_username")
+const mailBtn = document.querySelector(".mail_btn")
+const userBtn = document.querySelector(".username_btn")
+const close = document.querySelectorAll(".btn_cancel")
+
+// mail part
+if (mailBtn){
+    mailBtn.onclick = () =>{
+    overlay.style.display = "flex";
+    mailOverlay.style.display = "block";
+    usernameOverlay.style.display = "none";
+    profileOverlay.style.display = "none";
+    }
+}
+
+//username part
+if (userBtn){
+    userBtn.onclick = () =>{
+    overlay.style.display = "flex";
+    mailOverlay.style.display = "none";
+    usernameOverlay.style.display = "block";
+    }
+}
+
+//close overlay
+if (close){
+    close.forEach(close => {
+    close.onclick = () =>{
+    overlay.style.display = "none";
+    mailOverlay.style.display = "none";
+    usernameOverlay.style.display = "none";
+    }
+});
+}
+}
 
