@@ -119,6 +119,7 @@ async function loadDevToPost(isInitial = true) {
     isLoading = false;
   }
 }
+// Load random 3 unfollowed author
 async function loadAuhor() {
   const res = await fetch(`/profiles/`);
   const authors = await res.json();
@@ -187,6 +188,7 @@ async function deleteFollow(id) {
   });
   console.log(id);
 }
+
 // Infinite scroll handler
 function handleScroll() {
   // Get the scroll position
@@ -221,6 +223,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// Following btn
 document.addEventListener("click", async function (e) {
   if (e.target.closest(".follow__btn")) {
     const btn = e.target.closest(".follow__btn");
@@ -238,6 +241,7 @@ document.addEventListener("click", async function (e) {
     }
   }
 });
+
 // document.querySelectorAll(".follow__btn").forEach((item) => {
 //   item.addEventListener("click", () => {
 //     item.classList.toggle("followed");
@@ -275,6 +279,7 @@ scrollBtn.addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadCoderhomePost(true);
+  loadAuhor();
 });
 
 // Redirect "See more suggestions" to /following
@@ -286,6 +291,3 @@ document.querySelectorAll("aside a").forEach((link) => {
     });
   }
 });
-
-//Call function
-loadAuhor();
