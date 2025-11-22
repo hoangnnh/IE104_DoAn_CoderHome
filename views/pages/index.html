@@ -1,100 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coderhome</title>
+    <link rel="stylesheet" href="/styles/base/reset.css" />
+    <link rel="stylesheet" href="/styles/base/token.css" />
+    <link rel="stylesheet" href="/styles/base/fonts.css" />
+    <link rel="stylesheet" href="/styles/pages/index.css" />
+    <link rel="stylesheet" href="/styles/partials/post-card.css" />
+    <link rel="icon" type="image/png" href="/images/logos/favicon.png" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coderhome</title>
-  <link rel="stylesheet" href="/styles/base/reset.css">
-  <link rel="stylesheet" href="/styles/base/token.css">
-  <link rel="stylesheet" href="/styles/base/fonts.css">
-  <link rel="stylesheet" href="/styles/pages/index.css">
-  <link rel="stylesheet" href="/styles/partials/post-card.css">
-  <link rel="icon" type="image/png" href="/images/logos/favicon.png">
-</head>
-
-<body>
-  <coderhome-header></coderhome-header>
-  <toggle-menu></toggle-menu>
-  <toggle-avatar-option></toggle-avatar-option>
-  <toggle-notification></toggle-notification>
-  <main class="container">
-    <div class="main__content">
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item coderhome">
-            <p>Coderhome's posts</p>
-          </li>
-          <li class="nav__item devto">
-            <p>Dev.to's posts</p>
-          </li>
-        </ul>
-      </nav>
-      <section class="post">
-      </section>
-    </div>
-    <aside>
-      <div class="recommend">
-        <h3 class="recommend__topic-title">Recommended topics</h3>
-        <ul class="recommend__topic-list">
-          <li class="recommend__topic-list-item">Machine Learning</li>
-          <li class="recommend__topic-list-item">Python</li>
-          <li class="recommend__topic-list-item">Data Science</li>
-          <li class="recommend__topic-list-item">Blockchain</li>
-          <li class="recommend__topic-list-item">C++</li>
-          <li class="recommend__topic-list-item">DevOps</li>
-        </ul>
-        <a href="" style="margin: 0;">See more topics</a>
+  <body>
+    <coderhome-header></coderhome-header>
+    <toggle-menu></toggle-menu>
+    <toggle-avatar-option></toggle-avatar-option>
+    <toggle-notification></toggle-notification>
+    <main class="container">
+      <div class="main__content">
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item coderhome">
+              <p>Coderhome's posts</p>
+            </li>
+            <li class="nav__item devto">
+              <p>Dev.to's posts</p>
+            </li>
+          </ul>
+        </nav>
+        <section class="post"></section>
       </div>
-      <div class="rcm__follow">
-        <h3 class="rcm__follow-title">Who to follow</h3>
-        <ul class="rcm__follow-list">
-          <li class="rcm__follow-list-item">
-            <img src="/images/samples/author-avt-1.png" alt="Recommended blogger's avatar" class="avatar">
-            <div class="content">
-              <a href="" class="name">Nguyen Kien</a>
-              <p class="bio">Debugger by day, writer by night.</p>
-            </div>
-            <button class="follow__btn">
-              Follow
-            </button>
-          </li>
-          <li class="rcm__follow-list-item">
-            <img src="/images/samples/author-avt-1.png" alt="Recommended blogger's avatar" class="avatar">
-            <div class="content">
-              <a href="" class="name">Khoi Bui</a>
-              <p class="bio">Full-stack developer</p>
-            </div>
-            <button class="follow__btn">
-              Follow
-            </button>
-          </li>
-          <li class="rcm__follow-list-item">
-            <img src="/images/samples/author-avt-1.png" alt="Recommended blogger's avatar" class="avatar">
-            <div class="content">
-              <a href="" class="name">Hoang Redmi</a>
-              <p class="bio">Mentor, builder, and open-source contributor.</p>
-            </div>
-            <button class="follow__btn">
-              Follow
-            </button>
-          </li>
+      <aside>
+        <div class="recommend">
+          <h3 class="recommend__topic-title">Recommended topics</h3>
+          <ul class="recommend__topic-list">
+            <li class="recommend__topic-list-item">Machine Learning</li>
+            <li class="recommend__topic-list-item">Python</li>
+            <li class="recommend__topic-list-item">Data Science</li>
+            <li class="recommend__topic-list-item">Blockchain</li>
+            <li class="recommend__topic-list-item">C++</li>
+            <li class="recommend__topic-list-item">DevOps</li>
+          </ul>
+          <a href="" style="margin: 0">See more topics</a>
+        </div>
+        <div class="rcm__follow">
+          <h3 class="rcm__follow-title">Who to follow</h3>
+          <ul class="rcm__follow-list"></ul>
+          <a href="" style="margin: 0">See more suggestions</a>
+        </div>
+        <ul class="footer__nav__list">
+          <li class="footer__nav__item"><a href="/help">Help</a></li>
+          <li class="footer__nav__item"><a href="#">Status</a></li>
+          <li class="footer__nav__item"><a href="/about">About</a></li>
+          <li class="footer__nav__item"><a href="#">Press</a></li>
+          <li class="footer__nav__item"><a href="#">Privacy</a></li>
+          <li class="footer__nav__item"><a href="#">Term</a></li>
         </ul>
-        <a href="" style="margin: 0;">See more suggestions</a>
-      </div>
-      <ul class="footer__nav__list">
-        <li class="footer__nav__item"><a href="/help">Help</a></li>
-        <li class="footer__nav__item"><a href="#">Status</a></li>
-        <li class="footer__nav__item"><a href="/about">About</a></li>
-        <li class="footer__nav__item"><a href="#">Press</a></li>
-        <li class="footer__nav__item"><a href="#">Privacy</a></li>
-        <li class="footer__nav__item"><a href="#">Term</a></li>
-    </ul>
-    </aside>
-    <button id="scrollTopBtn" class="scroll-top">↑</button>
-  </main>
-  <script type="module" src="/scripts/main.js" defer></script>
-  <script type="module" src="/scripts/index.js" defer></script>
-</body>
-
+      </aside>
+      <button id="scrollTopBtn" class="scroll-top">↑</button>
+    </main>
+    <script type="module" src="/scripts/main.js" defer></script>
+    <script type="module" src="/scripts/index.js" defer></script>
+  </body>
 </html>
