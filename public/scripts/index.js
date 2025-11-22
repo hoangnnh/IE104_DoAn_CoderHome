@@ -1,4 +1,8 @@
-import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
+import {
+  getRandomLikeCount,
+  handleLikeClick,
+  handleBookmarkClick,
+} from "/scripts/helpers.js";
 import { renderPostCard } from "/scripts/components/post-card.js";
 
 const coderHome = document.querySelector(".coderhome");
@@ -50,8 +54,7 @@ async function loadCoderhomePost(isInitial = true) {
     }
 
     // Append new posts
-    const postsHTML = posts
-      .map(p => renderPostCard(p)).join("");
+    const postsHTML = posts.map((p) => renderPostCard(p)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
@@ -59,7 +62,6 @@ async function loadCoderhomePost(isInitial = true) {
     handleBookmarkClick();
 
     currentPage++;
-
   } catch (err) {
     console.error("Error loading Coderhome posts:", err);
   } finally {
@@ -103,8 +105,7 @@ async function loadDevToPost(isInitial = true) {
     }
 
     // Append new posts
-    const postsHTML = posts
-      .map(p => renderPostCard(p, 0, 1)).join("");
+    const postsHTML = posts.map((p) => renderPostCard(p, 0, 1)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
@@ -118,8 +119,74 @@ async function loadDevToPost(isInitial = true) {
     isLoading = false;
   }
 }
+async function loadAuhor() {
+  const res = await fetch(`/profiles/`);
+  const authors = await res.json();
 
+  const res2 = await fetch(`/current/`);
+  const currentUser = await res2.json();
+  const container = document.querySelector(".rcm__follow-list");
 
+  const followingIds = currentUser.followingAuthors.map(
+    (author) => author._id || author
+  );
+
+  const filteredAuthors = authors.filter((author) => {
+    return author._id !== currentUser && !followingIds.includes(author._id);
+  });
+
+  function getRandom3(arr) {
+    const result = [];
+    const len = arr.length;
+
+    if (len < 3) {
+      throw new Error("Mảng phải có ít nhất 3 phần tử");
+    }
+
+    const taken = new Set();
+
+    while (result.length < 3) {
+      const i = Math.floor(Math.random() * len);
+
+      if (!taken.has(i)) {
+        taken.add(i);
+        result.push(arr[i]);
+      }
+    }
+
+    return result;
+  }
+  const author3 = getRandom3(filteredAuthors);
+
+  container.innerHTML = author3
+    .map(
+      (author) => `
+        <li class="rcm__follow-list-item">
+          <img src="${author.profilePicture}" alt="Recommended blogger's avatar" class="avatar">
+          <div class="content">
+            <a href="" class="name">${author.username}</a>
+            <p class="bio">${author.bio}</p>
+          </div>
+          <button class="follow__btn" data-value="${author._id}">
+            Follow
+          </button>
+        </li>
+  `
+    )
+    .join("");
+}
+async function addFollow(id) {
+  await fetch(`/profiles/follow/add/${id}`, {
+    method: "POST",
+  });
+  console.log(id);
+}
+async function deleteFollow(id) {
+  await fetch(`/profiles/follow/delete/${id}`, {
+    method: "DELETE",
+  });
+  console.log(id);
+}
 // Infinite scroll handler
 function handleScroll() {
   // Get the scroll position
@@ -152,18 +219,37 @@ document.addEventListener("click", (e) => {
       postCard.style.display = "none";
     }, 400); // match CSS transition time
   }
-})
+});
 
-document.querySelectorAll(".follow__btn").forEach((item) => {
-  item.addEventListener("click", () => {
-    item.classList.toggle("followed");
+document.addEventListener("click", async function (e) {
+  if (e.target.closest(".follow__btn")) {
+    const btn = e.target.closest(".follow__btn");
+    const authorId = btn.dataset.value;
 
-    item.textContent = item.classList.contains("followed") ? "Following" : "Follow";
-  })
-})
+    // Toggle UI
+    if (btn.classList.contains("active")) {
+      await deleteFollow(authorId);
+      btn.classList.remove("active");
+      btn.textContent = "Follow";
+    } else {
+      await addFollow(authorId);
+      btn.classList.add("active");
+      btn.textContent = "Following";
+    }
+  }
+});
+// document.querySelectorAll(".follow__btn").forEach((item) => {
+//   item.addEventListener("click", () => {
+//     item.classList.toggle("followed");
+
+//     item.textContent = item.classList.contains("followed")
+//       ? "Following"
+//       : "Follow";
+//   });
+// });
 
 coderHome.addEventListener("click", () => {
-  loadCoderhomePost(true)
+  loadCoderhomePost(true);
 });
 
 devTo.addEventListener("click", () => {
@@ -183,20 +269,23 @@ window.addEventListener("scroll", () => {
 scrollBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
-    behavior: "smooth"
+    behavior: "smooth",
   });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadCoderhomePost(true)
-})
+  loadCoderhomePost(true);
+});
 
 // Redirect "See more suggestions" to /following
 document.querySelectorAll("aside a").forEach((link) => {
   if (link.textContent.trim() === "See more suggestions") {
     link.addEventListener("click", (e) => {
       e.preventDefault();
-      window.location.href = "/following";
+      window.location.href = "/following?tab=author&authorTab=more";
     });
   }
 });
+
+//Call function
+loadAuhor();
