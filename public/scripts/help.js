@@ -1,3 +1,4 @@
+// placeholder động cho ô tìm kiếm trong trang help
 const placeholders = [
   "Search for help...",
   "How can I post an article?",
@@ -12,8 +13,8 @@ const placeholders = [
 ];
 
 let index = 0;
-const input = document.getElementById("help_search");
-
+const input = document.getElementById("help_search"); // Input cần đổi placeholder
+// chuyển placeholder mỗi 3 giây
 setInterval(() => {
   index = (index + 1) % placeholders.length;
   const text = placeholders[index];
@@ -23,6 +24,7 @@ setInterval(() => {
   const typing = setInterval(() => {
     input.placeholder += text[i];
     i++;
+    // dừng tyoping khi hết chữ
     if (i >= text.length) clearInterval(typing);
   }, 40);
 }, 3000);

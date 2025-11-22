@@ -242,8 +242,8 @@ ul li a:hover{
     padding: 5px 15px;
 }
 
- 
-/* ≤1250px: Ẩn sidebar và responsive image */
+ /* responsive */
+/* remove aside big tablet < 1250px */
 @media (max-width: 1250px) { 
     .container_right { 
         display: none !important; 
@@ -269,7 +269,7 @@ ul li a:hover{
     } 
 } 
  
-/* 3. ≤1000px: Container adjustments */
+/* tablet < 1000px */
 @media (max-width: 1000px) { 
     .main_container { 
         width: 90% !important; 
@@ -296,7 +296,7 @@ ul li a:hover{
     }
 } 
  
-/* 4. ≤900px: Font size và padding adjustments */
+/* tablet < 900px */
 @media (max-width: 900px) { 
     .left_main_content h2 { 
         font-size: 32px; 
@@ -314,6 +314,7 @@ ul li a:hover{
     }
 } 
 
+/* mobile < 600px */
 @media (max-width: 600px) {
     .right_img { 
         width: 36px; 
@@ -335,6 +336,7 @@ ul li a:hover{
     }
 }
 
+/* mobile < 550px */
 @media (max-width: 550px) {
     .right_img{
         display: none;
@@ -358,6 +360,7 @@ ul li a:hover{
     }
 }
 
+/* mini mobile < 400px */
 @media (max-width: 400px) {
     .nav_item .nav_btn {
         padding: 8px 10px;

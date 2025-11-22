@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const navButtons = document.querySelectorAll(".nav_item button");
     const flexBox = document.querySelector(".flex_box");
-
+    // contents cho từng tab
     const tabContents = {
+        // account tab content
         account: `
             <button class="mail_name_btn">
                 <span class="big_span">
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </button>
         `,
-
+        // notifications tab content
         notifications: `
             <div style="padding: 20px 0; font-family: 'Lora', serif;">
                 <h3 style="margin-bottom: 20px; font-size: 20px;">Email Notifications</h3>
@@ -155,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </button>
             </div>
         `,
-
+        // memberships tab content
         memberships: `
             <div style="padding: 20px 0; font-family: 'Lora', serif;">
                 <h3 style="margin-bottom: 20px; font-size: 20px;">Your Memberships</h3>
@@ -192,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `
     };
 
-
+// hàm chuyển tab
 function switchTab(tabName) {
         navButtons.forEach(btn => {
             btn.parentElement.classList.remove("active");
@@ -210,7 +211,7 @@ function switchTab(tabName) {
 
         flexBox.innerHTML = tabContents[tabName.toLowerCase()] || tabContents.account;
     }
-
+// thêm sự kiện click cho các nút điều hướng
     navButtons.forEach(button => {
         button.addEventListener("click", function () {
             const tabName = this.textContent.trim();
