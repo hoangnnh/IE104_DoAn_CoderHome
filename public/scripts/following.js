@@ -188,15 +188,16 @@ function setActiveTab(clickedTab, tabGroup) {
   tabGroup.forEach((t) => t.classList.remove("active"));
   clickedTab.classList.add("active");
 }
-function resetAllActive() {
-  // Reset active của nav chính
+
+function resetTabs() {
   tabs.forEach((t) => t.classList.remove("active"));
-  // Reset post tabs
+}
+function resetPostNav() {
   postNavs.forEach((t) => t.classList.remove("active"));
-  // Reset author tabs
+}
+function resetAuthorNav() {
   authorNavs.forEach((t) => t.classList.remove("active"));
 }
-
 function setDefaultSubTab(type) {
   if (type === "post") {
     const allTab = document.querySelector('.post-nav__items[data-tab="all"]');
@@ -212,22 +213,24 @@ function setDefaultSubTab(type) {
 
 async function handleTabClick(tab, tabGroup) {
   const type = tab.dataset.tab;
-  // Reset toàn bộ active cũ trước khi set mới
-  resetAllActive();
+
   // Active tab hiện tại
   tab.classList.add("active");
   switch (type) {
-    case "post":
+    case "post": //Khi nhấn post
       activateNav({ post: true, author: false, topic: false });
-      setDefaultSubTab("post");
+      resetPostNav();
+      setDefaultSubTab("post"); //Mặc định khi vào post sẽ là All
+
       await loadFollowedPost();
       break;
-    case "author":
+    case "author": //Khi nhấn author
       activateNav({ post: false, author: true, topic: false });
-      setDefaultSubTab("author");
+      resetAuthorNav();
+      setDefaultSubTab("author"); //Mặc định khi vào author sẽ là followed
       await loadFollowedAuthor();
       break;
-    case "all":
+    case "all": //Khi nhấn all
       activateNav({ post: true, author: false, topic: false });
 
       // Active đúng sub-tab
@@ -235,7 +238,7 @@ async function handleTabClick(tab, tabGroup) {
 
       await loadFollowedPost();
       break;
-    case "topic":
+    case "topic": // Khi nhấn topic
       activateNav({ post: true, author: false, topic: true });
 
       tab.classList.add("active");
@@ -246,16 +249,15 @@ async function handleTabClick(tab, tabGroup) {
       } else {
         await loadFollowedPost();
       }
-
       updateArrowsAndFade();
       break;
-    case "followed":
+    case "followed": // Khi nhấn follwoed
       activateNav({ post: false, author: true, topic: false });
 
       tab.classList.add("active");
       await loadFollowedAuthor();
       break;
-    case "more":
+    case "more": // Khi nhấn more
       activateNav({ post: false, author: true, topic: false });
 
       tab.classList.add("active");
@@ -268,18 +270,21 @@ async function handleTabClick(tab, tabGroup) {
 tabs.forEach((tab) =>
   tab.addEventListener("click", (e) => {
     e.preventDefault();
+    resetTabs();
     handleTabClick(tab, tabs);
   })
 );
 postNavs.forEach((tab) =>
   tab.addEventListener("click", (e) => {
     e.preventDefault();
+    resetPostNav();
     handleTabClick(tab, postNavs);
   })
 );
 authorNavs.forEach((tab) =>
   tab.addEventListener("click", (e) => {
     e.preventDefault();
+    resetAuthorNav();
     handleTabClick(tab, authorNavs);
   })
 );
