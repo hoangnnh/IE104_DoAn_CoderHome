@@ -484,3 +484,66 @@ body .overlay{
         padding: 8px 10px;
     }
 }
+
+/* reponsive overlay */
+/* mobile */
+@media (max-width: 480px) {
+.overlay_mail,
+.overlay .overlay_username {
+    width: 85%;              
+    height: auto;            
+    padding: 20px;
+}
+
+.overlay_mail .mail_header,
+.overlay_username .username_header {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.mail_body input,
+.username_body input {
+    font-size: 14px;
+    padding: 12px;
+}
+
+.mail_footer,
+.username_footer {  
+    width: 100%;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.mail_footer button,
+.username_footer button {
+    width: 50%;               
+}
+}
+
+/* mobile > 480px  */
+@media (min-width: 480px) and (max-width: 768px) {
+    
+    .overlay_mail,
+    .overlay_username {
+        width: 70%;
+        height: auto;
+        padding: 25px;
+    }
+
+    .mail_footer,
+    .username_footer {
+        gap: 12px;
+    }
+}
+
+/* tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .overlay_mail {
+        width: 60%;
+    }
+
+    .overlay_username {
+        width: 50%;
+    }
+}
