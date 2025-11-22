@@ -6,7 +6,7 @@ const isAuth = require("../middleware/isAuth");
 router.get("/", isAuth, profileController.getAllUser);
 
 router.post("/follow/add/:id", isAuth, profileController.addFollow);
-router.post("/follow/delete/:id", isAuth, profileController.deleteFollow);
+router.delete("/follow/delete/:id", isAuth, profileController.deleteFollow);
 router.get("/:id", isAuth, profileController.getUser);
 
 router.patch("/:id", isAuth, profileController.editUserProfile);
