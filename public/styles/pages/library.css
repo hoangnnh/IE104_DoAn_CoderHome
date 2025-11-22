@@ -8,6 +8,7 @@ body{
   box-sizing: border-box;
 }
 
+/* library body */
 .library-body{
     display: flex;
     width: 100%;
@@ -304,7 +305,7 @@ body{
 }
 
 /* reponsive */
-/* tablet reponsive */
+/* tablet */
 @media (max-width: 1024px) {
 
   .container-main-part {
@@ -346,7 +347,7 @@ body{
   }
 }
 
-/* mobile reponsive */
+/* big mobile */
 @media (max-width: 768px) {
 
   .library-body {
@@ -399,7 +400,7 @@ body{
   }
 }
 
- 
+/* normal mobile */
 @media (max-width: 500px){
   .library-section .section-header{
     display: flex;
@@ -421,6 +422,7 @@ body{
   }
 }
 
+/* mini mobile */
 @media (max-width: 340px){
   .history-title{
     font-size: 22px;

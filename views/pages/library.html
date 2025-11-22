@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library</title>
-
   <link rel="stylesheet" href="/styles/base/reset.css">
   <link rel="stylesheet" href="/styles/base/token.css">
   <link rel="stylesheet" href="/styles/base/fonts.css">
@@ -15,14 +14,17 @@
 </head>
 
 <body>
+  <!--partial-->>
   <coderhome-header></coderhome-header>
   <toggle-menu></toggle-menu>
   <toggle-avatar-option></toggle-avatar-option>
   <toggle-notification></toggle-notification>
+  <!--partial end-->>
+  <!--Phần main-->
   <div class="library-body">
     <div class="body-container">
       <div class="container-main-part">
-        
+        <!--Header Thư viên-->
         <div class="main-header">
           <h1>Your Library</h1>
 
@@ -36,7 +38,11 @@
             </a>
           </nav>
         </div>
+       <!--end header thư viện-->
 
+       <!--Nội dung thư viện-->
+
+       <!--phần your list-->
         <div id="section-yourlist" class="library-section">
           <div class="create-box">
             <p class="create-title">Create your own list</p>
@@ -47,7 +53,7 @@
           <div id="yourListContainer" class="list-container">
           </div>
         </div>
-
+        <!--phần history-->
         <div id="section-history" class="library-section" style="display:none;">
           <div class="section-header">
           <h3 class="history-title">Your Reading History</h3>

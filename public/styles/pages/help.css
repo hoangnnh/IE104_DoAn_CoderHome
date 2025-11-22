@@ -215,7 +215,7 @@
 }
 
 /* reponsive */
-/* Tablet (≤ 1024px) */
+/* tablet & mobile */
 @media (max-width: 1024px) {
     .header .header_container {
         display: flex;
@@ -244,6 +244,7 @@
 
 }
 
+/* mini mobile */
 @media (max-width: 350px){
     .help_container .help_item {
         min-width: 280px;

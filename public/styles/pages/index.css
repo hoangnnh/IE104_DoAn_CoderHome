@@ -227,6 +227,33 @@ aside {
     background: #555;
 }
 
+.footer__nav__list {
+    width: 100%;
+    padding: 0;
+    gap: var(--space-md);
+    overflow: hidden;
+    margin: 32px 0;
+}
+
+.footer__nav__item {
+    list-style: none;
+    width: fit-content;
+    float: left;
+    padding-right: var(--font-size-md);
+    padding-bottom: var(--space-sm);
+}
+
+.footer__nav__item a{
+    margin: 0;
+    opacity: 0.6;
+    font-size: var(--font-size-sm);
+}
+
+.footer__nav__item:hover a{
+    text-decoration: underline;
+    opacity: 1;
+}
+
 
 /* ---------- Mobile (<768px) ---------- */
 @media (max-width: 767px) {
