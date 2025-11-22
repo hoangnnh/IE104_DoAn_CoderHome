@@ -2,14 +2,36 @@ import { handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
 import { renderPostCard } from "/scripts/components/post-card.js";
 // import { all } from "../../routes/profiles";
 
-async function loadFollowedPost() {
-  const res = await fetch(`/posts/`);
-  const res2 = await fetch(`/current/`);
+const container = document.querySelector(".main__content");
+// Fetch
+async function getCurrentAndPosts() {
+  const [userRes, postRes] = await Promise.all([
+    fetch("/current/"),
+    fetch("/posts/"),
+  ]);
 
-  const user = await res2.json();
-  const allposts = await res.json();
+  const user = await userRes.json();
+  const posts = await postRes.json();
+
+  return { user, posts };
+}
+async function getCurrentAndAuthors() {
+  const [userRes, authorsRes] = await Promise.all([
+    fetch("/current/"),
+    fetch("/profiles/"),
+  ]);
+
+  const user = await userRes.json();
+  const authors = await authorsRes.json();
+
+  return { user, authors };
+}
+
+//
+async function loadFollowedPost() {
+  const { user, posts: allposts } = await getCurrentAndPosts();
+
   const followingIds = user.followingAuthors.map((id) => id.toString());
-  const container = document.querySelector(".main__content");
 
   const posts = allposts
     .filter((post) => followingIds.includes(post.author._id))
@@ -27,14 +49,11 @@ async function loadFollowedPost() {
 }
 
 async function loadPostByTopic(topic) {
-  const res = await fetch(`/posts/`);
-  const res2 = await fetch(`/current/`);
-  const allposts = await res.json();
-  const user = await res2.json();
+  const { user, posts: allposts } = await getCurrentAndPosts();
+
   const followingIds = user.followingAuthors.map((id) => id.toString());
 
   const filteredTopicPosts = filterPostsByTag(allposts, topic);
-  const container = document.querySelector(".main__content");
 
   const filteredPosts = filteredTopicPosts
     .filter((post) => followingIds.includes(post.author._id))
@@ -54,19 +73,15 @@ async function loadPostByTopic(topic) {
   }
 }
 async function loadFollowedAuthor() {
-  const res = await fetch(`/current/`);
-  const currentUser = await res.json();
-
-  const res2 = await fetch(`/profiles/`);
-  const allAuthor = await res2.json();
-
-  const container = document.querySelector(".main__content");
+  const { user: currentUser, authors: allAuthors } =
+    await getCurrentAndAuthors();
 
   const followingIds = currentUser.followingAuthors.map(
     (author) => author._id || author
   );
-  const filteredAuthors = allAuthor.filter((author) => {
-    return author._id !== currentUser && followingIds.includes(author._id);
+
+  const filteredAuthors = allAuthors.filter((author) => {
+    return author._id !== currentUser._id && followingIds.includes(author._id);
   });
 
   container.innerHTML = filteredAuthors
@@ -91,26 +106,19 @@ async function loadFollowedAuthor() {
 }
 
 async function loadUnfollowedAuthor() {
-  console.log("loadAuthor called");
-  try {
-    const res = await fetch(`/profiles/`);
-    const allAuthor = await res.json();
-    const res2 = await fetch(`/current/`);
-    const currentUser = await res2.json();
-    const container = document.querySelector(".main__content");
+  const { user: currentUser, authors: allAuthors } =
+    await getCurrentAndAuthors();
 
-    const followingIds = currentUser.followingAuthors.map(
-      (author) => author._id || author
-    );
-    const filteredAuthors = allAuthor.filter((author) => {
-      return (
-        author._id !== currentUser._id && !followingIds.includes(author._id)
-      );
-    });
+  const followingIds = currentUser.followingAuthors.map(
+    (author) => author._id || author
+  );
+  const filteredAuthors = allAuthors.filter((author) => {
+    return author._id !== currentUser._id && !followingIds.includes(author._id);
+  });
 
-    container.innerHTML = filteredAuthors
-      .map(
-        (author) => `
+  container.innerHTML = filteredAuthors
+    .map(
+      (author) => `
             <div class="user__list-item">
               <div class="user__info">
                 <img src="${author.profilePicture}" alt="Blogger's avatar" class="avatar">
@@ -125,12 +133,8 @@ async function loadUnfollowedAuthor() {
             </div>
             <hr class="divider">
     `
-      )
-      .join("");
-    console.log("Success");
-  } catch (err) {
-    console.log("Fail");
-  }
+    )
+    .join("");
 }
 async function addFollow(id) {
   await fetch(`/profiles/follow/add/${id}`, {
@@ -146,9 +150,7 @@ async function deleteFollow(id) {
 }
 // Responsive
 
-// -------- Const
-
-const container = document.querySelector(".main__content");
+// -------- Const --------------------------------
 // following nav
 const tabs = document.querySelectorAll(".nav__items");
 // post nav
@@ -161,7 +163,6 @@ const topicContent = document.querySelector(".topic__content");
 const dropdownHeader = document.querySelector(".dropdown__header");
 const dropdownHeaderItem = document.querySelector(".dropdown__header-item");
 const arrow = document.querySelector(".arrow");
-const selection = document.querySelector(".dropdown__selection");
 const dropdownItems = document.querySelectorAll(".dropdown__item");
 const dropdown = document.querySelector(".dropdown__container");
 const topics = document.querySelectorAll(".topic");
@@ -175,7 +176,8 @@ const authorNav = document.querySelector(".author__nav");
 const topicNav = document.querySelector(".topic__nav");
 //
 const scrollBtn = document.querySelector(".scroll-top");
-//Event
+
+// ---------------- Event ------------------------------------
 
 // Khi bấm vào mỗi tab following nav
 function activateNav({ post = false, author = false, topic = false }) {
@@ -184,20 +186,12 @@ function activateNav({ post = false, author = false, topic = false }) {
   topicNav.classList.toggle("active", topic);
 }
 
-function setActiveTab(clickedTab, tabGroup) {
-  tabGroup.forEach((t) => t.classList.remove("active"));
-  clickedTab.classList.add("active");
+// Các hàm reset active của nav
+function resetActive(list) {
+  list.forEach((t) => t.classList.remove("active"));
 }
 
-function resetTabs() {
-  tabs.forEach((t) => t.classList.remove("active"));
-}
-function resetPostNav() {
-  postNavs.forEach((t) => t.classList.remove("active"));
-}
-function resetAuthorNav() {
-  authorNavs.forEach((t) => t.classList.remove("active"));
-}
+//
 function setDefaultSubTab(type) {
   if (type === "post") {
     const allTab = document.querySelector('.post-nav__items[data-tab="all"]');
@@ -210,8 +204,8 @@ function setDefaultSubTab(type) {
     if (followedTab) followedTab.classList.add("active");
   }
 }
-
-async function handleTabClick(tab, tabGroup) {
+//hàm xử lý
+async function handleTabClick(tab) {
   const type = tab.dataset.tab;
 
   // Active tab hiện tại
@@ -219,29 +213,24 @@ async function handleTabClick(tab, tabGroup) {
   switch (type) {
     case "post": //Khi nhấn post
       activateNav({ post: true, author: false, topic: false });
-      resetPostNav();
+      resetActive(postNavs);
       setDefaultSubTab("post"); //Mặc định khi vào post sẽ là All
 
       await loadFollowedPost();
       break;
     case "author": //Khi nhấn author
       activateNav({ post: false, author: true, topic: false });
-      resetAuthorNav();
+      resetActive(authorNavs);
       setDefaultSubTab("author"); //Mặc định khi vào author sẽ là followed
       await loadFollowedAuthor();
       break;
     case "all": //Khi nhấn all
       activateNav({ post: true, author: false, topic: false });
 
-      // Active đúng sub-tab
-      tab.classList.add("active");
-
       await loadFollowedPost();
       break;
     case "topic": // Khi nhấn topic
       activateNav({ post: true, author: false, topic: true });
-
-      tab.classList.add("active");
 
       const activeTopic = document.querySelector(".topic.active");
       if (activeTopic) {
@@ -254,39 +243,46 @@ async function handleTabClick(tab, tabGroup) {
     case "followed": // Khi nhấn follwoed
       activateNav({ post: false, author: true, topic: false });
 
-      tab.classList.add("active");
       await loadFollowedAuthor();
       break;
     case "more": // Khi nhấn more
       activateNav({ post: false, author: true, topic: false });
 
-      tab.classList.add("active");
       await loadUnfollowedAuthor();
       break;
   }
 }
 
 // Gắn sự kiện
-tabs.forEach((tab) =>
-  tab.addEventListener("click", (e) => {
-    e.preventDefault();
-    resetTabs();
-    handleTabClick(tab, tabs);
-  })
+tabs.forEach(
+  (
+    tab //Khi nhán nav trên cùng
+  ) =>
+    tab.addEventListener("click", (e) => {
+      e.preventDefault();
+      resetActive(tabs);
+      handleTabClick(tab, tabs);
+    })
 );
-postNavs.forEach((tab) =>
-  tab.addEventListener("click", (e) => {
-    e.preventDefault();
-    resetPostNav();
-    handleTabClick(tab, postNavs);
-  })
+postNavs.forEach(
+  (
+    tab //Khi nhấn post nav
+  ) =>
+    tab.addEventListener("click", (e) => {
+      e.preventDefault();
+      resetActive(postNavs);
+      handleTabClick(tab, postNavs);
+    })
 );
-authorNavs.forEach((tab) =>
-  tab.addEventListener("click", (e) => {
-    e.preventDefault();
-    resetAuthorNav();
-    handleTabClick(tab, authorNavs);
-  })
+authorNavs.forEach(
+  (
+    tab //Khi nhấn author nav
+  ) =>
+    tab.addEventListener("click", (e) => {
+      e.preventDefault();
+      resetActive(authorNavs);
+      handleTabClick(tab, authorNavs);
+    })
 );
 
 //Dropdown
@@ -401,7 +397,65 @@ document.addEventListener("click", async function (e) {
 });
 
 // Default UI on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
 
-// Default load
-loadFollowedPost();
-updateArrowsAndFade();
+  const mainTab = params.get("tab") || "post";
+  const authorTab = params.get("authorTab") || "followed";
+  const postTab = params.get("postTab") || "all";
+
+  // Reset all UI
+  resetActive(tabs);
+  resetActive(postNavs);
+  resetActive(authorNavs);
+
+  // ===== TAB CHÍNH =====
+  const mainTabs = document.querySelectorAll(".nav__items");
+  mainTabs.forEach((tab) => {
+    tab.classList.toggle("active", tab.dataset.tab === mainTab);
+  });
+
+  // ===== XỬ LÝ HIỂN THỊ NAV =====
+  if (mainTab === "author") {
+    activateNav({ post: false, author: true, topic: false });
+
+    // Active đúng author sub-tab
+    const authorTabs = document.querySelectorAll(".author-nav__items");
+
+    authorTabs.forEach((tab) => {
+      const isActive = tab.dataset.tab === authorTab;
+      tab.classList.toggle("active", isActive);
+    });
+
+    // Load data đúng tab
+    if (authorTab === "more") {
+      loadUnfollowedAuthor();
+    } else {
+      loadFollowedAuthor();
+    }
+  } else if (mainTab === "post") {
+    activateNav({ post: true, author: false, topic: false });
+
+    const postTabs = document.querySelectorAll(".post-nav__items");
+
+    postTabs.forEach((tab) => {
+      const isActive = tab.dataset.tab === postTab;
+      tab.classList.toggle("active", isActive);
+    });
+
+    if (postTab === "topic") {
+      activateNav({ post: true, author: false, topic: true });
+      const activeTopic = document.querySelector(".topic.active");
+
+      if (activeTopic) {
+        loadPostByTopic(activeTopic.dataset.value);
+      } else {
+        loadFollowedPost();
+      }
+      updateArrowsAndFade();
+    } else {
+      loadFollowedPost();
+      updateArrowsAndFade();
+    }
+  }
+});
