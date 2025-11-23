@@ -5,20 +5,25 @@ const modalCSS = `
 const modalHTML = `
 <div class="modal__overlay" id="modalOverlay"></div>
 <div class="modal__content" id="modalContent">
+    <!-- Modal header -->
     <div class="modal__header">
         <h2 class="modal__title">Notification</h2>
     </div>
+
+    <!-- Tabs to filter notifications -->
     <div class="modal__tabs">
         <button class="modal__tab-btn is-active" data-tab="all">All</button>
         <button class="modal__tab-btn" data-tab="unread">Unread</button>
     </div>
+
+    <!-- Notification list container -->
     <ul class="notification-list" id="notificationList">
         <!-- Notifications will be loaded here -->
     </ul>
 </div>
 `;
 
-// Mock Data
+// Mock notifications data
 const mockNotifications = [
   {
     id: 1,
@@ -60,30 +65,36 @@ const mockNotifications = [
 class NotificationModal extends HTMLElement {
   constructor() {
     super();
+    // Attach shadow DOM to encapsulate the component
     this.attachShadow({ mode: "open" });
     this.isOpen = false;
-    this.filter = "all"; // 'all' or 'unread'
+    this.filter = "all"; // 'all' or 'unread' filter
   }
 
   connectedCallback() {
-    // Render the component's static HTML and CSS
+    // Render template inside shadow DOM
     const template = document.createElement("template");
     template.innerHTML = modalCSS + modalHTML;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    // Find internal elements
+    // Internal DOM references
     this.modal = this.shadowRoot.getElementById("modalContent");
     this.overlay = this.shadowRoot.getElementById("modalOverlay");
     this.list = this.shadowRoot.getElementById("notificationList");
     this.tabButtons = this.shadowRoot.querySelectorAll(".modal__tab-btn");
 
-    // Add event listeners
+    // Close modal when clicking outside overlay
     this.overlay.addEventListener("click", () => this.close());
+
+    // Listen for toggle event from header
     document.addEventListener("toggle-notifications", () => this.toggle());
-    document.addEventListener('close-all',  () => {
+
+    // Listen for global close-all event
+    document.addEventListener('close-all', () => {
       this.close();
     });
 
+    // Tab click handlers
     this.tabButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         // Set the new filter
@@ -97,6 +108,7 @@ class NotificationModal extends HTMLElement {
     });
   }
 
+  // Toggle open/close state
   toggle() {
     console.log("notification button");
     this.isOpen = !this.isOpen;
@@ -104,22 +116,24 @@ class NotificationModal extends HTMLElement {
     else this.close();
   }
 
+  // Open modal and render notifications
   open() {
     this.modal.classList.add("is-active");
     this.overlay.classList.add("is-active");
     this.isOpen = true;
-    // Fetch and render notifications when opened
     this.renderNotifications();
   }
 
+  // Close modal
   close() {
     this.modal.classList.remove("is-active");
     this.overlay.classList.remove("is-active");
     this.isOpen = false;
   }
 
+  // Render notifications list
   renderNotifications() {
-    // Filter the mock data
+    // Filter notifications based on selected tab
     const filteredData = mockNotifications.filter((n) => {
       if (this.filter === "unread") return n.unread;
       return true; // 'all' filter
@@ -130,25 +144,24 @@ class NotificationModal extends HTMLElement {
       return;
     }
 
-    // Render list
+    // Map notifications to HTML list items
     this.list.innerHTML = filteredData
       .map((n) => {
         return `
-                <li class="notification-item ${n.unread ? "is-unread" : ""}">
-                    <img src="${n.user.avatar}" alt="${
-          n.user.name
-        }'s avatar" class="notification-item__avatar">
-                    <div class="notification-item__content">
-                        <p class="notification-item__text">
-                            <strong>${n.user.name}</strong> ${n.text}
-                        </p>
-                        <span class="notification-item__time">${n.time}</span>
-                    </div>
-                </li>
-            `;
+          <li class="notification-item ${n.unread ? "is-unread" : ""}">
+            <img src="${n.user.avatar}" alt="${n.user.name}'s avatar" class="notification-item__avatar">
+            <div class="notification-item__content">
+              <p class="notification-item__text">
+                <strong>${n.user.name}</strong> ${n.text}
+              </p>
+              <span class="notification-item__time">${n.time}</span>
+            </div>
+          </li>
+        `;
       })
       .join("");
   }
 }
 
+// Define custom element
 customElements.define("toggle-notification", NotificationModal);

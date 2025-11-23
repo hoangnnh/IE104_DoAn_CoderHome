@@ -30,12 +30,13 @@ const menuHTML = `
 class ToggleMenu extends HTMLElement {
     constructor() {
         super();
+        // Attach shadow DOM for encapsulation
         this.attachShadow({ mode: 'open' });
         this.isOpen = false;
     }
 
     async connectedCallback() {
-        // Render the component
+        // Render the template inside shadow DOM
         const template = document.createElement('template');
         template.innerHTML = menuCSS + menuHTML;
         this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -44,12 +45,12 @@ class ToggleMenu extends HTMLElement {
         this.menuElement = this.shadowRoot.getElementById('toggleMenu');
         this.overlayElement = this.shadowRoot.getElementById('menuOverlay');
 
-        // Add close listeners
+        // Close menu when clicking overlay
         this.overlayElement.addEventListener('click', () => this.close());
 
-        // Add global open listener (listens for the header's event)
+        // Listen for toggle-menu event from header
         document.addEventListener('toggle-menu', () => {
-            // Check if the menu is already active
+            // Toggle open/close state
             if (this.menuElement.classList.contains('is-active')) {
                 this.close();
             } else {
@@ -57,11 +58,12 @@ class ToggleMenu extends HTMLElement {
             }
         });
 
-        document.addEventListener('close-all',  () => {
+        // Listen for global close-all event
+        document.addEventListener('close-all', () => {
             this.close();
         });
 
-        // Update dynamic profile link
+        // Dynamically set profile link based on current user
         try {
             const response = await fetch('/current');
             if (response.ok) {
@@ -72,19 +74,21 @@ class ToggleMenu extends HTMLElement {
             console.error("Could not set profile link in menu", e);
         }
 
-        // Wait for the browser to load before loading toggle menu animation
+        // Enable animation after render
         setTimeout(() => {
-        this.menuElement.classList.add('menu-ready');
-        this.overlayElement.classList.add('menu-ready');
-    }, 0);
+            this.menuElement.classList.add('menu-ready');
+            this.overlayElement.classList.add('menu-ready');
+        }, 0);
     }
 
+    // Open menu
     open() {
         this.menuElement.classList.add('is-active');
         this.overlayElement.classList.add('is-active');
         this.isOpen = true;
     }
 
+    // Close menu
     close() {
         this.menuElement.classList.remove('is-active');
         this.overlayElement.classList.remove('is-active');
@@ -92,4 +96,5 @@ class ToggleMenu extends HTMLElement {
     }
 }
 
+// Define custom element
 customElements.define('toggle-menu', ToggleMenu);
