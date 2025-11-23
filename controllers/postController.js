@@ -39,9 +39,6 @@ async function createPost(req, res) {
 
     const savedPost = await post.save();
 
-    // await User.findByIdAndUpdate(req.user._id, {
-    //   $push: { postedPosts: post._id } // use $push/$addToSet per your intended behavior
-    // });
 
     const userId =
       (req.user && req.user._id) || (req.session && req.session.userId) || null;
@@ -98,11 +95,28 @@ async function getPost(req, res) {
 // Show all posts in Homepage
 async function getAllPosts(req, res) {
   try {
-    // Find all posts, sort by newest, and populate author's username
-    const posts = await Post.find()
+    let { currentPage, posts_per_page } = req.query;
+    if(currentPage === undefined && posts_per_page === undefined) {
+      const posts = await Post.find()
       .populate("author", "_id username profilePicture")
       .sort({ createdAt: -1 });
-    res.json(posts);
+      return res.json(posts);
+    }
+    
+    const limit = parseInt(posts_per_page);
+    const skip = (parseInt(currentPage) - 1) * limit;
+
+    const posts = await Post.find()
+    .populate("author", "_id username profilePicture")
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
+    const total = await Post.countDocuments();
+    const hasMore = (parseInt(currentPage) * limit) < total
+    
+    return res.json({posts, hasMore});
+
   } catch (err) {
     console.error("Get All Posts Error:", err);
     res.status(500).send("Server Error");

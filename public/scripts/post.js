@@ -1,6 +1,6 @@
-// lấy postId từ URL
+// Get postId from URL
 const postId = location.pathname.split("/").pop();
-// Lấy các phần từ HTML
+// Get elements from HTML
 const postTitle = document.querySelector(".post__title-head");
 const postHeader = document.querySelector(".post__header");
 const postContent = document.querySelector(".post__content");
@@ -8,16 +8,16 @@ const postTags = document.querySelector(".post__tags");
 const postAboutAuthor = document.querySelector(".post__about-author");
 const postResponse = document.querySelector(".post__response");
 
-// Hàm tải bình luận
+// Function to load comments
 async function loadComment() {
   const commentList = document.querySelector(".comment__list");
-  const resComment = await fetch(`/comments/${postId}`); // Gọi API lấy bình luận theo postId
-  const comments = await resComment.json(); // Chuyển đổi phản hồi thành JSON
+  const resComment = await fetch(`/comments/${postId}`); // Call API to get comments by postId
+  const comments = await resComment.json(); // Convert response to JSON
 
-  console.log(resComment); //Kiểm tra phản hồi từ server
-  console.log(comments); //Kiểm tra dữ liệu bình luận
+  console.log(resComment); // Check server response
+  console.log(comments); // Check comment data
 
-  // Tạo HTML cho từng bình luận và chèn vào danh sách bình luận
+  // Create HTML for each comment and insert into comment list
   commentList.innerHTML = comments
     .map(
       (item) => `
@@ -39,20 +39,22 @@ async function loadComment() {
     `
     )
     .join("");
+
+    
 }
 
-// Hàm tải bài viết theo postId
+// Function to load post by postId
 async function loadPostID() {
-  // Gọi API lấy bài viết và người dùng hiện tại
+  // Call API to get post and current user
   const resPost = await fetch(`/posts/${postId}`);
   const post = await resPost.json();
-  // Lấy thông tin người dùng hiện tại
+  // Get current user information
   const resUser = await fetch(`/current/`);
   const currentUser = await resUser.json();
 
-  postTitle.textContent = `${post.title}`; // Cập nhật tiêu đề bài viết
+  postTitle.textContent = `${post.title}`; // Update post title
 
-  // Cập nhật phần header bài viết
+  // Update post header section
   postHeader.innerHTML = `
     <p class="post__title">${post.title}</p>
     <p class="post__description">${post.description}</p>
@@ -63,34 +65,31 @@ async function loadPostID() {
                 <a href="/profile/${post.author._id}" class="post__author-name">
                     ${post.author.username}
                 </a>
-                <button class="post__author-follow">
-                    <span>Follow</span>
-                </button>
+                ${currentUser._id !== post.author._id ? `<button class="post__author-follow"><span>Follow</span></button>` : ""}
                 <p class="post__posted-date">6 days</p>
             </div>
             <hr class="post__divider"/>
             <div class="metadata__interaction-action">
                 <div class="metadata__interaction">
                     <div class="interaction__items">
-                        <img src="/images/icons/comment-icon.svg" alt="comment-icon" class="heart-icon"/>
-                        <p>3.7K</p>
+                        <img src="/images/icons/comment-icon.svg" alt="comment-icon" class="comment-icon"/>
+                        <span>3.7K</span>
                     </div>
                     <div class="interaction__items">
-                        <img src="/images/icons/heart-icon.svg" alt="heart-icon" class="comment-icon"/>
-                        <p>4.2K</p>
+                        <img src="/images/icons/heart-icon.svg" alt="heart-icon" class="heart-icon"/>
+                        <span>4.2K</span>
                     </div>
                 </div>
                 <div class="metadata__action">
-                    <img src="/images/icons/remove-icon.svg" alt="" class="close-icon"/>
                     <img src="/images/icons/bookmark-icon.svg" alt="" class="bookmark-icon"/>
                     <img src="/images/icons/share-icon.svg" alt="" class="share-icon"/>
                 </div>
             </div>
         </div>
 `;
-  // Cập nhật nội dung bài viết
+  // Update post content
   postContent.innerHTML = `${post.contentHTML}`;
-  // Cập nhật thẻ bài viết
+  // Update post tags
   postTags.innerHTML = post.tags
     .map(
       (tag, index) => `
@@ -103,7 +102,7 @@ async function loadPostID() {
     )
     .join("");
 
-  // Cập nhật phần về tác giả
+  // Update author section
   postAboutAuthor.innerHTML = `
     <img src="${post.author.profilePicture}" alt="avatar" class="post__author-img"/>
         <div class="post__author-content">
@@ -113,7 +112,7 @@ async function loadPostID() {
     <button class="post__author-follow"><span>Follow</span></button>
     `;
 
-  // Cập nhật phần phản hồi bài viết
+  // Update post response section
   postResponse.innerHTML = `
     <p class="post__respones-title">Responses</p>
                     <a href="/profile/${currentUser._id}" class="user__info">
@@ -135,24 +134,24 @@ async function loadPostID() {
                         </form>
     `;
 
-  // Xử lý tương tác với textarea phản hồi
+  // Handle textarea interaction for response
   const textarea = document.getElementById("response-content");
   const form = document.querySelector(".response-form");
   const baseHeight = textarea.scrollHeight;
 
-  // Thêm lớp active khi textarea được focus => mở rộng form
+  // Add active class when textarea is focused => expand form
   textarea.addEventListener("focus", () => {
     form.classList.add("active");
   });
 
-  // Loại bỏ lớp active khi textarea mất focus và không có nội dung => thu gọn form
+  // Remove active class when textarea loses focus and is empty => collapse form
   textarea.addEventListener("blur", () => {
     if (!textarea.value.trim()) {
       form.classList.remove("active");
     }
   });
 
-  // Xử lý nút hủy phản hồi => nút Cancel
+  // Handle cancel response button
   const cancelBtn = document.querySelector(".respones__cancel");
   cancelBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -161,22 +160,22 @@ async function loadPostID() {
     form.classList.remove("active");
   });
 
-  // Tự động điều chỉnh chiều cao của textarea khi nhập nội dung
+  // Automatically adjust textarea height when typing
   textarea.addEventListener("input", () => {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   });
 
-  // Xử lý gửi phản hồi khi nhấn Enter (không kèm Shift)
+  // Handle sending response when pressing Enter (without Shift)
   textarea.addEventListener("keydown", async (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault(); // Không xuống dòng
+      e.preventDefault(); // Prevent new line
 
-      // Gửi phản hồi
+      // Send response
       const content = textarea.value.trim();
       if (!content) return;
 
-      // Gọi API để gửi phản hồi
+      // Call API to send response
       await fetch("/comments/", {
         method: "POST",
         headers: {
@@ -185,7 +184,7 @@ async function loadPostID() {
         body: JSON.stringify({ postId, content }),
       });
 
-      // Reset textarea và thu gọn form
+      // Reset textarea and collapse form
       textarea.value = "";
       textarea.style.height = baseHeight + "px";
       form.classList.remove("active");
@@ -194,10 +193,39 @@ async function loadPostID() {
     }
   });
 
-  // Tải bình luận ban đầu
+  // Load initial comments
   await loadComment();
 
-  // Xử lý gửi phản hồi khi submit form
+  // Scroll to comment event
+  const commentIcon = document.querySelector(".comment-icon");
+  const commentSection = document.querySelector(".post__response");
+  commentIcon.addEventListener("click", () => {
+    commentSection.scrollIntoView({behavior: "smooth", block: "start"});
+  });
+
+  // Like event
+  const heartIcon = document.querySelector(".heart-icon");
+  heartIcon.addEventListener("click", () => {
+    heartIcon.classList.toggle("active");
+    if (heartIcon.classList.contains("active")) {
+      heartIcon.src = "/images/icons/heart-filled-icon.svg";
+    } else {
+      heartIcon.src = "/images/icons/heart-outline-icon.svg";
+    }
+  });
+
+  // Bookmark event
+  const bookmarkIcon = document.querySelector(".bookmark-icon");
+  bookmarkIcon.addEventListener("click", () => {
+    bookmarkIcon.classList.toggle("saved");
+    if (bookmarkIcon.classList.contains("saved")) {
+      bookmarkIcon.src = "/images/icons/bookmark-filled-icon.svg";
+    } else {
+      bookmarkIcon.src = "/images/icons/bookmark-outline-icon.svg";
+    }
+  })
+
+  // Handle sending response on form submit
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const content = textarea.value.trim();
