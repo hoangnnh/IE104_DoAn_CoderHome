@@ -25,14 +25,16 @@ navItems.forEach(item => {
 
 // Load List (FE only) 
 
-function loadYourList() {
+async function loadYourList() {
+  const res = await fetch("/current", { credentials: "include" });
+  const user = await res.json();
   const container = document.getElementById("yourListContainer");
 
   container.innerHTML = `
-    <div class="list-card">
+    <div class="list-card-fe">
       <div class="list-info">
-        <img class="avatar" src="/images/samples/author-avt-2.jpg"/>
-        <p class="list-author">YourName</p>
+        <img class="avatar" src="${user.profilePicture}" />
+        <p class="list-author">${user.username}</p>
         <h3 class="list-title">Web Dev List</h3>
         <p class="list-count">3 posts</p>
       </div>
@@ -47,6 +49,9 @@ function loadYourList() {
 }
 
 loadYourList();
+
+// Tạo list mới
+
 
 
 // Load History (from backend)
@@ -93,3 +98,4 @@ if (btnDelete) {
     loadHistory(); // reload history after delete
   });
 }
+
