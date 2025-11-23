@@ -20,13 +20,17 @@
     <main class="container">
       <h1 class="page__title">Following</h1>
       <nav class="following__nav">
-        <a href="#" class="nav__items active" data-tab="all"> All </a>
-
-        <a href="#" class="nav__items" data-tab="topic"> Topic </a>
-        <a href="#" class="nav__items" data-tab="more-to-follow">
-          More to Follow
-        </a>
+        <a href="#" class="nav__items" data-tab="post"> Post </a>
+        <a href="#" class="nav__items" data-tab="author">Author</a>
       </nav>
+      <div class="post__nav">
+        <a href="#" class="post-nav__items" data-tab="all">All</a>
+        <a href="#" class="post-nav__items" data-tab="topic">Topic</a>
+      </div>
+      <div class="author__nav">
+        <a href="#" class="author-nav__items" data-tab="followed"> Followed </a>
+        <a href="#" class="author-nav__items" data-tab="more">More</a>
+      </div>
       <div class="topic__nav">
         <div class="dropdown__container">
           <div class="dropdown__header">
@@ -34,9 +38,9 @@
             <span class="arrow"></span>
           </div>
           <div class="dropdown__selection">
-            <a href="" class="dropdown__item" data-value="Newest">Newest</a>
-            <a href="" class="dropdown__item" data-value="Oldest">Oldest</a>
-            <a href="" class="dropdown__item" data-value="Popular">Popular</a>
+            <a href="#" class="dropdown__item" data-value="Newest">Newest</a>
+            <a href="#" class="dropdown__item" data-value="Oldest">Oldest</a>
+            <a href="#" class="dropdown__item" data-value="Popular">Popular</a>
           </div>
         </div>
         <div class="topic__container">

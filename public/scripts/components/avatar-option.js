@@ -49,6 +49,7 @@ class AvatarOption extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
+        this.isOpen = false;
     }
 
     async connectedCallback() {
@@ -62,7 +63,6 @@ class AvatarOption extends HTMLElement {
 
         // Close when clicking outside
         this.overlay.addEventListener("click", () => this.close());
-
         // Listen for open/close event from header
         document.addEventListener("toggle-avatar-option", () => {
             if (this.optionBox.classList.contains("is-active")) {
@@ -72,6 +72,9 @@ class AvatarOption extends HTMLElement {
             }
         });
 
+        document.addEventListener('close-all',  () => {
+            this.close();
+        });
         // Load user info
         try {
             const res = await fetch("/current");
@@ -96,11 +99,13 @@ class AvatarOption extends HTMLElement {
     open() {
         this.optionBox.classList.add("is-active");
         this.overlay.classList.add("is-active");
+        this.isOpen = true;
     }
 
     close() {
         this.optionBox.classList.remove("is-active");
         this.overlay.classList.remove("is-active");
+        this.isOpen = false;
     }
 }
 

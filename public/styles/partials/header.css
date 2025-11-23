@@ -83,6 +83,7 @@
 .header__search-input {
     border: none;
     outline: none;
+    width: 100%;
     background: transparent;
     color: var(--color-text-body);
     font-family: var(--font-family-heading);
