@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
-
     const navButtons = document.querySelectorAll(".nav_item button");
     const flexBox = document.querySelector(".flex_box");
-
- 
-   // content cho từng tab
-   
+    // content cho từng tab
     const tabContents = {
         // ACCOUNT TAB
         account: `
@@ -199,9 +195,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         `
     };
 
-  // tạo biến lưu thông tin user hiện tại
+    // tạo biến lưu thông tin user hiện tại
     let currentUser = null;
-
     async function loadUser() {
         try {
             const res = await fetch("/current", { credentials: "include" });
@@ -222,8 +217,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     await loadUser();
-
-   // thay đổi template với dữ liệu user
+    // thay đổi template với dữ liệu user
     function parseTemplate(html, user) {
         return html
             .replace(/{{email}}/g, user.email)
@@ -232,11 +226,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             .replace(/{{avatar}}/g, user.avatar);
     }
 
-// switch tab function
+    // switch tab function
     function switchTab(tabName) {
-
-// hàm chuyển tab
-function switchTab(tabName) {
+        // hàm chuyển tab
         navButtons.forEach(btn => {
             btn.parentElement.classList.remove("active");
             btn.classList.remove("nav_btn1");
@@ -253,85 +245,79 @@ function switchTab(tabName) {
         if (currentUser) {
             flexBox.innerHTML = parseTemplate(rawHTML, currentUser);
             overlayClick();
-        } 
+        }
     }
- 
-// click event listeners
+    // click event listeners
     navButtons.forEach(button => {
         button.addEventListener("click", function () {
             switchTab(this.textContent.trim());
         });
     });
-
     switchTab("Account");
-
 });
-
 
 // overlay part
 function overlayClick() {
-const overlay = document.querySelector(".overlay")
-const mailOverlay = document.querySelector(".overlay_mail")
-const usernameOverlay = document.querySelector(".overlay_username")
-const mailBtn = document.querySelector(".mail_btn")
-const userBtn = document.querySelector(".username_btn")
-const close = document.querySelectorAll(".btn_cancel")
-const mailInput = document.querySelector(".mail_input")
-const mailOutput= document.querySelector(".mail_output")
-const nameInput = document.querySelector(".username_input")
-const nameOutput = document.querySelector(".username_output")
-const saveMailBtn = document.querySelector(".btn_save_mail")
-const saveNameBtn = document.querySelector(".btn_save_name")
+    const overlay = document.querySelector(".overlay")
+    const mailOverlay = document.querySelector(".overlay_mail")
+    const usernameOverlay = document.querySelector(".overlay_username")
+    const profileOverlay = document.querySelector(".overlay_profile")
+    const mailBtn = document.querySelector(".mail_btn")
+    const userBtn = document.querySelector(".username_btn")
+    const close = document.querySelectorAll(".btn_cancel")
+    const mailInput = document.querySelector(".mail_input")
+    const mailOutput = document.querySelector(".mail_output")
+    const nameInput = document.querySelector(".username_input")
+    const nameOutput = document.querySelector(".username_output")
+    const saveMailBtn = document.querySelector(".btn_save_mail")
+    const saveNameBtn = document.querySelector(".btn_save_name")
 
+    // mail part
+    if (mailBtn) {
+        mailBtn.onclick = () => {
+            overlay.style.display = "flex";
+            mailOverlay.style.display = "block";
+            usernameOverlay.style.display = "none";
+            profileOverlay.style.display = "none";
+        }
+    }
+    //username part
+    if (userBtn) {
+        userBtn.onclick = () => {
+            overlay.style.display = "flex";
+            mailOverlay.style.display = "none";
+            usernameOverlay.style.display = "block";
+        }
+    }
 
+    //close overlay
+    if (close) {
+        close.forEach(close => {
+            close.onclick = () => {
+                overlay.style.display = "none";
+                mailOverlay.style.display = "none";
+                usernameOverlay.style.display = "none";
+            }
+        });
+    }
 
-// mail part
-if (mailBtn){
-    mailBtn.onclick = () =>{
-    overlay.style.display = "flex";
-    mailOverlay.style.display = "block";
-    usernameOverlay.style.display = "none";
-    profileOverlay.style.display = "none";
+    if (saveMailBtn) {
+        saveMailBtn.onclick = () => {
+            overlay.style.display = "none"
+            const newMail = mailInput.value.trim();
+            if (newMail !== "") {
+                mailOutput.innerText = newMail;
+            }
+        }
     }
-}
 
-//username part
-if (userBtn){
-    userBtn.onclick = () =>{
-    overlay.style.display = "flex";
-    mailOverlay.style.display = "none";
-    usernameOverlay.style.display = "block";
+    if (saveNameBtn) {
+        saveNameBtn.onclick = () => {
+            overlay.style.display = "none"
+            const newName = nameInput.value.trim();
+            if (newName !== "") {
+                nameOutput.innerText = newName;
+            }
+        }
     }
-}
-
-//close overlay
-if (close){
-    close.forEach(close => {
-    close.onclick = () =>{
-    overlay.style.display = "none";
-    mailOverlay.style.display = "none";
-    usernameOverlay.style.display = "none";
-    }
-});
-}
-
-if (saveMailBtn){
-    saveMailBtn.onclick = () =>{
-    overlay.style.display = "none"
-    const newMail = mailInput.value.trim();
-    if (newMail !== "") {
-        mailOutput.innerText = newMail;
-    }
-    }
-}
-
-if (saveNameBtn){
-    saveNameBtn.onclick = () =>{
-    overlay.style.display = "none"
-    const newName = nameInput.value.trim();
-    if (newName !== "") {
-        nameOutput.innerText = newName;
-    }
-    }
-}
 }
