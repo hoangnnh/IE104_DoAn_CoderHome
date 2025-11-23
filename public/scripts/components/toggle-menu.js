@@ -31,6 +31,7 @@ class ToggleMenu extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.isOpen = false;
     }
 
     async connectedCallback() {
@@ -56,6 +57,10 @@ class ToggleMenu extends HTMLElement {
             }
         });
 
+        document.addEventListener('close-all',  () => {
+            this.close();
+        });
+
         // Update dynamic profile link
         try {
             const response = await fetch('/current');
@@ -77,11 +82,13 @@ class ToggleMenu extends HTMLElement {
     open() {
         this.menuElement.classList.add('is-active');
         this.overlayElement.classList.add('is-active');
+        this.isOpen = true;
     }
 
     close() {
         this.menuElement.classList.remove('is-active');
         this.overlayElement.classList.remove('is-active');
+        this.isOpen = false;
     }
 }
 

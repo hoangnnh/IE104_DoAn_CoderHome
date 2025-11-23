@@ -235,6 +235,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 // switch tab function
     function switchTab(tabName) {
 
+// hàm chuyển tab
+function switchTab(tabName) {
         navButtons.forEach(btn => {
             btn.parentElement.classList.remove("active");
             btn.classList.remove("nav_btn1");

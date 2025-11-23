@@ -1,5 +1,6 @@
 import { handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
 import { renderPostCard } from "/scripts/components/post-card.js";
+// import { all } from "../../routes/profiles";
 
 async function loadFollowedPost() {
   const res = await fetch(`/posts/`);
@@ -14,8 +15,7 @@ async function loadFollowedPost() {
     .filter((post) => followingIds.includes(post.author._id))
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   if (posts && posts.length > 0) {
-    container.innerHTML = posts
-      .map(p => renderPostCard(p, 1, 0)).join("");
+    container.innerHTML = posts.map((p) => renderPostCard(p, 1, 0)).join("");
 
     handleLikeClick();
     handleBookmarkClick();
@@ -42,7 +42,8 @@ async function loadPostByTopic(topic) {
 
   if (filteredPosts && filteredPosts.length > 0) {
     container.innerHTML = filteredPosts
-      .map(p => renderPostCard(p, 1, 0)).join("");
+      .map((p) => renderPostCard(p, 1, 0))
+      .join("");
 
     handleLikeClick();
     handleBookmarkClick();
@@ -52,7 +53,44 @@ async function loadPostByTopic(topic) {
     `;
   }
 }
-async function loadAuthor() {
+async function loadFollowedAuthor() {
+  const res = await fetch(`/current/`);
+  const currentUser = await res.json();
+
+  const res2 = await fetch(`/profiles/`);
+  const allAuthor = await res2.json();
+
+  const container = document.querySelector(".main__content");
+
+  const followingIds = currentUser.followingAuthors.map(
+    (author) => author._id || author
+  );
+  const filteredAuthors = allAuthor.filter((author) => {
+    return author._id !== currentUser && followingIds.includes(author._id);
+  });
+
+  container.innerHTML = filteredAuthors
+    .map(
+      (author) => `
+            <div class="user__list-item">
+              <div class="user__info">
+                <img src="${author.profilePicture}" alt="Blogger's avatar" class="avatar">
+                <div class="content">
+                  <a href="/profile/${author._id}" style="font-weight: bold;" class="name">${author.username}</a>
+                  <p class="bio">${author.bio}</p>
+                </div>
+              </div>
+              <button class="follow__btn active" data-value="${author._id}">
+                Following
+              </button>
+            </div>
+            <hr class="divider">
+  `
+    )
+    .join("");
+}
+
+async function loadUnfollowedAuthor() {
   console.log("loadAuthor called");
   try {
     const res = await fetch(`/profiles/`);
@@ -73,27 +111,22 @@ async function loadAuthor() {
     container.innerHTML = filteredAuthors
       .map(
         (author) => `
-                    <div class="user__list-item">
-                <div class="user__info">
-                    <img src="${author.profilePicture}" alt="Blogger's avatar" class="avatar">
-                    <div class="content">
-                        <a href="/profile/${author._id}" style="font-weight: bold;" class="name">${author.username}</a>
-                    <p class="bio">${author.bio}</p>
+            <div class="user__list-item">
+              <div class="user__info">
+                <img src="${author.profilePicture}" alt="Blogger's avatar" class="avatar">
+                <div class="content">
+                  <a href="/profile/${author._id}" style="font-weight: bold;" class="name">${author.username}</a>
+                  <p class="bio">${author.bio}</p>
                 </div>
-                </div>
-                <button class="follow__btn" data-value="${author._id}">
+              </div>
+              <button class="follow__btn" data-value="${author._id}">
                 Follow
-                </button>
+              </button>
             </div>
             <hr class="divider">
     `
       )
       .join("");
-    // const followBtn = document.querySelectorAll(".follow__btn");
-    // followBtn.addEventListener("click", () => {
-    //   addFollow();
-    //   followBtn.classList.toggle("active");
-    // });
     console.log("Success");
   } catch (err) {
     console.log("Fail");
@@ -113,52 +146,148 @@ async function deleteFollow(id) {
 }
 // Responsive
 
-// Const
-const btnLeft = document.getElementById("scrollLeft");
-const btnRight = document.getElementById("scrollRight");
+// -------- Const
+
+const container = document.querySelector(".main__content");
+// following nav
+const tabs = document.querySelectorAll(".nav__items");
+// post nav
+const postNavs = document.querySelectorAll(".post-nav__items");
+//author nav
+const authorNavs = document.querySelectorAll(".author-nav__items");
+//
+const topicContent = document.querySelector(".topic__content");
+//
 const dropdownHeader = document.querySelector(".dropdown__header");
 const dropdownHeaderItem = document.querySelector(".dropdown__header-item");
 const arrow = document.querySelector(".arrow");
 const selection = document.querySelector(".dropdown__selection");
 const dropdownItems = document.querySelectorAll(".dropdown__item");
 const dropdown = document.querySelector(".dropdown__container");
-const tabs = document.querySelectorAll(".nav__items");
-const container = document.querySelector(".main__content");
-const topicContainer = document.querySelector(".topic__nav");
-const topicContent = document.querySelector(".topic__content");
 const topics = document.querySelectorAll(".topic");
 const fadeLeft = document.querySelector(".fade-left");
 const fadeRight = document.querySelector(".fade-right");
-const scrollBtn = document.querySelector(".scroll-top");
-
+const btnLeft = document.getElementById("scrollLeft");
+const btnRight = document.getElementById("scrollRight");
 //
+const postNav = document.querySelector(".post__nav");
+const authorNav = document.querySelector(".author__nav");
+const topicNav = document.querySelector(".topic__nav");
+//
+const scrollBtn = document.querySelector(".scroll-top");
 //Event
 
-// Khi bấm vào mỗi tab
+// Khi bấm vào mỗi tab following nav
+function activateNav({ post = false, author = false, topic = false }) {
+  postNav.classList.toggle("active", post);
+  authorNav.classList.toggle("active", author);
+  topicNav.classList.toggle("active", topic);
+}
 
-tabs.forEach((tab) => {
-  tab.addEventListener("click", async function (e) {
-    e.preventDefault();
+function setActiveTab(clickedTab, tabGroup) {
+  tabGroup.forEach((t) => t.classList.remove("active"));
+  clickedTab.classList.add("active");
+}
 
-    tabs.forEach((t) => t.classList.remove("active"));
-    this.classList.add("active");
+function resetTabs() {
+  tabs.forEach((t) => t.classList.remove("active"));
+}
+function resetPostNav() {
+  postNavs.forEach((t) => t.classList.remove("active"));
+}
+function resetAuthorNav() {
+  authorNavs.forEach((t) => t.classList.remove("active"));
+}
+function setDefaultSubTab(type) {
+  if (type === "post") {
+    const allTab = document.querySelector('.post-nav__items[data-tab="all"]');
+    if (allTab) allTab.classList.add("active");
+  }
+  if (type === "author") {
+    const followedTab = document.querySelector(
+      '.author-nav__items[data-tab="followed"]'
+    );
+    if (followedTab) followedTab.classList.add("active");
+  }
+}
 
-    const type = this.dataset.tab;
+async function handleTabClick(tab, tabGroup) {
+  const type = tab.dataset.tab;
 
-    if (type === "all") {
-      loadFollowedPost();
-      topicContainer.classList.remove("active");
-    } else if (type === "topic") {
+  // Active tab hiện tại
+  tab.classList.add("active");
+  switch (type) {
+    case "post": //Khi nhấn post
+      activateNav({ post: true, author: false, topic: false });
+      resetPostNav();
+      setDefaultSubTab("post"); //Mặc định khi vào post sẽ là All
+
+      await loadFollowedPost();
+      break;
+    case "author": //Khi nhấn author
+      activateNav({ post: false, author: true, topic: false });
+      resetAuthorNav();
+      setDefaultSubTab("author"); //Mặc định khi vào author sẽ là followed
+      await loadFollowedAuthor();
+      break;
+    case "all": //Khi nhấn all
+      activateNav({ post: true, author: false, topic: false });
+
+      // Active đúng sub-tab
+      tab.classList.add("active");
+
+      await loadFollowedPost();
+      break;
+    case "topic": // Khi nhấn topic
+      activateNav({ post: true, author: false, topic: true });
+
+      tab.classList.add("active");
+
       const activeTopic = document.querySelector(".topic.active");
-      loadPostByTopic(activeTopic.dataset.value);
-      topicContainer.classList.add("active");
+      if (activeTopic) {
+        await loadPostByTopic(activeTopic.dataset.value);
+      } else {
+        await loadFollowedPost();
+      }
       updateArrowsAndFade();
-    } else if (type === "more-to-follow") {
-      topicContainer.classList.remove("active");
-      loadAuthor();
-    }
-  });
-});
+      break;
+    case "followed": // Khi nhấn follwoed
+      activateNav({ post: false, author: true, topic: false });
+
+      tab.classList.add("active");
+      await loadFollowedAuthor();
+      break;
+    case "more": // Khi nhấn more
+      activateNav({ post: false, author: true, topic: false });
+
+      tab.classList.add("active");
+      await loadUnfollowedAuthor();
+      break;
+  }
+}
+
+// Gắn sự kiện
+tabs.forEach((tab) =>
+  tab.addEventListener("click", (e) => {
+    e.preventDefault();
+    resetTabs();
+    handleTabClick(tab, tabs);
+  })
+);
+postNavs.forEach((tab) =>
+  tab.addEventListener("click", (e) => {
+    e.preventDefault();
+    resetPostNav();
+    handleTabClick(tab, postNavs);
+  })
+);
+authorNavs.forEach((tab) =>
+  tab.addEventListener("click", (e) => {
+    e.preventDefault();
+    resetAuthorNav();
+    handleTabClick(tab, authorNavs);
+  })
+);
 
 //Dropdown
 dropdownHeader.addEventListener("click", (e) => {
@@ -176,7 +305,7 @@ dropdownItems.forEach((item) => {
   });
 });
 
-// --------Topic arrow--------
+// Hàm cập nhât Topic arrow và làm mờ
 function updateArrowsAndFade() {
   const scrollLeft = topicContent.scrollLeft;
   const maxScroll = topicContent.scrollWidth - topicContent.clientWidth;
@@ -196,7 +325,7 @@ function updateArrowsAndFade() {
     fadeRight.style.display = "none";
   }
 }
-
+// Hàm lọc post theo Tags
 function filterPostsByTag(postsArray, targetTag) {
   const normalizedTag = targetTag.toLowerCase();
 
@@ -210,6 +339,7 @@ function filterPostsByTag(postsArray, targetTag) {
   });
 }
 
+// Nút chuyển trên Topic nav
 btnLeft.addEventListener("click", () => {
   topicContent.scrollBy({ left: -200, behavior: "smooth" });
 });
@@ -234,8 +364,8 @@ topics.forEach((topic) => {
     updateArrowsAndFade();
   });
 });
-// Scroll top
 
+// Scroll top
 window.addEventListener("scroll", () => {
   if (window.scrollY > 200) {
     scrollBtn.style.display = "block";
@@ -250,6 +380,7 @@ scrollBtn.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
 // Follow Btn
 document.addEventListener("click", async function (e) {
   if (e.target.closest(".follow__btn")) {
@@ -269,6 +400,8 @@ document.addEventListener("click", async function (e) {
   }
 });
 
-// Call Function
+// Default UI on page load
+
+// Default load
 loadFollowedPost();
 updateArrowsAndFade();

@@ -49,27 +49,35 @@ class Header extends HTMLElement {
 
   async connectedCallback() {
     this.menuTrigger.addEventListener('click', () => {
+      const menuOpen = document.querySelector("toggle-menu").isOpen;
+      if (!menuOpen) document.dispatchEvent(new CustomEvent('close-all'));
       document.dispatchEvent(new CustomEvent('toggle-menu'));
     });
 
     this.notificationTrigger.addEventListener('click', () => {
+      const notificationOpen = document.querySelector("toggle-notification")?.isOpen;
+      if (!notificationOpen) document.dispatchEvent(new CustomEvent('close-all'));
       document.dispatchEvent(new CustomEvent('toggle-notifications'));
     });
 
-    this.avatarLink.addEventListener("click", (e) => {
-      e.preventDefault();
+    this.avatarLink.addEventListener("click", () => {
+      const avatarOpen = document.querySelector("toggle-avatar-option").isOpen;
+      if (!avatarOpen) {
+        document.dispatchEvent(new CustomEvent("close-all"));
+      }
+
       document.dispatchEvent(new CustomEvent("toggle-avatar-option"));
     });
 
-      const searchInput = this.shadowRoot.querySelector(".header__search-input");
+    const searchInput = this.shadowRoot.querySelector(".header__search-input");
     searchInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const query = searchInput.value.trim();
-      if (query) {
-        window.location.href = `/search-result?q=${encodeURIComponent(query)}`;
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+          window.location.href = `/search-result?q=${encodeURIComponent(query)}`;
+        }
       }
-    }
     });
 
     try {
