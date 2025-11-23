@@ -6,6 +6,7 @@ const avatarOptionHTML = `
 <div class="avatar-option__overlay" id="avatarOverlay"></div>
 
 <div class="avatar__option" id="avatarOption">
+    <!-- User basic info -->
     <div class="avatar__basic-info">
         <img src="/images/user-avatar.jpg" alt="" class="avatar-image" id="avatarImg">
         <p class="user-name" id="userName">User</p>
@@ -13,6 +14,7 @@ const avatarOptionHTML = `
 
     <hr class="divider">
 
+    <!-- User options list -->
     <ul class="option__list">
         <a href="" class="option__item" id="userProfile">
             <p>Information</p>
@@ -34,6 +36,7 @@ const avatarOptionHTML = `
 
     <hr class="divider">
 
+    <!-- Footer navigation links -->
     <ul class="nav__list">
         <li class="nav__item"><a href="/help">Help</a></li>
         <li class="nav__item"><a href="#">Status</a></li>
@@ -48,11 +51,13 @@ const avatarOptionHTML = `
 class AvatarOption extends HTMLElement {
     constructor() {
         super();
+        // Attach shadow DOM to encapsulate styles and markup
         this.attachShadow({ mode: "open" });
         this.isOpen = false;
     }
 
     async connectedCallback() {
+        // Render template inside shadow DOM
         const template = document.createElement("template");
         template.innerHTML = avatarOptionCSS + avatarOptionHTML;
         this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -61,9 +66,10 @@ class AvatarOption extends HTMLElement {
         this.optionBox = this.shadowRoot.getElementById("avatarOption");
         this.overlay = this.shadowRoot.getElementById("avatarOverlay");
 
-        // Close when clicking outside
+        // Close when clicking outside overlay
         this.overlay.addEventListener("click", () => this.close());
-        // Listen for open/close event from header
+
+        // Listen for toggle event from header
         document.addEventListener("toggle-avatar-option", () => {
             if (this.optionBox.classList.contains("is-active")) {
                 this.close();
@@ -72,10 +78,12 @@ class AvatarOption extends HTMLElement {
             }
         });
 
+        // Listen for global close-all event
         document.addEventListener('close-all',  () => {
             this.close();
         });
-        // Load user info
+
+        // Load current user info
         try {
             const res = await fetch("/current");
             if (res.ok) {
@@ -83,7 +91,6 @@ class AvatarOption extends HTMLElement {
                 this.shadowRoot.getElementById("avatarImg").src = user.profilePicture;
                 this.shadowRoot.getElementById("userName").textContent = user.username;
                 this.shadowRoot.getElementById("userProfile").href = `/profile/${user._id}`;
-                
             }
         } catch (e) {
             console.error("Cannot load user info in avatar option:", e);
@@ -96,12 +103,14 @@ class AvatarOption extends HTMLElement {
         }, 0);
     }
 
+    // Open avatar options
     open() {
         this.optionBox.classList.add("is-active");
         this.overlay.classList.add("is-active");
         this.isOpen = true;
     }
 
+    // Close avatar options
     close() {
         this.optionBox.classList.remove("is-active");
         this.overlay.classList.remove("is-active");
@@ -109,4 +118,5 @@ class AvatarOption extends HTMLElement {
     }
 }
 
+// Define the custom element
 customElements.define("toggle-avatar-option", AvatarOption);
