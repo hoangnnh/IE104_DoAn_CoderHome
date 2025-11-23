@@ -33,19 +33,14 @@ async function loadCoderhomePost(isInitial = true) {
 
   if (isLoading || !hasMore) return;
   isLoading = true;
-
   try {
-    // get all posts from DB
-    const res = await fetch("/posts/");
-    const allPosts = await res.json();
-
-    // Calculate each posts of 1 load
-    const startIndex = (currentPage - 1) * posts_per_page;
-    const endIndex = startIndex + posts_per_page;
-    const posts = allPosts.slice(startIndex, endIndex);
+    // get 10 posts from DB each scroll
+    const res = await fetch(`/posts?currentPage=${currentPage}&posts_per_page=${posts_per_page}`);
+    const data = await res.json();
+    const posts = data.posts;
 
     // Check if there are more posts
-    hasMore = endIndex < allPosts.length;
+    hasMore = data.hasMore;
     const container = document.querySelector(".post");
 
     // If this is the first load, clear container
@@ -165,7 +160,7 @@ async function loadAuhor() {
         <li class="rcm__follow-list-item">
           <img src="${author.profilePicture}" alt="Recommended blogger's avatar" class="avatar">
           <div class="content">
-            <a href="" class="name">${author.username}</a>
+            <a href="/profile/${author._id}" class="name">${author.username}</a>
             <p class="bio">${author.bio}</p>
           </div>
           <button class="follow__btn" data-value="${author._id}">
@@ -277,11 +272,6 @@ scrollBtn.addEventListener("click", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadCoderhomePost(true);
-  loadAuhor();
-});
-
 // Redirect "See more suggestions" to /following
 document.querySelectorAll("aside a").forEach((link) => {
   if (link.textContent.trim() === "See more suggestions") {
@@ -290,4 +280,9 @@ document.querySelectorAll("aside a").forEach((link) => {
       window.location.href = "/following?tab=author&authorTab=more";
     });
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadCoderhomePost(true);
+  loadAuhor();
 });
