@@ -53,9 +53,6 @@ async function loadCoderhomePost(isInitial = true) {
 
     container.insertAdjacentHTML("beforeend", postsHTML);
 
-    handleLikeClick();
-    handleBookmarkClick();
-
     currentPage++;
   } catch (err) {
     console.error("Error loading Coderhome posts:", err);
@@ -103,9 +100,6 @@ async function loadDevToPost(isInitial = true) {
     const postsHTML = posts.map((p) => renderPostCard(p, 0, 1)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
-
-    handleLikeClick();
-    handleBookmarkClick();
 
     currentPage++;
   } catch (err) {
@@ -283,6 +277,10 @@ document.querySelectorAll("aside a").forEach((link) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const postContainer = document.querySelector(".post");
+  // Setup event delegation
+  handleLikeClick(postContainer);
+  handleBookmarkClick(postContainer);
   loadCoderhomePost(true);
   loadAuhor();
 });
