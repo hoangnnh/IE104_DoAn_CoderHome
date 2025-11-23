@@ -1,4 +1,6 @@
+// lấy postId từ URL
 const postId = location.pathname.split("/").pop();
+// Lấy các phần từ HTML
 const postTitle = document.querySelector(".post__title-head");
 const postHeader = document.querySelector(".post__header");
 const postContent = document.querySelector(".post__content");
@@ -6,13 +8,16 @@ const postTags = document.querySelector(".post__tags");
 const postAboutAuthor = document.querySelector(".post__about-author");
 const postResponse = document.querySelector(".post__response");
 
+// Hàm tải bình luận
 async function loadComment() {
   const commentList = document.querySelector(".comment__list");
-  const resComment = await fetch(`/comments/${postId}`);
-  const comments = await resComment.json();
+  const resComment = await fetch(`/comments/${postId}`); // Gọi API lấy bình luận theo postId
+  const comments = await resComment.json(); // Chuyển đổi phản hồi thành JSON
 
-  console.log(resComment);
-  console.log(comments);
+  console.log(resComment); //Kiểm tra phản hồi từ server
+  console.log(comments); //Kiểm tra dữ liệu bình luận
+
+  // Tạo HTML cho từng bình luận và chèn vào danh sách bình luận
   commentList.innerHTML = comments
     .map(
       (item) => `
@@ -36,14 +41,18 @@ async function loadComment() {
     .join("");
 }
 
+// Hàm tải bài viết theo postId
 async function loadPostID() {
+  // Gọi API lấy bài viết và người dùng hiện tại
   const resPost = await fetch(`/posts/${postId}`);
   const post = await resPost.json();
+  // Lấy thông tin người dùng hiện tại
   const resUser = await fetch(`/current/`);
   const currentUser = await resUser.json();
 
-  postTitle.textContent = `${post.title}`;
+  postTitle.textContent = `${post.title}`; // Cập nhật tiêu đề bài viết
 
+  // Cập nhật phần header bài viết
   postHeader.innerHTML = `
     <p class="post__title">${post.title}</p>
     <p class="post__description">${post.description}</p>
@@ -79,8 +88,9 @@ async function loadPostID() {
             </div>
         </div>
 `;
-
+  // Cập nhật nội dung bài viết
   postContent.innerHTML = `${post.contentHTML}`;
+  // Cập nhật thẻ bài viết
   postTags.innerHTML = post.tags
     .map(
       (tag, index) => `
@@ -93,6 +103,7 @@ async function loadPostID() {
     )
     .join("");
 
+  // Cập nhật phần về tác giả
   postAboutAuthor.innerHTML = `
     <img src="${post.author.profilePicture}" alt="avatar" class="post__author-img"/>
         <div class="post__author-content">
@@ -102,6 +113,7 @@ async function loadPostID() {
     <button class="post__author-follow"><span>Follow</span></button>
     `;
 
+  // Cập nhật phần phản hồi bài viết
   postResponse.innerHTML = `
     <p class="post__respones-title">Responses</p>
                     <a href="/profile/${currentUser._id}" class="user__info">
@@ -123,20 +135,24 @@ async function loadPostID() {
                         </form>
     `;
 
+  // Xử lý tương tác với textarea phản hồi
   const textarea = document.getElementById("response-content");
   const form = document.querySelector(".response-form");
   const baseHeight = textarea.scrollHeight;
 
+  // Thêm lớp active khi textarea được focus => mở rộng form
   textarea.addEventListener("focus", () => {
     form.classList.add("active");
   });
 
+  // Loại bỏ lớp active khi textarea mất focus và không có nội dung => thu gọn form
   textarea.addEventListener("blur", () => {
     if (!textarea.value.trim()) {
       form.classList.remove("active");
     }
   });
 
+  // Xử lý nút hủy phản hồi => nút Cancel
   const cancelBtn = document.querySelector(".respones__cancel");
   cancelBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -145,13 +161,43 @@ async function loadPostID() {
     form.classList.remove("active");
   });
 
+  // Tự động điều chỉnh chiều cao của textarea khi nhập nội dung
   textarea.addEventListener("input", () => {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   });
 
+  // Xử lý gửi phản hồi khi nhấn Enter (không kèm Shift)
+  textarea.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault(); // Không xuống dòng
+
+      // Gửi phản hồi
+      const content = textarea.value.trim();
+      if (!content) return;
+
+      // Gọi API để gửi phản hồi
+      await fetch("/comments/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ postId, content }),
+      });
+
+      // Reset textarea và thu gọn form
+      textarea.value = "";
+      textarea.style.height = baseHeight + "px";
+      form.classList.remove("active");
+
+      await loadComment();
+    }
+  });
+
+  // Tải bình luận ban đầu
   await loadComment();
 
+  // Xử lý gửi phản hồi khi submit form
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const content = textarea.value.trim();
