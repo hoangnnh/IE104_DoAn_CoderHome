@@ -33,14 +33,19 @@ async function loadCoderhomePost(isInitial = true) {
 
   if (isLoading || !hasMore) return;
   isLoading = true;
+
   try {
-    // get 10 posts from DB each scroll
-    const res = await fetch(`/posts?currentPage=${currentPage}&posts_per_page=${posts_per_page}`);
-    const data = await res.json();
-    const posts = data.posts;
+    // get all posts from DB
+    const res = await fetch("/posts/");
+    const allPosts = await res.json();
+
+    // Calculate each posts of 1 load
+    const startIndex = (currentPage - 1) * posts_per_page;
+    const endIndex = startIndex + posts_per_page;
+    const posts = allPosts.slice(startIndex, endIndex);
 
     // Check if there are more posts
-    hasMore = data.hasMore;
+    hasMore = endIndex < allPosts.length;
     const container = document.querySelector(".post");
 
     // If this is the first load, clear container
@@ -52,9 +57,6 @@ async function loadCoderhomePost(isInitial = true) {
     const postsHTML = posts.map((p) => renderPostCard(p)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
-
-    handleLikeClick();
-    handleBookmarkClick();
 
     currentPage++;
   } catch (err) {
@@ -103,9 +105,6 @@ async function loadDevToPost(isInitial = true) {
     const postsHTML = posts.map((p) => renderPostCard(p, 0, 1)).join("");
 
     container.insertAdjacentHTML("beforeend", postsHTML);
-
-    handleLikeClick();
-    handleBookmarkClick();
 
     currentPage++;
   } catch (err) {
@@ -160,7 +159,7 @@ async function loadAuhor() {
         <li class="rcm__follow-list-item">
           <img src="${author.profilePicture}" alt="Recommended blogger's avatar" class="avatar">
           <div class="content">
-            <a href="/profile/${author._id}" class="name">${author.username}</a>
+            <a href="" class="name">${author.username}</a>
             <p class="bio">${author.bio}</p>
           </div>
           <button class="follow__btn" data-value="${author._id}">
@@ -272,6 +271,7 @@ scrollBtn.addEventListener("click", () => {
   });
 });
 
+
 // Redirect "See more suggestions" to /following
 document.querySelectorAll("aside a").forEach((link) => {
   if (link.textContent.trim() === "See more suggestions") {
@@ -283,6 +283,10 @@ document.querySelectorAll("aside a").forEach((link) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const postContainer = document.querySelector(".post");
+  // Setup event delegation
+  handleLikeClick(postContainer);
+  handleBookmarkClick(postContainer);
   loadCoderhomePost(true);
   loadAuhor();
 });
