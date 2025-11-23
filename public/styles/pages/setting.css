@@ -242,6 +242,124 @@ ul li a:hover{
     padding: 5px 15px;
 }
 
+body .overlay{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay_mail{
+    width: 550px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    padding: 30px;
+}
+
+.overlay_mail .mail_header {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'lora';
+}
+
+.overlay_mail .mail_body{
+    margin-top: 10px;
+}
+
+.mail_body input{
+    padding: 13px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 'lora';
+}
+
+.mail_body p{
+    padding-top: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.overlay .mail_footer{
+    display: flex;
+    margin-top: 30px;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.mail_footer .btn_cancel,
+.mail_footer .btn_save{
+    padding: 10px;
+    border-radius: 1.2rem;
+    background-color: #fff;
+    color: rgb(26, 137, 23);
+    border: 1px solid rgb(26, 137, 23);
+    cursor: pointer;
+}
+
+.mail_footer .btn_cancel:hover,
+.mail_footer .btn_save:hover{
+    background-color: rgb(26, 137, 23);
+    color: #fff;
+}
+
+.overlay .overlay_username{
+    width: 400px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    padding: 30px;
+}
+
+.overlay_username .username_header{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.overlay_username .username_body{
+        margin-top: 10px;
+}
+
+.username_body input{
+    padding: 13px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 'lora';
+}
+
+.overlay_username .username_footer{
+    display: flex;
+    margin-top: 20px;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.username_footer .btn_cancel,
+.username_footer .btn_save{
+    padding: 10px;
+    border-radius: 1.2rem;;
+    background-color: #fff;
+    color: rgb(26, 137, 23);
+    border: 1px solid rgb(26, 137, 23);
+    cursor: pointer;
+}
+
+.username_footer .btn_cancel:hover,
+.username_footer .btn_save:hover{
+    background-color: rgb(26, 137, 23);
+    color: #fff;
+}
+
  /* responsive */
 /* remove aside big tablet < 1250px */
 @media (max-width: 1250px) { 
@@ -364,5 +482,68 @@ ul li a:hover{
 @media (max-width: 400px) {
     .nav_item .nav_btn {
         padding: 8px 10px;
+    }
+}
+
+/* reponsive overlay */
+/* mobile */
+@media (max-width: 480px) {
+.overlay_mail,
+.overlay .overlay_username {
+    width: 85%;              
+    height: auto;            
+    padding: 20px;
+}
+
+.overlay_mail .mail_header,
+.overlay_username .username_header {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.mail_body input,
+.username_body input {
+    font-size: 14px;
+    padding: 12px;
+}
+
+.mail_footer,
+.username_footer {  
+    width: 100%;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.mail_footer button,
+.username_footer button {
+    width: 50%;               
+}
+}
+
+/* mobile > 480px  */
+@media (min-width: 480px) and (max-width: 768px) {
+    
+    .overlay_mail,
+    .overlay_username {
+        width: 70%;
+        height: auto;
+        padding: 25px;
+    }
+
+    .mail_footer,
+    .username_footer {
+        gap: 12px;
+    }
+}
+
+/* tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .overlay_mail {
+        width: 60%;
+    }
+
+    .overlay_username {
+        width: 50%;
     }
 }

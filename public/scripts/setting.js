@@ -1,33 +1,37 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+
     const navButtons = document.querySelectorAll(".nav_item button");
     const flexBox = document.querySelector(".flex_box");
-    // contents cho từng tab
+
+ 
+   // content cho từng tab
+   
     const tabContents = {
-        // account tab content
+        // ACCOUNT TAB
         account: `
-            <button class="mail_name_btn">
+            <button class="mail_name_btn mail_btn">
                 <span class="big_span">
                     <span class="left"><p>Email address</p></span>
-                    <span class="right"><p>nhuhinhtrinh@gmail.com</p></span>
+                    <span class="right mail_output"><p>{{email}}</p></span>
                 </span>
             </button>
 
-            <button class="mail_name_btn">
+            <button class="mail_name_btn username_btn">
                 <span class="big_span">
                     <span class="left"><p>Username</p></span>
-                    <span class="right"><p>@zingjyuhing</p></span>
+                    <span class="right username_output"><p>@{{username}}</p></span>
                 </span>
             </button>
 
-            <button class="setting_btn">
+            <button class="setting_btn profile_info_btn">
                 <div class="big_span">
                     <span class="left">
                         <p>Profile information</p><br>
                         <p class="bellow">Edit name, photo pronouns, short bio, etc.</p>
                     </span>
                     <span class="right">
-                        <p class="p1">Như Hinh Trịnh</p>
-                        <img src="images/samples/author-avt-2.jpg" alt="" class="right_img">
+                        <p class="p1">{{username}}</p>
+                        <img src="{{avatar}}" alt="" class="right_img">
                     </span>
                 </div>
             </button>
@@ -74,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <button class="setting_btn">
                 <div class="big_span">
                     <span class="left">
-                        <p class = "p1">Your CoderHome Digest frequency</p><br>
+                        <p class="p1">Your CoderHome Digest frequency</p><br>
                         <p class="bellow">Adjust how often you see a new Digest.</p>
                     </span>
                     <span class="right">
@@ -104,7 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </button>
         `,
-        // notifications tab content
+
+        // NOTIFICATIONS TAB
         notifications: `
             <div style="padding: 20px 0; font-family: 'Lora', serif;">
                 <h3 style="margin-bottom: 20px; font-size: 20px;">Email Notifications</h3>
@@ -156,7 +161,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 </button>
             </div>
         `,
-        // memberships tab content
+
+        // MEMBERSHIPS TAB
         memberships: `
             <div style="padding: 20px 0; font-family: 'Lora', serif;">
                 <h3 style="margin-bottom: 20px; font-size: 20px;">Your Memberships</h3>
@@ -193,6 +199,42 @@ document.addEventListener("DOMContentLoaded", function () {
         `
     };
 
+  // tạo biến lưu thông tin user hiện tại
+    let currentUser = null;
+
+    async function loadUser() {
+        try {
+            const res = await fetch("/current", { credentials: "include" });
+            const data = await res.json();
+
+            if (data && data._id) {
+                currentUser = {
+                    email: data.email,
+                    name: data.name,
+                    username: data.username,
+                    avatar: data.profilePicture
+                };
+            }
+
+        } catch (err) {
+            console.log("Fetch user error:", err);
+        }
+    }
+
+    await loadUser();
+
+   // thay đổi template với dữ liệu user
+    function parseTemplate(html, user) {
+        return html
+            .replace(/{{email}}/g, user.email)
+            .replace(/{{name}}/g, user.name)
+            .replace(/{{username}}/g, user.username)
+            .replace(/{{avatar}}/g, user.avatar);
+    }
+
+// switch tab function
+    function switchTab(tabName) {
+
 // hàm chuyển tab
 function switchTab(tabName) {
         navButtons.forEach(btn => {
@@ -201,23 +243,95 @@ function switchTab(tabName) {
             btn.classList.add("nav_btn");
         });
 
-        const activeButton = Array.from(navButtons).find(btn => 
-            btn.textContent.trim() === tabName
+        const activeButton = Array.from(navButtons).find(
+            btn => btn.textContent.trim() === tabName
         );
-        if (activeButton) {
-            activeButton.parentElement.classList.add("active");
-            activeButton.parentElement.classList.add("active");
-        }
+        if (activeButton) activeButton.parentElement.classList.add("active");
 
-        flexBox.innerHTML = tabContents[tabName.toLowerCase()] || tabContents.account;
+        const rawHTML = tabContents[tabName.toLowerCase()] || tabContents.account;
+
+        if (currentUser) {
+            flexBox.innerHTML = parseTemplate(rawHTML, currentUser);
+            overlayClick();
+        } 
     }
-// thêm sự kiện click cho các nút điều hướng
+ 
+// click event listeners
     navButtons.forEach(button => {
         button.addEventListener("click", function () {
-            const tabName = this.textContent.trim();
-            switchTab(tabName);
+            switchTab(this.textContent.trim());
         });
     });
 
     switchTab("Account");
+
 });
+
+
+// overlay part
+function overlayClick() {
+const overlay = document.querySelector(".overlay")
+const mailOverlay = document.querySelector(".overlay_mail")
+const usernameOverlay = document.querySelector(".overlay_username")
+const mailBtn = document.querySelector(".mail_btn")
+const userBtn = document.querySelector(".username_btn")
+const close = document.querySelectorAll(".btn_cancel")
+const mailInput = document.querySelector(".mail_input")
+const mailOutput= document.querySelector(".mail_output")
+const nameInput = document.querySelector(".username_input")
+const nameOutput = document.querySelector(".username_output")
+const saveMailBtn = document.querySelector(".btn_save_mail")
+const saveNameBtn = document.querySelector(".btn_save_name")
+
+
+
+// mail part
+if (mailBtn){
+    mailBtn.onclick = () =>{
+    overlay.style.display = "flex";
+    mailOverlay.style.display = "block";
+    usernameOverlay.style.display = "none";
+    profileOverlay.style.display = "none";
+    }
+}
+
+//username part
+if (userBtn){
+    userBtn.onclick = () =>{
+    overlay.style.display = "flex";
+    mailOverlay.style.display = "none";
+    usernameOverlay.style.display = "block";
+    }
+}
+
+//close overlay
+if (close){
+    close.forEach(close => {
+    close.onclick = () =>{
+    overlay.style.display = "none";
+    mailOverlay.style.display = "none";
+    usernameOverlay.style.display = "none";
+    }
+});
+}
+
+if (saveMailBtn){
+    saveMailBtn.onclick = () =>{
+    overlay.style.display = "none"
+    const newMail = mailInput.value.trim();
+    if (newMail !== "") {
+        mailOutput.innerText = newMail;
+    }
+    }
+}
+
+if (saveNameBtn){
+    saveNameBtn.onclick = () =>{
+    overlay.style.display = "none"
+    const newName = nameInput.value.trim();
+    if (newName !== "") {
+        nameOutput.innerText = newName;
+    }
+    }
+}
+}
