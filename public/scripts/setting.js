@@ -316,7 +316,7 @@ function overlayClick() {
             overlay.style.display = "none"
             const newName = nameInput.value.trim();
             if (newName !== "") {
-                nameOutput.innerText = newName;
+                nameOutput.innerText = "@" + newName;
             }
         }
     }
