@@ -51,7 +51,7 @@ async function loadYourList() {
 
 loadYourList();
 
-//overlay + create, delete list
+//overlay + create, delete list...
 
 // Mở overlay
 const getStarted = document.querySelector(".create-btn")
