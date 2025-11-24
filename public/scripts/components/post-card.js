@@ -48,7 +48,7 @@ class="post__author-name">
             <div class="post__interact-action">
               ${showRemoveBtn ? `<button class="icon-btn remove-post"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>` : ``}
               <button class="icon-btn bookmark-btn"><img src="/images/icons/bookmark-outline-icon.svg" class="react-icon"/></button>
-              <button class="icon-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
+              <button class="icon-btn remove-btn"><img src="/images/icons/three-dots-icon.svg" class="react-icon"/></button>
             </div>
           </div>
         </div>
