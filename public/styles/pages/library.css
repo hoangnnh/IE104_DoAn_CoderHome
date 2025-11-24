@@ -8,6 +8,78 @@ body{
   box-sizing: border-box;
 }
 
+/* library overlay */
+.overlay{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay.open{
+  display: flex;
+}
+
+.overlay-newlist{
+  width: 400px;
+  height: 200px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.overlay-newlist .newlist-header{
+  text-align: center;
+}
+
+.newlist-body{
+  margin-top: 20px;
+}
+
+.newlist-body input{
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  font-size: 'lora';
+}
+
+.newlist-body p{
+  opacity: 0.6;
+  font-size: 14px;
+  padding: 3px;
+}
+
+.newlist-footer{
+    display: flex;
+    margin-top: 10px;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.newlist-footer .btn-cancel,
+.newlist-footer .btn-save{
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #fff;
+    color: rgb(26, 137, 23);
+    border: 1px solid rgb(26, 137, 23);
+    cursor: pointer;
+}
+
+.btn-cancel:hover, .btn-save:hover{
+    background-color: rgb(26, 137, 23);
+    color: #fff;
+}
+
+
 /* library body */
 .library-body{
     display: flex;
@@ -321,6 +393,24 @@ body{
 .history-info p {
   font-size: 14px;
   color: #777;
+}
+
+.list-card-fe .delete-list{
+  width: 130px;
+  padding: 10px 15px;
+  border-radius: 2rem;
+  background-color: black;
+  color: white;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  width: fit-content;
+}
+
+.delete-list:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 /* reponsive */
