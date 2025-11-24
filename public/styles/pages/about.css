@@ -501,7 +501,6 @@ svg path:hover {
 .footer {
     background-color: #13101c;
     height: 75px;
-    border-top: #000 1px solid;
     display: flex;
     align-items: center;
     justify-content: center;
