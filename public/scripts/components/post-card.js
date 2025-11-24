@@ -4,19 +4,22 @@ const renderPostCard = (post, ownSrc = 1, showRemoveBtn = 1) => {
   // ownSrc = 1: Posts' source is from DB
   // ownSrc = 0: Posts' source is from dev.to
 
+  const removedUserIconPath = '/images/icons/removed-user-icon.svg';
+
   return `
     <article class="post__card">
       <div class="post__author">
-        <img src="${ownSrc ? post.author.profilePicture : post.user.profile_image}" alt="author" class="post__author-img"/>
-        <a href="${ownSrc
-      ? ('/profile/' + post.author._id)
-      : ('https://dev.to/' + post.user.username)}" 
-          class="post__author-name"
-        >
-          ${ownSrc
-      ? (post.author?.username || "Unknown")
+        <img src="${ownSrc ? (post.author?.profilePicture || removedUserIconPath) : post.user.profile_image}" alt="author" class="post__author-img"/>
+       <a href="${ownSrc
+      ? (post.author?._id ? `/profile/${post.author._id}` : '/404')
+      : `https://dev.to/${post.user.username}`
+    }" 
+class="post__author-name">
+  ${ownSrc
+      ? (post.author?.username || "deleted_user")
       : (post.user.name || post.user.username)
-    }</a>
+    }
+</a>
       </div>
       <div class="post__left">
         <div class="post__left-text">
