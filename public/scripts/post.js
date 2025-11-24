@@ -43,7 +43,7 @@ async function loadComment() {
 
 function scrollToCommentSection() {
   const commentIcon = document.querySelector(".comment-icon");
-  const commentSection = document.querySelector(".post__response");
+  const commentSection = document.querySelector("#response-content");
   commentIcon.addEventListener("click", () => {
     commentSection.scrollIntoView({behavior: "smooth", block: "start"});
   });
@@ -243,4 +243,14 @@ async function loadPostID() {
     await loadComment();
   });
 }
-loadPostID();
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadPostID();
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("scroll") === "comment") {
+      setTimeout(() => {
+        const commentSection = document.querySelector("#response-content");
+        commentSection.scrollIntoView({behavior: "smooth"});
+      }, 500);
+    }
+});
