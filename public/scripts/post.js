@@ -38,9 +38,15 @@ async function loadComment() {
         </li>
     `
     )
-    .join("");
+    .join("");   
+}
 
-    
+function scrollToCommentSection() {
+  const commentIcon = document.querySelector(".comment-icon");
+  const commentSection = document.querySelector("#response-content");
+  commentIcon.addEventListener("click", () => {
+    commentSection.scrollIntoView({behavior: "smooth", block: "start"});
+  });
 }
 
 // Function to load post by postId
@@ -197,11 +203,7 @@ async function loadPostID() {
   await loadComment();
 
   // Scroll to comment event
-  const commentIcon = document.querySelector(".comment-icon");
-  const commentSection = document.querySelector(".post__response");
-  commentIcon.addEventListener("click", () => {
-    commentSection.scrollIntoView({behavior: "smooth", block: "start"});
-  });
+  scrollToCommentSection();
 
   // Like event
   const heartIcon = document.querySelector(".heart-icon");
@@ -241,4 +243,14 @@ async function loadPostID() {
     await loadComment();
   });
 }
-loadPostID();
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadPostID();
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("scroll") === "comment") {
+      setTimeout(() => {
+        const commentSection = document.querySelector("#response-content");
+        commentSection.scrollIntoView({behavior: "smooth"});
+      }, 500);
+    }
+});
