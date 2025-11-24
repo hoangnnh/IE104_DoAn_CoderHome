@@ -37,6 +37,7 @@ async function loadYourList() {
         <p class="list-author">${user.username}</p>
         <h3 class="list-title">Web Dev List</h3>
         <p class="list-count">3 posts</p>
+        <button class = "delete-list">Delete</button>
       </div>
 
       <div class="list-thumbnail">
@@ -50,9 +51,67 @@ async function loadYourList() {
 
 loadYourList();
 
-// Tạo list mới
+//overlay + create, delete list
 
+// Mở overlay
+const getStarted = document.querySelector(".create-btn")
+const closeBtn = document.querySelector(".btn-cancel")
+const createList = document.querySelector(".btn-save")
+const overlay = document.querySelector(".overlay")
+const newList = document.querySelector(".overlay-newlist")
+const deleteList = document.querySelectorAll(".delete-list")
 
+getStarted.onclick = () =>{
+  overlay.style.display = "flex"
+  newList.style.display = "block"
+}
+
+closeBtn.onclick = () =>{
+  overlay.style.display = "none"
+}
+
+createList.onclick = async () =>{
+  const inputValues = document.querySelector(".newlist-input").value
+  if(!inputValues.trim()){
+    alert("Vui lòng nhập tên danh sách")
+    return;
+  }
+
+  overlay.style.display ="none"
+
+  const res = await fetch("/current", { credentials: "include" });
+  const user = await res.json();
+
+  const card = document.createElement("div")
+  card.className = "list-card-fe"
+  card.innerHTML = `
+  <div class="list-info">
+        <img class="avatar" src="${user.profilePicture}" />
+        <p class="list-author">${user.username}</p>
+        <h3 class="list-title">${inputValues}</h3>
+        <p class="list-count">0 posts</p>
+        <button class = "delete-list">Delete</button>
+      </div>
+
+      <div class="list-thumbnail">
+        <p>No post yet</p>
+      </div>
+  `;
+  
+   yourListContainer.appendChild(card);
+   document.querySelector(".newlist-input").value = ""
+}
+
+yourListContainer.addEventListener("click" , (e) =>{
+    if(e.target.classList.contains("delete-list")){
+    e.preventDefault();
+    const cardRemove = e.target.closest(".list-card-fe"); 
+
+    if (cardRemove) {
+      cardRemove.remove();
+    }
+  }
+})
 
 // Load History (from backend)
 
