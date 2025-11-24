@@ -20,6 +20,26 @@
   <toggle-avatar-option></toggle-avatar-option>
   <toggle-notification></toggle-notification>
   <!--partial end-->
+
+  <!--overlay-->
+  <div class="overlay">
+    <div class="overlay-newlist">
+       <div class="newlist-header">
+           <h3>Create new list</h3>
+       </div>
+
+       <div class="newlist-body">
+            <input type="text" class = "newlist-input" placeholder="Enter your new list name">
+            <p>Create your new list</p>
+          </div>
+
+       <div class="newlist-footer">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-save">Create</button>
+       </div>
+    </div>
+  </div>
+  <!--Phần main-->
   <div class="library-body">
     <div class="body-container">
       <div class="container-main-part">
@@ -37,11 +57,11 @@
             </a>
           </nav>
         </div>
-       <!--end header thư viện-->
+      <!--end header thư viện-->
 
-       <!--Nội dung thư viện-->
+      <!--Nội dung thư viện-->
 
-       <!--phần your list-->
+      <!--phần your list-->
         <div id="section-yourlist" class="library-section">
           <div class="create-box">
             <p class="create-title">Create your own list</p>
@@ -66,7 +86,9 @@
     </div>
   </div>
 
-  <script src="/scripts/library.js"></script>
+  <script src="/scripts/library.js" defer></script>
   <script type="module" src="/scripts/main.js"></script>
 </body>
 </html>
+
+

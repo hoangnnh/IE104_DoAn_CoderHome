@@ -1,6 +1,7 @@
 import {
   handleLikeClick,
   handleBookmarkClick,
+  handleCommentClick
 } from "/scripts/helpers.js";
 import { renderPostCard } from "/scripts/components/post-card.js";
 
@@ -280,6 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Setup event delegation
   handleLikeClick(postContainer);
   handleBookmarkClick(postContainer);
+  handleCommentClick(postContainer);
   loadCoderhomePost(true);
   loadAuhor();
 });

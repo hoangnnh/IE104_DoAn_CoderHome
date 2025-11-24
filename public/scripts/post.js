@@ -45,7 +45,7 @@ async function loadComment() {
 
 function scrollToCommentSection() {
   const commentIcon = document.querySelector(".comment-icon");
-  const commentSection = document.querySelector(".post__response");
+  const commentSection = document.querySelector("#response-content");
   commentIcon.addEventListener("click", () => {
     commentSection.scrollIntoView({ behavior: "smooth", block: "start" });
   });

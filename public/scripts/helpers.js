@@ -37,6 +37,16 @@ function handleBookmarkClick(container) {
     });
 }
 
+function handleCommentClick(container) {
+    container.addEventListener("click", (e) => {
+        const commentBtn = e.target.closest(".comment");
+        if (!commentBtn) return;
+        const postId = commentBtn.dataset.id;
+        if (!postId) return;
+        window.location.href = `/post/${postId}?scroll=comment`;
+    })
+}
+
 function getRandomLikeCount() {
     const num = Math.floor(Math.random() * 15000) + 1; // 1 → 15000
     if (num >= 1000) return (num / 1000).toFixed(1) + "K";
@@ -60,4 +70,4 @@ function formatLikeCount(num) {
 }
 
 
-export { handleLikeClick, handleBookmarkClick, getRandomLikeCount };
+export { handleLikeClick, handleBookmarkClick, getRandomLikeCount, handleCommentClick };

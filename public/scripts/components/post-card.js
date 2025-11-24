@@ -40,9 +40,10 @@ class="post__author-name">
                 <img src="/images/icons/heart-outline-icon.svg" class="react-icon-meta heart"/>
                 <span>${ownSrc ? getRandomLikeCount() : post.public_reactions_count}</span>
               </div>
-              <span style="display: flex; align-items: center; gap: 0.5rem">
-              <img src="/images/icons/comment-icon.svg" class="react-icon-meta" style="display: inline;"/> ${ownSrc ? '170' : post.comments_count}
-              </span>
+              <div style="display: flex; align-items: center; gap: 0.5rem">
+                <img src="/images/icons/comment-icon.svg" class="react-icon-meta comment" data-id="${ownSrc ? post._id : ``}"/> 
+                <span>${ownSrc ? '170' : post.comments_count}</span>
+              </div>
             </div>
             <div class="post__interact-action">
               ${showRemoveBtn ? `<button class="icon-btn remove-post"><img src="/images/icons/remove-icon.svg" class="react-icon"/></button>` : ``}
