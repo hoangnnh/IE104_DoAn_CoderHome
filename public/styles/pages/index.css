@@ -39,7 +39,7 @@ li:hover {
 
 .nav p {
   font-family: var(--font-family-heading);
-
+  font-size: var(--font-size-lg);
   padding-top: 2rem;
   padding-bottom: 1rem;
 }
@@ -99,8 +99,8 @@ aside {
   max-width: 300px;
 }
 
-.recommend > a,
-.rcm__follow > a {
+.recommend>a,
+.rcm__follow>a {
   color: var(--color-gray-medium);
 }
 
@@ -113,8 +113,8 @@ aside {
   margin: 1.5rem 0;
 }
 
-.recommend > a:hover,
-.rcm__follow > a:hover {
+.recommend>a:hover,
+.rcm__follow>a:hover {
   text-decoration: underline;
 }
 
@@ -271,6 +271,10 @@ aside {
 
   .nav__list {
     justify-content: center;
+  }
+
+  .nav__item p {
+    font-size: var(--font-size-md);
   }
 
   .main__content {

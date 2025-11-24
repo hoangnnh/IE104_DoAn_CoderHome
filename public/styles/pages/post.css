@@ -1,5 +1,4 @@
 :root {
-  --container-min-width: 500px;
   --base-width-ratio-lg: 60%;
   --base-width-ratio-md: 70%;
   --base-width-ratio-sm: 85%;
@@ -18,7 +17,6 @@ button {
 .container {
   height: 100%;
   width: 100%;
-  min-width: var(--container-min-width);
   background-color: var(--color-surface);
   justify-content: center;
   justify-items: center;

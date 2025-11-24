@@ -50,13 +50,9 @@
 
 .toggle-menu__item:hover {
     background-color: var(--color-gray-lightest);
-}
-
-.toggle-menu__item.is-active {
-    background-color: var(--color-gray-lightest);
-    color: var(--color-text-heading);
     font-weight: var(--font-weight-semibold);
 }
+
 
 .toggle-menu__item.is-active .icon {
     color: var(--color-text-heading);

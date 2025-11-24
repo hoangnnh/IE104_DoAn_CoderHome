@@ -6,7 +6,7 @@ const menuHTML = `
 <div class="toggle-menu__overlay" id="menuOverlay"></div>
 <aside class="toggle-menu" id="toggleMenu">
     <nav class="toggle-menu__nav">
-        <a href="/" class="toggle-menu__item is-active">
+        <a href="/" class="toggle-menu__item">
             <img class="icon" src="/images/icons/home-icon.svg" alt="home icon">
             <span>Home</span>
         </a>
