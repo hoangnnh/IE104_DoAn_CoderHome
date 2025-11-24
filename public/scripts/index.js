@@ -1,5 +1,4 @@
 import {
-  getRandomLikeCount,
   handleLikeClick,
   handleBookmarkClick,
   handleCommentClick
