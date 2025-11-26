@@ -73,7 +73,7 @@ closeBtn.onclick = () =>{
 createList.onclick = async () =>{
   const inputValues = document.querySelector(".newlist-input").value
   if(!inputValues.trim()){
-    alert("Vui lòng nhập tên danh sách")
+    alert("Please enter list name!")
     return;
   }
 
