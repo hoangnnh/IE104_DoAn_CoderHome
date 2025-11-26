@@ -1,7 +1,7 @@
 import {
   handleLikeClick,
   handleBookmarkClick,
-  handleCommentClick
+  handleCommentClick,
 } from "/scripts/helpers.js";
 import { renderPostCard } from "/scripts/components/post-card.js";
 
@@ -35,7 +35,9 @@ async function loadCoderhomePost(isInitial = true) {
   isLoading = true;
   try {
     // get 10 posts from DB each scroll
-    const res = await fetch(`/posts?currentPage=${currentPage}&posts_per_page=${posts_per_page}`);
+    const res = await fetch(
+      `/posts?currentPage=${currentPage}&posts_per_page=${posts_per_page}`
+    );
     const data = await res.json();
     const posts = data.posts;
 
@@ -109,7 +111,7 @@ async function loadDevToPost(isInitial = true) {
   }
 }
 // Load random 3 unfollowed author
-async function loadAuhor() {
+async function loadAuthor() {
   const res = await fetch(`/profiles/`);
   const authors = await res.json();
 
@@ -283,5 +285,5 @@ document.addEventListener("DOMContentLoaded", () => {
   handleBookmarkClick(postContainer);
   handleCommentClick(postContainer);
   loadCoderhomePost(true);
-  loadAuhor();
+  loadAuthor();
 });
