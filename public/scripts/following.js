@@ -43,7 +43,7 @@ async function loadFollowedPost() {
     handleBookmarkClick();
   } else {
     container.innerHTML = `
-    <p  class="error__not-found">You haven't Follow any one yet!!</p>
+    <p  class="error__not-found">You haven't follow any one yet!! Or maybe the author you follow haven't post any post yet!!</p>
     `;
   }
 }
@@ -68,7 +68,7 @@ async function loadPostByTopic(topic) {
     handleBookmarkClick();
   } else {
     container.innerHTML = `
-    <p  class="error__not-found">Can't find post of this Topic! It's maybe you haven't Follow any one yet Or no post of this topic!!</p>
+    <p  class="error__not-found">Can't find post of this Topic! It's maybe you haven't follow any one yet or no post of this topic!!</p>
     `;
   }
 }
