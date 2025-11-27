@@ -34,7 +34,7 @@ async function loadFollowedPost() {
   const followingIds = user.followingAuthors.map((id) => id.toString());
 
   const posts = allposts
-    .filter((post) => followingIds.includes(post.author._id))
+    .filter((post) => followingIds.includes(post.author?._id))
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   if (posts && posts.length > 0) {
     container.innerHTML = posts.map((p) => renderPostCard(p, 1, 0)).join("");
