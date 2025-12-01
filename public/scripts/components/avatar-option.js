@@ -8,7 +8,7 @@ const avatarOptionHTML = `
 <div class="avatar__option" id="avatarOption">
     <!-- User basic info -->
     <div class="avatar__basic-info">
-        <img src="/images/user-avatar.jpg" alt="" class="avatar-image" id="avatarImg">
+        <img src="/images/samples/default-avt.png" alt="" class="avatar-image" id="avatarImg">
         <p class="user-name" id="userName">User</p>
     </div>
 

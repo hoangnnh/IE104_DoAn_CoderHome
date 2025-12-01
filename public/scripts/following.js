@@ -1,6 +1,5 @@
-import { handleLikeClick, handleBookmarkClick } from "/scripts/helpers.js";
+import { handleLikeClick, handleCommentClick, handleBookmarkClick } from "/scripts/utils/postHandler.js";
 import { renderPostCard } from "/scripts/components/post-card.js";
-// import { all } from "../../routes/profiles";
 
 const container = document.querySelector(".main__content");
 // Fetch
@@ -39,8 +38,6 @@ async function loadFollowedPost() {
   if (posts && posts.length > 0) {
     container.innerHTML = posts.map((p) => renderPostCard(p, 1, 0)).join("");
 
-    handleLikeClick();
-    handleBookmarkClick();
   } else {
     container.innerHTML = `
     <p  class="error__not-found">You haven't follow any one yet!! Or maybe the author you follow haven't post any post yet!!</p>
@@ -398,6 +395,12 @@ document.addEventListener("click", async function (e) {
 
 // Default UI on page load
 window.addEventListener("DOMContentLoaded", () => {
+  const postContainer = document.querySelector(".main__content");
+
+  handleLikeClick(postContainer);
+  handleCommentClick(postContainer);
+  handleBookmarkClick(postContainer);
+
   const params = new URLSearchParams(window.location.search);
 
   const mainTab = params.get("tab") || "post";

@@ -5,9 +5,6 @@ const session = require("express-session");
 
 require("dotenv").config();
 
-const User = require("./models/user");
-const Post = require("./models/post");
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
