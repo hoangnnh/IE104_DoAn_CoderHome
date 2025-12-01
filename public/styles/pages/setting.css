@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    font-family: var(--font-family-heading);
 }
 
 * {
@@ -7,19 +8,6 @@ body{
   padding: 0;
   box-sizing: border-box;
 }
-
-/* font */
-@font-face {
-    font-family: 'Lora';
-    src: url(../fonts/Lora/Lora-VariableFont_wght.ttf), format(truetype);
-}
-
-@font-face {
-    font-family: 'robto';
-    src: url(../fonts/Roboto_Condensed/RobotoCondensed-Medium.ttf), format(truetype);
-}
-
-
 
 /*main part*/
 .main{
@@ -57,7 +45,6 @@ body{
 }
 
 .left_main_content h2{
-    font-family: 'lora';
     font-size: 40px;
     margin-bottom: 40px;
 }
@@ -202,7 +189,6 @@ body{
 
 .container_right .right_text{
     padding-top: 70px;
-    font-family: 'lora';
     margin: 0 20px;
 }
 
@@ -269,7 +255,6 @@ body .overlay{
 .overlay_mail .mail_header {
     text-align: center;
     margin-bottom: 40px;
-    font-family: 'lora';
 }
 
 .overlay_mail .mail_body{
@@ -280,7 +265,6 @@ body .overlay{
     padding: 13px;
     border: 1px solid #ccc;
     width: 100%;
-    font-size: 'lora';
 }
 
 .mail_body p{
@@ -334,7 +318,6 @@ body .overlay{
     padding: 13px;
     border: 1px solid #ccc;
     width: 100%;
-    font-size: 'lora';
 }
 
 .overlay_username .username_footer{

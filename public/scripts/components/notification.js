@@ -110,7 +110,6 @@ class NotificationModal extends HTMLElement {
 
   // Toggle open/close state
   toggle() {
-    console.log("notification button");
     this.isOpen = !this.isOpen;
     if (this.isOpen) this.open();
     else this.close();

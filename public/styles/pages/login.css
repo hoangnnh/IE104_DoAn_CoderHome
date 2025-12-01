@@ -19,7 +19,7 @@
 
 /* Left */
 .login-left {
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
   flex-basis: 35%;
   padding: var(--space-xl) var(--space-lg);
   display: flex;
@@ -27,11 +27,7 @@
   align-items: center;
   text-align: center;
   justify-content: center;
-}
-
-.login-left .logo img {
-  width: 150px;
-  margin-bottom: var(--space-xxl);
+  border-right: 1px solid var(--color-gray-light);
 }
 
 .login-left .illustration img {
@@ -44,6 +40,10 @@
   font-size: var(--font-size-md);
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-medium);
+}
+
+.logo img {
+  height: var(--icon-base-height);
 }
 
 /* Right */
@@ -128,6 +128,7 @@ input[type="password"]:focus {
 
 .btn--forget-pw {
   color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
   text-decoration: none;
 }
 
@@ -166,20 +167,20 @@ input[type="password"]:focus {
   width: 100%;
   padding: var(--space-sm);
   border-radius: var(--border-radius-pill);
-  border: var(--border-width) solid var(--color-border);
+  border: var(--border-width) solid var(--color-gray-medium);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--space-sm);
   font-weight: var(--font-weight-semibold);
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
   color: var(--color-text-body);
   cursor: pointer;
   transition: 0.2s;
 }
 
 .btn-social:hover {
-  background-color: var(--color-surface);
+  text-decoration: underline;
 }
 
 .btn-social img {
@@ -212,11 +213,7 @@ input[type="password"]:focus {
     flex-basis: auto;
     padding: var(--space-lg) var(--space-md);
     background-color: var(--background-surface);
-  }
-
-  .login-left .logo img {
-    width: 120px;
-    margin-bottom: 0;
+    border: none;
   }
 
   .login-left .illustration {
@@ -245,11 +242,6 @@ input[type="password"]:focus {
 
   .login-left {
     padding: var(--space-md);
-  }
-
-  .login-left .logo img {
-    width: 100px;
-    margin-bottom: 0;
   }
 
   .login-right {

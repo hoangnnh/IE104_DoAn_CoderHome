@@ -17,7 +17,9 @@
     <div class="register-container">
       <div class="register-left">
         <div class="logo">
-          <img src="/images/logos/website-logo.png" alt="Coderhome Logo" />
+          <a href="/">
+            <img src="/images/logos/website-logo.png" alt="Coderhome Logo" />
+          </a>
         </div>
         <div class="illustration">
           <img src="/images/pages/auth-bg.png" alt="Study Illustration" />
@@ -48,27 +50,27 @@
           </div>
           <button class="form-btn" type="submit">Create Account</button>
 
-          <p class="auth-switch-link">
-            Already have an account? <a href="/login">Login</a>
-          </p>
-
           <div class="divider">
             <hr> <span> or</span>
             <hr>
           </div>
 
           <div class="social-login">
-            <button class="btn-social github" type = "button">
+            <button class="btn-social github" type="button">
               <img src="/images/icons/github-icon.png" alt="Github"> Login with Github
             </button>
-            <button class="btn-social google" type = "button">
+            <button class="btn-social google" type="button">
               <img src="/images/icons/google-icon.png" alt="Google"> Login with Google
             </button>
           </div>
+          <p class="auth-switch-link">
+            Already have an account? <a href="/login">Login</a>
+          </p>
         </form>
       </div>
     </div>
   </main>
-  <script src="/scripts/register.js" defer></script>
+  <script src="/scripts/auth/register.js" defer></script>
 </body>
+
 </html>
