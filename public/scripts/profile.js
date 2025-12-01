@@ -1,4 +1,4 @@
-import { handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
+import { handleLikeClick, handleCommentClick, handleBookmarkClick } from '/scripts/utils/postHandler.js';
 import { renderPostCard } from '/scripts/components/post-card.js';
 
 const userId = location.pathname.split("/").pop();
@@ -53,9 +53,6 @@ async function loadPostedPost() {
 
     postedPostContainer.innerHTML = posts
       .map(p => renderPostCard(p, 1, 0)).join('');
-
-    handleLikeClick();
-    handleBookmarkClick();
 
   } else {
     postedPostContainer.innerHTML = `
@@ -132,7 +129,10 @@ async function loadUserMoreInfo() {
   <div class="more-info__container">
     <div class="more-info__title">
       <div class="more-info__name">${user.username}</div>
-      <button class="more-info__share"><img src="/images/icons/classic-share-icon.svg"/>Share</button>
+      <button class="more-info__share">
+        <img src="/images/icons/classic-share-icon.svg"/>
+        <span>Share</span>
+      </button>
     </div>
     <div class="more-info__details">
       <div class="more-info__follower">
@@ -286,9 +286,6 @@ const sideProfile = document.querySelector(".side-profile");
 const nav = document.querySelector(".profile-nav");
 const userMain = document.querySelector(".user__main");
 const mq = window.matchMedia("(max-width: 900px)");
-const bgImg = document.querySelector(".user__bg-img");
-const moreInfoContainer = document.querySelector(".more-info__container");
-const userAvt = document.querySelector(".user__avatar");
 
 function responsive(e) {
   if (e.matches) {
@@ -302,7 +299,6 @@ mq.addEventListener("change", responsive);
 responsive(mq);
 
 const tabs = document.querySelectorAll(".profile-nav__items");
-const contents = document.querySelector(".profile-content");
 
 // Khi bấm vào mỗi tab
 
@@ -323,10 +319,16 @@ tabs.forEach((tab) => {
 
 //Khi bam vao More
 const more = document.querySelector(".side-profile__more");
-const socialLinksContainer = document.querySelector(".user__social-links");
-const moreInfo = document.querySelector(".user__more-info");
 const arrow = document.querySelector(".arrow");
 more.addEventListener("click", () => {
   sideProfile.classList.toggle("active");
   arrow.classList.toggle("active");
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const postContainer = document.querySelector(".profile-content");
+  // Setup event delegation
+  handleLikeClick(postContainer);
+  handleBookmarkClick(postContainer);
+  handleCommentClick(postContainer);
 });

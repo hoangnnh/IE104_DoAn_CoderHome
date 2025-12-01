@@ -224,6 +224,7 @@ a {
 
 .more-info__share {
   display: flex;
+  align-items: center;
   padding: var(--space-sm) var(--space-lg);
   width: fit-content;
   border-radius: var(--border-radius-pill);
@@ -232,6 +233,10 @@ a {
   color: var(--color-white);
   font-size: var(--font-size-md);
   transition: all 0.3s ease;
+}
+
+.more-info__share img {
+  width: calc(0.6 * var(--icon-base-width));
 }
 
 .more-info__share:hover {
