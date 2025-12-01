@@ -1,4 +1,4 @@
-import { getRandomLikeCount, handleLikeClick, handleBookmarkClick } from '/scripts/helpers.js';
+import { getRandomLikeCount } from '/scripts/utils/postHandler.js';
 
 const renderPostCard = (post, ownSrc = 1, showRemoveBtn = 1) => {
   // ownSrc = 1: Posts' source is from DB
