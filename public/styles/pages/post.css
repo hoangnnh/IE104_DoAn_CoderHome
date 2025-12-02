@@ -197,6 +197,41 @@ button {
   margin: 0 auto;
 }
 
+.post__content img,
+.post__content table {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  white-space: nowrap; 
+}
+
+.post__content table td,
+.post__content table th {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.post__content code {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.post__content pre {
+  white-space: pre;
+  overflow-x: auto;    
+  max-width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #f7f7f7;
+}
+
+.post__content a {
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
 /* Footer */
 .post__footer {
   display: flex;
@@ -438,4 +473,10 @@ button {
   .metadata__interaction-action {
     padding: 0 var(--space-md);
   }
+
+  .post__content table {
+     overflow-x: auto; 
+     
+  }
+
 }

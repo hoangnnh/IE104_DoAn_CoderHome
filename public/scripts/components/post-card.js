@@ -52,7 +52,7 @@ class="post__author-name">
             </div>
           </div>
         </div>
-        <img src="${ownSrc ? post.thumbnailUrl : (post.cover_image || "/images/samples/default-thumbnail.png")}" class="post__img"/>
+        <img loading="lazy" src="${ownSrc ? post.thumbnailUrl : (post.cover_image || "/images/samples/default-thumbnail.png")}" class="post__img"/>
       </div>
     </article>
     `

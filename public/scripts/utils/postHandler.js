@@ -43,7 +43,7 @@ function handleCommentClick(container) {
         if (!commentBtn) return;
         const postId = commentBtn.dataset.id;
         if (!postId) return;
-        window.location.href = `/post/${postId}?scroll=comment`;
+        window.location.href =`/post/${postId}?scroll=comment`;
     })
 }
 
