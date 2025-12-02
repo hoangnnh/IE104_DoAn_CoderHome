@@ -1,4 +1,8 @@
-import { handleLikeClick, handleCommentClick, handleBookmarkClick } from "/scripts/utils/postHandler.js";
+import {
+  handleLikeClick,
+  handleCommentClick,
+  handleBookmarkClick,
+} from "/scripts/utils/postHandler.js";
 import { renderPostCard } from "/scripts/components/post-card.js";
 
 const container = document.querySelector(".main__content");
@@ -37,7 +41,6 @@ async function loadFollowedPost() {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   if (posts && posts.length > 0) {
     container.innerHTML = posts.map((p) => renderPostCard(p, 1, 0)).join("");
-
   } else {
     container.innerHTML = `
     <p  class="error__not-found">You haven't follow any one yet!! Or maybe the author you follow haven't post any post yet!!</p>
@@ -295,6 +298,7 @@ dropdownItems.forEach((item) => {
     const selected = item.getAttribute("data-value");
     dropdownHeaderItem.textContent = selected;
     dropdown.classList.remove("active");
+    arrow.classList.remove("active");
   });
 });
 
