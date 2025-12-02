@@ -161,7 +161,7 @@ async function loadManagePosts() {
                     <div class="table__row">
                         <div class="table__cell">${index + 1}</div>
                         <div class="table__cell title">${p.title}</div>
-                        <div class="table__cell">${p.author.username}</div>
+                        <div class="table__cell">${p.author?.username || "Deleted User"}</div>
                         <div class="table__cell">${new Date(p.createdAt).toLocaleDateString()}</div>
                         <div class="table__cell status">Pending</div>
                         <div class="table__cell action">
@@ -238,9 +238,9 @@ async function loadManageComments() {
     const content = comments.map((c, index) => `
                     <div class="table__row-comment">
                         <div class="table__cell">${index + 1}</div>
-                        <div class="table__cell title">${c.post.title}</div>
+                        <div class="table__cell title">${c.post?.title || "Deleted Post"}</div>
                         <div class="table__cell cell-content">${c.content}</div>
-                        <div class="table__cell">${c.author.username}</div>
+                        <div class="table__cell">${c.author?.username || "Deleted User"}</div>
                         <div class="table__cell action">
                             <button class="edit-btn">
                                 <img src="/images/icons/admin/square-edit-outline.svg" alt="edit icon">
@@ -339,7 +339,7 @@ async function loadPostStats() {
         data: {
             labels,
             datasets: [{
-                label: "Số bài đăng",
+                label: "Post",
                 data: counts,
                 backgroundColor: "#1A3D64",
                 borderColor: "#1A3D64",
